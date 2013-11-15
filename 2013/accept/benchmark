@@ -1,0 +1,27 @@
+make
+time ./c-client
+
+./c-server
+./cpp-server 9000
+erl +K true -env ERL_MAX_PORTS 8192
+
+server:start().
+
+# result #
+C C++/ASIO Erlang
+
+$ time ./c-client 
+
+real	1m34.921s
+user	0m0.498s
+sys	1m9.674s
+$ time ./c-client 
+
+real	1m34.972s
+user	0m0.495s
+sys	1m10.013s
+$ time ./c-client 
+
+real	1m39.437s
+user	0m0.520s
+sys	1m11.655s
