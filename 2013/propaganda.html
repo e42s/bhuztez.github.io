@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <title>Erlang失败的宣传</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="created" content="2013-11-30" />
+  <meta name="generator" content="human" />
+  <meta name="og:title" content="Erlang失败的宣传" />
+  <meta name="og:locale" content="zh_CN" />
+  <link rel="home" href="/" />
+  <link rel="stylesheet" type="text/css" href="../base.css" />
+</head>
+
+<body>
+
+<h1>Erlang失败的宣传</h1>
+
+<p><a href="http://www.google.com/trends/explore?q=Erlang%2C+node.js">Google Trends</a>上很容易看到node.js迅速流行起来了，Erlang不仅没有流行起来，反而越来越没人关注了。这是非常奇怪的。因为现在CPU已经都是多核的了，而且在可预见的未来单个CPU的核心数量只会越来越多，Erlang也已经很接近让你不改一行代码，就可以把8个CPU核心当成1个8倍速的CPU核心来用了，唯一的区别只是单个process最多只能分到1/8的CPU时间罢了。像Twisted这种事件驱动框架，只能单进程运行，在多个CPU核心面前就显得异常尴尬了，自然也就没人用了。要是按这个趋势发展，一种全新的事件驱动框架是很难流行起来的，就算流行起来也不会比Erlang更流行。</p>
+
+<p>在node.js刚出来的时候，即便是在采用事件驱动模型的框架里也没有任何优势可言，编辑调试代码，Emacs远比node.js方便，支持的协议，Twisted远比node.js多。在node.js之前，就有不少使用JavaScript的服务端编程框架了。它们都没有流行起来。node.js也就不可能刚一出现就有不少第三方库了。当然这也意味着node.js没有什么历史包袱，不需要去兼容现有的库。既然如此，node.js完全可以不用事件驱动模型，毕竟那不符合当前CPU发展方向。比如和JavaScript很类似的Lua语言用的就是协程。JavaScript并不需要改动语法就可以支持协程的。可node.js还是选择了事件驱动模型。不仅选择了事件驱动模型，还选择了V8。当时V8连yield都不支持呢。node.js却偏偏流行起来了，现在还远比Erlang更流行。</p>
+
+<p>node.js宣传工作做得好啊。就拿主页来说吧，先看看<a href="http://nodejs.org/">node.js的主页</a>，再看看<a href="http://www.erlang.org/">Erlang的主页</a>。很明显，Erlang根本就不想向你推销它自己。这还是最近的改版。改版之前更是惨不忍睹。<a href="http://rubyonrails.org/">Ruby on Rails</a>是近年来另一个宣传工作做的挺到位的服务端框架。找出两者首页的共同点，我们不难发现，一个好的主页应该有自我介绍、来自第三方的评价以及有哪些知名企业/团体在用这些信息。最好还能有一个简单的例子。自我介绍需要包括两部分的内容，一是功能，二是特色和优势。在写第二部分的时候，一定要强调因果关系，也就是，优势来自于特色。这个特色应该是整个宣传工作中的主旋律，要重复重复再重复。而来自第三方的评价和实际案例可以增强说服力。眼见为实，一个简单的例子是必要的。Rails首页虽然没有简单的例子，但是通过视频达到了类似的效果。node.js要远比Erlang流行，node.js的首页提供的是还没在用node.js的人想看的内容，肯定是想吸引更多的人来用。而Erlang的首页提供的已经在用Erlang的人想看的内容，单纯看首页的话，Erlang根本就不可能流行起来嘛。</p>
+
+<p>从结果上看，Erlang的宣传太失败了。以至于没用过Erlang的往往理直气壮地给Erlang扣上难学难用的帽子，而<a href="http://www.zhihu.com/question/20405300/answer/15813334">用过Erlang的也不敢确信Erlang确实比较容易</a>。要知道，<a href="http://dl.acm.org/citation.cfm?id=1238844.1238850">爱立信还曾用一个模拟真实的项目评估过Erlang的开发效率和运行效率的</a>。用Erlang完成不同的功能，开发效率是PLEX的3到25倍，平均下来大约是8倍。即便是跑分，<a href="http://benchmarksgame.alioth.debian.org/u64q/which-programs-are-fastest.php">Erlang也是不输PHP的</a>。实际上呢，node.js给人的感觉是你要是现在还没听说过就显得老土了。而Erlang，则被普遍认为难学难用，小众非主流，语法怪异丑陋，运行性能不高。就算Erlang再好，任由负面观点广泛传播，也不积极地宣传Erlang的优点，时间只会证明当年爱立信禁止新项目使用Erlang的远见了。</p>
+
+</body>
+</html>
