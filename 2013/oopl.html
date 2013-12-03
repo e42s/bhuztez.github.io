@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+  <title>Erlang: 史上第一种实用的OO程序语言</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="created" content="2013-12-04" />
+  <meta name="generator" content="human" />
+  <meta name="og:title" content="Erlang: 史上第一种实用的OO程序语言" />
+  <meta name="og:locale" content="zh_CN" />
+  <link rel="home" href="/" />
+  <link rel="stylesheet" type="text/css" href="../base.css" />
+</head>
+
+<body>
+
+<h1>Erlang: 史上第一种实用的OO程序语言</h1>
+
+<p>OO只是一个非常非常简单的概念，但是即使是现在，依旧有很多很多人对这个名词会感到困惑。当然了，刚接触到这个词的时候感到困惑也是很正常的，毕竟OO通常是作为buzzword出现的。比如在<a href="http://labs.oracle.com/features/tenyears/volcd/papers/7Gosling.pdf">Java白皮书</a>里：</p>
+
+<blockquote>
+JAVA: A simple, object oriented, distributed, interpreted, robust, secure, architecture neutral, portable, high performance, multithreaded, dynamic language.
+</blockquote>
+
+<p>很多语言的名字里面就有OO，比如:</p>
+
+<ul>
+<li>Objective-C</li>
+<li>OCaml</li>
+<li>Objective-J</li>
+<li>Object Lisp</li>
+<li>ObjectLOGO</li>
+<li>Object Pascal</li>
+<li>Object REXX</li>
+</ul>
+
+<p>也有很多种不同类型的语言声称支持OO，比如:</p>
+
+<ul>
+<li>BASIC</li>
+<li>COBOL</li>
+<li>CommonLisp</li>
+<li>Fortran</li>
+<li>Forth</li>
+<li>Matlab</li>
+<li>Perl</li>
+<li>PHP</li>
+<li>Prolog</li>
+<li>S/R</li>
+<li>PL/SQL</li>
+</ul>
+
+<p>更有让人摸不着头脑的“什么都是object”:</p>
+
+<blockquote>
+As with Python, in <a href="https://www.ruby-lang.org/en/documentation/ruby-from-other-languages/to-ruby-from-python/">Ruby</a>,...
+
+<ul>
+<li>Everything is an object ...</li>
+</ul>
+</blockquote>
+
+<p>其实，从OO这个概念演变的历史里还是很容易看出到底什么才是OO的。</p>
+
+<p>OO的概念最初来自于Simula。Simula引入了process的概念。Simula认为<a href="http://staff.um.edu.mt/jskl1/talk.html">系统就是一组相互通信的准并行process</a>。Simula里所谓的准并行process其实就是协程。Simula的协程之间有通信机制组成准并行系统(QPS)，以模拟离散事件。</p>
+
+<p>Smalltalk-71和Carl Hewitt最初的actor model很类似，都是为了描述并发，<a href="http://stephane.ducasse.free.fr/FreeBooks/SmalltalkHistoryHOPL.pdf">且都深受Simula 67影响</a>。Alan Kay为此发明了一个新词，Object Oriented。之后混乱的历史就这么开始了，只不过前者是想开发一种语言，后者想建立一种形式化模型。Alan Kay根本就没去实现<a href="http://www.mail-archive.com/fonc@vpri.org/msg02952.html">Smalltalk-71</a>。而后续有实现版本的Smalltalk<a href="http://lists.squeakfoundation.org/pipermail/squeak-dev/1998-October/017019.html">和Smalltalk-71区别很大</a>。所以，很多人都误以为Smalltalk-80就是OO的代表。后来，Alan Kay出来澄清过，OO和Class一点关系都没有。OO的关键就是<a href="http://www.purl.org/stefan_ram/pub/doc_kay_oop_en">有效实现消息机制</a>。而Carl Hewitt为actor model添加了capability这种安全特性。虽然完成了形式化，但是一直就没能在当时作出一个高效的实现。后来他就去研究CSP模型了。</p>
+
+<p>从发展历史中很容易看出，OO根本不是什么高深的理论，也不是什么魔法，OO仍然是遵循过程式的，只不过侧重点是强调多个过程之间的联系，Object Oriented即按物体(来划分过程，一个物体对应一个过程，一个物体只能通过消息来影响其他物体的状态)。从时间上看，每个物体是一个独立的过程，从空间上看，每个物体需要有一片独立的内存空间来存储状态。只要把process换成object，Erlang就是<a href="http://www.esug.org/data/ESUG2006/pres/erlang-smalltalkconference.pdf">Alan Kay想要的Smalltalk</a>。</p>
+
+<p>Simula 67已经具备了OO程序所有需要的设施，当然可以认为是第一种实用的OO程序语言。那为什么是Erlang，而不是Simula？Erlang对OO的支持更加明确和直接。比如错误代码和异常这个长生不衰的话题，双方的支持者都认为自己的处理方式更正确，但事实上都有明显的缺陷。Erlang明确地揭示了两者的联系和区别，并通过模式匹配将两者以符合直觉的方式组合在了一起。Erlang不仅在语言层面上对OO有良好地支持，并且在语言的基础上，对process之间的常用的通信模式进行了总结，建立了OTP，极大地方便了OO程序的开发。考虑到Erlang目前在并发领域相对其他所有语言几乎不可逾越的优势(根本就没有新语言尝试挑战Erlang的长处)，把Erlang当是第一种实用的OO程序语言也是理所当然的。</p>
+
+</body>
+</html>
