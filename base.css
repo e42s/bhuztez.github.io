@@ -1,14 +1,22 @@
 html {
-  margin: 0;
-  padding: 0;
+    background: #EEE;
+}
+
+* {
+  text-align: left;
 }
 
 body {
-  margin: 2em;
-  padding: 0;
-  width: 35em;
+    box-shadow: 0 0 1em 0 #AAA;
+    background: #FFF;
+    max-width: 42em;
+    margin: 2em auto;
+    padding: 2em;
+    text-align: center;
+
+    counter-reset: eqn;
 }
 
 p {
-  line-height: 1.6em;
+  line-height: 180%;
 }

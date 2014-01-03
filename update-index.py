@@ -12,6 +12,7 @@ HEADER = """<!doctype html>
 <html>
 <head>
 <title>OOP &#8866; FP</title>
+<link rel="stylesheet" type="text/css" href="base.css" />
 </head>
 <body>
 <h1>OOP &#8866; FP</h1>
