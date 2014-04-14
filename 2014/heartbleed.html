@@ -21,5 +21,7 @@
 
 <p>要通过<a href="http://blog.regehr.org/archives/1125">静态分析</a>找出这个漏洞也不是不可能的。很不幸，Coverity没有发现问题，Frama-C是可以检查出问题，但是要让OpenSSL都能通过Frama-C检查也不是一件容易的事。很难想像，<a href="http://blogs.wsj.com/digits/2014/04/11/nsa-says-it-wasnt-previously-aware-of-heartbleed/">NSA没在第一时间发现这个漏洞</a>。</p>
 
+<p>问题出在TLS协议层，基本上就不可能从日志上查出被攻击的迹象。所以，有X.509证书的赶紧去申请个新的。公共的Wifi就不要连了。特别提醒一点，由于这一次会导致海量证书被revoke，所以浏览器一定要强制OCSP，不然被中间人用偷来的私钥攻击了，你啥也不知道。</p>
+
 </body>
 </html>
