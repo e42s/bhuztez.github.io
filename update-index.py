@@ -11,12 +11,12 @@ import urllib
 HEADER = """<!doctype html>
 <html>
 <head>
-<title>OOP &#8866; FP</title>
+<title>By Christmas!</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="base.css" />
 </head>
 <body>
-<h1>OOP &#8866; FP</h1>
+<h1><a href="http://pugs.blogs.com/talks/dls06-pugs.pdf">By Christmas!</a></h1>
 <ul>
 """
 FOORTER = """
