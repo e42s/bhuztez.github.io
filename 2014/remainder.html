@@ -1,0 +1,2021 @@
+<!doctype html>
+<html>
+<head>
+  <title>中国剩余定理</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="created" content="2014-08-03" />
+  <meta name="generator" content="human" />
+  <meta name="og:title" content="中国剩余定理" />
+  <meta name="og:locale" content="zh_CN" />
+  <link rel="home" href="/" />
+  <link rel="stylesheet" type="text/css" href="../base.css" />
+</head>
+
+<body>
+
+<h1>中国剩余定理</h1>
+
+<p>本文纯属搞笑，切勿当真</p>
+
+<p>中国剩余定理这个叫法是对这种方法的极大误解。根据中国人只追求实用的天赋，肯定不会没事去证明某种数学性质的。要是给不出解法，就算证明了一个很重要的性质，一句这有啥用就噎死了。中国剩余定理实际上是为了解一种同余方程组。中国剩余定理很可能不是中国人最早证明的，完整的解法也很可能不是中国人最早给出的，只是因为孙子算经中对这种同余方程组给出了不完整的解法，这就叫中国剩余定理了，和费马大定理有异曲同工之妙。</p>
+
+<p>求正整数<math><mi>x</mi></math>使得</p>
+
+<math class="equation">
+<mfenced open="{" close="">
+<mtable>
+<mtr>
+  <mtd><mi>x</mi><mo>&equiv;</mo><msub><mi>a</mi><mn>1</mn></msub></mtd>
+  <mtd><mfenced><mrow><mo>mod</mo><msub><mi>m</mi><mn>1</mn></msub></mrow></mfenced></mtd>
+</mtr>
+<mtr>
+  <mtd><mi>x</mi><mo>&equiv;</mo><msub><mi>a</mi><mn>2</mn></msub></mtd>
+  <mtd><mfenced><mrow><mo>mod</mo><msub><mi>m</mi><mn>2</mn></msub></mrow></mfenced></mtd>
+</mtr>
+<mtr>
+  <mtd><mo>&hellip;</mo></mtd>
+  <mtd></mtd>
+</mtr>
+<mtr>
+  <mtd><mi>x</mi><mo>&equiv;</mo><msub><mi>a</mi><mi>n</mi></msub></mtd>
+  <mtd><mfenced><mrow><mo>mod</mo><msub><mi>m</mi><mi>n</mi></msub></mrow></mfenced></mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>找出任意一个满足这个同余方程组的<math><mi>x</mi></math>后，根据中国剩余定理即可得到最小的<math><mi>x</mi></math>。</p>
+
+<p>用构造法，求<math><msub><mi>b</mi><mi>i</mi></msub><mo>,</mo><mi>i</mi><mo>&isin;</mo>
+<mfenced open="{" close="}" separators=",">
+<mn>1</mn>
+<mn>2</mn>
+<mo>&hellip;</mo>
+<mi>n</mi>
+</mfenced>
+</math>使得</p>
+
+<math class="equation">
+<mo>&forall;</mo>
+<mfenced open="(" close=")" separators=",">
+<mrow>
+<mi>j</mi><mo>&isin;</mo>
+<mfenced open="{" close="}" separators=",">
+<mn>1</mn>
+<mn>2</mn>
+<mo>&hellip;</mo>
+<mi>n</mi>
+</mfenced>
+</mrow>
+<mrow>
+<mi>j</mi><mo>&ne;</mo><mi>i</mi>
+</mrow>
+</mfenced>
+
+<mspace width="0.5em"/>
+<msub><mi>m</mi><mi>j</mi></msub><mo>&#8739;</mo><msub><mi>b</mi><mi>i</mi></msub>
+</math>
+
+<p>记<math><msub><mi>b</mi><mi>i</mi></msub></math>和<math><msub><mi>m</mi><mi>i</mi></msub></math>的最大公约数为<math><mi>gcd</mi><mfenced><msub><mi>b</mi><mi>i</mi></msub><msub><mi>m</mi><mi>i</mi></msub></mfenced></math>。若有</p>
+
+<math class="equation">
+<mi>gcd</mi><mfenced><msub><mi>b</mi><mi>i</mi></msub><msub><mi>m</mi><mi>i</mi></msub></mfenced>
+<mo>&#8739;</mo>
+<msub><mi>a</mi><mi>i</mi></msub>
+</math>
+
+<p>且存在<math><msub><mi>k</mi><mi>i</mi></msub><mo>,</mo><mi>i</mi><mo>&isin;</mo>
+<mfenced open="{" close="}" separators=",">
+<mn>1</mn>
+<mn>2</mn>
+<mo>&hellip;</mo>
+<mi>n</mi>
+</mfenced>
+</math>满足</p>
+
+<math class="equation">
+<msub><mi>k</mi><mi>i</mi></msub>
+<msub><mi>b</mi><mi>i</mi></msub>
+<mo>&equiv;</mo>
+<mi>gcd</mi><mfenced><msub><mi>b</mi><mi>i</mi></msub><msub><mi>m</mi><mi>i</mi></msub></mfenced>
+<mfenced><mrow><mo>mod</mo><msub><mi>m</mi><mi>i</mi></msub></mrow></mfenced>
+<mo>,</mo><mi>i</mi><mo>&isin;</mo>
+<mfenced open="{" close="}" separators=",">
+<mn>1</mn>
+<mn>2</mn>
+<mo>&hellip;</mo>
+<mi>n</mi>
+</mfenced>
+</math>
+
+<p>不妨设</p>
+
+<math class="equation">
+<mi>x</mi><mo>=</mo>
+<msubsup><mi>&sum;</mi><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup>
+<mfrac>
+<msub><mi>a</mi><mi>i</mi></msub>
+<mrow><mi>gcd</mi><mfenced><msub><mi>b</mi><mi>i</mi></msub><msub><mi>m</mi><mi>i</mi></msub></mfenced></mrow>
+</mfrac>
+<msub><mi>k</mi><mi>i</mi></msub>
+<msub><mi>b</mi><mi>i</mi></msub>
+</math>
+
+<p>对于任意<math><mi>j</mi></math>，满足
+<math>
+<mi>j</mi><mo>&isin;</mo>
+<mfenced open="{" close="}" separators=",">
+<mn>1</mn>
+<mn>2</mn>
+<mo>&hellip;</mo>
+<mi>n</mi>
+</mfenced>
+</math>，有</p>
+
+<math class="equation">
+<mo>&forall;</mo>
+<mfenced open="(" close=")" separators=",">
+<mrow>
+<mi>i</mi><mo>&isin;</mo>
+<mfenced open="{" close="}" separators=",">
+<mn>1</mn>
+<mn>2</mn>
+<mo>&hellip;</mo>
+<mi>n</mi>
+</mfenced>
+</mrow>
+<mrow>
+<mi>i</mi><mo>&ne;</mo><mi>j</mi>
+</mrow>
+</mfenced>
+
+<mspace width="0.5em"/>
+<msub><mi>m</mi><mi>j</mi></msub><mo>&#8739;</mo><msub><mi>b</mi><mi>i</mi></msub>
+</math>
+
+<p>可得</p>
+
+<math class="equation">
+<msub><mi>m</mi><mi>j</mi></msub><mo>&#8739;</mo>
+<msub><mo>&sum;</mo><mrow><mi>i</mi><mo>&ne;</mo><mi>j</mi></mrow></msub>
+<mfrac>
+  <msub><mi>a</mi><mi>i</mi></msub>
+  <mrow><mi>gcd</mi><mfenced><msub><mi>b</mi><mi>i</mi></msub><msub><mi>m</mi><mi>i</mi></msub></mfenced></mrow>
+</mfrac>
+<msub><mi>k</mi><mi>i</mi></msub>
+<msub><mi>b</mi><mi>i</mi></msub>
+</math>
+
+<p>所以</p>
+
+<math class="equation">
+<mtable>
+<mtr>
+  <mtd>
+<msubsup><mi>&sum;</mi><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup>
+<mfrac>
+  <msub><mi>a</mi><mi>i</mi></msub>
+  <mrow><mi>gcd</mi><mfenced><msub><mi>b</mi><mi>i</mi></msub><msub><mi>m</mi><mi>i</mi></msub></mfenced></mrow>
+</mfrac>
+<msub><mi>k</mi><mi>i</mi></msub>
+<msub><mi>b</mi><mi>i</mi></msub>
+  </mtd>
+  <mtd>
+<mo>&equiv;</mo>
+<mfrac>
+  <msub><mi>a</mi><mi>j</mi></msub>
+  <mrow><mi>gcd</mi><mfenced><msub><mi>b</mi><mi>j</mi></msub><msub><mi>m</mi><mi>j</mi></msub></mfenced></mrow>
+</mfrac>
+<msub><mi>k</mi><mi>j</mi></msub>
+<msub><mi>b</mi><mi>j</mi></msub>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><msub><mi>m</mi><mi>j</mi></msub></mrow></mfenced>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd></mtd>
+  <mtd>
+<mo>&equiv;</mo>
+<mfrac>
+  <msub><mi>a</mi><mi>j</mi></msub>
+  <mrow><mi>gcd</mi><mfenced><msub><mi>b</mi><mi>j</mi></msub><msub><mi>m</mi><mi>j</mi></msub></mfenced></mrow>
+</mfrac>
+<mi>gcd</mi><mfenced><msub><mi>b</mi><mi>j</mi></msub><msub><mi>m</mi><mi>j</mi></msub></mfenced>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><msub><mi>m</mi><mi>j</mi></msub></mrow></mfenced>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd></mtd>
+  <mtd>
+<mo>&equiv;</mo>
+<msub><mi>a</mi><mi>j</mi></msub>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><msub><mi>m</mi><mi>j</mi></msub></mrow></mfenced>
+  </mtd>
+</mtr>
+</mtable>
+</math>
+
+<p><math><msub><mi>b</mi><mi>i</mi></msub></math>可以直接取<math>
+<msub><mo>&prod;</mo><mrow><mi>j</mi><mo>&ne;</mo><mi>i</mi></mrow></msub>
+<msub><mi>m</mi><mi>j</mi></msub>
+</math>，求<math><msub><mi>k</mi><mi>i</mi></msub></math>却比较困难。</p>
+
+<p>因为</p>
+
+<math class="equation">
+<msub><mi>k</mi><mi>i</mi></msub>
+<msub><mi>b</mi><mi>i</mi></msub>
+<mo>mod</mo><msub>
+<mi>m</mi><mi>i</mi></msub>
+<mo>=</mo>
+<mi>gcd</mi><mfenced><msub><mi>b</mi><mi>i</mi></msub><msub><mi>m</mi><mi>i</mi></msub></mfenced>
+<mo>&sdot;</mo>
+<mfenced>
+<mrow>
+<msub><mi>k</mi><mi>i</mi></msub>
+<mfrac>
+  <msub><mi>b</mi><mi>i</mi></msub>
+  <mrow><mi>gcd</mi><mfenced><msub><mi>b</mi><mi>i</mi></msub><msub><mi>m</mi><mi>i</mi></msub></mfenced></mrow>
+</mfrac>
+<mo>mod</mo>
+<mfrac>
+  <msub><mi>m</mi><mi>i</mi></msub>
+  <mrow><mi>gcd</mi><mfenced><msub><mi>b</mi><mi>i</mi></msub><msub><mi>m</mi><mi>i</mi></msub></mfenced></mrow>
+</mfrac>
+</mrow>
+</mfenced>
+</math>
+
+<p>所以，<math><msub><mi>k</mi><mi>i</mi></msub></math>满足</p>
+
+<math class="equation">
+<msub><mi>k</mi><mi>i</mi></msub>
+<mfrac>
+  <msub><mi>b</mi><mi>i</mi></msub>
+  <mrow><mi>gcd</mi><mfenced><msub><mi>b</mi><mi>i</mi></msub><msub><mi>m</mi><mi>i</mi></msub></mfenced></mrow>
+</mfrac>
+<mo>&equiv;</mo>
+<mn>1</mn>
+<mfenced>
+<mrow>
+<mo>mod</mo>
+<mfrac>
+  <msub><mi>m</mi><mi>i</mi></msub>
+  <mrow><mi>gcd</mi><mfenced><msub><mi>b</mi><mi>i</mi></msub><msub><mi>m</mi><mi>i</mi></msub></mfenced></mrow>
+</mfrac>
+</mrow>
+</mfenced>
+</math>
+
+
+<p>这个问题也可以表示成，已知<math><mi>a</mi></math>,<math><mi>m</mi></math>，且<math><mi>gcd</mi><mfenced><mi>a</mi><mi>m</mi></mfenced><mo>=</mo><mn>1</mn></math>，求<math><mi>k</mi></math>使得</p>
+
+<math class="equation">
+<mi>k</mi><mi>a</mi><mo>&equiv;</mo><mn>1</mn><mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+</math>
+
+
+<h2>欧拉定理</h2>
+
+<p>有一种解法，不知道从哪里流传出来的，利用了欧拉定理。</p>
+
+<p>欧拉定理指出，若<math><mi>gcd</mi><mfenced><mi>a</mi><mi>m</mi></mfenced><mo>=</mo><mn>1</mn></math>，有</p>
+
+<math class="equation">
+<msup><mi>a</mi><mrow><mi>&phi;</mi><mfenced><mi>m</mi></mfenced></mrow></msup>
+<mo>&equiv;</mo><mn>1</mn>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+</math>
+
+<p>所以，<math><mi>k</mi></math>取<math><msup><mi>a</mi><mrow><mi>&phi;</mi><mfenced><mi>m</mi></mfenced><mo>-</mo><mn>1</mn></mrow></msup></math>即可。</p>
+
+<p>因为除了量子计算机，我们并没有有效的办法能计算出<math><mi>&phi;</mi><mfenced><mi>m</mi></mfenced></math>，至少古人不能使用这种方法。</p>
+
+
+<h2>大衍求一术</h2>
+
+<p>中国古代有一种求解的方法，叫做大衍求一术。很多介绍中国剩余定理的文章都没有提到大衍求一术。而提到大衍求一术的很多都只讲了什么是大衍求一术，而没有解释为什么。而大衍求一术乍一看完全不知道这是在算什么。</p>
+
+<p>数书九章中记载的大衍求一术是这样的。按如下放置四个数，不断作以下变换，直到<math><msub><mi>r</mi><mn>1</mn></msub></math>或<math><msub><mi>r</mi><mn>2</mn></msub></math>为<math><mn>1</mn></math>为止。</p>
+
+<math>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><msub><mi>k</mi><mn>1</mn></msub></mtd>
+  <mtd><msub><mi>r</mi><mn>1</mn></msub></mtd>
+</mtr>
+<mtr>
+  <mtd><msub><mi>k</mi><mn>2</mn></msub></mtd>
+  <mtd><msub><mi>r</mi><mn>2</mn></msub></mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&rarr;</mo>
+<mfenced open="{" close="">
+<mtable>
+<mtr>
+  <mtd>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><msub><mi>k</mi><mn>1</mn></msub></mtd>
+  <mtd><msub><mi>r</mi><mn>1</mn></msub></mtd>
+</mtr>
+<mtr>
+  <mtd>
+   <msub><mi>k</mi><mn>2</mn></msub><mo>+</mo><msub><mi>k</mi><mn>1</mn></msub>
+   <mfenced open="[" close="]"><mfrac><msub><mi>r</mi><mn>2</mn></msub><msub><mi>r</mi><mn>1</mn></msub></mfrac></mfenced>
+  </mtd>
+  <mtd><msub><mi>r</mi><mn>2</mn></msub><mo>mod</mo><msub><mi>r</mi><mn>1</mn></msub></mtd>
+</mtr>
+</mtable>
+</mfenced>
+  </mtd>
+  <mtd><mo>,</mo><msub><mi>r</mi><mn>1</mn></msub><mo>&lt;</mo><msub><mi>r</mi><mn>2</mn></msub></mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd>
+    <msub><mi>k</mi><mn>1</mn></msub><mo>+</mo><msub><mi>k</mi><mn>2</mn></msub>
+    <mfenced open="[" close="]"><mfrac><msub><mi>r</mi><mn>1</mn></msub><msub><mi>r</mi><mn>2</mn></msub></mfrac></mfenced>
+  </mtd>
+  <mtd><msub><mi>r</mi><mn>1</mn></msub><mo>mod</mo><msub><mi>r</mi><mn>2</mn></msub></mtd>
+</mtr>
+<mtr>
+  <mtd><msub><mi>k</mi><mn>2</mn></msub></mtd>
+  <mtd><msub><mi>r</mi><mn>2</mn></msub></mtd>
+</mtr>
+</mtable>
+</mfenced>
+  </mtd>
+  <mtd><mo>,</mo><msub><mi>r</mi><mn>1</mn></msub><mo>&gt;</mo><msub><mi>r</mi><mn>2</mn></msub></mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>一开始四个数是</p>
+
+<math>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><mn>1</mn></mtd>
+  <mtd><mi>a</mi></mtd>
+</mtr>
+<mtr>
+  <mtd><mn>0</mn></mtd>
+  <mtd><mi>m</mi></mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+
+<p>很难看出，在变换过程中，这四个位置上的数始终满足</p>
+
+<math class="equation">
+<mfenced open="{" close="">
+<mtable>
+  <mtr>
+    <mtd><msub><mi>k</mi><mn>1</mn></msub><mi>a</mi><mo>&equiv;</mo><msub><mi>r</mi><mn>1</mn></msub></mtd>
+    <mtd><mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced></mtd>
+  </mtr>
+  <mtr>
+    <mtd><msub><mi>k</mi><mn>2</mn></msub><mi>a</mi><mo>&equiv;</mo><mo>-</mo><msub><mi>r</mi><mn>2</mn></msub></mtd>
+    <mtd><mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced></mtd>
+  </mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>一开始</p>
+
+<math class="equation">
+<mfenced open="{" close="">
+<mtable>
+<mtr>
+  <mtd>
+<mn>1</mn>
+<mo>&sdot;</mo>
+<mi>a</mi>
+<mo>&equiv;</mo>
+<mi>a</mi>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>0</mn>
+<mo>&sdot;</mo>
+<mi>a</mi>
+<mo>&equiv;</mo>
+<mi>0</mi>
+<mo>&equiv;</mo>
+<mo>-</mo>
+<mi>m</mi>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+
+<p>当<math><msub><mi>r</mi><mn>1</mn></msub><mo>&lt;</mo><msub><mi>r</mi><mn>2</mn></msub></math>时，</p>
+
+<math class="equation">
+<mtable>
+<mtr>
+  <mtd>
+<mfenced>
+<mrow>
+<msub><mi>k</mi><mn>2</mn></msub><mo>+</mo><msub><mi>k</mi><mn>1</mn></msub>
+<mfenced open="[" close="]"><mfrac><msub><mi>r</mi><mn>2</mn></msub><msub><mi>r</mi><mn>1</mn></msub></mfrac></mfenced>
+</mrow>
+</mfenced>
+<mo>&sdot;</mo>
+<mi>a</mi>
+  </mtd>
+  <mtd>
+<mo>&equiv;</mo>
+<mo>-</mo>
+<msub><mi>r</mi><mn>2</mn></msub>
+<mo>+</mo>
+<msub><mi>r</mi><mn>1</mn></msub>
+<mfenced open="[" close="]"><mfrac><msub><mi>r</mi><mn>2</mn></msub><msub><mi>r</mi><mn>1</mn></msub></mfrac></mfenced>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd></mtd>
+  <mtd>
+<mo>&equiv;</mo>
+<mo>-</mo>
+<msub><mi>r</mi><mn>2</mn></msub>
+<mo>+</mo>
+<msub><mi>r</mi><mn>2</mn></msub>
+<mo>-</mo>
+<msub><mi>r</mi><mn>2</mn></msub>
+<mo>mod</mo>
+<msub><mi>r</mi><mn>1</mn></msub>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd></mtd>
+  <mtd>
+<mo>&equiv;</mo>
+<mo>-</mo>
+<msub><mi>r</mi><mn>2</mn></msub>
+<mo>mod</mo>
+<msub><mi>r</mi><mn>1</mn></msub>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+</mtable>
+</math>
+
+<p>当<math><msub><mi>r</mi><mn>1</mn></msub><mo>&gt;</mo><msub><mi>r</mi><mn>2</mn></msub></math>时，</p>
+
+<math class="equation">
+<mtable>
+<mtr>
+  <mtd>
+<mfenced>
+<mrow>
+<msub><mi>k</mi><mn>1</mn></msub><mo>+</mo><msub><mi>k</mi><mn>2</mn></msub>
+<mfenced open="[" close="]"><mfrac><msub><mi>r</mi><mn>1</mn></msub><msub><mi>r</mi><mn>2</mn></msub></mfrac></mfenced>
+</mrow>
+</mfenced>
+<mo>&sdot;</mo>
+<mi>a</mi>
+  </mtd>
+  <mtd>
+<mo>&equiv;</mo>
+<msub><mi>r</mi><mn>1</mn></msub>
+<mo>-</mo>
+<msub><mi>r</mi><mn>2</mn></msub>
+<mfenced open="[" close="]"><mfrac><msub><mi>r</mi><mn>1</mn></msub><msub><mi>r</mi><mn>2</mn></msub></mfrac></mfenced>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd></mtd>
+  <mtd>
+<mo>&equiv;</mo>
+<msub><mi>r</mi><mn>1</mn></msub>
+<mo>-</mo>
+<msub><mi>r</mi><mn>1</mn></msub>
+<mo>+</mo>
+<msub><mi>r</mi><mn>1</mn></msub>
+<mo>mod</mo>
+<msub><mi>r</mi><mn>2</mn></msub>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd></mtd>
+  <mtd>
+<mo>&equiv;</mo>
+<msub><mi>r</mi><mn>1</mn></msub>
+<mo>mod</mo>
+<msub><mi>r</mi><mn>2</mn></msub>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+</mtable>
+</math>
+
+<p>所以，这两个等式在变换过程中始终成立。</p>
+
+<p>最终，若<math><msub><mi>r</mi><mn>1</mn></msub><mo>=</mo><mn>1</mn></math></p>
+
+<math class="equation">
+<msub><mi>k</mi><mn>1</mn></msub>
+<mi>a</mi>
+<mo>&equiv;</mo>
+<mn>1</mn>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+</math>
+
+<p>若<math><msub><mi>r</mi><mn>2</mn></msub><mo>=</mo><mn>1</mn></math>，作以下变换</p>
+
+<math>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><msub><mi>k</mi><mn>1</mn></msub></mtd>
+  <mtd><msub><mi>r</mi><mn>1</mn></msub></mtd>
+</mtr>
+<mtr>
+  <mtd><msub><mi>k</mi><mn>2</mn></msub></mtd>
+  <mtd><mn>1</mn></mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&rarr;</mo>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd>
+    <msub><mi>k</mi><mn>1</mn></msub><mo>+</mo>
+    <msub><mi>k</mi><mn>2</mn></msub>
+    <mfenced><mrow><msub><mi>r</mi><mn>1</mn></msub><mo>-</mo><mn>1</mn></mrow></mfenced>
+  </mtd>
+  <mtd><mn>1</mn></mtd>
+</mtr>
+<mtr>
+  <mtd><msub><mi>k</mi><mn>2</mn></msub></mtd>
+  <mtd><mn>1</mn></mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>此时，</p>
+
+<math class="equation">
+<mtable>
+<mtr>
+  <mtd>
+<mfenced>
+<mrow>
+<msub><mi>k</mi><mn>1</mn></msub><mo>+</mo>
+<msub><mi>k</mi><mn>2</mn></msub>
+<mfenced><mrow><msub><mi>r</mi><mn>1</mn></msub><mo>-</mo><mn>1</mn></mrow></mfenced>
+</mrow>
+</mfenced>
+<mo>&sdot;</mo>
+<mi>a</mi>
+  </mtd>
+  <mtd>
+<mo>&equiv;</mo>
+<msub><mi>r</mi><mn>1</mn></msub>
+<mo>-</mo>
+<mfenced><mrow><msub><mi>r</mi><mn>1</mn></msub><mo>-</mo><mn>1</mn></mrow></mfenced>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd></mtd>
+  <mtd>
+<mo>&equiv;</mo>
+<mn>1</mn>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+</mtable>
+</math>
+
+<p>和西方的扩展欧几里德算法相比，循环不变式差一个负号，在最后一步需要分两种情况讨论。数书九章并没有交代大衍求一术是怎么来的，可能一开始就是这样的，也可能是流传过程中减号误传成了加号，现在已无从考证了。</p>
+
+<p>剩下的难题是到底是怎么想到这种方法的。</p>
+
+
+<h2>扩展欧几里德算法</h2>
+
+<p>现在用扩展欧几里德算法来求解。把循环不变式换成</p>
+
+<math class="equation">
+<mfenced open="{" close="">
+<mtable>
+  <mtr>
+    <mtd><msub><mi>k</mi><mn>1</mn></msub><mi>a</mi><mo>&equiv;</mo><msub><mi>r</mi><mn>1</mn></msub></mtd>
+    <mtd><mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced></mtd>
+  </mtr>
+  <mtr>
+    <mtd><msub><mi>k</mi><mn>2</mn></msub><mi>a</mi><mo>&equiv;</mo><msub><mi>r</mi><mn>2</mn></msub></mtd>
+    <mtd><mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced></mtd>
+  </mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>变换过程换成</p>
+
+<math>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><msub><mi>k</mi><mn>1</mn></msub></mtd>
+  <mtd><msub><mi>r</mi><mn>1</mn></msub></mtd>
+</mtr>
+<mtr>
+  <mtd><msub><mi>k</mi><mn>2</mn></msub></mtd>
+  <mtd><msub><mi>r</mi><mn>2</mn></msub></mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&rarr;</mo>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd>
+   <msub><mi>k</mi><mn>2</mn></msub><mo>-</mo><msub><mi>k</mi><mn>1</mn></msub>
+   <mfenced open="[" close="]"><mfrac><msub><mi>r</mi><mn>2</mn></msub><msub><mi>r</mi><mn>1</mn></msub></mfrac></mfenced>
+  </mtd>
+  <mtd><msub><mi>r</mi><mn>2</mn></msub><mo>mod</mo><msub><mi>r</mi><mn>1</mn></msub></mtd>
+</mtr>
+<mtr>
+  <mtd><msub><mi>k</mi><mn>1</mn></msub></mtd>
+  <mtd><msub><mi>r</mi><mn>1</mn></msub></mtd>
+</mtr>
+</mtable>
+</mfenced>
+
+</math>
+
+<p>而初始值不变，仍然是</p>
+
+<math>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><mn>1</mn></mtd>
+  <mtd><mi>a</mi></mtd>
+</mtr>
+<mtr>
+  <mtd><mn>0</mn></mtd>
+  <mtd><mi>m</mi></mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>一开始</p>
+
+<math class="equation">
+<mfenced open="{" close="">
+<mtable>
+<mtr>
+  <mtd>
+<mn>1</mn>
+<mo>&sdot;</mo>
+<mi>a</mi>
+<mo>&equiv;</mo>
+<mi>a</mi>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>0</mn>
+<mo>&sdot;</mo>
+<mi>a</mi>
+<mo>&equiv;</mo>
+<mi>0</mi>
+<mo>&equiv;</mo>
+<mi>m</mi>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>变换过程中</p>
+
+<math class="equation">
+<mtable>
+<mtr>
+  <mtd>
+<mfenced>
+<mrow>
+  <msub><mi>k</mi><mn>2</mn></msub><mo>-</mo><msub><mi>k</mi><mn>1</mn></msub>
+  <mfenced open="[" close="]"><mfrac><msub><mi>r</mi><mn>2</mn></msub><msub><mi>r</mi><mn>1</mn></msub></mfrac></mfenced>
+</mrow>
+</mfenced>
+<mo>&sdot;</mo>
+<mi>a</mi>
+  </mtd>
+  <mtd>
+<mo>&equiv;</mo>
+<msub><mi>r</mi><mn>2</mn></msub><mo>-</mo><msub><mi>r</mi><mn>1</mn></msub>
+<mfenced open="[" close="]"><mfrac><msub><mi>r</mi><mn>2</mn></msub><msub><mi>r</mi><mn>1</mn></msub></mfrac></mfenced>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+
+<mtr>
+  <mtd></mtd>
+  <mtd>
+<mo>&equiv;</mo>
+<msub><mi>r</mi><mn>2</mn></msub><mo>-</mo>
+<mfenced>
+<mrow>
+<msub><mi>r</mi><mn>2</mn></msub><mo>-</mo>
+<msub><mi>r</mi><mn>2</mn></msub><mo>mod</mo><msub><mi>r</mi><mn>1</mn></msub>
+</mrow>
+</mfenced>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+
+<mtr>
+  <mtd></mtd>
+  <mtd>
+<mo>&equiv;</mo>
+<msub><mi>r</mi><mn>2</mn></msub><mo>mod</mo><msub><mi>r</mi><mn>1</mn></msub>
+  </mtd>
+  <mtd>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+  </mtd>
+</mtr>
+
+</mtable>
+</math>
+
+<p>所以，这两个等式在变换过程中始终成立。</p>
+
+<p>最终，若<math><msub><mi>r</mi><mn>1</mn></msub><mo>=</mo><mn>1</mn></math></p>
+
+<math class="equation">
+<msub><mi>k</mi><mn>1</mn></msub>
+<mi>a</mi>
+<mo>&equiv;</mo>
+<mn>1</mn>
+<mfenced><mrow><mo>mod</mo><mi>m</mi></mrow></mfenced>
+</math>
+
+
+<h2>辗转相除法</h2>
+
+<p>辗转相除法是一种求最大公约数的方法。西方所谓的欧几里德算法就是辗转相除法。而扩展欧几里德算法其实就是同一种算法，只不过得到了更多结果。</p>
+
+<p>已知<math><mi>a</mi></math>,<math><mi>b</mi></math>，求<math><mi>gcd</mi><mfenced><mi>a</mi><mi>b</mi></mfenced></math>。</p>
+
+<p>按如下放置两个数，不断作以下变换，直到<math><msub><mi>r</mi><mn>1</mn></msub></math>为<math><mn>0</mn></math></p>
+
+<math>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><msub><mi>r</mi><mn>1</mn></msub></mtd>
+</mtr>
+<mtr>
+  <mtd><msub><mi>r</mi><mn>2</mn></msub></mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&rarr;</mo>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><msub><mi>r</mi><mn>2</mn></msub><mo>mod</mo><msub><mi>r</mi><mn>1</mn></msub></mtd>
+</mtr>
+<mtr>
+  <mtd><msub><mi>r</mi><mn>1</mn></msub></mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>一开始两个数是</p>
+<math>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><mi>a</mi></mtd>
+</mtr>
+<mtr>
+  <mtd><mi>b</mi></mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>不妨设<math>
+<msub><mi>r</mi><mn>1</mn></msub><mo>=</mo>
+<msub><mi>s</mi><mn>1</mn></msub><mo>&sdot;</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mn>1</mn></msub><msub><mi>r</mi><mn>2</mn></msub></mfenced>
+</math>，<math>
+<msub><mi>r</mi><mn>2</mn></msub><mo>=</mo>
+<msub><mi>s</mi><mn>2</mn></msub><mo>&sdot;</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mn>1</mn></msub><msub><mi>r</mi><mn>2</mn></msub></mfenced>
+</math>，则</p>
+
+<math class="equation">
+<mtable>
+<mtr>
+<mtd>
+<msub><mi>r</mi><mn>2</mn></msub><mo>mod</mo><msub><mi>r</mi><mn>1</mn></msub>
+</mtd>
+<mtd>
+<mo>=</mo>
+<mfenced>
+<mrow>
+<msub><mi>s</mi><mn>2</mn></msub><mo>&sdot;</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mn>1</mn></msub><msub><mi>r</mi><mn>2</mn></msub></mfenced>
+</mrow>
+</mfenced>
+<mo>mod</mo>
+<mfenced>
+<mrow>
+<msub><mi>s</mi><mn>1</mn></msub><mo>&sdot;</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mn>1</mn></msub><msub><mi>r</mi><mn>2</mn></msub></mfenced>
+</mrow>
+</mfenced>
+</mtd>
+</mtr>
+<mtr>
+  <mtd></mtd>
+  <mtd>
+<mo>=</mo>
+<mfenced>
+<mrow>
+<msub><mi>s</mi><mn>2</mn></msub>
+<mo>mod</mo>
+<msub><mi>s</mi><mn>1</mn></msub>
+</mrow>
+</mfenced>
+<mo>&sdot;</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mn>1</mn></msub><msub><mi>r</mi><mn>2</mn></msub></mfenced>
+  </mtd>
+</mtr>
+</mtable>
+</math>
+
+<p>因为<math><mi>gcd</mi>
+<mfenced>
+<mrow>
+<msub><mi>s</mi><mi>2</mi></msub><mo>mod</mo><msub><mi>s</mi><mi>1</mi></msub>
+</mrow>
+<msub><mi>s</mi><mi>1</mi></msub>
+</mfenced>
+<mo>=</mo>
+<mn>1</mn>
+</math>，所以</p>
+
+<math class="equation">
+<mi>gcd</mi>
+<mfenced>
+<mrow>
+<msub><mi>r</mi><mi>2</mi></msub><mo>mod</mo><msub><mi>r</mi><mi>1</mi></msub>
+</mrow>
+<msub><mi>r</mi><mi>1</mi></msub>
+</mfenced>
+<mo>=</mo>
+<mi>gcd</mi>
+<mfenced>
+<msub><mi>r</mi><mi>1</mi></msub>
+<msub><mi>r</mi><mi>2</mi></msub>
+</mfenced>
+</math>
+
+<p>因此，<math>
+<mi>gcd</mi>
+<mfenced>
+<msub><mi>r</mi><mi>1</mi></msub>
+<msub><mi>r</mi><mi>2</mi></msub>
+</mfenced>
+</math>始终是<math>
+<mi>gcd</mi>
+<mfenced>
+<mi>a</mi>
+<mi>b</mi>
+</mfenced>
+</math>
+</p>
+
+<p>当<math><msub><mi>s</mi><mi>1</mi></msub><mo>=</mo><mn>1</mn></math>时，<math><msub><mi>s</mi><mi>2</mi></msub><mo>mod</mo><msub><mi>s</mi><mi>1</mi></msub><mo>=</mo><mn>0</mn></math>，计算结束，得到了<math>
+<mi>gcd</mi>
+<mfenced>
+<mi>a</mi>
+<mi>b</mi>
+</mfenced>
+</math></p>
+
+<p>如下图所示，辗转相除法从后往前看，有<math>
+<msub><mi>r</mi><mn>1</mn></msub>
+<mo>=</mo>
+<mi>gcd</mi><mfenced><mi>a</mi><mi>b</mi></mfenced>
+<mo>=</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mi>n</mi></msub><msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mfenced>
+</math></p>
+
+<math>
+<mfenced open="" close="" separators="&rarr;">
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><mi>a</mi></mtd>
+</mtr>
+<mtr>
+  <mtd><mi>b</mi></mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&hellip;</mo>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><msub><mi>r</mi><mn>4</mn></msub></mtd>
+</mtr>
+<mtr>
+  <mtd><msub><mi>r</mi><mn>5</mn></msub></mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><msub><mi>r</mi><mn>3</mn></msub></mtd>
+</mtr>
+<mtr>
+  <mtd><msub><mi>r</mi><mn>4</mn></msub></mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><msub><mi>r</mi><mn>2</mn></msub></mtd>
+</mtr>
+<mtr>
+  <mtd><msub><mi>r</mi><mn>3</mn></msub></mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><msub><mi>r</mi><mn>1</mn></msub></mtd>
+</mtr>
+<mtr>
+  <mtd><msub><mi>r</mi><mn>2</mn></msub></mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mfenced>
+<mtable>
+<mtr>
+  <mtd><mn>0</mn></mtd>
+</mtr>
+<mtr>
+  <mtd><msub><mi>r</mi><mn>1</mn></msub></mtd>
+</mtr>
+</mtable>
+</mfenced>
+</mfenced>
+</math>
+
+<p>求解<math><msub><mi>k</mi><mn>1</mn></msub></math>，使得</p>
+
+<math class="equation">
+<msub><mi>k</mi><mn>1</mn></msub>
+<msub><mi>r</mi><mn>1</mn></msub>
+<mo>&equiv;</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mn>1</mn></msub><msub><mi>r</mi><mn>2</mn></msub></mfenced>
+<mfenced>
+<mrow>
+<mo>mod</mo>
+<msub><mi>r</mi><mn>2</mn></msub>
+</mrow>
+</mfenced>
+</math>
+
+<p>因为</p>
+
+<math class="equation">
+<msub><mi>r</mi><mn>1</mn></msub>
+<mo>=</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mn>1</mn></msub><msub><mi>r</mi><mn>2</mn></msub></mfenced>
+</math>
+
+<p>所以</p>
+
+<math class="equation">
+<msub><mi>k</mi><mn>1</mn></msub>
+<mo>=</mo>
+<mn>1</mn>
+</math>
+
+<p>求解<math><msub><mi>k</mi><mn>2</mn></msub></math>，使得</p>
+
+<math class="equation">
+<msub><mi>k</mi><mn>2</mn></msub>
+<msub><mi>r</mi><mn>2</mn></msub>
+<mo>&equiv;</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mn>2</mn></msub><msub><mi>r</mi><mn>3</mn></msub></mfenced>
+<mfenced>
+<mrow>
+<mo>mod</mo>
+<msub><mi>r</mi><mn>3</mn></msub>
+</mrow>
+</mfenced>
+</math>
+
+<p>不妨设</p>
+
+<math class="equation">
+<msub><mi>r</mi><mn>3</mn></msub>
+<mo>-</mo>
+<msub><mi>q</mi><mn>2</mn></msub>
+<msub><mi>r</mi><mn>2</mn></msub>
+<mo>=</mo>
+<msub><mi>r</mi><mn>1</mn></msub>
+</math>
+
+<p>因为</p>
+
+<math class="equation">
+<msub><mi>r</mi><mn>1</mn></msub>
+<mo>=</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mn>2</mn></msub><msub><mi>r</mi><mn>3</mn></msub></mfenced>
+</math>
+
+<p>可得</p>
+
+<math class="equation">
+<msub><mi>r</mi><mn>3</mn></msub>
+<mo>-</mo>
+<msub><mi>q</mi><mn>2</mn></msub>
+<msub><mi>r</mi><mn>2</mn></msub>
+<mo>=</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mn>2</mn></msub><msub><mi>r</mi><mn>3</mn></msub></mfenced>
+</math>
+
+<p>所以</p>
+
+<math class="equation">
+<msub><mi>k</mi><mn>2</mn></msub>
+<mo>=</mo>
+<mo>-</mO>
+<msub><mi>q</mi><mn>2</mn></msub>
+</math>
+
+<p>求解<math><msub><mi>k</mi><mn>3</mn></msub></math>，使得</p>
+
+<math class="equation">
+<msub><mi>k</mi><mn>3</mn></msub>
+<msub><mi>r</mi><mn>3</mn></msub>
+<mo>&equiv;</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mn>3</mn></msub><msub><mi>r</mi><mn>4</mn></msub></mfenced>
+<mfenced>
+<mrow>
+<mo>mod</mo>
+<msub><mi>r</mi><mn>4</mn></msub>
+</mrow>
+</mfenced>
+</math>
+
+
+<p>不妨设</p>
+
+<math class="equation">
+<msub><mi>r</mi><mn>4</mn></msub>
+<mo>-</mo>
+<msub><mi>q</mi><mn>3</mn></msub>
+<msub><mi>r</mi><mn>3</mn></msub>
+<mo>=</mo>
+<msub><mi>r</mi><mn>2</mn></msub>
+</math>
+
+<p>因为</p>
+
+<math class="equation">
+<msub><mi>r</mi><mn>3</mn></msub>
+<mo>-</mo>
+<msub><mi>q</mi><mn>2</mn></msub>
+<msub><mi>r</mi><mn>2</mn></msub>
+<mo>=</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mn>3</mn></msub><msub><mi>r</mi><mn>4</mn></msub></mfenced>
+</math>
+
+<p>可得</p>
+
+<math class="equation">
+<msub><mi>r</mi><mn>3</mn></msub>
+<mo>-</mo>
+<msub><mi>q</mi><mn>2</mn></msub>
+<mfenced>
+<mrow>
+<msub><mi>r</mi><mn>4</mn></msub>
+<mo>-</mo>
+<msub><mi>q</mi><mn>3</mn></msub>
+<msub><mi>r</mi><mn>3</mn></msub>
+</mrow>
+</mfenced>
+<mo>=</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mn>3</mn></msub><msub><mi>r</mi><mn>4</mn></msub></mfenced>
+</math>
+
+<p>即</p>
+
+<math class="equation">
+<msub><mi>r</mi><mn>3</mn></msub>
+<mfenced>
+<mrow>
+<mn>1</mn>
+<mo>+</mo>
+<msub><mi>q</mi><mn>2</mn></msub>
+<msub><mi>q</mi><mn>3</mn></msub>
+</mrow>
+</mfenced>
+<mo>-</mo>
+<msub><mi>q</mi><mn>2</mn></msub>
+<msub><mi>r</mi><mn>4</mn></msub>
+<mo>=</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mn>3</mn></msub><msub><mi>r</mi><mn>4</mn></msub></mfenced>
+</math>
+
+<p>所以</p>
+
+<math class="equation">
+<msub><mi>k</mi><mn>3</mn></msub>
+<mo>=</mo>
+<mn>1</mn>
+<mo>+</mo>
+<msub><mi>q</mi><mn>2</mn></msub>
+<msub><mi>q</mi><mn>3</mn></msub>
+</math>
+
+<p>不难看出，假设存在</p>
+
+<math class="equation">
+<msub><mi>k</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub>
+<mo>+</mo>
+<msub><mi>k</mi><mi>n</mi></msub>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+<mo>=</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub></mfenced>
+</math>
+
+<p>不妨设</p>
+
+<math class="equation">
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub>
+<mo>-</mo>
+<msub><mi>q</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+<mo>=</mo>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub>
+</math>
+
+<p>可得</p>
+
+<math class="equation">
+<msub><mi>k</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub>
+<mfenced>
+<mrow>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub>
+<mo>-</mo>
+<msub><mi>q</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+</mrow>
+</mfenced>
+<mo>+</mo>
+<msub><mi>k</mi><mi>n</mi></msub>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+<mo>=</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub></mfenced>
+</math>
+
+<p>即</p>
+
+<math class="equation">
+<mfenced>
+<mrow>
+<msub><mi>k</mi><mi>n</mi></msub>
+<mo>-</mo>
+<msub><mi>k</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub>
+<msub><mi>q</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+</mrow>
+</mfenced>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+<mo>+</mo>
+<msub><mi>k</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub>
+<mo>=</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub></mfenced>
+</math>
+
+<p>所以</p>
+
+<math class="equation">
+<msub><mi>k</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+<mo>=</mo>
+<msub><mi>k</mi><mi>n</mi></msub>
+<mo>-</mo>
+<msub><mi>k</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub>
+<msub><mi>q</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+</math>
+
+<p>即</p>
+
+<math class="equation">
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>k</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<msub><mi>k</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>=</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mo>-</mo><msub><mi>q</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&sdot;</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>k</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<msub><mi>k</mi><mi>n</mi></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>逐项展开后</p>
+
+<math class="equation">
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>k</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<msub><mi>k</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>=</mo>
+<mfenced open="" close="" separators="&sdot;">
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mo>-</mo><msub><mi>q</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&hellip;</mo>
+
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mo>-</mo><msub><mi>q</mi><mn>3</mn></msub>
+  </mtd>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mo>-</mo><msub><mi>q</mi><mn>2</mn></msub>
+  </mtd>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+</mfenced>
+</math>
+
+<p>且有</p>
+
+<math class="equation">
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&sdot;</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>k</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<msub><mi>k</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>=</mo>
+<mi>gcd</mi><mfenced><msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub></mfenced>
+</math>
+
+<p>观察</p>
+
+<math class="equation">
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+    <msub><mi>c</mi><mn>3</mn></msub>
+  </mtd>
+  <mtd>
+    <msub><mi>c</mi><mn>1</mn></msub>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+    <msub><mi>c</mi><mn>4</mn></msub>
+  </mtd>
+  <mtd>
+    <msub><mi>c</mi><mn>2</mn></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&sdot;</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mo>-</mo><mi>q</mi>
+  </mtd>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>=</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mo>-</mo><mi>q</mi><msub><mi>c</mi><mn>3</mn></msub>
+<mo>+</mo><msub><mi>c</mi><mn>1</mn></msub>
+  </mtd>
+  <mtd>
+    <msub><mi>c</mi><mn>3</mn></msub>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mo>-</mo><mi>q</mi><msub><mi>c</mi><mn>4</mn></msub>
+<mo>+</mo><msub><mi>c</mi><mn>2</mn></msub>
+  </mtd>
+  <mtd>
+    <msub><mi>c</mi><mn>4</mn></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+
+<p>矩阵乘法符合结合率，不妨设</p>
+
+<math class="equation">
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&sdot;</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>s</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>s</mi><mrow><mi>m</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<msub><mi>t</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>t</mi><mrow><mi>m</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>=</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>r</mi><mi>m</mi></msub>
+  </mtd>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>在辗转相除法的每一步</p>
+
+<math class="equation">
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>m</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>m</mi><mo>+</mo><mn>3</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&sdot;</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mo>-</mo><msub><mi>q</mi><mrow><mi>m</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>=</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>m</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>同时计算</p>
+
+<math class="equation">
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>s</mi><mrow><mi>m</mi><mo>+</mo><mn>3</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>s</mi><mrow><mi>m</mi><mo>+</mo><mn>4</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&sdot;</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mo>-</mo><msub><mi>q</mi><mrow><mi>m</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>=</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>s</mi><mrow><mi>m</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>s</mi><mrow><mi>m</mi><mo>+</mo><mn>3</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>可以合并成</p>
+
+<math class="equation">
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>s</mi><mrow><mi>m</mi><mo>+</mo><mn>3</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>s</mi><mrow><mi>m</mi><mo>+</mo><mn>4</mn></mrow></msub>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>m</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>m</mi><mo>+</mo><mn>3</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&sdot;</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mo>-</mo><msub><mi>q</mi><mrow><mi>m</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+
+<mo>=</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>s</mi><mrow><mi>m</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>s</mi><mrow><mi>m</mi><mo>+</mo><mn>3</mn></mrow></msub>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>m</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>补一个单位矩阵，也就是</p>
+
+<math class="equation">
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&sdot;</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>=</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>得到初值</p>
+
+<math class="equation">
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>连起来</p>
+
+<math class="equation">
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&sdot;</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mo>-</mo><msub><mi>q</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&sdot;</mo>
+<mo>&hellip;</mo>
+<mo>&sdot;</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mo>-</mo><msub><mi>q</mi><mn>1</mn></msub>
+  </mtd>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>1</mn>
+  </mtd>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>=</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>s</mi><mn>1</mn></msub>
+  </mtd>
+  <mtd>
+<msub><mi>s</mi><mn>2</mn></msub>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+  <mtd>
+<msub><mi>r</mi><mn>1</mn></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>所以<math><msub><mi>s</mi><mn>2</mn></msub></math>就是结果</p>
+
+<p>更合理的思路是，把辗转相除法写成矩阵形式后，观察到</p>
+
+<math class="equation">
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+  </mtd>
+  <mtd>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>&sdot;</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<msub><mi>s</mi><mn>1</mn></msub>
+  </mtd>
+  <mtd>
+<msub><mi>s</mi><mn>2</mn></msub>
+  </mtd>
+</mtr>
+<mtr>
+  <mtd>
+<msub><mi>t</mi><mn>1</mn></msub>
+  </mtd>
+  <mtd>
+<msub><mi>t</mi><mn>2</mn></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+<mo>=</mo>
+<mfenced open="[" close="]">
+<mtable>
+<mtr>
+  <mtd>
+<mn>0</mn>
+  </mtd>
+  <mtd>
+<msub><mi>r</mi><mn>1</mn></msub>
+  </mtd>
+</mtr>
+</mtable>
+</mfenced>
+</math>
+
+<p>发现</p>
+
+<math class="equation">
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+<msub><mi>s</mi><mn>2</mn></msub>
+<mo>&equiv;</mo>
+<msub><mi>r</mi><mn>1</mn></msub>
+<mo>&equiv;</mo>
+<mi>gcd</mi>
+<mfenced>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub>
+</mfenced>
+<mfenced>
+<mrow>
+<mo>mod</mo>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub>
+</mrow>
+</mfenced>
+</math>
+
+<p>且有循环不变式</p>
+
+<math class="equation">
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub>
+<msub><mi>s</mi><mrow><mi>m</mi><mo>+</mo><mn>2</mn></mrow></msub>
+<mo>&equiv;</mo>
+<msub><mi>r</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub>
+<mfenced>
+<mrow>
+<mo>mod</mo>
+<msub><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></msub>
+</mrow>
+</mfenced>
+</math>
+
+<p>这样就得到了扩展欧几里德算法</p>
+
+</body>
+</html>

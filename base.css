@@ -3,7 +3,7 @@ html {
 }
 
 * {
-  text-align: left;
+    text-align: left;
 }
 
 body {
@@ -18,5 +18,18 @@ body {
 }
 
 p {
-  line-height: 180%;
+    line-height: 180%;
+}
+
+math {
+    font-size: 1.2em;
+    margin: 0 0.2em;
+}
+
+
+math.equation:after {
+    text-align: right;
+    margin: 0 0 0 2em;
+    counter-increment: eqn;
+    content: "(" counter(eqn) ")";
 }
