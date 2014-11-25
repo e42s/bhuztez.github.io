@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+      <meta charset="utf-8" />
+    <title>C-c C-k &middot; 中国剩余定理</title>
+    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
+    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+
+
+
+</head>
+<body>
+    <header>
+        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+        </nav>
+        <div class="header_box">
+            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h2>to impress your cat</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Aug 03, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/chinese-remainder-theorem.html" rel="bookmark" title="Permanent Link to &quot;中国剩余定理&quot;">中国剩余定理</a>
+                </h2>
+<p>本文纯属搞笑，切勿当真</p>
+<p>中国剩余定理这个叫法是对这种方法的极大误解。根据中国人只追求实用的天赋，肯定不会没事去证明某种数学性质的。要是给不出解法，就算证明了一个很重要的性质，一句这有啥用就噎死了。中国剩余定理实际上是为了解一种同余方程组。中国剩余定理很可能不是中国人最早证明的，完整的解法也很可能不是中国人最早给出的，只是因为孙子算经中对这种同余方程组给出了不完整的解法，这就叫中国剩余定理了，和费马大定理有异曲同工之妙。</p>
+<!-- more -->
+<p>求正整数 <span class="formula"><i>x</i></span>
+ 使得</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎧</span></span><span class="arrayrow"><span class="bracket align-left">⎪</span></span><span class="arrayrow"><span class="bracket align-left">⎪</span></span><span class="arrayrow"><span class="bracket align-left">⎨</span></span><span class="arrayrow"><span class="bracket align-left">⎪</span></span><span class="arrayrow"><span class="bracket align-left">⎪</span></span><span class="arrayrow"><span class="bracket align-left">⎩</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-l">
+<i>x</i> ≡ <i>a</i><sub>1</sub>
+</span>
+<span class="arraycell align- ">
+(<i>mod</i> <i>m</i><sub>1</sub>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align- ">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+<i>x</i> ≡ <i>a</i><sub>2</sub>
+</span>
+<span class="arraycell align- ">
+(<i>mod</i> <i>m</i><sub>2</sub>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align- ">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+…
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+<i>x</i> ≡ <i>a</i><sub><i>n</i></sub>
+</span>
+<span class="arraycell align- ">
+(<i>mod</i> <i>m</i><sub><i>n</i></sub>)
+</span>
+
+</span>
+</span><span class="emptydot"></span>
+</div>
+<p>找出任意一个满足这个同余方程组的 <span class="formula"><i>x</i></span>
+ 后，根据中国剩余定理即可得到最小的 <span class="formula"><i>x</i></span>
+ 。</p>
+<p>用构造法，求 <span class="formula"><i>b</i><sub><i>i</i></sub>, <i>i</i> ∈ {1, 2, …, <i>n</i>}</span>
+ 使得</p>
+<div class="formula">
+∀(<i>j</i> ∈ {1, 2, …, <i>n</i>}, <i>j</i> ≠ <i>i</i>)<i>m</i><sub><i>j</i></sub>∣<i>b</i><sub><i>i</i></sub>
+</div>
+<p>记 <span class="formula"><i>b</i><sub><i>i</i></sub></span>
+ 和 <span class="formula"><i>m</i><sub><i>i</i></sub></span>
+ 的最大公约数为 <span class="formula"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span>
+ 。若有</p>
+<div class="formula">
+<i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)∣<i>a</i><sub><i>i</i></sub>
+</div>
+<p>且存在 <span class="formula"><i>k</i><sub><i>i</i></sub>, <i>i</i> ∈ {1, 2, …, <i>n</i>}</span>
+ 满足</p>
+<div class="formula">
+<i>k</i><sub><i>i</i></sub><i>b</i><sub><i>i</i></sub> ≡ <i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)(<i>mod</i> <i>m</i><sub><i>i</i></sub>)<i>i</i> ∈ {1, 2, …, <i>n</i>}
+</div>
+<p>不妨设</p>
+<div class="formula">
+<i>x</i> = <span class="limits"><sup class="limit"><i>n</i></sup><span class="limit"><span class="symbol">∑</span></span><sub class="limit"><i>i</i> = 1</sub></span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>a</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span><i>k</i><sub><i>i</i></sub><i>b</i><sub><i>i</i></sub>
+</div>
+<p>对于任意 <span class="formula"><i>j</i></span>
+ ，满足 <span class="formula"><i>j</i> ∈ {1, 2, …, <i>n</i>}</span>
+ ，有</p>
+<div class="formula">
+∀(<i>i</i> ∈ {1, 2, …, <i>n</i>}, <i>i</i> ≠ <i>j</i>)<i>m</i><sub><i>j</i></sub>∣<i>b</i><sub><i>i</i></sub>
+</div>
+<p>可得</p>
+<div class="formula">
+<i>m</i><sub><i>j</i></sub>∣<span class="limits"><sup class="limit"> </sup><span class="limit"><span class="symbol">∑</span></span><sub class="limit"><i>i</i> ≠ <i>j</i></sub></span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>a</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span><i>k</i><sub><i>i</i></sub><i>b</i><sub><i>i</i></sub>
+</div>
+<p>所以</p>
+<div class="formula">
+<span class="array"><span class="arrayrow">
+<span class="arraycell align-l">
+<span class="limits"><sup class="limit"><i>n</i></sup><span class="limit"><span class="symbol">∑</span></span><sub class="limit"><i>i</i> = 1</sub></span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>a</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span><i>k</i><sub><i>i</i></sub><i>b</i><sub><i>i</i></sub>
+</span>
+<span class="arraycell align-l">
+ ≡ <span class="fraction"><span class="ignored">(</span><span class="numerator"><i>a</i><sub><i>j</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>j</i></sub>, <i>m</i><sub><i>j</i></sub>)</span><span class="ignored">)</span></span><i>k</i><sub><i>j</i></sub><i>b</i><sub><i>j</i></sub>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i><sub><i>j</i></sub>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+
+</span>
+<span class="arraycell align-l">
+ ≡ <span class="fraction"><span class="ignored">(</span><span class="numerator"><i>a</i><sub><i>j</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>j</i></sub>, <i>m</i><sub><i>j</i></sub>)</span><span class="ignored">)</span></span><i>gcd</i>(<i>b</i><sub><i>j</i></sub>, <i>m</i><sub><i>j</i></sub>)
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i><sub><i>j</i></sub>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+
+</span>
+<span class="arraycell align-l">
+ ≡ <i>a</i><sub><i>j</i></sub>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i><sub><i>j</i></sub>)
+</span>
+
+</span>
+</span>
+</div>
+<p><span class="formula"><i>bi</i></span>
+ 可以直接取 <span class="formula"><span class="limits"><span class="limit"><span class="symbol">∏</span></span></span><sub><i>j</i> ≠ <i>i</i></sub><i>m</i><sub><i>j</i></sub></span>
+ ，求 <span class="formula"><i>k</i><sub><i>i</i></sub></span>
+ 却比较困难。</p>
+<p>因为</p>
+<div class="formula">
+<i>k</i><sub><i>i</i></sub><i>b</i><sub><i>i</i></sub> <i>mod</i> <i>m</i><sub><i>i</i></sub> ≡ <i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><i>k</i><sub><i>i</i></sub><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>b</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span> <i>mod</i> <span class="fraction"><span class="ignored">(</span><span class="numerator"><i>m</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
+</div>
+<p>所以， <span class="formula"><i>k</i><sub><i>i</i></sub></span>
+ 满足</p>
+<div class="formula">
+<i>k</i><sub><i>i</i></sub><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>b</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span> ≡ 1<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><i>mod</i> <span class="fraction"><span class="ignored">(</span><span class="numerator"><i>m</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
+</div>
+<p>这个问题也可以表示成，已知 <span class="formula"><i>a</i>, <i>m</i></span>
+ ，且 <span class="formula"><i>gcd</i>(<i>a</i>, <i>m</i>) = 1</span>
+ ，求 <span class="formula"><i>k</i></span>
+ 使得</p>
+<div class="formula">
+<i>ka</i> ≡ 1(<i>mod</i> <i>m</i>)
+</div>
+<div class="section" id="id2">
+<h2>欧拉定理</h2>
+<p>有一种解法，不知道从哪里流传出来的，利用了欧拉定理。</p>
+<p>欧拉定理指出，若 <span class="formula"><i>gcd</i>(<i>a</i>, <i>m</i>) = 1</span>
+ ，有</p>
+<div class="formula">
+<i>a</i><sup><i>φ</i>(<i>m</i>)</sup> ≡ 1(<i>mod</i> <i>m</i>)
+</div>
+<p>所以， <span class="formula"><i>k</i></span>
+ 取 <span class="formula"><i>a</i><sup><i>φ</i>(<i>m</i>) − 1</sup></span>
+ 即可。</p>
+<p>因为除了量子计算机，我们并没有有效的办法能计算出 <span class="formula"><i>φ</i>(<i>m</i>)</span>
+，至少古人不能使用这种方法。</p>
+</div>
+<div class="section" id="id3">
+<h2>大衍求一术</h2>
+<p>中国古代有一种求解的方法，叫做大衍求一术。很多介绍中国剩余定理的文章都没有提到大衍求一术。而提到大衍求一术的很多都只讲了什么是大衍求一术，而没有解释为什么。而大衍求一术乍一看完全不知道这是在算什么。</p>
+<p>数书九章中记载的大衍求一术是这样的。按如下放置四个数，不断作以下变换，直到 <span class="formula"><i>r</i>1</span>
+ 或 <span class="formula"><i>r</i>2</span>
+ 为1为止。</p>
+<div class="formula">
+<span class="environment"><span class="arrayrow">
+<span class="arraycell align-r">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub>1</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub>1</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub>2</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub>2</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span> → <span class="array"><span class="arrayrow"><span class="bracket align-left">⎧</span></span><span class="arrayrow"><span class="bracket align-left">⎨</span></span><span class="arrayrow"><span class="bracket align-left">⎩</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-l">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub>1</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub>1</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub>2</sub> + <i>k</i><sub>1</sub><span class="symbol">⌊</span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>r</i><sub>2</sub></span><span class="ignored">)/(</span><span class="denominator"><i>r</i><sub>1</sub></span><span class="ignored">)</span></span><span class="symbol">⌋</span>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub>2</sub> <i>mod</i> <i>r</i><sub>1</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
+</span>
+<span class="arraycell align-l">
+, <i>r</i><sub>1</sub> &lt; <i>r</i><sub>2</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub>1</sub> + <i>k</i><sub>2</sub><span class="symbol">⌊</span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>r</i><sub>1</sub></span><span class="ignored">)/(</span><span class="denominator"><i>r</i><sub>2</sub></span><span class="ignored">)</span></span><span class="symbol">⌋</span>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub>1</sub> <i>mod</i> <i>r</i><sub>2</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub>2</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub>2</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
+</span>
+<span class="arraycell align-l">
+, <i>r</i><sub>1</sub> &gt; <i>r</i><sub>2</sub>
+</span>
+
+</span>
+</span><span class="emptydot"></span>
+</span>
+
+</span>
+</span>
+</div>
+<p>一开始四个数是</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+<i>a</i>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+0
+</span>
+<span class="arraycell align-c">
+<i>m</i>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
+</div>
+<p>很难看出，在变换过程中，这四个位置上的数始终满足</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎧</span></span><span class="arrayrow"><span class="bracket align-left">⎨</span></span><span class="arrayrow"><span class="bracket align-left">⎩</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-l">
+<i>k</i><sub>1</sub><i>a</i> ≡ <i>r</i><sub>1</sub>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+<i>k</i><sub>2</sub><i>a</i> ≡  − <i>r</i><sub>2</sub>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+</span><span class="emptydot"></span>
+</div>
+<p>一开始</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎧</span></span><span class="arrayrow"><span class="bracket align-left">⎨</span></span><span class="arrayrow"><span class="bracket align-left">⎩</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-l">
+1⋅<i>a</i> ≡ <i>a</i>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+0⋅<i>a</i> ≡ 0 ≡  − <i>m</i>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+</span><span class="emptydot"></span>
+</div>
+<p>当 <span class="formula"><i>r</i><sub>1</sub> &lt; <i>r</i><sub>2</sub></span>
+ 时，</p>
+<div class="formula">
+<span class="array"><span class="arrayrow">
+<span class="arraycell align-l">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><i>k</i><sub>2</sub> + <i>k</i><sub>1</sub><span class="symbol">⌊</span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>r</i><sub>2</sub></span><span class="ignored">)/(</span><span class="denominator"><i>r</i><sub>1</sub></span><span class="ignored">)</span></span><span class="symbol">⌋</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>⋅<i>a</i>
+</span>
+<span class="arraycell align-l">
+ ≡  − <i>r</i><sub>2</sub> + <i>r</i><sub>1</sub><span class="symbol">⌊</span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>r</i><sub>2</sub></span><span class="ignored">)/(</span><span class="denominator"><i>r</i><sub>1</sub></span><span class="ignored">)</span></span><span class="symbol">⌋</span>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+
+</span>
+<span class="arraycell align-l">
+ ≡  − <i>r</i><sub>2</sub> + <i>r</i><sub>2</sub> − <i>r</i><sub>2</sub> <i>mod</i> <i>r</i><sub>1</sub>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+
+</span>
+<span class="arraycell align-l">
+ ≡  − <i>r</i><sub>2</sub> <i>mod</i> <i>r</i><sub>1</sub>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+</span>
+</div>
+<p>当 <span class="formula"><i>r</i><sub>1</sub> &gt; <i>r</i><sub>2</sub></span>
+ 时，</p>
+<div class="formula">
+<span class="array"><span class="arrayrow">
+<span class="arraycell align-l">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><i>k</i><sub>1</sub> + <i>k</i><sub>2</sub><span class="symbol">⌊</span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>r</i><sub>1</sub></span><span class="ignored">)/(</span><span class="denominator"><i>r</i><sub>2</sub></span><span class="ignored">)</span></span><span class="symbol">⌋</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>⋅<i>a</i>
+</span>
+<span class="arraycell align-l">
+ ≡ <i>r</i><sub>1</sub> − <i>r</i><sub>2</sub><span class="symbol">⌊</span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>r</i><sub>1</sub></span><span class="ignored">)/(</span><span class="denominator"><i>r</i><sub>2</sub></span><span class="ignored">)</span></span><span class="symbol">⌋</span>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+
+</span>
+<span class="arraycell align-l">
+ ≡ <i>r</i><sub>1</sub> − <i>r</i><sub>1</sub> + <i>r</i><sub>1</sub> <i>mod</i> <i>r</i><sub>2</sub>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+
+</span>
+<span class="arraycell align-l">
+ ≡ <i>r</i><sub>1</sub> <i>mod</i> <i>r</i><sub>2</sub>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+</span>
+</div>
+<p>所以，这两个等式在变换过程中始终成立。</p>
+<p>最终，若 <span class="formula"><i>r</i><sub>1</sub> = 1</span>
+</p>
+<div class="formula">
+<i>k</i><sub>1</sub><i>a</i> ≡ 1(<i>mod</i> <i>m</i>)
+</div>
+<p>若 <span class="formula"><i>r</i><sub>2</sub> = 1</span>
+ ，作以下变换</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub>1</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub>1</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub>2</sub>
+</span>
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span> → <span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub>1</sub> + <i>k</i><sub>2</sub>(<i>r</i><sub>1</sub> − 1)
+</span>
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub>2</sub>
+</span>
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
+</div>
+<p>此时，</p>
+<div class="formula">
+<span class="array"><span class="arrayrow">
+<span class="arraycell align-l">
+(<i>k</i><sub>1</sub> + <i>k</i><sub>2</sub>(<i>r</i><sub>1</sub> − 1))⋅<i>a</i>
+</span>
+<span class="arraycell align-l">
+ ≡ <i>r</i><sub>1</sub> − (<i>r</i><sub>1</sub> − 1)
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+
+</span>
+<span class="arraycell align-l">
+ ≡ 1
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+</span>
+</div>
+<p>和西方的扩展欧几里德算法相比，循环不变式差一个负号，在最后一步需要分两种情况讨论。数书九章并没有交代大衍求一术是怎么来的，可能一开始就是这样的，也可能是流传过程中减号误传成了加号，现在已无从考证了。</p>
+</div>
+<div class="section" id="id4">
+<h2>扩展欧几里德算法</h2>
+<p>现在用扩展欧几里德算法来求解。把循环不变式换成</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎧</span></span><span class="arrayrow"><span class="bracket align-left">⎨</span></span><span class="arrayrow"><span class="bracket align-left">⎩</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-l">
+<i>k</i><sub>1</sub><i>a</i> ≡ <i>r</i><sub>1</sub>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+<i>k</i><sub>2</sub><i>a</i> ≡ <i>r</i><sub>2</sub>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+</span><span class="emptydot"></span>
+</div>
+<p>变换过程换成</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub>1</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub>1</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub>2</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub>2</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span> → <span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub>2</sub> − <i>k</i><sub>1</sub><span class="symbol">⌊</span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>r</i><sub>2</sub></span><span class="ignored">)/(</span><span class="denominator"><i>r</i><sub>1</sub></span><span class="ignored">)</span></span><span class="symbol">⌋</span>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub>2</sub> <i>mod</i> <i>r</i><sub>1</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub>1</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub>1</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
+</div>
+<p>而初始值不变，仍然是</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+<i>a</i>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+0
+</span>
+<span class="arraycell align-c">
+<i>m</i>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
+</div>
+<p>一开始</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎧</span></span><span class="arrayrow"><span class="bracket align-left">⎨</span></span><span class="arrayrow"><span class="bracket align-left">⎩</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-l">
+1⋅<i>a</i> ≡ <i>a</i>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+0⋅<i>a</i> ≡ 0 ≡ <i>m</i>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+</span><span class="emptydot"></span>
+</div>
+<p>变换过程中</p>
+<div class="formula">
+<span class="array"><span class="arrayrow">
+<span class="arraycell align-l">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><i>k</i><sub>2</sub> − <i>k</i><sub>1</sub><span class="symbol">⌊</span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>r</i><sub>2</sub></span><span class="ignored">)/(</span><span class="denominator"><i>r</i><sub>1</sub></span><span class="ignored">)</span></span><span class="symbol">⌋</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>⋅<i>a</i>
+</span>
+<span class="arraycell align-l">
+ ≡ <i>r</i><sub>2</sub> − <i>r</i><sub>1</sub><span class="symbol">⌊</span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>r</i><sub>2</sub></span><span class="ignored">)/(</span><span class="denominator"><i>r</i><sub>1</sub></span><span class="ignored">)</span></span><span class="symbol">⌋</span>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+
+</span>
+<span class="arraycell align-l">
+ ≡ <i>r</i><sub>2</sub> − (<i>r</i><sub>2</sub> − <i>r</i><sub>2</sub> <i>mod</i> <i>r</i><sub>1</sub>)
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+
+</span>
+<span class="arraycell align-l">
+ ≡ <i>r</i><sub>2</sub> <i>mod</i> <i>r</i><sub>1</sub>
+</span>
+<span class="arraycell align-l">
+(<i>mod</i> <i>m</i>)
+</span>
+
+</span>
+</span>
+</div>
+<p>所以，这两个等式在变换过程中始终成立。</p>
+<p>最终，若 <span class="formula"><i>r</i><sub>1</sub> = 1</span>
+</p>
+<div class="formula">
+<i>k</i><sub>1</sub><i>a</i> ≡ 1(<i>mod</i> <i>m</i>)
+</div>
+</div>
+<div class="section" id="id5">
+<h2>辗转相除法</h2>
+<p>辗转相除法是一种求最大公约数的方法。西方所谓的欧几里德算法就是辗转相除法。而扩展欧几里德算法其实就是同一种算法，只不过得到了更多结果。</p>
+<p>已知 <span class="formula"><i>a</i>, <i>b</i></span>
+ ，求 <span class="formula"><i>gcd</i>(<i>a</i>, <i>b</i>)</span>
+ 。</p>
+<p>按如下放置两个数，不断作以下变换，直到 <span class="formula"><i>r</i>1</span>
+ 为0</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub>1</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub>2</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span> → <span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub>2</sub> <i>mod</i> <i>r</i><sub>1</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub>1</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
+</div>
+<p>一开始两个数是</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>a</i>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>b</i>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
+</div>
+<p>不妨设 <span class="formula"><i>r</i><sub>1</sub> = <i>s</i><sub>1</sub>⋅<i>gcd</i>(<i>r</i><sub>1</sub>, <i>r</i><sub>2</sub>), <i>r</i><sub>2</sub> = <i>s</i><sub>2</sub>⋅<i>gcd</i>(<i>r</i>1, <i>r</i>2)</span>
+ ，则</p>
+<div class="formula">
+<span class="array"><span class="arrayrow">
+<span class="arraycell align-l">
+<i>r</i>2 <i>mod</i> <i>r</i>1
+</span>
+<span class="arraycell align-l">
+ = (<i>s</i><sub>2</sub>⋅<i>gcd</i>(<i>r</i><sub>1</sub>, <i>r</i><sub>2</sub>)) <i>mod</i> (<i>s</i><sub>1</sub>⋅<i>gcd</i>(<i>r</i><sub>1</sub>, <i>r</i><sub>2</sub>))
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+
+</span>
+<span class="arraycell align-l">
+ = (<i>s</i><sub>2</sub> <i>mod</i> <i>s</i><sub>1</sub>)⋅<i>gcd</i>(<i>r</i><sub>1</sub>, <i>r</i><sub>2</sub>)
+</span>
+
+</span>
+</span>
+</div>
+<p>因为 <span class="formula"><i>gcd</i>(<i>s</i><sub>2</sub> <i>mod</i> <i>s</i><sub>1</sub>, <i>s</i><sub>1</sub>) = 1</span>
+ ，所以</p>
+<div class="formula">
+<i>gcd</i>(<i>r</i><sub>2</sub> <i>mod</i> <i>r</i><sub>1</sub>, <i>r</i><sub>1</sub>) = <i>gcd</i>(<i>r</i><sub>1</sub>, <i>r</i><sub>2</sub>)
+</div>
+<p>因此， <span class="formula"><i>gcd</i>(<i>r</i>1, <i>r</i>2)</span>
+ 始终是 <span class="formula"><i>gcd</i>(<i>a</i>, <i>b</i>)</span>
+</p>
+<p>当 <span class="formula"><i>s</i><sub>1</sub> = 1</span>
+ 时， <span class="formula"><i>s</i><sub>2</sub> <i>mod</i> <i>s</i><sub>1</sub> = 0</span>
+ ，计算结束，得到了 <span class="formula"><i>gcd</i>(<i>a</i>, <i>b</i>)</span>
+</p>
+<p>如下图所示，辗转相除法从后往前看，有 <span class="formula"><i>r</i><sub>1</sub> = <i>gcd</i>(<i>a</i>, <i>b</i>) = <i>gcd</i>(<i>r</i><sub><i>n</i></sub>, <i>r</i><sub><i>n</i> + 1</sub>)</span>
+</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>a</i>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>b</i>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span> → … → <span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub>4</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub>5</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span> → <span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub>3</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub>4</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span> → <span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub>2</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub>3</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span> → <span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub>1</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub>2</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span> → <span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub>1</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
+</div>
+<p>求解 <span class="formula"><i>k</i><sub>1</sub></span>
+ ，使得 <span class="formula"><i>k</i><sub>1</sub><i>r</i><sub>1</sub> ≡ <i>gcd</i>(<i>r</i><sub>1</sub>, <i>r</i><sub>2</sub>)(<i>mod</i> <i>r</i><sub>2</sub>)</span>
+</p>
+<p>因为 <span class="formula"><i>r</i><sub>1</sub> = <i>gcd</i>(<i>r</i><sub>1</sub>, <i>r</i><sub>2</sub>)</span>
+ 所以 <span class="formula"><i>k</i><sub>1</sub> = 1</span>
+</p>
+<p>求解 <span class="formula"><i>k</i><sub>2</sub></span>
+ ，使得 <span class="formula"><i>k</i><sub>2</sub><i>r</i><sub>2</sub> ≡ <i>gcd</i>(<i>r</i><sub>2</sub>, <i>r</i><sub>3</sub>)(<i>mod</i> <i>r</i><sub>3</sub>)</span>
+</p>
+<p>不妨设 <span class="formula"><i>r</i><sub>3</sub> − <i>q</i><sub>2</sub><i>r</i><sub>2</sub> = <i>r</i><sub>1</sub></span>
+</p>
+<p>因为 <span class="formula"><i>r</i><sub>1</sub> = <i>gcd</i>(<i>r</i><sub>2</sub>, <i>r</i><sub>3</sub>)</span>
+</p>
+<p>可得 <span class="formula"><i>r</i><sub>3</sub> − <i>q</i><sub>2</sub><i>r</i><sub>2</sub> = <i>gcd</i>(<i>r</i><sub>2</sub>, <i>r</i><sub>3</sub>)</span>
+</p>
+<p>所以 <span class="formula"><i>k</i><sub>2</sub> =  − <i>q</i><sub>2</sub></span>
+</p>
+<p>求解 <span class="formula"><i>k</i><sub>3</sub></span>
+ ，使得 <span class="formula"><i>k</i><sub>3</sub><i>r</i><sub>3</sub> ≡ <i>gcd</i>(<i>r</i><sub>3</sub>, <i>r</i><sub>4</sub>)(<i>mod</i> <i>r</i><sub>3</sub>)</span>
+</p>
+<p>不妨设 <span class="formula"><i>r</i><sub>4</sub> − <i>q</i><sub>3</sub><i>r</i><sub>3</sub> = <i>r</i><sub>2</sub></span>
+</p>
+<p>因为 <span class="formula"><i>r</i><sub>3</sub> − <i>q</i><sub>2</sub><i>r</i><sub>2</sub> = <i>gcd</i>(<i>r</i><sub>3</sub>, <i>r</i><sub>4</sub>)</span>
+</p>
+<p>可得 <span class="formula"><i>r</i><sub>3</sub> − <i>q</i><sub>2</sub>(<i>r</i><sub>4</sub> − <i>q</i><sub>3</sub><i>r</i><sub>3</sub>) = <i>gcd</i>(<i>r</i><sub>3</sub>, <i>r</i><sub>4</sub>)</span>
+</p>
+<p>即 <span class="formula"><i>r</i><sub>3</sub>(1 + <i>q</i><sub>2</sub><i>q</i><sub>3</sub>) − <i>q</i><sub>2</sub><i>r</i><sub>4</sub> = <i>gcd</i>(<i>r</i><sub>3</sub>, <i>r</i><sub>4</sub>)</span>
+</p>
+<p>所以 <span class="formula"><i>k</i><sub>3</sub> = 1 + <i>q</i><sub>2</sub><i>q</i><sub>3</sub></span>
+</p>
+<p>不难看出，假设存在 <span class="formula"><i>k</i><sub><i>n</i> + 1</sub><i>r</i><sub><i>n</i> + 1</sub> + <i>k</i><sub><i>n</i></sub><i>r</i><sub><i>n</i> + 2</sub> = <i>gcd</i>(<i>r</i><sub><i>n</i> + 2</sub>, <i>r</i><sub><i>n</i> + 3</sub>)</span>
+</p>
+<p>不妨设 <span class="formula"><i>r</i><sub><i>n</i> + 3</sub> − <i>q</i><sub><i>n</i> + 2</sub><i>r</i><sub><i>n</i> + 2</sub> = <i>r</i><sub><i>n</i> + 1</sub></span>
+</p>
+<p>可得 <span class="formula"><i>k</i><sub><i>n</i> + 1</sub>(<i>r</i><sub><i>n</i> + 3</sub> − <i>q</i><sub><i>n</i> + 2</sub><i>r</i><sub><i>n</i> + 2</sub>) + <i>k</i><sub><i>n</i></sub><i>r</i><sub><i>n</i> + 2</sub> = <i>gcd</i>(<i>r</i><sub><i>n</i> + 2</sub>, <i>r</i><sub><i>n</i> + 3</sub>)</span>
+</p>
+<p>即 <span class="formula">(<i>k</i><sub><i>n</i></sub> − <i>k</i><sub><i>n</i> + 1</sub><i>q</i><sub><i>n</i> + 2</sub>)<i>r</i><sub><i>n</i> + 2</sub> + <i>k</i><sub><i>n</i> + 1</sub><i>r</i><sub><i>n</i> + 3</sub> = <i>gcd</i>(<i>r</i><sub><i>n</i> + 2</sub>, <i>r</i><sub><i>n</i> + 3</sub>)</span>
+</p>
+<p>所以 <span class="formula"><i>k</i><sub><i>n</i> + 2</sub> = <i>k</i><sub><i>n</i></sub> − <i>k</i><sub><i>n</i> + 1</sub><i>q</i><sub><i>n</i> + 2</sub></span>
+</p>
+<p>即</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub><i>n</i> + 2</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub><i>n</i> + 1</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span> = <span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+ − <i>q</i><sub><i>n</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub><i>n</i> + 1</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub><i>n</i></sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>
+</div>
+<p>逐项展开后</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub><i>n</i> + 2</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub><i>n</i> + 1</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span> = <span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+ − <i>q</i><sub><i>n</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>⋅…⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+ − <i>q</i><sub>3</sub>
+</span>
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+ − <i>q</i><sub>2</sub>
+</span>
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>
+</div>
+<p>且有</p>
+<div class="formula">
+<span class="symbol">[</span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub><i>n</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub><i>n</i> + 3</sub>
+</span>
+
+</span>
+</span><span class="symbol">]</span>⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub><i>n</i> + 2</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>k</i><sub><i>n</i> + 1</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span> = <i>gcd</i>(<i>r</i><sub><i>n</i> + 2</sub>, <i>r</i><sub><i>n</i> + 3</sub>)
+</div>
+<p>观察</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>c</i><sub>3</sub>
+</span>
+<span class="arraycell align-c">
+<i>c</i><sub>1</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>c</i><sub>4</sub>
+</span>
+<span class="arraycell align-c">
+<i>c</i><sub>2</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+ − <i>q</i>
+</span>
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span> = <span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+ − <i>q</i><i>c</i><sub>3</sub> + <i>c</i><sub>1</sub>
+</span>
+<span class="arraycell align-c">
+<i>c</i><sub>3</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ − <i>q</i><i>c</i><sub>4</sub> + <i>c</i><sub>2</sub>
+</span>
+<span class="arraycell align-c">
+<i>c</i><sub>4</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>
+</div>
+<p>矩阵乘法符合结合率，不妨设</p>
+<div class="formula">
+<span class="symbol">[</span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub><i>n</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub><i>n</i> + 3</sub>
+</span>
+
+</span>
+</span><span class="symbol">]</span>⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>s</i><sub><i>m</i> + 1</sub>
+</span>
+<span class="arraycell align-c">
+<i>s</i><sub><i>m</i> + 2</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>t</i><sub><i>m</i> + 1</sub>
+</span>
+<span class="arraycell align-c">
+<i>t</i><sub><i>m</i> + 2</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span> = <span class="symbol">[</span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub><i>m</i></sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub><i>m</i> + 1</sub>
+</span>
+
+</span>
+</span><span class="symbol">]</span>
+</div>
+<p>在辗转相除法的每一步</p>
+<div class="formula">
+<span class="symbol">[</span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub><i>m</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub><i>m</i> + 3</sub>
+</span>
+
+</span>
+</span><span class="symbol">]</span>⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+ − <i>q</i><sub><i>m</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span> = <span class="symbol">[</span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub><i>m</i> + 1</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub><i>m</i> + 2</sub>
+</span>
+
+</span>
+</span><span class="symbol">]</span>
+</div>
+<p>同时计算</p>
+<div class="formula">
+<span class="symbol">[</span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>s</i><sub><i>m</i> + 3</sub>
+</span>
+<span class="arraycell align-c">
+<i>s</i><sub><i>m</i> + 4</sub>
+</span>
+
+</span>
+</span><span class="symbol">]</span>⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+ − <i>q</i><sub><i>m</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span> = <span class="symbol">[</span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>s</i><sub><i>m</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+<i>s</i><sub><i>m</i> + 3</sub>
+</span>
+
+</span>
+</span><span class="symbol">]</span>
+</div>
+<p>可以合并成</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>s</i><sub><i>m</i> + 3</sub>
+</span>
+<span class="arraycell align-c">
+<i>s</i><sub><i>m</i> + 4</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub><i>m</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub><i>m</i> + 3</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+ − <i>q</i><sub><i>m</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span> = <span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>s</i><sub><i>m</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+<i>s</i><sub><i>m</i> + 3</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub><i>m</i> + 1</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub><i>m</i> + 2</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>
+</div>
+<p>补一个单位矩阵，也就是</p>
+<div class="formula">
+<span class="symbol">[</span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub><i>n</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub><i>n</i> + 3</sub>
+</span>
+
+</span>
+</span><span class="symbol">]</span>⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+0
+</span>
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span> = <span class="symbol">[</span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub><i>n</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub><i>n</i> + 3</sub>
+</span>
+
+</span>
+</span><span class="symbol">]</span>
+</div>
+<p>得到初值</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub><i>n</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub><i>n</i> + 3</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>
+</div>
+<p>连起来</p>
+<div class="formula">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub><i>n</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub><i>n</i> + 3</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+ − <i>q</i><sub><i>n</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>⋅…⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+ − <i>q</i><sub>1</sub>
+</span>
+<span class="arraycell align-c">
+1
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+1
+</span>
+<span class="arraycell align-c">
+0
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span> = <span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>s</i><sub>1</sub>
+</span>
+<span class="arraycell align-c">
+<i>s</i><sub>2</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+0
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub>1</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>
+</div>
+<p>所以 <span class="formula"><i>s</i><sub>2</sub></span>
+ 就是结果</p>
+<p>更合理的思路是，把辗转相除法写成矩阵形式后，观察到</p>
+<div class="formula">
+<span class="symbol">[</span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>r</i><sub><i>n</i> + 2</sub>
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub><i>n</i> + 3</sub>
+</span>
+
+</span>
+</span><span class="symbol">]</span>⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>s</i><sub>1</sub>
+</span>
+<span class="arraycell align-c">
+<i>s</i><sub>2</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>t</i><sub>1</sub>
+</span>
+<span class="arraycell align-c">
+<i>t</i><sub>2</sub>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span> = <span class="symbol">[</span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+0
+</span>
+<span class="arraycell align-c">
+<i>r</i><sub>1</sub>
+</span>
+
+</span>
+</span><span class="symbol">]</span>
+</div>
+<p>发现 <span class="formula"><i>r</i><sub><i>n</i> + 2</sub><i>s</i><sub>2</sub> ≡ <i>r</i><sub>1</sub> ≡ <i>gcd</i>(<i>r</i><sub><i>n</i> + 2</sub>, <i>r</i><sub><i>n</i> + 3</sub>)(<i>mod</i> <i>r</i><sub><i>n</i> + 3</sub>)</span>
+</p>
+<p>且有循环不变式 <span class="formula"><i>r</i><sub><i>n</i> + 2</sub><i>s</i><sub><i>m</i> + 2</sub> ≡ <i>r</i><sub><i>m</i> + 1</sub>(<i>mod</i> <i>r</i><sub><i>n</i> + 3</sub>)</span>
+</p>
+<p>这样就得到了扩展欧几里德算法</p>
+</div>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

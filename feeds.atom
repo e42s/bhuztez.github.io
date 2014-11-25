@@ -1,0 +1,2235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>C-c C-k</title><link href="http://bhuztez.github.io/" rel="alternate"></link><link href="http://bhuztez.github.io/feeds.atom" rel="self"></link><id>http://bhuztez.github.io/</id><updated>2014-08-03T00:00:00+08:00</updated><entry><title>中国剩余定理</title><link href="http://bhuztez.github.io/2014/chinese-remainder-theorem.html" rel="alternate"></link><updated>2014-08-03T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2014-08-03:2014/chinese-remainder-theorem.html</id><summary type="html">&lt;p&gt;本文纯属搞笑，切勿当真&lt;/p&gt;
+&lt;p&gt;中国剩余定理这个叫法是对这种方法的极大误解。根据中国人只追求实用的天赋，肯定不会没事去证明某种数学性质的。要是给不出解法，就算证明了一个很重要的性质，一句这有啥用就噎死了。中国剩余定理实际上是为了解一种同余方程组。中国剩余定理很可能不是中国人最早证明的，完整的解法也很可能不是中国人最早给出的，只是因为孙子算经中对这种同余方程组给出了不完整的解法，这就叫中国剩余定理了，和费马大定理有异曲同工之妙。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;求正整数 &lt;span class="formula"&gt;&lt;i&gt;x&lt;/i&gt;&lt;/span&gt;
+ 使得&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎧&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎪&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎪&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎨&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎪&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎪&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎩&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+&lt;i&gt;x&lt;/i&gt; ≡ &lt;i&gt;a&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align- "&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align- "&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+&lt;i&gt;x&lt;/i&gt; ≡ &lt;i&gt;a&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align- "&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align- "&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+…
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+&lt;i&gt;x&lt;/i&gt; ≡ &lt;i&gt;a&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt;&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align- "&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt;&lt;/sub&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="emptydot"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;找出任意一个满足这个同余方程组的 &lt;span class="formula"&gt;&lt;i&gt;x&lt;/i&gt;&lt;/span&gt;
+ 后，根据中国剩余定理即可得到最小的 &lt;span class="formula"&gt;&lt;i&gt;x&lt;/i&gt;&lt;/span&gt;
+ 。&lt;/p&gt;
+&lt;p&gt;用构造法，求 &lt;span class="formula"&gt;&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;i&lt;/i&gt; ∈ {1, 2, …, &lt;i&gt;n&lt;/i&gt;}&lt;/span&gt;
+ 使得&lt;/p&gt;
+&lt;div class="formula"&gt;
+∀(&lt;i&gt;j&lt;/i&gt; ∈ {1, 2, …, &lt;i&gt;n&lt;/i&gt;}, &lt;i&gt;j&lt;/i&gt; ≠ &lt;i&gt;i&lt;/i&gt;)&lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;∣&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;
+&lt;/div&gt;
+&lt;p&gt;记 &lt;span class="formula"&gt;&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;
+ 和 &lt;span class="formula"&gt;&lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;
+ 的最大公约数为 &lt;span class="formula"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;)&lt;/span&gt;
+ 。若有&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;)∣&lt;i&gt;a&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;
+&lt;/div&gt;
+&lt;p&gt;且存在 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;i&lt;/i&gt; ∈ {1, 2, …, &lt;i&gt;n&lt;/i&gt;}&lt;/span&gt;
+ 满足&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt; ≡ &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;)(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;)&lt;i&gt;i&lt;/i&gt; ∈ {1, 2, …, &lt;i&gt;n&lt;/i&gt;}
+&lt;/div&gt;
+&lt;p&gt;不妨设&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;x&lt;/i&gt; = &lt;span class="limits"&gt;&lt;sup class="limit"&gt;&lt;i&gt;n&lt;/i&gt;&lt;/sup&gt;&lt;span class="limit"&gt;&lt;span class="symbol"&gt;∑&lt;/span&gt;&lt;/span&gt;&lt;sub class="limit"&gt;&lt;i&gt;i&lt;/i&gt; = 1&lt;/sub&gt;&lt;/span&gt;&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;a&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;)&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;
+&lt;/div&gt;
+&lt;p&gt;对于任意 &lt;span class="formula"&gt;&lt;i&gt;j&lt;/i&gt;&lt;/span&gt;
+ ，满足 &lt;span class="formula"&gt;&lt;i&gt;j&lt;/i&gt; ∈ {1, 2, …, &lt;i&gt;n&lt;/i&gt;}&lt;/span&gt;
+ ，有&lt;/p&gt;
+&lt;div class="formula"&gt;
+∀(&lt;i&gt;i&lt;/i&gt; ∈ {1, 2, …, &lt;i&gt;n&lt;/i&gt;}, &lt;i&gt;i&lt;/i&gt; ≠ &lt;i&gt;j&lt;/i&gt;)&lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;∣&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;
+&lt;/div&gt;
+&lt;p&gt;可得&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;∣&lt;span class="limits"&gt;&lt;sup class="limit"&gt; &lt;/sup&gt;&lt;span class="limit"&gt;&lt;span class="symbol"&gt;∑&lt;/span&gt;&lt;/span&gt;&lt;sub class="limit"&gt;&lt;i&gt;i&lt;/i&gt; ≠ &lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;a&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;)&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;
+&lt;/div&gt;
+&lt;p&gt;所以&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+&lt;span class="limits"&gt;&lt;sup class="limit"&gt;&lt;i&gt;n&lt;/i&gt;&lt;/sup&gt;&lt;span class="limit"&gt;&lt;span class="symbol"&gt;∑&lt;/span&gt;&lt;/span&gt;&lt;sub class="limit"&gt;&lt;i&gt;i&lt;/i&gt; = 1&lt;/sub&gt;&lt;/span&gt;&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;a&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;)&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ ≡ &lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;a&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;)&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ ≡ &lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;a&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;)&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;)
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ ≡ &lt;i&gt;a&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;span class="formula"&gt;&lt;i&gt;bi&lt;/i&gt;&lt;/span&gt;
+ 可以直接取 &lt;span class="formula"&gt;&lt;span class="limits"&gt;&lt;span class="limit"&gt;&lt;span class="symbol"&gt;∏&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt; ≠ &lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;j&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;
+ ，求 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;
+ 却比较困难。&lt;/p&gt;
+&lt;p&gt;因为&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt; ≡ &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;)⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;)&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt; &lt;i&gt;mod&lt;/i&gt; &lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;)&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;所以， &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;
+ 满足&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;)&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt; ≡ 1&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;i&gt;mod&lt;/i&gt; &lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;b&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;)&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;这个问题也可以表示成，已知 &lt;span class="formula"&gt;&lt;i&gt;a&lt;/i&gt;, &lt;i&gt;m&lt;/i&gt;&lt;/span&gt;
+ ，且 &lt;span class="formula"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;a&lt;/i&gt;, &lt;i&gt;m&lt;/i&gt;) = 1&lt;/span&gt;
+ ，求 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;/span&gt;
+ 使得&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;ka&lt;/i&gt; ≡ 1(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;欧拉定理&lt;/h2&gt;
+&lt;p&gt;有一种解法，不知道从哪里流传出来的，利用了欧拉定理。&lt;/p&gt;
+&lt;p&gt;欧拉定理指出，若 &lt;span class="formula"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;a&lt;/i&gt;, &lt;i&gt;m&lt;/i&gt;) = 1&lt;/span&gt;
+ ，有&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;a&lt;/i&gt;&lt;sup&gt;&lt;i&gt;φ&lt;/i&gt;(&lt;i&gt;m&lt;/i&gt;)&lt;/sup&gt; ≡ 1(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/div&gt;
+&lt;p&gt;所以， &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;/span&gt;
+ 取 &lt;span class="formula"&gt;&lt;i&gt;a&lt;/i&gt;&lt;sup&gt;&lt;i&gt;φ&lt;/i&gt;(&lt;i&gt;m&lt;/i&gt;) − 1&lt;/sup&gt;&lt;/span&gt;
+ 即可。&lt;/p&gt;
+&lt;p&gt;因为除了量子计算机，我们并没有有效的办法能计算出 &lt;span class="formula"&gt;&lt;i&gt;φ&lt;/i&gt;(&lt;i&gt;m&lt;/i&gt;)&lt;/span&gt;
+，至少古人不能使用这种方法。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;大衍求一术&lt;/h2&gt;
+&lt;p&gt;中国古代有一种求解的方法，叫做大衍求一术。很多介绍中国剩余定理的文章都没有提到大衍求一术。而提到大衍求一术的很多都只讲了什么是大衍求一术，而没有解释为什么。而大衍求一术乍一看完全不知道这是在算什么。&lt;/p&gt;
+&lt;p&gt;数书九章中记载的大衍求一术是这样的。按如下放置四个数，不断作以下变换，直到 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;1&lt;/span&gt;
+ 或 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;2&lt;/span&gt;
+ 为1为止。&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="environment"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-r"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; → &lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎧&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎨&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎩&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; + &lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;span class="symbol"&gt;⌊&lt;/span&gt;&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class="symbol"&gt;⌋&lt;/span&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; &amp;lt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; + &lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;span class="symbol"&gt;⌊&lt;/span&gt;&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class="symbol"&gt;⌋&lt;/span&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; &amp;gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="emptydot"&gt;&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;一开始四个数是&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;a&lt;/i&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;m&lt;/i&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;很难看出，在变换过程中，这四个位置上的数始终满足&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎧&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎨&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎩&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;i&gt;a&lt;/i&gt; ≡ &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;i&gt;a&lt;/i&gt; ≡  − &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="emptydot"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;一开始&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎧&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎨&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎩&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+1⋅&lt;i&gt;a&lt;/i&gt; ≡ &lt;i&gt;a&lt;/i&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+0⋅&lt;i&gt;a&lt;/i&gt; ≡ 0 ≡  − &lt;i&gt;m&lt;/i&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="emptydot"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;当 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; &amp;lt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;
+ 时，&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; + &lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;span class="symbol"&gt;⌊&lt;/span&gt;&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class="symbol"&gt;⌋&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;⋅&lt;i&gt;a&lt;/i&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ ≡  − &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; + &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;span class="symbol"&gt;⌊&lt;/span&gt;&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class="symbol"&gt;⌋&lt;/span&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ ≡  − &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; + &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; − &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ ≡  − &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;当 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; &amp;gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;
+ 时，&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; + &lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;span class="symbol"&gt;⌊&lt;/span&gt;&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class="symbol"&gt;⌋&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;⋅&lt;i&gt;a&lt;/i&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ ≡ &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; − &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;span class="symbol"&gt;⌊&lt;/span&gt;&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class="symbol"&gt;⌋&lt;/span&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ ≡ &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; − &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; + &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ ≡ &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;所以，这两个等式在变换过程中始终成立。&lt;/p&gt;
+&lt;p&gt;最终，若 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; = 1&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;i&gt;a&lt;/i&gt; ≡ 1(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/div&gt;
+&lt;p&gt;若 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; = 1&lt;/span&gt;
+ ，作以下变换&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; → &lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; + &lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; − 1)
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;此时，&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; + &lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; − 1))⋅&lt;i&gt;a&lt;/i&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ ≡ &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; − (&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; − 1)
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ ≡ 1
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;和西方的扩展欧几里德算法相比，循环不变式差一个负号，在最后一步需要分两种情况讨论。数书九章并没有交代大衍求一术是怎么来的，可能一开始就是这样的，也可能是流传过程中减号误传成了加号，现在已无从考证了。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;扩展欧几里德算法&lt;/h2&gt;
+&lt;p&gt;现在用扩展欧几里德算法来求解。把循环不变式换成&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎧&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎨&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎩&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;i&gt;a&lt;/i&gt; ≡ &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;i&gt;a&lt;/i&gt; ≡ &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="emptydot"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;变换过程换成&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; → &lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; − &lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;span class="symbol"&gt;⌊&lt;/span&gt;&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class="symbol"&gt;⌋&lt;/span&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;而初始值不变，仍然是&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;a&lt;/i&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;m&lt;/i&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;一开始&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎧&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎨&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎩&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+1⋅&lt;i&gt;a&lt;/i&gt; ≡ &lt;i&gt;a&lt;/i&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+0⋅&lt;i&gt;a&lt;/i&gt; ≡ 0 ≡ &lt;i&gt;m&lt;/i&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="emptydot"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;变换过程中&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; − &lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;span class="symbol"&gt;⌊&lt;/span&gt;&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class="symbol"&gt;⌋&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;⋅&lt;i&gt;a&lt;/i&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ ≡ &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; − &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;span class="symbol"&gt;⌊&lt;/span&gt;&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class="symbol"&gt;⌋&lt;/span&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ ≡ &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; − (&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; − &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;)
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ ≡ &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;所以，这两个等式在变换过程中始终成立。&lt;/p&gt;
+&lt;p&gt;最终，若 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; = 1&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;i&gt;a&lt;/i&gt; ≡ 1(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;m&lt;/i&gt;)
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h2&gt;辗转相除法&lt;/h2&gt;
+&lt;p&gt;辗转相除法是一种求最大公约数的方法。西方所谓的欧几里德算法就是辗转相除法。而扩展欧几里德算法其实就是同一种算法，只不过得到了更多结果。&lt;/p&gt;
+&lt;p&gt;已知 &lt;span class="formula"&gt;&lt;i&gt;a&lt;/i&gt;, &lt;i&gt;b&lt;/i&gt;&lt;/span&gt;
+ ，求 &lt;span class="formula"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;a&lt;/i&gt;, &lt;i&gt;b&lt;/i&gt;)&lt;/span&gt;
+ 。&lt;/p&gt;
+&lt;p&gt;按如下放置两个数，不断作以下变换，直到 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;1&lt;/span&gt;
+ 为0&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; → &lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;一开始两个数是&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;a&lt;/i&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;b&lt;/i&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;不妨设 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; = &lt;i&gt;s&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;⋅&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;), &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; = &lt;i&gt;s&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;⋅&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;1, &lt;i&gt;r&lt;/i&gt;2)&lt;/span&gt;
+ ，则&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+&lt;i&gt;r&lt;/i&gt;2 &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;1
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ = (&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;⋅&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;)) &lt;i&gt;mod&lt;/i&gt; (&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;⋅&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;))
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-l"&gt;
+
+&lt;/span&gt;
+&lt;span class="arraycell align-l"&gt;
+ = (&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;s&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;)⋅&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;)
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;因为 &lt;span class="formula"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;s&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;i&gt;s&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;) = 1&lt;/span&gt;
+ ，所以&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;) = &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;)
+&lt;/div&gt;
+&lt;p&gt;因此， &lt;span class="formula"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;1, &lt;i&gt;r&lt;/i&gt;2)&lt;/span&gt;
+ 始终是 &lt;span class="formula"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;a&lt;/i&gt;, &lt;i&gt;b&lt;/i&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;当 &lt;span class="formula"&gt;&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; = 1&lt;/span&gt;
+ 时， &lt;span class="formula"&gt;&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; &lt;i&gt;mod&lt;/i&gt; &lt;i&gt;s&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; = 0&lt;/span&gt;
+ ，计算结束，得到了 &lt;span class="formula"&gt;&lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;a&lt;/i&gt;, &lt;i&gt;b&lt;/i&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;如下图所示，辗转相除法从后往前看，有 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; = &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;a&lt;/i&gt;, &lt;i&gt;b&lt;/i&gt;) = &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt;&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 1&lt;/sub&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;a&lt;/i&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;b&lt;/i&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; → … → &lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;4&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;5&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; → &lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;4&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; → &lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; → &lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; → &lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎛&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎜&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎝&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎞&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎟&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎠&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;求解 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;/span&gt;
+ ，使得 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; ≡ &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;)(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;因为 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; = &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;)&lt;/span&gt;
+ 所以 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; = 1&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;求解 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;
+ ，使得 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; ≡ &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;)(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;不妨设 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt; − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; = &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;因为 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; = &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;可得 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt; − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; = &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;所以 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; =  − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;求解 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;&lt;/span&gt;
+ ，使得 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt; ≡ &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;4&lt;/sub&gt;)(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;不妨设 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;4&lt;/sub&gt; − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt; = &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;因为 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt; − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; = &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;4&lt;/sub&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;可得 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt; − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;4&lt;/sub&gt; − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;) = &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;4&lt;/sub&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;即 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;(1 + &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;i&gt;q&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;) − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;4&lt;/sub&gt; = &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;4&lt;/sub&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;所以 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt; = 1 + &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;i&gt;q&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;不难看出，假设存在 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 1&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 1&lt;/sub&gt; + &lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt;&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt; = &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;不妨设 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt; − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt; = &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 1&lt;/sub&gt;&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;可得 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 1&lt;/sub&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt; − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;) + &lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt;&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt; = &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;即 &lt;span class="formula"&gt;(&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt;&lt;/sub&gt; − &lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 1&lt;/sub&gt;&lt;i&gt;q&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;)&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt; + &lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 1&lt;/sub&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt; = &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;所以 &lt;span class="formula"&gt;&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt; = &lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt;&lt;/sub&gt; − &lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 1&lt;/sub&gt;&lt;i&gt;q&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;即&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; = &lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt;&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;逐项展开后&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; = &lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;⋅…⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;且有&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="symbol"&gt;[&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="symbol"&gt;]&lt;/span&gt;⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;k&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; = &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt;)
+&lt;/div&gt;
+&lt;p&gt;观察&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;c&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;c&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;c&lt;/i&gt;&lt;sub&gt;4&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;c&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ − &lt;i&gt;q&lt;/i&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; = &lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ − &lt;i&gt;q&lt;/i&gt;&lt;i&gt;c&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt; + &lt;i&gt;c&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;c&lt;/i&gt;&lt;sub&gt;3&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ − &lt;i&gt;q&lt;/i&gt;&lt;i&gt;c&lt;/i&gt;&lt;sub&gt;4&lt;/sub&gt; + &lt;i&gt;c&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;c&lt;/i&gt;&lt;sub&gt;4&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;矩阵乘法符合结合率，不妨设&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="symbol"&gt;[&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="symbol"&gt;]&lt;/span&gt;⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;t&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;t&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; = &lt;span class="symbol"&gt;[&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt;&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="symbol"&gt;]&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;在辗转相除法的每一步&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="symbol"&gt;[&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 3&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="symbol"&gt;]&lt;/span&gt;⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; = &lt;span class="symbol"&gt;[&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="symbol"&gt;]&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;同时计算&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="symbol"&gt;[&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 3&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 4&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="symbol"&gt;]&lt;/span&gt;⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; = &lt;span class="symbol"&gt;[&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 3&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="symbol"&gt;]&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;可以合并成&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 3&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 4&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 3&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; = &lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 3&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;补一个单位矩阵，也就是&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="symbol"&gt;[&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="symbol"&gt;]&lt;/span&gt;⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; = &lt;span class="symbol"&gt;[&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="symbol"&gt;]&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;得到初值&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;连起来&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;⋅…⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ − &lt;i&gt;q&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+1
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; = &lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;所以 &lt;span class="formula"&gt;&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;
+ 就是结果&lt;/p&gt;
+&lt;p&gt;更合理的思路是，把辗转相除法写成矩阵形式后，观察到&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;span class="symbol"&gt;[&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="symbol"&gt;]&lt;/span&gt;⋅&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎡&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎢&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-left"&gt;⎣&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+ 
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;t&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;t&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎤&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎥&lt;/span&gt;&lt;/span&gt;&lt;span class="arrayrow"&gt;&lt;span class="bracket align-right"&gt;⎦&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; = &lt;span class="symbol"&gt;[&lt;/span&gt;&lt;span class="array"&gt;&lt;span class="arrayrow"&gt;
+&lt;span class="arraycell align-c"&gt;
+0
+&lt;/span&gt;
+&lt;span class="arraycell align-c"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt;
+&lt;/span&gt;
+
+&lt;/span&gt;
+&lt;/span&gt;&lt;span class="symbol"&gt;]&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;发现 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;2&lt;/sub&gt; ≡ &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;1&lt;/sub&gt; ≡ &lt;i&gt;gcd&lt;/i&gt;(&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt;)(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;且有循环不变式 &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 2&lt;/sub&gt;&lt;i&gt;s&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 2&lt;/sub&gt; ≡ &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt; + 1&lt;/sub&gt;(&lt;i&gt;mod&lt;/i&gt; &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;n&lt;/i&gt; + 3&lt;/sub&gt;)&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;这样就得到了扩展欧几里德算法&lt;/p&gt;
+&lt;/div&gt;
+</summary></entry><entry><title>Heartbleed漏洞</title><link href="http://bhuztez.github.io/2014/heartbleed.html" rel="alternate"></link><updated>2014-04-13T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2014-04-13:2014/heartbleed.html</id><summary type="html">&lt;p&gt;最近爆出的&lt;a class="reference external" href="http://heartbleed.com/"&gt;Heartbleed&lt;/a&gt;漏洞实际上宣告了互联网安全已经破产了很久了。不管怎么样，还是首先提醒一下，这次的漏洞后果非常非常严重，至少应该尽快更新所有用到受影响版本的OpenSSL软件。不仅仅是服务端程序受影响，客户端程序也同样受影响，而且很多软件都选择自行编译一份OpenSSL库，所以即便使用的操作系统不受影响，自行安装的程序只要需要联网就很可能受影响。你可以检查一下软件安装目录下的文件。Windows下有libeay32.dll、ssleay32.dll或者类似名字的文件，Mac OS X下有libssl.dynlib或者类似名字的文件，Linux下有libssl.so或者类似名字的文件，非常有可能是受影响的。假如发现了这些文件，而在4月8日以后软件开发商没有发布过修补这个漏洞的新版本，请务必要第一时间联系软件开发商及时更新软件。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;这次的问题是出现在对TLS协议的heartbeat的处理上，这也是漏洞会被命名为Heartbleed的原因。我觉得TLS协议上的Heartbeat的设计也很有问题。为什么Heartbeat的payload是可变长度且可长达64K，而不是固定的长度比如64个字节？假如可变的是padding的长度而不是payload的长度，这次的漏洞根本就不会出现。同时，OpenSSL对malloc的封装把问题变得更严重了，越界读到的内存基本都在OpenSSL之前申请的范围之内，也就是都算得上是敏感内容。我感觉这里的内存分配应该把不同数据内容不同连接隔离开啊，每一片内存前后放两个内存页用来在发生越界的时候直接crash掉程序。&lt;a class="reference external" href="http://article.gmane.org/gmane.comp.encryption.openssl.user/51243"&gt;Akamai最近向OpenSSL提交了一个补丁&lt;/a&gt;，表明他们在几年前就已经应用了这样的想法，不过他们只把这种措施限制在ASN.1格式处理上了，也就是只保护了证书和私钥，其他数据还是混在一起的，&lt;a class="reference external" href="https://blogs.akamai.com/2014/04/heartbleed-update-v3.html"&gt;私钥还是有可能从中间结果泄露&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;要通过&lt;a class="reference external" href="http://blog.regehr.org/archives/1125"&gt;静态分析&lt;/a&gt;找出这个漏洞也不是不可能的。很不幸，Coverity没有发现问题，Frama-C是可以检查出问题，但是要让OpenSSL都能通过Frama-C检查也不是一件容易的事。很难想像，&lt;a class="reference external" href="http://blogs.wsj.com/digits/2014/04/11/nsa-says-it-wasnt-previously-aware-of-heartbleed/"&gt;NSA没在第一时间发现这个漏洞&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;问题出在TLS协议层，基本上就不可能从日志上查出被攻击的迹象。所以，有X.509证书的赶紧去申请个新的。公共的Wifi就不要连了。特别提醒一点，由于这一次会导致海量证书被revoke，所以浏览器一定要强制OCSP，不然被中间人用偷来的私钥攻击了，你啥也不知道。&lt;/p&gt;
+</summary></entry><entry><title>比谁accept()快</title><link href="http://bhuztez.github.io/2013/benchmarking-accept.html" rel="alternate"></link><updated>2013-11-23T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2013-11-23:2013/benchmarking-accept.html</id><summary type="html">&lt;p&gt;不知道为什么&lt;a class="reference external" href="http://avplayer.org/"&gt;国内技术第一的开源社区&lt;/a&gt;会去&lt;a class="reference external" href="http://avboost.com/t/asio/347"&gt;反驳&lt;/a&gt;一个&lt;a class="reference external" href="http://my.oschina.net/u/200693/blog/34462"&gt;很不合理的benchmark&lt;/a&gt;。那个benchmark竟然用了Erlang臭名昭著的 &lt;code&gt;io:format&lt;/code&gt; ，莫名其妙地把 &lt;code&gt;socket&lt;/code&gt; 设置成 &lt;code&gt;active&lt;/code&gt; ，还不自量力地和C++去比速度，C++代码还是Boost库文档里的&lt;a class="reference external" href="http://www.boost.org/doc/libs/1_55_0/doc/html/boost_asio/example/cpp03/echo/async_tcp_echo_server.cpp"&gt;例子&lt;/a&gt;。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;而国内技术第一的开源社区给出的benchmark实际上就是比 &lt;code&gt;accept()&lt;/code&gt; 。所以要把 &lt;code&gt;accept&lt;/code&gt; 的 &lt;code&gt;process&lt;/code&gt; 的 &lt;code&gt;priority&lt;/code&gt; 设置成 &lt;code&gt;max&lt;/code&gt; 才行。另外，Erlang默认的port数量设得比较小，需要把 &lt;code&gt;ERL_MAX_PORTS&lt;/code&gt; 改得大一点。&lt;/p&gt;
+&lt;p&gt;国内技术第一的开源社区的benchmark就一次10000个连接，结束得太快了。我又懒得改ulimit上限，同时只有4000个就只有4000个吧，总数设成80万个连接。不会C++，就用C写了&lt;a class="reference external" href="http://bhuztez.github.io/accept/client.c"&gt;个&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://bhuztez.github.io/accept/server.c"&gt;C版本&lt;/a&gt;的结果&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+real    1m34.921s
+user    0m0.498s
+sys     1m9.674s
+&lt;/pre&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://bhuztez.github.io/accept/server.cpp"&gt;Boost/ASIO版本&lt;/a&gt;的结果&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+real    1m34.972s
+user    0m0.495s
+sys     1m10.013s
+&lt;/pre&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://bhuztez.github.io/accept/server.erl"&gt;Erlang版本&lt;/a&gt;的结果&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+real    1m39.437s
+user    0m0.520s
+sys     1m11.655s
+&lt;/pre&gt;
+&lt;p&gt;可以看到，区区80万个连接，Erlang就比C++慢了5秒。对于每天HTTP请求数动辄上十亿的巨型网站来说，每80亿个连接，Erlang仅 &lt;code&gt;accept()&lt;/code&gt; 就会比C++多花5万秒啊，一天也就8万多秒，哪里还有时间来运行业务逻辑啊。&lt;/p&gt;
+&lt;p&gt;整天摆弄micro benchmark，不去探索不去尝试的弊病，Rob Pike早就&lt;a class="reference external" href="http://doc.cat-v.org/bell_labs/utah2000/"&gt;吐槽&lt;/a&gt;过了。&lt;/p&gt;
+</summary></entry><entry><title>用gcj编译SWT程序</title><link href="http://bhuztez.github.io/2013/compiling-swt-application-with-gcj.html" rel="alternate"></link><updated>2013-01-02T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2013-01-02:2013/compiling-swt-application-with-gcj.html</id><summary type="html">&lt;p&gt;很久之前编译成功过一次，忘了记下编译用的参数，之后就再也想不起来了。现在重新编译一次，把用到的参数记录一下。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;gcj可以把Java程序编译成本地指令集。比如下面这个程序， &lt;code&gt;gcj -s -o SwingHelloWorld --main=SwingHelloWorld -Os SwingHelloWorld.java&lt;/code&gt; 就可以了。运行再关掉，可以明显的感觉到比用JVM快了一点。&lt;/p&gt;
+&lt;pre class="code java literal-block"&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;java.awt.FlowLayout&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;javax.swing.JFrame&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;javax.swing.JLabel&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;javax.swing.WindowConstants&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SwingHelloWorld&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;JFrame&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;JFrame&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello world!&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setLayout&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;FlowLayout&lt;/span&gt;&lt;span class="o"&gt;());&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;add&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;JLabel&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello world!&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;));&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;pack&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setDefaultCloseOperation&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;WindowConstants&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;DISPOSE_ON_CLOSE&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setVisible&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;SWT程序的编译过程略有不同，以下面这个程序为例&lt;/p&gt;
+&lt;pre class="code java literal-block"&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;org.eclipse.swt.SWT&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;org.eclipse.swt.widgets.Display&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;org.eclipse.swt.widgets.Shell&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;org.eclipse.swt.widgets.Label&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SWTHelloWorld&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;Display&lt;/span&gt; &lt;span class="n"&gt;display&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Display&lt;/span&gt; &lt;span class="o"&gt;();&lt;/span&gt;
+        &lt;span class="n"&gt;Shell&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Shell&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+
+        &lt;span class="n"&gt;Label&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Label&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;SWT&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;CENTER&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setText&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello, World!&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;pack&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+
+        &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;pack&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+        &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;open&lt;/span&gt; &lt;span class="o"&gt;();&lt;/span&gt;
+        &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setText&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello, World!&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(!&lt;/span&gt;&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;isDisposed&lt;/span&gt; &lt;span class="o"&gt;())&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(!&lt;/span&gt;&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;readAndDispatch&lt;/span&gt; &lt;span class="o"&gt;())&lt;/span&gt;
+                &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;sleep&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+
+        &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;dispose&lt;/span&gt; &lt;span class="o"&gt;();&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;需要先编译一下 &lt;code&gt;swt.jar&lt;/code&gt; ，值得注意的是要加上 &lt;code&gt;-fjni&lt;/code&gt; 参数&lt;/p&gt;
+&lt;pre class="code text literal-block"&gt;
+gcj -s -Os -shared -fjni -fPIC -o libswt.so /usr/lib64/java/swt.jar
+gcj -s -Os --classpath=/usr/lib64/java/swt.jar -o SWTHelloWorld --main=SWTHelloWorld SWTHelloWorld.java -lswt -L.
+LD_LIBRARY_PATH=. ./SWTHelloWorld
+&lt;/pre&gt;
+&lt;p&gt;也可以静态链接 &lt;code&gt;swt.jar&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="code text literal-block"&gt;
+gcj -Os -c -fjni -o swt.o /usr/lib64/java/swt.jar
+gcj -s -o SWTHelloWorld -Os --classpath=/usr/lib64/java/swt.jar --main=SWTHelloWorld SWTHelloWorld.java swt.o
+./SWTHelloWorld
+&lt;/pre&gt;
+&lt;p&gt;要在 &lt;code&gt;gij&lt;/code&gt; 里用上编译过的swt，编译swt时需要加上 &lt;code&gt;-findirect-dispatch -Wl,-Bsymbolic&lt;/code&gt; 。运行 &lt;code&gt;gij&lt;/code&gt; 时加上 &lt;code&gt;-verbose:class&lt;/code&gt; 可以检查是否用上了编译好的swt。参考 &lt;a class="reference external" href="http://gcc.gnu.org/wiki/How_to_BC_compile_with_GCJ"&gt;How to BC compile with GCJ&lt;/a&gt;&lt;/p&gt;
+&lt;pre class="code text literal-block"&gt;
+gcj -s -Os -shared -fjni -fPIC -findirect-dispatch -Wl,-Bsymbolic -o libswt.so /usr/lib64/java/swt.jar
+
+gcj-dbtool -n swt.db
+gcj-dbtool -a swt.db /usr/lib64/java/swt.jar libswt.so
+gij -verbose:class --cp .:/usr/lib64/java/swt.jar SWTHelloWorld
+gij -verbose:class --cp .:/usr/lib64/java/swt.jar -Dgnu.gcj.precompiled.db.path=swt.db SWTHelloWorld
+&lt;/pre&gt;
+</summary></entry><entry><title>Python代码阅读基础</title><link href="http://bhuztez.github.io/2012/python-code-reading-101.html" rel="alternate"></link><updated>2012-06-06T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2012-06-06:2012/python-code-reading-101.html</id><summary type="html">&lt;p&gt;在阅读Python代码的时候，别忘了Python标准库里几个比较有用的库， &lt;code&gt;pdb&lt;/code&gt; 、 &lt;code&gt;ast&lt;/code&gt; 和 &lt;code&gt;code&lt;/code&gt; 。 &lt;code&gt;pdb&lt;/code&gt; 用来调试， &lt;code&gt;ast&lt;/code&gt; 用来解析Python代码， &lt;code&gt;code&lt;/code&gt; 直接能给你一个 &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop"&gt;REPL&lt;/a&gt; 。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;比如，阅读 &lt;code&gt;nova-api&lt;/code&gt; 的代码，并不关心URL Routing是怎么实现的，想知道的只是URL和相应处理代码的对应关系。把 &lt;code&gt;nova-api&lt;/code&gt; 最后两行代码换成下面这两行。&lt;/p&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;code&lt;/span&gt;
+&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interact&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;locals&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;运行：&lt;/p&gt;
+&lt;pre class="code pycon literal-block"&gt;
+&lt;span class="go"&gt;Python 2.7.3rc2 (default, Apr 22 2012, 22:30:17)
+[GCC 4.6.3] on linux2
+Type &amp;quot;help&amp;quot;, &amp;quot;copyright&amp;quot;, &amp;quot;credits&amp;quot; or &amp;quot;license&amp;quot; for more information.
+(InteractiveConsole)
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;
+&lt;span class="go"&gt;[&amp;lt;nova.service.WSGIService object at 0x7f9cf662ff90&amp;gt;, &amp;lt;nova.service.WSGIService object at 0x2e90850&amp;gt;, &amp;lt;nova.service.WSGIService object at 0x33123d0&amp;gt;, &amp;lt;nova.service.WSGIService object at 0x4d3e390&amp;gt;]
+&lt;/span&gt;&lt;span class="nb"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="go"&gt;['__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_get_manager', 'app', 'host', 'loader', 'manager', 'name', 'port', 'server', 'start', 'stop', 'wait']
+&lt;/span&gt;&lt;span class="p"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;servers&lt;/span&gt; &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="go"&gt;['ec2', 'osapi_compute', 'osapi_volume', 'metadata']
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;
+&lt;span class="go"&gt;{(None, ''): &amp;lt;nova.api.openstack.FaultWrapper object at 0x33b7a10&amp;gt;, (None, '/v1.1'): &amp;lt;nova.api.openstack.FaultWrapper object at 0x4d2e150&amp;gt;, (None, '/v2'): &amp;lt;nova.api.openstack.FaultWrapper object at 0x4866990&amp;gt;}
+&lt;/span&gt;&lt;span class="nb"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="go"&gt;['__call__', '__cmp__', '__contains__', '__delitem__', '__doc__', '__getitem__', '__init__', '__iter__', '__len__', '__module__', '__repr__', '__setitem__', '_accept_strategy', '_content_type_strategy', '_match', '_munge_path', '_path_strategy', '_set_script_name', 'applications', 'clear', 'domain_url_re', 'get', 'has_key', 'items', 'iteritems', 'iterkeys', 'itervalues', 'keys', 'norm_url_re', 'normalize_url', 'not_found_app', 'not_found_application', 'pop', 'popitem', 'setdefault', 'sort_apps', 'update', 'values']
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;
+&lt;span class="go"&gt;[((None, '/v1.1'), &amp;lt;nova.api.openstack.FaultWrapper object at 0x4d2e150&amp;gt;), ((None, '/v2'), &amp;lt;nova.api.openstack.FaultWrapper object at 0x4866990&amp;gt;), ((None, ''), &amp;lt;nova.api.openstack.FaultWrapper object at 0x33b7a10&amp;gt;)]
+&lt;/span&gt;&lt;span class="nb"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="go"&gt;['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__delslice__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getslice__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__setslice__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+&lt;/span&gt;&lt;span class="nb"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="go"&gt;['__call__', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'application', 'factory', 'process_request', 'process_response']
+&lt;/span&gt;&lt;span class="nb"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="go"&gt;['__call__', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_headers', '_build_user_headers', '_cache', '_cache_get', '_cache_put', '_cache_store_invalid', '_get_header', '_get_http_connection', '_get_user_token_from_header', '_header_to_env_var', '_iso8601', '_json_request', '_reject_request', '_remove_auth_headers', '_remove_headers', '_request_admin_token', '_validate_user_token', 'admin_password', 'admin_tenant_name', 'admin_token', 'admin_user', 'app', 'auth_host', 'auth_port', 'auth_uri', 'conf', 'delay_auth_decision', 'get_admin_token', 'http_client_class', 'token_cache_time']
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;
+&lt;span class="go"&gt;&amp;lt;keystone.middleware.auth_token.AuthProtocol object at 0x4d2e0d0&amp;gt;
+&lt;/span&gt;&lt;span class="nb"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="go"&gt;['__call__', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_headers', '_build_user_headers', '_cache', '_cache_get', '_cache_put', '_cache_store_invalid', '_get_header', '_get_http_connection', '_get_user_token_from_header', '_header_to_env_var', '_iso8601', '_json_request', '_reject_request', '_remove_auth_headers', '_remove_headers', '_request_admin_token', '_validate_user_token', 'admin_password', 'admin_tenant_name', 'admin_token', 'admin_user', 'app', 'auth_host', 'auth_port', 'auth_uri', 'conf', 'delay_auth_decision', 'get_admin_token', 'http_client_class', 'token_cache_time']
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;
+&lt;span class="go"&gt;&amp;lt;nova.api.auth.NovaKeystoneContext object at 0x4990cd0&amp;gt;
+&lt;/span&gt;&lt;span class="nb"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="go"&gt;['__call__', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'application', 'factory', 'process_request', 'process_response']
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;
+&lt;span class="go"&gt;&amp;lt;nova.api.openstack.compute.limits.RateLimitingMiddleware object at 0x4986b90&amp;gt;
+&lt;/span&gt;&lt;span class="nb"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="go"&gt;['__call__', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_limiter', 'application', 'factory', 'process_request', 'process_response']
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;
+&lt;span class="go"&gt;&amp;lt;nova.api.openstack.compute.APIRouter object at 0x3508ed0&amp;gt;
+&lt;/span&gt;&lt;span class="nb"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="go"&gt;['ExtensionManager', '__call__', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_dispatch', '_router', '_setup_ext_routes', '_setup_extensions', '_setup_routes', 'factory', 'map', 'resources']
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;
+&lt;span class="go"&gt;&amp;lt;nova.api.openstack.ProjectMapper object at 0x4866650&amp;gt;
+&lt;/span&gt;&lt;span class="nb"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="go"&gt;['__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_create_gens', '_create_regs', '_created_gens', '_created_regs', '_envdel', '_envget', '_envset', '_master_regexp', '_match', '_regprefix', '_routenames', 'always_scan', 'append_slash', 'collection', 'connect', 'controller_scan', 'create_regs', 'create_regs_lock', 'debug', 'decode_errors', 'directory', 'domain_match', 'encoding', 'environ', 'explicit', 'extend', 'generate', 'hardcode_names', 'match', 'matchlist', 'maxkeys', 'minimization', 'minkeys', 'prefix', 'redirect', 'req_data', 'resource', 'routematch', 'sub_domains', 'sub_domains_ignore', 'submapper', 'urlcache']
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;servers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;matchlist&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
+&lt;span class="go"&gt;'os-floating-ips'
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conditions&lt;/span&gt;
+&lt;span class="go"&gt;{'method': ['GET']}
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_kargs&lt;/span&gt;
+&lt;span class="go"&gt;{'requirements': {'id': '[^\\/]+(?&amp;lt;!\\\\)'}, 'controller': &amp;lt;nova.api.openstack.wsgi.Resource object at 0x5093b50&amp;gt;, 'action': 'show'}
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_kargs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'controller'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="go"&gt;&amp;lt;nova.api.openstack.wsgi.Resource object at 0x5093b50&amp;gt;
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_kargs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'controller'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__class__&lt;/span&gt;
+&lt;span class="go"&gt;&amp;lt;class 'nova.api.openstack.wsgi.Resource'&amp;gt;
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_kargs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'controller'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;controller&lt;/span&gt;
+&lt;span class="go"&gt;&amp;lt;nova.api.openstack.compute.contrib.floating_ips.FloatingIPController object at 0x4d07d50&amp;gt;
+&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_kargs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'controller'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;controller&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__doc__&lt;/span&gt;
+&lt;span class="go"&gt;'Return data about the given floating ip.'&lt;/span&gt;
+&lt;/pre&gt;
+</summary></entry><entry><title>老笑话了</title><link href="http://bhuztez.github.io/2012/there-is-an-old-joke.html" rel="alternate"></link><updated>2012-04-13T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2012-04-13:2012/there-is-an-old-joke.html</id><summary type="html">&lt;p&gt;去年爆出了hash collision DoS的问题 &lt;a class="footnote-reference" href="#hash-collision-dos" id="id2"&gt;[1]&lt;/a&gt; ，其实这是一个老笑话了 &lt;a class="footnote-reference" href="#an-old-joke" id="id3"&gt;[2]&lt;/a&gt; ：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;老妈平时买菜总爱拎着个弹簧秤。然而昨天我在菜市场里看到的一幕，可比老妈的弹簧秤高明多了。&lt;/p&gt;
+&lt;p&gt;一老大爷走到卖西红柿的摊前问：“多少钱一斤？”摊主回答：“两块五。”大爷挑了三个西红柿放到秤盘里。摊主说：“一斤半，三块七。”大爷说：“我就做个汤，不用那么多。”说着就去掉了个儿最大的那个西红柿。摊主迅速地又瞧一眼说：“一斤二两，三块钱。”&lt;/p&gt;
+&lt;p&gt;我在一旁看着，心想，怎么这西红柿越大越不压称，难道那个大西红柿是空心的。实在看不过去了，就提醒大爷：“他称的不对。”没想到大爷对我摆了摆手，毫不在意，伸手就往外掏钱。&lt;/p&gt;
+&lt;p&gt;那摊主见大爷如此爽快，索性拿眼睛瞥着我，一副得意洋洋的样子。没想到的是，大爷并没有拿摊主已经装在塑料袋里的两个西红柿，而是拿起刚才去掉的那大的，放下七毛钱，扭头就走……&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table class="docutils footnote" frame="void" id="hash-collision-dos" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.ocert.org/advisories/ocert-2011-003.html"&gt;multiple implementations denial-of-service via hash algorithm collision&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="an-old-joke" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;这是我能找到的最早的有明确时间的转载了， &lt;a class="reference external" href="https://blog.delphij.net/2006/04/zz-56.html"&gt;https://blog.delphij.net/2006/04/zz-56.html&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</summary></entry><entry><title>用Django ORM动态生成SQL</title><link href="http://bhuztez.github.io/2010/django-query-to-sql.html" rel="alternate"></link><updated>2010-09-17T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2010-09-17:2010/django-query-to-sql.html</id><summary type="html">&lt;p&gt;去年的时候，就想自己仿个 &lt;a class="reference external" href="https://github.com/"&gt;GitHub&lt;/a&gt; 玩玩。可是， &lt;a class="reference external" href="http://git-scm.com/"&gt;Git&lt;/a&gt; 并不像 &lt;a class="reference external" href="http://mercurial.selenic.com/"&gt;Mercurial&lt;/a&gt; 那样原生支持HTTP协议，得用SSH来限制用户访问。 &lt;a class="reference external" href="https://github.com/"&gt;GitHub&lt;/a&gt; 和 &lt;a class="reference external" href="http://gitorious.org/"&gt;Gitorious&lt;/a&gt; 也都是那么做的。 而 &lt;a class="reference external" href="http://eagain.net/gitweb/?p=gitosis.git"&gt;Gitosis&lt;/a&gt; 和 &lt;a class="reference external" href="https://github.com/sitaramc/gitolite"&gt;Gitolite&lt;/a&gt; 用起来都不是很方便， 后来看到 &lt;a class="reference external" href="http://twistedmatrix.com/"&gt;Twisted&lt;/a&gt; 也实现了SSH协议，想在上面改改就拿来用，毕竟不能直接拿来用，也一直没去看，就这样不了了之了。直到某日，看到 &lt;a class="reference external" href="http://deadpuck.net/blag/serving-git/"&gt;Serving Git&lt;/a&gt; 。这样SSH的问题就解决了。顺着那篇文章的思路下来，就想用 &lt;a class="reference external" href="http://www.djangoproject.com/"&gt;Django&lt;/a&gt; 弄个Web界面让用户来管理密钥，很快就弄好了，没有遇到任何困难。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;不过，既然是用 &lt;a class="reference external" href="http://twistedmatrix.com/"&gt;Twisted&lt;/a&gt; ，用 &lt;a class="reference external" href="http://www.djangoproject.com/"&gt;Django&lt;/a&gt; 来操作数据库总觉得有点怪怪的。尽管自己测试的时候，下面这样的代码运行起来也没什么问题。&lt;/p&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;PublicKeyChecker&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SSHPublicKeyDatabase&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;checkKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;credentials&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;keystring&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fromString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;credentials&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;blob&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;OPENSSH&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;PublicKey&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="n"&gt;user__username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;credentials&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="n"&gt;keystring&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;keystring&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exists&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;因为 &lt;tt class="docutils literal"&gt;PublicKeyChecker&lt;/tt&gt; 继承自 &lt;tt class="docutils literal"&gt;SSHPublicKeyDatabase&lt;/tt&gt; ， 看了下 &lt;tt class="docutils literal"&gt;twisted.conch.checkers&lt;/tt&gt; ，看到了一个 &lt;tt class="docutils literal"&gt;maybeDeferred&lt;/tt&gt;  &lt;a class="footnote-reference" href="#deferred" id="id1"&gt;[1]&lt;/a&gt; 。下面就是相关部分的代码：&lt;/p&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SSHPublicKeyDatabase&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;requestAvatarId&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;credentials&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;defer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;maybeDeferred&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;checkKey&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;credentials&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_cbRequestAvatarId&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;credentials&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addErrback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_ebRequestAvatarId&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://twistedmatrix.com/"&gt;Twisted&lt;/a&gt; 里需要用 &lt;tt class="docutils literal"&gt;twisted.enterprise.adbapi&lt;/tt&gt; 来操作数据库，而这玩意儿需要直接传入SQL语句 &lt;a class="footnote-reference" href="#adbapi" id="id2"&gt;[2]&lt;/a&gt; 。在 &lt;a class="reference external" href="http://www.djangoproject.com/"&gt;Django&lt;/a&gt; 里是用ORM解决问题的，还是希望在这里尽量不要硬编码SQL语句了。看了看 &lt;a class="reference external" href="http://www.djangoproject.com/"&gt;Django&lt;/a&gt; 的源代码，找到了这么个办法，可以得到对应 &lt;tt class="docutils literal"&gt;queryset&lt;/tt&gt; 的SQL语句。&lt;/p&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="n"&gt;qs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PublicKey&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;user__username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;credentials&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;keystring&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;keystring&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;compiler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;qs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_compiler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;using&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;qs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;sql&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compiler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;as_sql&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;但是， &lt;tt class="docutils literal"&gt;sqlite3&lt;/tt&gt; 会对这样生成的SQL语句报错。需要用 &lt;tt class="docutils literal"&gt;cursor.convert_query(sql)&lt;/tt&gt; 把里面的 &lt;tt class="docutils literal"&gt;%s&lt;/tt&gt; 之类的转换成 &amp;quot;&lt;tt class="docutils literal"&gt;?&lt;/tt&gt;&amp;quot;（问号）。&lt;/p&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="n"&gt;cursor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compiler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connection&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;sql&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;convert_query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sql&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;终于可以返回查询了。&lt;/p&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;dbpool&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;runQuery&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sql&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;我们只需要知道有没有，不需要取回这么多数据，因为 &lt;tt class="docutils literal"&gt;[:1]&lt;/tt&gt; 会直接取出结果，所以用 &lt;tt class="docutils literal"&gt;qs.query.set_limits&lt;/tt&gt; 。&lt;/p&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="n"&gt;qs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PublicKey&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;user__username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;credentials&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;keystring&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;keystring&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;only&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;qs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_limits&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;把前面的连起来&lt;/p&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;PublicKeyChecker&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SSHPublicKeyDatabase&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;checkKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;credentials&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;keystring&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fromString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;credentials&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;blob&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;OPENSSH&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="n"&gt;qs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PublicKey&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="n"&gt;user__username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;credentials&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="n"&gt;keystring&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;keystring&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;only&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;qs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_limits&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="n"&gt;compiler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;qs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_compiler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;using&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;qs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;sql&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compiler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;as_sql&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="n"&gt;cursor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compiler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connection&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;sql&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;convert_query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sql&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;dbpool&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;runQuery&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sql&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;
+&lt;table class="docutils footnote" frame="void" id="deferred" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;关于 &lt;tt class="docutils literal"&gt;Deferred&lt;/tt&gt; 可以参考 &lt;a class="reference external" href="http://twistedmatrix.com/documents/current/core/howto/defer.html"&gt;Deferred Reference&lt;/a&gt; （2010年8月22日查阅）&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="adbapi" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;参考 &lt;a class="reference external" href="http://twistedmatrix.com/documents/current/core/howto/rdbms.html"&gt;twisted.enterprise.adbapi: Twisted RDBMS support&lt;/a&gt; （2010年8月22日查阅）&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</summary></entry><entry><title>ArchLinux从AUR安装octave-forge遇到gcc-fortran conflicts with gcc-libs</title><link href="http://bhuztez.github.io/2010/install-octave-forge-from-aur.html" rel="alternate"></link><updated>2010-01-02T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2010-01-02:2010/install-octave-forge-from-aur.html</id><summary type="html">&lt;p&gt;从&lt;a class="reference external" href="http://aur.archlinux.org/packages.php?ID=20824"&gt;这里&lt;/a&gt;看，应该2009年8月31日才加上的。其实 &lt;code&gt;gcc-fortran&lt;/code&gt; 是不一定要的，把 &lt;code&gt;makedepends&lt;/code&gt; 那行去掉就好了，囧&lt;/p&gt;
+</summary></entry><entry><title>编译SystemC 2.2.0的问题</title><link href="http://bhuztez.github.io/2009/compiling-systemc.html" rel="alternate"></link><updated>2009-04-12T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2009-04-12:2009/compiling-systemc.html</id><summary type="html">&lt;p&gt;居然连编译都有困难，SystemC的表现令人失望。看了&lt;a class="reference external" href="http://forums.fedoraforum.org/showthread.php?t=199153"&gt;这个帖子&lt;/a&gt;的#7之后，才发现居然还是个低级错误，要修改 &lt;code&gt;systemc-2.2.0/src/sysc/utils/sc_utils_ids.cpp&lt;/code&gt; 这个文件，更加C++一点的写法是像下面这样的：&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;pre class="code c++ literal-block"&gt;
+&lt;span class="cp"&gt;#include &amp;lt;cstdlib&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;另外，SCV在我这里就连configure都不行，后来一看，竟然从2006年到现在还没更新过，怪不得里面用的automake的版本号都小得有点离奇。&lt;/p&gt;
+</summary></entry><entry><title>pppd插件编写</title><link href="http://bhuztez.github.io/2008/pppd-plugin.html" rel="alternate"></link><updated>2008-11-06T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2008-11-06:2008/pppd-plugin.html</id><summary type="html">&lt;p&gt;先 &lt;code&gt;yum install ppp-devel&lt;/code&gt; ，接着就可以在代码中使用 &lt;code&gt;#include &amp;lt;pppd/pppd.h&amp;gt;&lt;/code&gt; 和 &lt;code&gt;char pppd_version[] = VERSION;&lt;/code&gt; 以确保plugin能被pppd使用。&lt;/p&gt;
+&lt;p&gt;pap_passwd_hook被调用的过程还是很令人困惑的。首先，第一次被调用的时候，参数user是有分配空间的，为了让pap_passwd_hook被调用，是不能传入password的，导致第一次被调用的时候，参数passwd没有被分配空间，是NULL。若第一次修改了用户名，第二次调用的时候会传入修改过的用户名，而第二次passwd被分配了空间，此时可以strcpy。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;所以还得这么干：&lt;/p&gt;
+&lt;pre class="code c literal-block"&gt;
+&lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;pwd&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;MAXSECRETLEN&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;is_name_modified&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;option_t&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;pwd&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;o_string&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pwd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="s"&gt;&amp;quot;pwd&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="n"&gt;OPT_STATIC&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;MAXSECRETLEN&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+
+&lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;pap_passwd_hooker&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;passwd&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// Note: Do not modify the username twice in a session.
+&lt;/span&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;is_name_modified&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;modify&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;is_name_modified&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Note: passwd == NULL the first time this function is called
+&lt;/span&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;passwd&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;strcpy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;passwd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pwd&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;plugin_init&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;add_options&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;pap_passwd_hook&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pap_passwd_hooker&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+</summary></entry></feed>

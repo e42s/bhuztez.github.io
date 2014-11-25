@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+      <meta charset="utf-8" />
+    <title>C-c C-k &middot; Python代码阅读基础</title>
+    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
+    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+
+
+
+</head>
+<body>
+    <header>
+        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+        </nav>
+        <div class="header_box">
+            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h2>to impress your cat</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Jun 06, 2012</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2012/python-code-reading-101.html" rel="bookmark" title="Permanent Link to &quot;Python代码阅读基础&quot;">Python代码阅读基础</a>
+                </h2>
+<p>在阅读Python代码的时候，别忘了Python标准库里几个比较有用的库， <code>pdb</code> 、 <code>ast</code> 和 <code>code</code> 。 <code>pdb</code> 用来调试， <code>ast</code> 用来解析Python代码， <code>code</code> 直接能给你一个 <a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> 。</p>
+<!-- more -->
+<p>比如，阅读 <code>nova-api</code> 的代码，并不关心URL Routing是怎么实现的，想知道的只是URL和相应处理代码的对应关系。把 <code>nova-api</code> 最后两行代码换成下面这两行。</p>
+<pre class="code python literal-block">
+<span class="kn">import</span> <span class="nn">code</span>
+<span class="n">code</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="nb">locals</span><span class="p">())</span>
+</pre>
+<p>运行：</p>
+<pre class="code pycon literal-block">
+<span class="go">Python 2.7.3rc2 (default, Apr 22 2012, 22:30:17)
+[GCC 4.6.3] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+(InteractiveConsole)
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">servers</span>
+<span class="go">[&lt;nova.service.WSGIService object at 0x7f9cf662ff90&gt;, &lt;nova.service.WSGIService object at 0x2e90850&gt;, &lt;nova.service.WSGIService object at 0x33123d0&gt;, &lt;nova.service.WSGIService object at 0x4d3e390&gt;]
+</span><span class="nb"></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">(</span><span class="n">servers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">['__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_get_manager', 'app', 'host', 'loader', 'manager', 'name', 'port', 'server', 'start', 'stop', 'wait']
+</span><span class="p"></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span> <span class="n">s</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">servers</span> <span class="p">]</span>
+<span class="go">['ec2', 'osapi_compute', 'osapi_volume', 'metadata']
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span>
+<span class="go">{(None, ''): &lt;nova.api.openstack.FaultWrapper object at 0x33b7a10&gt;, (None, '/v1.1'): &lt;nova.api.openstack.FaultWrapper object at 0x4d2e150&gt;, (None, '/v2'): &lt;nova.api.openstack.FaultWrapper object at 0x4866990&gt;}
+</span><span class="nb"></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">(</span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="p">)</span>
+<span class="go">['__call__', '__cmp__', '__contains__', '__delitem__', '__doc__', '__getitem__', '__init__', '__iter__', '__len__', '__module__', '__repr__', '__setitem__', '_accept_strategy', '_content_type_strategy', '_match', '_munge_path', '_path_strategy', '_set_script_name', 'applications', 'clear', 'domain_url_re', 'get', 'has_key', 'items', 'iteritems', 'iterkeys', 'itervalues', 'keys', 'norm_url_re', 'normalize_url', 'not_found_app', 'not_found_application', 'pop', 'popitem', 'setdefault', 'sort_apps', 'update', 'values']
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span>
+<span class="go">[((None, '/v1.1'), &lt;nova.api.openstack.FaultWrapper object at 0x4d2e150&gt;), ((None, '/v2'), &lt;nova.api.openstack.FaultWrapper object at 0x4866990&gt;), ((None, ''), &lt;nova.api.openstack.FaultWrapper object at 0x33b7a10&gt;)]
+</span><span class="nb"></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">(</span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span><span class="p">)</span>
+<span class="go">['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__delslice__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getslice__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__setslice__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+</span><span class="nb"></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">(</span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">['__call__', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'application', 'factory', 'process_request', 'process_response']
+</span><span class="nb"></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">(</span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">application</span><span class="p">)</span>
+<span class="go">['__call__', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_headers', '_build_user_headers', '_cache', '_cache_get', '_cache_put', '_cache_store_invalid', '_get_header', '_get_http_connection', '_get_user_token_from_header', '_header_to_env_var', '_iso8601', '_json_request', '_reject_request', '_remove_auth_headers', '_remove_headers', '_request_admin_token', '_validate_user_token', 'admin_password', 'admin_tenant_name', 'admin_token', 'admin_user', 'app', 'auth_host', 'auth_port', 'auth_uri', 'conf', 'delay_auth_decision', 'get_admin_token', 'http_client_class', 'token_cache_time']
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">application</span>
+<span class="go">&lt;keystone.middleware.auth_token.AuthProtocol object at 0x4d2e0d0&gt;
+</span><span class="nb"></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">(</span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">application</span><span class="p">)</span>
+<span class="go">['__call__', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_headers', '_build_user_headers', '_cache', '_cache_get', '_cache_put', '_cache_store_invalid', '_get_header', '_get_http_connection', '_get_user_token_from_header', '_header_to_env_var', '_iso8601', '_json_request', '_reject_request', '_remove_auth_headers', '_remove_headers', '_request_admin_token', '_validate_user_token', 'admin_password', 'admin_tenant_name', 'admin_token', 'admin_user', 'app', 'auth_host', 'auth_port', 'auth_uri', 'conf', 'delay_auth_decision', 'get_admin_token', 'http_client_class', 'token_cache_time']
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">app</span>
+<span class="go">&lt;nova.api.auth.NovaKeystoneContext object at 0x4990cd0&gt;
+</span><span class="nb"></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">(</span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">app</span><span class="p">)</span>
+<span class="go">['__call__', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'application', 'factory', 'process_request', 'process_response']
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">application</span>
+<span class="go">&lt;nova.api.openstack.compute.limits.RateLimitingMiddleware object at 0x4986b90&gt;
+</span><span class="nb"></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">(</span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">application</span><span class="p">)</span>
+<span class="go">['__call__', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_limiter', 'application', 'factory', 'process_request', 'process_response']
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">application</span>
+<span class="go">&lt;nova.api.openstack.compute.APIRouter object at 0x3508ed0&gt;
+</span><span class="nb"></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">(</span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">application</span><span class="p">)</span>
+<span class="go">['ExtensionManager', '__call__', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_dispatch', '_router', '_setup_ext_routes', '_setup_extensions', '_setup_routes', 'factory', 'map', 'resources']
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">map</span>
+<span class="go">&lt;nova.api.openstack.ProjectMapper object at 0x4866650&gt;
+</span><span class="nb"></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">(</span><span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">map</span><span class="p">)</span>
+<span class="go">['__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_create_gens', '_create_regs', '_created_gens', '_created_regs', '_envdel', '_envget', '_envset', '_master_regexp', '_match', '_regprefix', '_routenames', 'always_scan', 'append_slash', 'collection', 'connect', 'controller_scan', 'create_regs', 'create_regs_lock', 'debug', 'decode_errors', 'directory', 'domain_match', 'encoding', 'environ', 'explicit', 'extend', 'generate', 'hardcode_names', 'match', 'matchlist', 'maxkeys', 'minimization', 'minkeys', 'prefix', 'redirect', 'req_data', 'resource', 'routematch', 'sub_domains', 'sub_domains_ignore', 'submapper', 'urlcache']
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span> <span class="o">=</span> <span class="n">servers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">applications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">matchlist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">name</span>
+<span class="go">'os-floating-ips'
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">conditions</span>
+<span class="go">{'method': ['GET']}
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">_kargs</span>
+<span class="go">{'requirements': {'id': '[^\\/]+(?&lt;!\\\\)'}, 'controller': &lt;nova.api.openstack.wsgi.Resource object at 0x5093b50&gt;, 'action': 'show'}
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">_kargs</span><span class="p">[</span><span class="s">'controller'</span><span class="p">]</span>
+<span class="go">&lt;nova.api.openstack.wsgi.Resource object at 0x5093b50&gt;
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">_kargs</span><span class="p">[</span><span class="s">'controller'</span><span class="p">]</span><span class="o">.</span><span class="n">__class__</span>
+<span class="go">&lt;class 'nova.api.openstack.wsgi.Resource'&gt;
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">_kargs</span><span class="p">[</span><span class="s">'controller'</span><span class="p">]</span><span class="o">.</span><span class="n">controller</span>
+<span class="go">&lt;nova.api.openstack.compute.contrib.floating_ips.FloatingIPController object at 0x4d07d50&gt;
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">_kargs</span><span class="p">[</span><span class="s">'controller'</span><span class="p">]</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">show</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="go">'Return data about the given floating ip.'</span>
+</pre>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

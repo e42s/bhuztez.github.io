@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>C-c C-k</title>
+    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
+    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+</head>
+<body>
+    <header>
+        <nav>            <li class="selected"><a href="http://bhuztez.github.io/">Home</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+        </nav>
+        <div class="header_box">
+            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h2>to impress your cat</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Aug 03, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/chinese-remainder-theorem.html" rel="bookmark" title="Permanent Link to &quot;中国剩余定理&quot;">中国剩余定理</a>
+                </h2>
+<p>本文纯属搞笑，切勿当真</p>
+<p>中国剩余定理这个叫法是对这种方法的极大误解。根据中国人只追求实用的天赋，肯定不会没事去证明某种数学性质的。要是给不出解法，就算证明了一个很重要的性质，一句这有啥用就噎死了。中国剩余定理实际上是为了解一种同余方程组。中国剩余定理很可能不是中国人最早证明的，完整的解法也很可能不是中国人最早给出的，只是因为孙子算经中对这种同余方程组给出了不完整的解法，这就叫中国剩余定理了，和费马大定理有异曲同工之妙。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Apr 13, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/heartbleed.html" rel="bookmark" title="Permanent Link to &quot;Heartbleed漏洞&quot;">Heartbleed漏洞</a>
+                </h2>
+<p>最近爆出的<a class="reference external" href="http://heartbleed.com/">Heartbleed</a>漏洞实际上宣告了互联网安全已经破产了很久了。不管怎么样，还是首先提醒一下，这次的漏洞后果非常非常严重，至少应该尽快更新所有用到受影响版本的OpenSSL软件。不仅仅是服务端程序受影响，客户端程序也同样受影响，而且很多软件都选择自行编译一份OpenSSL库，所以即便使用的操作系统不受影响，自行安装的程序只要需要联网就很可能受影响。你可以检查一下软件安装目录下的文件。Windows下有libeay32.dll、ssleay32.dll或者类似名字的文件，Mac OS X下有libssl.dynlib或者类似名字的文件，Linux下有libssl.so或者类似名字的文件，非常有可能是受影响的。假如发现了这些文件，而在4月8日以后软件开发商没有发布过修补这个漏洞的新版本，请务必要第一时间联系软件开发商及时更新软件。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Nov 23, 2013</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2013/benchmarking-accept.html" rel="bookmark" title="Permanent Link to &quot;比谁accept()快&quot;">比谁accept()快</a>
+                </h2>
+<p>不知道为什么<a class="reference external" href="http://avplayer.org/">国内技术第一的开源社区</a>会去<a class="reference external" href="http://avboost.com/t/asio/347">反驳</a>一个<a class="reference external" href="http://my.oschina.net/u/200693/blog/34462">很不合理的benchmark</a>。那个benchmark竟然用了Erlang臭名昭著的 <code>io:format</code> ，莫名其妙地把 <code>socket</code> 设置成 <code>active</code> ，还不自量力地和C++去比速度，C++代码还是Boost库文档里的<a class="reference external" href="http://www.boost.org/doc/libs/1_55_0/doc/html/boost_asio/example/cpp03/echo/async_tcp_echo_server.cpp">例子</a>。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Jan 02, 2013</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2013/compiling-swt-application-with-gcj.html" rel="bookmark" title="Permanent Link to &quot;用gcj编译SWT程序&quot;">用gcj编译SWT程序</a>
+                </h2>
+<p>很久之前编译成功过一次，忘了记下编译用的参数，之后就再也想不起来了。现在重新编译一次，把用到的参数记录一下。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Jun 06, 2012</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2012/python-code-reading-101.html" rel="bookmark" title="Permanent Link to &quot;Python代码阅读基础&quot;">Python代码阅读基础</a>
+                </h2>
+<p>在阅读Python代码的时候，别忘了Python标准库里几个比较有用的库， <code>pdb</code> 、 <code>ast</code> 和 <code>code</code> 。 <code>pdb</code> 用来调试， <code>ast</code> 用来解析Python代码， <code>code</code> 直接能给你一个 <a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> 。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Apr 13, 2012</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2012/there-is-an-old-joke.html" rel="bookmark" title="Permanent Link to &quot;老笑话了&quot;">老笑话了</a>
+                </h2>
+<p>去年爆出了hash collision DoS的问题 <a class="footnote-reference" href="#hash-collision-dos" id="id2">[1]</a> ，其实这是一个老笑话了 <a class="footnote-reference" href="#an-old-joke" id="id3">[2]</a> ：</p>
+<blockquote>
+<p>老妈平时买菜总爱拎着个弹簧秤。然而昨天我在菜市场里看到的一幕，可比老妈的弹簧秤高明多了。</p>
+<p>一老大爷走到卖西红柿的摊前问：“多少钱一斤？”摊主回答：“两块五。”大爷挑了三个西红柿放到秤盘里。摊主说：“一斤半，三块七。”大爷说：“我就做个汤，不用那么多。”说着就去掉了个儿最大的那个西红柿。摊主迅速地又瞧一眼说：“一斤二两，三块钱。”</p>
+<p>我在一旁看着，心想，怎么这西红柿越大越不压称，难道那个大西红柿是空心的。实在看不过去了，就提醒大爷：“他称的不对。”没想到大爷对我摆了摆手，毫不在意，伸手就往外掏钱。</p>
+<p>那摊主见大爷如此爽快，索性拿眼睛瞥着我，一副得意洋洋的样子。没想到的是，大爷并没有拿摊主已经装在塑料袋里的两个西红柿，而是拿起刚才去掉的那大的，放下七毛钱，扭头就走……</p>
+</blockquote>
+<table class="docutils footnote" frame="void" id="hash-collision-dos" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td><a class="reference external" href="http://www.ocert.org/advisories/ocert-2011-003.html">multiple implementations denial-of-service via hash algorithm collision</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="an-old-joke" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>这是我能找到的最早的有明确时间的转载了， <a class="reference external" href="https://blog.delphij.net/2006/04/zz-56.html">https://blog.delphij.net/2006/04/zz-56.html</a></td></tr>
+</tbody>
+</table><div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Sep 17, 2010</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2010/django-query-to-sql.html" rel="bookmark" title="Permanent Link to &quot;用Django ORM动态生成SQL&quot;">用Django ORM动态生成SQL</a>
+                </h2>
+<p>去年的时候，就想自己仿个 <a class="reference external" href="https://github.com/">GitHub</a> 玩玩。可是， <a class="reference external" href="http://git-scm.com/">Git</a> 并不像 <a class="reference external" href="http://mercurial.selenic.com/">Mercurial</a> 那样原生支持HTTP协议，得用SSH来限制用户访问。 <a class="reference external" href="https://github.com/">GitHub</a> 和 <a class="reference external" href="http://gitorious.org/">Gitorious</a> 也都是那么做的。 而 <a class="reference external" href="http://eagain.net/gitweb/?p=gitosis.git">Gitosis</a> 和 <a class="reference external" href="https://github.com/sitaramc/gitolite">Gitolite</a> 用起来都不是很方便， 后来看到 <a class="reference external" href="http://twistedmatrix.com/">Twisted</a> 也实现了SSH协议，想在上面改改就拿来用，毕竟不能直接拿来用，也一直没去看，就这样不了了之了。直到某日，看到 <a class="reference external" href="http://deadpuck.net/blag/serving-git/">Serving Git</a> 。这样SSH的问题就解决了。顺着那篇文章的思路下来，就想用 <a class="reference external" href="http://www.djangoproject.com/">Django</a> 弄个Web界面让用户来管理密钥，很快就弄好了，没有遇到任何困难。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Jan 02, 2010</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2010/install-octave-forge-from-aur.html" rel="bookmark" title="Permanent Link to &quot;ArchLinux从AUR安装octave-forge遇到gcc-fortran conflicts with gcc-libs&quot;">ArchLinux从AUR安装octave-forge遇到gcc-fortran conflicts with gcc-libs</a>
+                </h2>
+<p>从<a class="reference external" href="http://aur.archlinux.org/packages.php?ID=20824">这里</a>看，应该2009年8月31日才加上的。其实 <code>gcc-fortran</code> 是不一定要的，把 <code>makedepends</code> 那行去掉就好了，囧</p><div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Apr 12, 2009</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2009/compiling-systemc.html" rel="bookmark" title="Permanent Link to &quot;编译SystemC 2.2.0的问题&quot;">编译SystemC 2.2.0的问题</a>
+                </h2>
+<p>居然连编译都有困难，SystemC的表现令人失望。看了<a class="reference external" href="http://forums.fedoraforum.org/showthread.php?t=199153">这个帖子</a>的#7之后，才发现居然还是个低级错误，要修改 <code>systemc-2.2.0/src/sysc/utils/sc_utils_ids.cpp</code> 这个文件，更加C++一点的写法是像下面这样的：</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Nov 06, 2008</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2008/pppd-plugin.html" rel="bookmark" title="Permanent Link to &quot;pppd插件编写&quot;">pppd插件编写</a>
+                </h2>
+<p>先 <code>yum install ppp-devel</code> ，接着就可以在代码中使用 <code>#include &lt;pppd/pppd.h&gt;</code> 和 <code>char pppd_version[] = VERSION;</code> 以确保plugin能被pppd使用。</p>
+<p>pap_passwd_hook被调用的过程还是很令人困惑的。首先，第一次被调用的时候，参数user是有分配空间的，为了让pap_passwd_hook被调用，是不能传入password的，导致第一次被调用的时候，参数passwd没有被分配空间，是NULL。若第一次修改了用户名，第二次调用的时候会传入修改过的用户名，而第二次passwd被分配了空间，此时可以strcpy。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>
