@@ -315,8 +315,8 @@ pre.code { word-wrap: break-word; word-break: break-all; }
 pre.pycon {white-space: pre-wrap;}
 
 article.post > p:first-of-type:first-letter {
-    font-size: 1.8em;
+    font-size: 1.6em;
     display: block;
     float: left;
-    padding: 0.3em 0.2em;
+    padding: 0.4em 0.2em 0em;
 }
