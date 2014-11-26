@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+      <meta charset="utf-8" />
+    <title>C-c C-k &middot; DNS基本配置</title>
+    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
+    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+
+
+
+</head>
+<body>
+    <header>
+        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
+            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        </nav>
+        <div class="header_box">
+            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h2>to impress your cat</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Aug 06, 2012</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2012/dns.html" rel="bookmark" title="Permanent Link to &quot;DNS基本配置&quot;">DNS基本配置</a>
+                </h2>
+<p>因为DNSSEC和SSHFP配置步骤还是有点多的，在这里记录一下</p>
+<!-- more -->
+<div class="section" id="dns-server">
+<h2>运行一个临时的DNS Server</h2>
+<p>在配置文件里把文件/目录地址改到当前目录下。BIND 9.7多了一个 session-keyfile <a class="footnote-reference" href="#bind97-session-key" id="id1">[1]</a> 。</p>
+<table class="docutils footnote" frame="void" id="bind97-session-key" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://www.isc.org/software/bind/new-features/9.7">New Features in BIND 9.7</a></td></tr>
+</tbody>
+</table>
+<pre class="code bash literal-block">
+<span class="c">#!/usr/bin/env bash
+</span>
+<span class="nv">ROOT</span><span class="o">=</span><span class="s2">&quot;$(pwd)&quot;</span>
+
+mkdir -p <span class="s2">&quot;${ROOT}/keys&quot;</span>
+mkdir -p <span class="s2">&quot;${ROOT}/zones&quot;</span>
+
+<span class="k">if</span> <span class="o">[[</span> ! -e <span class="s2">&quot;named.conf&quot;</span> <span class="o">]]</span>; <span class="k">then
+
+</span>cat &gt;<span class="s2">&quot;named.conf&quot;</span> <span class="s">&lt;&lt; EOF
+options {
+        listen-on               port 8053       { 127.0.0.1; };
+        directory               &quot;${ROOT}/zones&quot;;
+        pid-file                &quot;${ROOT}/named.pid&quot;;
+        session-keyfile         &quot;${ROOT}/session.key&quot;;
+        managed-keys-directory  &quot;${ROOT}/keys&quot;;
+
+        allow-query             { 127.0.0.1; };
+        recursion               no;
+};
+
+controls {};
+EOF</span>
+
+<span class="k">fi
+
+</span>named -c named.conf -g
+</pre>
+</div>
+<div class="section" id="zone">
+<h2>添加一个zone</h2>
+<p>修改 <code>named.conf</code> ，添加一个zone。</p>
+<pre class="code literal-block">
+zone &quot;example.com.&quot; {
+        type    master;
+        file    &quot;example.com&quot;;
+};
+</pre>
+<p>在 <code>zones</code> 目录下，新建 <code>example.com</code> 文件</p>
+<pre class="code literal-block">
+$ORIGIN .
+$TTL 300
+example.com         IN SOA  example.com. root.example.com. (
+                            201208061  ; serial
+                            300        ; refresh
+                            300        ; retry
+                            300        ; expire
+                            300        ; minimum
+                            )
+                    NS      ns.example.com.
+                    A       127.0.0.1
+ns.example.com.             A       127.0.0.1
+</pre>
+<p>使用 <code>dig</code> 来查询</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> dig -p 8053 &#64;127.0.0.1 example.com
+<span class="go">
+; &lt;&lt;&gt;&gt; DiG 9.8.2-RedHat-9.8.2-1.fc16 &lt;&lt;&gt;&gt; -p 8053 &#64;127.0.0.1 example.com
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 2269
+;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; QUESTION SECTION:
+;example.com.                   IN      A
+
+;; ANSWER SECTION:
+example.com.            300     IN      A       127.0.0.1
+
+;; AUTHORITY SECTION:
+example.com.            300     IN      NS      ns.example.com.
+
+;; ADDITIONAL SECTION:
+ns.example.com.         300     IN      A       127.0.0.1
+
+;; Query time: 1 msec
+;; SERVER: 127.0.0.1#8053(127.0.0.1)
+;; WHEN: Mon Aug  6 16:35:14 2012
+;; MSG SIZE  rcvd: 78</span>
+</pre>
+</div>
+<div class="section" id="id2">
+<h2>修改DNS记录</h2>
+<p>修改 <code>zone</code> 的设置，添加 <code>allow-update</code> 。因为BIND 9.7开始，BIND启动的时候会临时生成一个可以用来update的key。就先用这个key来操作好了。</p>
+<pre class="code literal-block">
+zone &quot;example.com.&quot; {
+        type            master;
+        file            &quot;example.com&quot;;
+
+        allow-update    { key local-ddns; };
+};
+</pre>
+<p>用 <code>nsupdate</code> 添加一条记录</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> nsupdate -k session.key
+<span class="gp">&gt;</span> server localhost 8053
+<span class="gp">&gt;</span> update add www.example.com. 300 A 127.0.0.1
+<span class="gp">&gt;</span> send
+<span class="gp">&gt;</span> quit
+<span class="gp">$</span>
+</pre>
+<p>用 <code>dig</code> 查询结果</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> dig -p 8053 &#64;127.0.0.1 www.example.com
+<span class="go">
+; &lt;&lt;&gt;&gt; DiG 9.8.2-RedHat-9.8.2-1.fc16 &lt;&lt;&gt;&gt; -p 8053 &#64;127.0.0.1 www.example.com
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 40774
+;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; QUESTION SECTION:
+;www.example.com.               IN      A
+
+;; ANSWER SECTION:
+www.example.com.        300     IN      A       127.0.0.1
+
+;; AUTHORITY SECTION:
+example.com.            300     IN      NS      ns.example.com.
+
+;; ADDITIONAL SECTION:
+ns.example.com.         300     IN      A       127.0.0.1
+
+;; Query time: 2 msec
+;; SERVER: 127.0.0.1#8053(127.0.0.1)
+;; WHEN: Mon Aug  6 16:47:02 2012
+;; MSG SIZE  rcvd: 82</span>
+</pre>
+<p>删除一条记录可以用</p>
+<pre class="code literal-block">
+update delete www.example.com. 300 A 127.0.0.1
+</pre>
+<p>要一次删除 <code>www.example.com.</code> 所有A记录，用</p>
+<pre class="code literal-block">
+update delete www.example.com. A
+</pre>
+<p>生成修改记录用的key</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> dnssec-keygen -T KEY -a HMAC-SHA512 -b 512 -n USER user
+<span class="go">Kuser.+165+40835
+</span><span class="gp">$</span> cat Kuser.+165+40835.key
+<span class="go">user. IN KEY 0 3 165 C25Jqxj2ZY8m18yaANh9FpvKhHPXksoOtlOH8XemcV4YB4JSfmbqEmbf lpZIBgeTHqPkMNv08jbyluawecL5yA==
+</span><span class="gp">$</span> cat Kuser.+165+40835.private
+<span class="go">Private-key-format: v1.3
+Algorithm: 165 (HMAC_SHA512)
+Key: C25Jqxj2ZY8m18yaANh9FpvKhHPXksoOtlOH8XemcV4YB4JSfmbqEmbflpZIBgeTHqPkMNv08jbyluawecL5yA==
+Bits: AAA=
+Created: 20120807063255
+Publish: 20120807063255
+Activate: 20120807063255</span>
+</pre>
+<p>修改 <code>named.conf</code></p>
+<pre class="code literal-block">
+key &quot;user.&quot; {
+        algorithm       HMAC-SHA512;
+        secret          &quot;C25Jqxj2ZY8m18yaANh9FpvKhHPXksoOtlOH8XemcV4YB4JSfmbqEmbflpZIBgeTHqPkMNv08jbyluawecL5yA==&quot;;
+};
+
+zone &quot;example.com.&quot; {
+        type            master;
+        file            &quot;example.com&quot;;
+
+        allow-update    { key user.; };
+};
+</pre>
+<p>此时用 <code>nsupdate -k Kuser.+165+40835.private</code> 就可以修改DNS记录了</p>
+<div class="section" id="python">
+<h3>Python</h3>
+<p>可以用 <a class="reference external" href="http://www.dnspython.org/">dnspython</a> 来修改DNS记录</p>
+<pre class="code python literal-block">
+<span class="kn">import</span> <span class="nn">dns.query</span>
+<span class="kn">import</span> <span class="nn">dns.tsig</span>
+<span class="kn">import</span> <span class="nn">dns.tsigkeyring</span>
+<span class="kn">import</span> <span class="nn">dns.update</span>
+<span class="kn">import</span> <span class="nn">dns.rdatatype</span>
+
+<span class="n">keyring</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">tsigkeyring</span><span class="o">.</span><span class="n">from_text</span><span class="p">({</span>
+    <span class="s">'user.'</span><span class="p">:</span> <span class="s">&quot;C25Jqxj2ZY8m18yaANh9FpvKhHPXksoOtlOH8XemcV4YB4JSfmbqEmbflpZIBgeTHqPkMNv08jbyluawecL5yA==&quot;</span>
+<span class="p">})</span>
+
+<span class="n">update</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">update</span><span class="o">.</span><span class="n">Update</span><span class="p">(</span>
+    <span class="s">'example.com.'</span><span class="p">,</span>
+    <span class="n">keyring</span><span class="o">=</span><span class="n">keyring</span><span class="p">,</span>
+    <span class="n">keyalgorithm</span><span class="o">=</span><span class="n">dns</span><span class="o">.</span><span class="n">tsig</span><span class="o">.</span><span class="n">HMAC_SHA512</span><span class="p">)</span>
+
+<span class="n">update</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">'www'</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">dns</span><span class="o">.</span><span class="n">rdatatype</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="s">'127.0.0.1'</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">tcp</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="s">'127.0.0.1'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8053</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">response</span>
+</pre>
+<p>运行</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> python dnsupdate.py
+<span class="go">id 49584
+opcode UPDATE
+rcode NOERROR
+flags QR
+;ZONE
+example.com. IN SOA
+;PREREQ
+;UPDATE
+;ADDITIONAL</span>
+</pre>
+</div>
+<div class="section" id="java">
+<h3>Java</h3>
+<p>可以用 <a class="reference external" href="http://www.dnsjava.org/">dnsjava</a> 来修改DNS记录</p>
+<pre class="code java literal-block">
+<span class="kn">import</span> <span class="nn">org.xbill.DNS.*</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">DNSUpdate</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="kd">throws</span> <span class="n">org</span><span class="o">.</span><span class="na">xbill</span><span class="o">.</span><span class="na">DNS</span><span class="o">.</span><span class="na">TextParseException</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">IOException</span> <span class="o">{</span>
+        <span class="n">Name</span> <span class="n">zone</span> <span class="o">=</span> <span class="n">Name</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">&quot;example.com.&quot;</span><span class="o">);</span>
+        <span class="n">Update</span> <span class="n">update</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Update</span><span class="o">(</span><span class="n">zone</span><span class="o">);</span>
+        <span class="n">Name</span> <span class="n">host</span> <span class="o">=</span> <span class="n">Name</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">&quot;www&quot;</span><span class="o">,</span> <span class="n">zone</span><span class="o">);</span>
+        <span class="n">TSIG</span> <span class="n">key</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TSIG</span><span class="o">(</span>
+            <span class="n">TSIG</span><span class="o">.</span><span class="na">HMAC_SHA512</span><span class="o">,</span>
+            <span class="s">&quot;user.&quot;</span><span class="o">,</span>
+            <span class="s">&quot;C25Jqxj2ZY8m18yaANh9FpvKhHPXksoOtlOH8XemcV4YB4JSfmbqEmbflpZIBgeTHqPkMNv08jbyluawecL5yA==&quot;</span><span class="o">);</span>
+
+        <span class="n">update</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">host</span><span class="o">,</span> <span class="n">Type</span><span class="o">.</span><span class="na">A</span><span class="o">,</span> <span class="mi">300</span><span class="o">,</span> <span class="s">&quot;127.0.0.1&quot;</span><span class="o">);</span>
+
+        <span class="n">Resolver</span> <span class="n">resolver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleResolver</span><span class="o">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="o">);</span>
+        <span class="n">resolver</span><span class="o">.</span><span class="na">setTCP</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">resolver</span><span class="o">.</span><span class="na">setPort</span><span class="o">(</span><span class="mi">8053</span><span class="o">);</span>
+        <span class="n">resolver</span><span class="o">.</span><span class="na">setTSIGKey</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
+
+        <span class="n">Message</span> <span class="n">response</span> <span class="o">=</span> <span class="n">resolver</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">update</span><span class="o">);</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">};</span>
+</pre>
+<p>编译运行</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> javac -cp dnsjava-2.1.3.jar DNSUpdate.java
+<span class="gp">$</span> java -cp .:dnsjava-2.1.3.jar DNSUpdate
+<span class="go">;; -&gt;&gt;HEADER&lt;&lt;- opcode: UPDATE, status: NOERROR, id: 54821
+;; flags: qr ; qd: 1 an: 0 au: 0 ad: 1
+;; TSIG ok
+;; ZONE:
+;;      example.com., type = SOA, class = IN
+
+;; PREREQUISITES:
+
+;; UPDATE RECORDS:
+
+;; ADDITIONAL RECORDS:
+user.                   0       ANY     TSIG    hmac-sha512. 1344326060 300 64 YmqR2FI00zkP+K8oikeip7QM+QSZgAJg/b+vCCFi18AFFarRdOrkNSRNouPMGec9qUko0Gf6AywU2W7YXsKUtA== NOERROR 0
+
+;; Message size: 138 bytes</span>
+</pre>
+</div>
+</div>
+<div class="section" id="master-slave">
+<h2>Master/Slave</h2>
+<p>修改zone的设置，添加 <code>allow-transfer</code> 和 <code>also-notify</code> 。</p>
+<pre class="code literal-block">
+zone &quot;example.com.&quot; {
+        type            master;
+        file            &quot;example.com&quot;;
+
+        allow-update    { key local-ddns; };
+        allow-transfer  { 127.0.0.1; };
+        also-notify     { 127.0.0.1 port 8153; };
+};
+</pre>
+<p>slave的配置，只要把zone的 <code>masters</code> 设置好就可以了。</p>
+<pre class="code bash literal-block">
+<span class="c">#!/usr/bin/env bash
+</span>
+<span class="nv">ROOT</span><span class="o">=</span><span class="s2">&quot;$(pwd)&quot;</span>
+
+mkdir -p <span class="s2">&quot;${ROOT}/slave-keys&quot;</span>
+mkdir -p <span class="s2">&quot;${ROOT}/slave-zones&quot;</span>
+
+<span class="k">if</span> <span class="o">[[</span> ! -e <span class="s2">&quot;slave.conf&quot;</span> <span class="o">]]</span>; <span class="k">then
+
+</span>cat &gt;<span class="s2">&quot;slave.conf&quot;</span> <span class="s">&lt;&lt; EOF
+options {
+        listen-on               port 8153       { 127.0.0.1; };
+        directory               &quot;${ROOT}/slave-zones&quot;;
+        pid-file                &quot;${ROOT}/slave.pid&quot;;
+        session-keyfile         &quot;${ROOT}/slave.session.key&quot;;
+        managed-keys-directory  &quot;${ROOT}/slave-keys&quot;;
+
+        allow-query             { 127.0.0.1; };
+        recursion               no;
+};
+
+controls {};
+
+zone &quot;example.com.&quot; {
+        type    slave;
+        masters { 127.0.0.1 port 8053; };
+};
+EOF</span>
+
+<span class="k">fi
+
+</span>named -c slave.conf -g
+</pre>
+</div>
+<div class="section" id="dnssec">
+<h2>DNSSEC</h2>
+<p>在zones目录下，生成ZSK</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> dnssec-keygen -a rsasha512 -b 1024 -n ZONE example.com.
+<span class="go">Generating key pair......................++++++ ...............++++++
+Kexample.com.+010+41861</span>
+</pre>
+<p>生成KSK</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> dnssec-keygen -a rsasha512 -b 1024 -n ZONE -f KSK example.com.
+<span class="go">Generating key pair.........................++++++ .....................................++++++
+Kexample.com.+010+49764</span>
+</pre>
+<p>修改 <code>example.com</code> ，在最后添加两行</p>
+<pre class="code text literal-block">
+$INCLUDE &quot;Kexample.com.+010+41861.key&quot;
+$INCLUDE &quot;Kexample.com.+010+49764.key&quot;
+</pre>
+<p>签名zone</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> dnssec-signzone example.com
+<span class="go">Verifying the zone using the following algorithms: RSASHA512.
+Zone signing complete:
+Algorithm: RSASHA512: KSKs: 1 active, 0 stand-by, 0 revoked
+                      ZSKs: 1 active, 0 stand-by, 0 revoked
+example.com.signed</span>
+</pre>
+<p>修改 <code>named.conf</code></p>
+<pre class="code literal-block">
+zone &quot;example.com.&quot; {
+        type            master;
+        file            &quot;example.com.signed&quot;;
+};
+</pre>
+<p>在options加上</p>
+<pre class="code literal-block">
+dnssec-enable           yes;
+</pre>
+<p>启动bind，查看DNSKEY</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> dig -p 8053 &#64;localhost  +multi +noall +answer DNSKEY example.com.
+<span class="go">example.com.            300 IN DNSKEY 256 3 10 (
+                                AwEAAbexLhdu6Fk91XVCZlXPuJUD4BfigFUFhEkijwrF
+                                CF6KCAuixIt4tob2l4yTw/txAbGuzNz5t4oI/GUifniJ
+                                oQO5WLn18YnhPtQ/TLgyDfTB01IAqK1AMNJ4bHINEn4V
+                                gh3q4V41xgh8GMdYN5LsD5qUKUpoy8hMLRSGSK6VVr6v
+                                ) ; key id = 41861
+example.com.            300 IN DNSKEY 257 3 10 (
+                                AwEAAboBxp1wNbmxhINtxORCNfwQQaZ3QlTtlxfV+jCR
+                                Y5R44ri1ygI5kZEToqiB7W6nnxbUi9T5HRGmJmprl7Qa
+                                pEzw4S8YaUXCdYAPy8tNFHMSsrj2d72r2gR2DSBp4C5Z
+                                D5XGdk9kV6GSbCl0DMd0nzabSLMVw/A8N7l9cVU+MVez
+                                ) ; key id = 49764</span>
+</pre>
+<p>建立 <code>trusted-key.key</code> 文件</p>
+<pre class="code literal-block">
+example.com.            300 IN DNSKEY 257 3 10 AwEAAboBxp1wNbmxhINtxORCNfwQQaZ3QlTtlxfV+jCRY5R44ri1ygI5kZEToqiB7W6nnxbUi9T5HRGmJmprl7QapEzw4S8YaUXCdYAPy8tNFHMSsrj2d72r2gR2DSBp4C5ZD5XGdk9kV6GSbCl0DMd0nzabSLMVw/A8N7l9cVU+MVez
+</pre>
+<p>用 <code>dig</code> 来验证</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> dig -p 8053 &#64;localhost A example.com. +sigchase +trusted-key<span class="o">=</span>trusted-key.key
+<span class="go">;; RRset to chase:
+example.com.            300     IN      A       127.0.0.1
+
+
+;; RRSIG of the RRset to chase:
+example.com.            300     IN      RRSIG   A 10 2 300 20120909052125 20120810052125 41861 example.com. A5raSwawZlfWejUvvWG+DYTiAMhbWyTXyScEYNxJxSyOrzZGLD4gGlFI RGmt91nmyw2+f2sHHqlRtvEmcxzFydTwZJs0lTdkQ3PODov4btEah52N aJGADObHaIAqZYcvYPlIpDDcZNIDQxbJbQyI6+JmWoFJN4QwyqXLn9dr LTU=
+
+
+
+Launch a query to find a RRset of type DNSKEY for zone: example.com.
+
+;; DNSKEYset that signs the RRset to chase:
+example.com.            300     IN      DNSKEY  256 3 10 AwEAAbexLhdu6Fk91XVCZlXPuJUD4BfigFUFhEkijwrFCF6KCAuixIt4 tob2l4yTw/txAbGuzNz5t4oI/GUifniJoQO5WLn18YnhPtQ/TLgyDfTB 01IAqK1AMNJ4bHINEn4Vgh3q4V41xgh8GMdYN5LsD5qUKUpoy8hMLRSG SK6VVr6v
+example.com.            300     IN      DNSKEY  257 3 10 AwEAAboBxp1wNbmxhINtxORCNfwQQaZ3QlTtlxfV+jCRY5R44ri1ygI5 kZEToqiB7W6nnxbUi9T5HRGmJmprl7QapEzw4S8YaUXCdYAPy8tNFHMS srj2d72r2gR2DSBp4C5ZD5XGdk9kV6GSbCl0DMd0nzabSLMVw/A8N7l9 cVU+MVez
+
+
+;; RRSIG of the DNSKEYset that signs the RRset to chase:
+example.com.            300     IN      RRSIG   DNSKEY 10 2 300 20120909052125 20120810052125 41861 example.com. KEAnlTPJsxS1lg4vJv3MdblH9LgPq5Mcv5uxhjnujHiyJkPw9kl57lcp GyFOZcWcE226fBoM+YkzHhziiPmTnjxZBWK9unnsyBgfsGy+t6YlvorQ XB60O0AAgrbDouWg9HO3wpYjILXK37w/J+MkCYXPpj1o5+OU5Adtl/LK HJQ=
+example.com.            300     IN      RRSIG   DNSKEY 10 2 300 20120909052125 20120810052125 49764 example.com. V1fqbwK/USLsnHN2Q6tgN4mFMZtaEjtbhkSzUCPDq6TFsOEClHF09Do7 0mEDQCqW+r1DljpAPVzHBHzzKz5DAMLApn+qVeE+NaD0/WvMeh5nyvMQ 8jQ0102M7i9bVuRvnfSKRU74UxWD71Py6AS6wyg26KBgP9RIs4f5UEeN lPc=
+
+
+
+Launch a query to find a RRset of type DS for zone: example.com.
+;; NO ANSWERS: no more
+
+;; WARNING There is no DS for the zone: example.com.
+
+
+
+;; WE HAVE MATERIAL, WE NOW DO VALIDATION
+;; VERIFYING A RRset for example.com. with DNSKEY:41861: success
+;; OK We found DNSKEY (or more) to validate the RRset
+;; Ok, find a Trusted Key in the DNSKEY RRset: 49764
+;; VERIFYING DNSKEY RRset for example.com. with DNSKEY:49764: success
+
+;; Ok this DNSKEY is a Trusted Key, DNSSEC validation is ok: SUCCESS</span>
+</pre>
+</div>
+<div class="section" id="recursive-resolver">
+<h2>recursive resolver</h2>
+<p>建立 <code>trusted-keys</code> 文件</p>
+<pre class="code literal-block">
+trusted-keys {
+example.com.            257 3 10 &quot;AwEAAboBxp1wNbmxhINtxORCNfwQQaZ3QlTtlxfV+jCRY5R44ri1ygI5kZEToqiB7W6nnxbUi9T5HRGmJmprl7QapEzw4S8YaUXCdYAPy8tNFHMSsrj2d72r2gR2DSBp4C5ZD5XGdk9kV6GSbCl0DMd0nzabSLMVw/A8N7l9cVU+MVez&quot;;
+};
+</pre>
+<div class="section" id="bind">
+<h3>bind</h3>
+<p>启动bind作为recursive resolver</p>
+<pre class="code bash literal-block">
+<span class="c">#!/usr/bin/env bash
+</span>
+<span class="nv">ROOT</span><span class="o">=</span><span class="s2">&quot;$(pwd)&quot;</span>
+
+mkdir -p <span class="s2">&quot;${ROOT}/recursive-keys&quot;</span>
+mkdir -p <span class="s2">&quot;${ROOT}/recursive-zones&quot;</span>
+
+<span class="k">if</span> <span class="o">[[</span> ! -e <span class="s2">&quot;recursive.conf&quot;</span> <span class="o">]]</span>; <span class="k">then
+
+</span>cat &gt;<span class="s2">&quot;recursive.conf&quot;</span> <span class="s">&lt;&lt; EOF
+options {
+        listen-on               port 8253       { 127.0.0.1; };
+        directory               &quot;${ROOT}/recursive-zones&quot;;
+        pid-file                &quot;${ROOT}/recursive.pid&quot;;
+        session-keyfile         &quot;${ROOT}/recursive.session.key&quot;;
+        managed-keys-directory  &quot;${ROOT}/recursive-keys&quot;;
+
+        allow-query             { 127.0.0.1; };
+        recursion               yes;
+        dnssec-validation       yes;
+        forwarders { 127.0.0.1 port 8053; };
+};
+
+controls {};
+
+include &quot;${ROOT}/trusted-keys&quot;;
+EOF</span>
+
+<span class="k">fi
+
+</span>named -c recursive.conf -g
+</pre>
+<p>使用 <code>dig</code> 查看结果</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> dig -p 8253 &#64;localhost example.com. +dnssec
+<span class="go">
+; &lt;&lt;&gt;&gt; DiG 9.8.2-RedHat-9.8.2-1.fc16 &lt;&lt;&gt;&gt; -p 8253 &#64;localhost example.com. +dnssec
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 29620
+;; flags: qr rd ra ad; QUERY: 1, ANSWER: 2, AUTHORITY: 2, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags: do; udp: 4096
+;; QUESTION SECTION:
+;example.com.                   IN      A
+
+;; ANSWER SECTION:
+example.com.            78      IN      A       127.0.0.1
+example.com.            78      IN      RRSIG   A 10 2 300 20120909052125 20120810052125 41861 example.com. A5raSwawZlfWejUvvWG+DYTiAMhbWyTXyScEYNxJxSyOrzZGLD4gGlFI RGmt91nmyw2+f2sHHqlRtvEmcxzFydTwZJs0lTdkQ3PODov4btEah52N aJGADObHaIAqZYcvYPlIpDDcZNIDQxbJbQyI6+JmWoFJN4QwyqXLn9dr LTU=
+
+;; AUTHORITY SECTION:
+example.com.            78      IN      NS      ns.example.com.
+example.com.            78      IN      RRSIG   NS 10 2 300 20120909052125 20120810052125 41861 example.com. JMTkJtNQ75fRhHY+QgMqkVChHKAOiV+tnG3YiEKEBVmgBoslNaCdTFvw PJXfxCh776Nl+o5xbNkA6nZNcAA6UlM8/v9piK5+K1as7n5MJTiIDacC KiHYIwZvBrs8F3OVybXV+rTshFz4t19NNx8snJD9yP+UJLjmxV3Ej0OP QKo=
+
+;; Query time: 1 msec
+;; SERVER: 127.0.0.1#8253(127.0.0.1)
+;; WHEN: Fri Aug 10 15:39:16 2012
+;; MSG SIZE  rcvd: 415</span>
+</pre>
+</div>
+<div class="section" id="unbound">
+<h3>unbound</h3>
+<p>启动unbound作为recursive resolver</p>
+<pre class="code bash literal-block">
+<span class="c">#!/usr/bin/env bash
+</span>
+<span class="nv">ROOT</span><span class="o">=</span><span class="s2">&quot;$(pwd)&quot;</span>
+
+
+<span class="k">if</span> <span class="o">[[</span> ! -e <span class="s2">&quot;unbound.conf&quot;</span> <span class="o">]]</span>; <span class="k">then
+
+</span>cat &gt;<span class="s2">&quot;unbound.conf&quot;</span> <span class="s">&lt;&lt; EOF
+server:
+    num-threads: 1
+    port: 8353
+    directory: &quot;${ROOT}&quot;
+    trusted-keys-file: &quot;${ROOT}/trusted-keys&quot;
+    pidfile: &quot;${ROOT}/unbound.pid&quot;
+    verbosity: 1
+    use-syslog: no
+    do-daemonize: no
+    username: &quot;$(whoami)&quot;
+    do-not-query-localhost: no
+
+
+forward-zone:
+    name: &quot;example.com.&quot;
+    forward-addr: 127.0.0.1&#64;8053
+EOF</span>
+
+<span class="k">fi
+
+</span>unbound -c unbound.conf
+</pre>
+<p>使用 <code>dig</code> 查看结果</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> dig -p 8353 &#64;localhost example.com. +dnssec
+<span class="go">
+; &lt;&lt;&gt;&gt; DiG 9.8.2-RedHat-9.8.2-1.fc16 &lt;&lt;&gt;&gt; -p 8353 &#64;localhost example.com. +dnssec
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 28672
+;; flags: qr rd ra ad; QUERY: 1, ANSWER: 2, AUTHORITY: 2, ADDITIONAL: 3
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags: do; udp: 4096
+;; QUESTION SECTION:
+;example.com.                   IN      A
+
+;; ANSWER SECTION:
+example.com.            300     IN      A       127.0.0.1
+example.com.            300     IN      RRSIG   A 10 2 300 20120909052125 20120810052125 41861 example.com. A5raSwawZlfWejUvvWG+DYTiAMhbWyTXyScEYNxJxSyOrzZGLD4gGlFI RGmt91nmyw2+f2sHHqlRtvEmcxzFydTwZJs0lTdkQ3PODov4btEah52N aJGADObHaIAqZYcvYPlIpDDcZNIDQxbJbQyI6+JmWoFJN4QwyqXLn9dr LTU=
+
+;; AUTHORITY SECTION:
+example.com.            300     IN      NS      ns.example.com.
+example.com.            300     IN      RRSIG   NS 10 2 300 20120909052125 20120810052125 41861 example.com. JMTkJtNQ75fRhHY+QgMqkVChHKAOiV+tnG3YiEKEBVmgBoslNaCdTFvw PJXfxCh776Nl+o5xbNkA6nZNcAA6UlM8/v9piK5+K1as7n5MJTiIDacC KiHYIwZvBrs8F3OVybXV+rTshFz4t19NNx8snJD9yP+UJLjmxV3Ej0OP QKo=
+
+;; ADDITIONAL SECTION:
+ns.example.com.         300     IN      A       127.0.0.1
+ns.example.com.         300     IN      RRSIG   A 10 3 300 20120909052125 20120810052125 41861 example.com. MgDjvx9Xmfg/p872Im2QhRgehKZi8yKr8E8dfueT+uhfp5KCx0g6pIX4 5VLJO/lYmdaG+vRQyj0FLTLntDIM9G/5rlKp9CISH4yD6nsyfQI63FM1 lwDM29fytCilHXvgWb64jbGf/lHxuKsaZjsvaJyRZeWyEzpFKNq8BB5v RHI=
+
+;; Query time: 1 msec
+;; SERVER: 127.0.0.1#8353(127.0.0.1)
+;; WHEN: Fri Aug 10 15:48:40 2012
+;; MSG SIZE  rcvd: 602</span>
+</pre>
+</div>
+</div>
+<div class="section" id="sshfp">
+<h2>SSHFP</h2>
+<p>生成SSH密钥对</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> ssh-keygen -q -N <span class="s1">''</span> -f id_rsa
+</pre>
+<p>转换成SSHFP记录，并把这行添加到 <code>zones/example.com</code> 里</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> ssh-keygen -r example.com. -f id_rsa.pub
+<span class="go">example.com. IN SSHFP 1 1 5727cac5dcca0d87c2b74f33e6e6106f09a03d27</span>
+</pre>
+<p>SSH客户端使用的 <code>config</code> 文件</p>
+<pre class="code literal-block">
+Host example.com
+    Port 8022
+    VerifyHostKeyDNS yes
+    StrictHostKeyChecking ask
+</pre>
+<p>运行一个临时的SSH Server</p>
+<pre class="code python literal-block">
+<span class="c">#!/usr/bin/env python2</span>
+
+<span class="kn">from</span> <span class="nn">twisted.python</span> <span class="kn">import</span> <span class="n">log</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">log</span><span class="o">.</span><span class="n">startLogging</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">reactor</span>
+<span class="kn">from</span> <span class="nn">twisted.conch.ssh</span> <span class="kn">import</span> <span class="n">factory</span>
+<span class="kn">from</span> <span class="nn">twisted.conch.ssh</span> <span class="kn">import</span> <span class="n">keys</span>
+
+<span class="n">SSHD_KEY</span> <span class="o">=</span> <span class="s">'id_rsa'</span>
+
+<span class="n">PUBLIC_KEY</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="n">SSHD_KEY</span><span class="p">)</span>
+<span class="n">PRIVATE_KEY</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="n">SSHD_KEY</span><span class="p">)</span>
+
+<span class="n">SSH_TYPE</span> <span class="o">=</span> <span class="n">PUBLIC_KEY</span><span class="o">.</span><span class="n">sshType</span><span class="p">()</span>
+<span class="n">FINGERPRINT</span> <span class="o">=</span> <span class="n">PUBLIC_KEY</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">SSHFactory</span><span class="p">(</span><span class="n">factory</span><span class="o">.</span><span class="n">SSHFactory</span><span class="p">):</span>
+    <span class="n">publicKeys</span> <span class="o">=</span> <span class="p">{</span><span class="n">SSH_TYPE</span><span class="p">:</span> <span class="n">PUBLIC_KEY</span><span class="p">}</span>
+    <span class="n">privateKeys</span> <span class="o">=</span> <span class="p">{</span><span class="n">SSH_TYPE</span><span class="p">:</span> <span class="n">PRIVATE_KEY</span><span class="p">}</span>
+
+
+<span class="n">reactor</span><span class="o">.</span><span class="n">listenTCP</span><span class="p">(</span><span class="mi">8022</span><span class="p">,</span> <span class="n">SSHFactory</span><span class="p">())</span>
+<span class="n">reactor</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre>
+<p>劫持SSH客户端的DNS请求，将其发往8253端口</p>
+<pre class="code c literal-block">
+<span class="cp">#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;errno.h&gt;
+</span>
+<span class="cp">#include &lt;stdio.h&gt;
+#include &lt;stdint.h&gt;
+#define __USE_GNU
+#include &lt;dlfcn.h&gt;
+</span>
+
+<span class="k">static</span> <span class="kt">in_port_t</span> <span class="n">sendto_port</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">in_addr_t</span> <span class="n">sendto_addr</span> <span class="o">=</span> <span class="n">INADDR_NONE</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">connect</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">addr</span><span class="p">,</span> <span class="kt">socklen_t</span> <span class="n">addrlen</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">static</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">_connect</span><span class="p">)(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">addr</span><span class="p">,</span> <span class="kt">socklen_t</span> <span class="n">addrlen</span><span class="p">)</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_connect</span><span class="p">)</span> <span class="n">_connect</span> <span class="o">=</span> <span class="n">dlsym</span><span class="p">(</span><span class="n">RTLD_NEXT</span><span class="p">,</span> <span class="s">&quot;connect&quot;</span><span class="p">);</span>
+  <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="o">*</span><span class="n">addr_in</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="o">*</span><span class="p">)</span><span class="n">addr</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">ntohs</span><span class="p">(</span><span class="n">addr_in</span><span class="o">-&gt;</span><span class="n">sin_port</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">53</span><span class="p">)</span> <span class="k">return</span> <span class="n">_connect</span><span class="p">(</span><span class="n">sockfd</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">addrlen</span><span class="p">);</span>
+
+  <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="n">new_addr_in</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">addr_in</span><span class="o">-&gt;</span><span class="n">sin_family</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span><span class="mi">8253</span><span class="p">),</span>
+    <span class="p">.</span><span class="n">sin_addr</span> <span class="o">=</span> <span class="p">{</span> <span class="p">.</span><span class="n">s_addr</span> <span class="o">=</span> <span class="n">htonl</span><span class="p">(</span><span class="n">INADDR_LOOPBACK</span><span class="p">)</span> <span class="p">},</span>
+    <span class="p">.</span><span class="n">sin_zero</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>
+  <span class="p">};</span>
+
+  <span class="n">sendto_addr</span> <span class="o">=</span> <span class="n">addr_in</span><span class="o">-&gt;</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span><span class="p">;</span>
+  <span class="n">sendto_port</span> <span class="o">=</span> <span class="n">addr_in</span><span class="o">-&gt;</span><span class="n">sin_port</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="n">_connect</span><span class="p">(</span><span class="n">sockfd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">new_addr_in</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">new_addr_in</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kt">ssize_t</span> <span class="nf">recvfrom</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">len</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">,</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">src_addr</span><span class="p">,</span> <span class="kt">socklen_t</span> <span class="o">*</span><span class="n">addrlen</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">static</span> <span class="kt">ssize_t</span> <span class="p">(</span><span class="o">*</span><span class="n">_recvfrom</span><span class="p">)(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">len</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">,</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">src_addr</span><span class="p">,</span> <span class="kt">socklen_t</span> <span class="o">*</span><span class="n">addrlen</span><span class="p">)</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_recvfrom</span><span class="p">)</span> <span class="n">_recvfrom</span> <span class="o">=</span> <span class="n">dlsym</span><span class="p">(</span><span class="n">RTLD_NEXT</span><span class="p">,</span> <span class="s">&quot;recvfrom&quot;</span><span class="p">);</span>
+
+  <span class="kt">ssize_t</span> <span class="n">result</span> <span class="o">=</span> <span class="n">_recvfrom</span><span class="p">(</span><span class="n">sockfd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span> <span class="n">src_addr</span><span class="p">,</span> <span class="n">addrlen</span><span class="p">);</span>
+  <span class="p">((</span><span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="o">*</span><span class="p">)</span><span class="n">src_addr</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span> <span class="o">=</span> <span class="n">sendto_addr</span><span class="p">;</span>
+  <span class="p">((</span><span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="o">*</span><span class="p">)</span><span class="n">src_addr</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">sendto_port</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+<p>编译，通过 <code>LD_PRELOAD</code> 运行SSH客户端</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> <span class="nv">LD_PRELOAD</span><span class="o">=</span><span class="s2">&quot;$(pwd)/hook.so&quot;</span> ssh -v -i id_rsa -F config example.com
+<span class="go">OpenSSH_5.8p2, OpenSSL 1.0.0i-fips 19 Apr 2012
+debug1: Reading configuration data config
+debug1: Applying options for example.com
+debug1: Connecting to example.com [127.0.0.1] port 8022.
+debug1: Connection established.
+debug1: identity file id_rsa type 1
+debug1: identity file id_rsa-cert type -1
+debug1: Remote protocol version 2.0, remote software version Twisted
+debug1: no match: Twisted
+debug1: Enabling compatibility mode for protocol 2.0
+debug1: Local version string SSH-2.0-OpenSSH_5.8
+debug1: SSH2_MSG_KEXINIT sent
+debug1: SSH2_MSG_KEXINIT received
+debug1: kex: server-&gt;client aes128-ctr hmac-md5 none
+debug1: kex: client-&gt;server aes128-ctr hmac-md5 none
+debug1: sending SSH2_MSG_KEXDH_INIT
+debug1: expecting SSH2_MSG_KEXDH_REPLY
+debug1: Server host key: RSA c4:04:b5:ef:1f:d3:0b:9a:44:13:a3:4e:e8:69:20:f2
+debug1: found 1 secure fingerprints in DNS
+debug1: matching host key fingerprint found in DNS
+debug1: ssh_rsa_verify: signature correct
+debug1: SSH2_MSG_NEWKEYS sent
+debug1: expecting SSH2_MSG_NEWKEYS
+debug1: SSH2_MSG_NEWKEYS received
+debug1: Roaming not allowed by server
+debug1: SSH2_MSG_SERVICE_REQUEST sent
+Connection closed by 127.0.0.1</span>
+</pre>
+<p>现在就不再提示需要确认服务端公钥了</p>
+</div>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

@@ -2022,6 +2022,693 @@ gcj-dbtool -a swt.db /usr/lib64/java/swt.jar libswt.so
 gij -verbose:class --cp .:/usr/lib64/java/swt.jar SWTHelloWorld
 gij -verbose:class --cp .:/usr/lib64/java/swt.jar -Dgnu.gcj.precompiled.db.path=swt.db SWTHelloWorld
 &lt;/pre&gt;
+</summary></entry><entry><title>DNS基本配置</title><link href="http://bhuztez.github.io/2012/dns.html" rel="alternate"></link><updated>2012-08-06T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2012-08-06:2012/dns.html</id><summary type="html">&lt;p&gt;因为DNSSEC和SSHFP配置步骤还是有点多的，在这里记录一下&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;div class="section" id="dns-server"&gt;
+&lt;h2&gt;运行一个临时的DNS Server&lt;/h2&gt;
+&lt;p&gt;在配置文件里把文件/目录地址改到当前目录下。BIND 9.7多了一个 session-keyfile &lt;a class="footnote-reference" href="#bind97-session-key" id="id1"&gt;[1]&lt;/a&gt; 。&lt;/p&gt;
+&lt;table class="docutils footnote" frame="void" id="bind97-session-key" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.isc.org/software/bind/new-features/9.7"&gt;New Features in BIND 9.7&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class="code bash literal-block"&gt;
+&lt;span class="c"&gt;#!/usr/bin/env bash
+&lt;/span&gt;
+&lt;span class="nv"&gt;ROOT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;$(pwd)&amp;quot;&lt;/span&gt;
+
+mkdir -p &lt;span class="s2"&gt;&amp;quot;${ROOT}/keys&amp;quot;&lt;/span&gt;
+mkdir -p &lt;span class="s2"&gt;&amp;quot;${ROOT}/zones&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; ! -e &lt;span class="s2"&gt;&amp;quot;named.conf&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;; &lt;span class="k"&gt;then
+
+&lt;/span&gt;cat &amp;gt;&lt;span class="s2"&gt;&amp;quot;named.conf&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;&amp;lt; EOF
+options {
+        listen-on               port 8053       { 127.0.0.1; };
+        directory               &amp;quot;${ROOT}/zones&amp;quot;;
+        pid-file                &amp;quot;${ROOT}/named.pid&amp;quot;;
+        session-keyfile         &amp;quot;${ROOT}/session.key&amp;quot;;
+        managed-keys-directory  &amp;quot;${ROOT}/keys&amp;quot;;
+
+        allow-query             { 127.0.0.1; };
+        recursion               no;
+};
+
+controls {};
+EOF&lt;/span&gt;
+
+&lt;span class="k"&gt;fi
+
+&lt;/span&gt;named -c named.conf -g
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="zone"&gt;
+&lt;h2&gt;添加一个zone&lt;/h2&gt;
+&lt;p&gt;修改 &lt;code&gt;named.conf&lt;/code&gt; ，添加一个zone。&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+zone &amp;quot;example.com.&amp;quot; {
+        type    master;
+        file    &amp;quot;example.com&amp;quot;;
+};
+&lt;/pre&gt;
+&lt;p&gt;在 &lt;code&gt;zones&lt;/code&gt; 目录下，新建 &lt;code&gt;example.com&lt;/code&gt; 文件&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+$ORIGIN .
+$TTL 300
+example.com         IN SOA  example.com. root.example.com. (
+                            201208061  ; serial
+                            300        ; refresh
+                            300        ; retry
+                            300        ; expire
+                            300        ; minimum
+                            )
+                    NS      ns.example.com.
+                    A       127.0.0.1
+ns.example.com.             A       127.0.0.1
+&lt;/pre&gt;
+&lt;p&gt;使用 &lt;code&gt;dig&lt;/code&gt; 来查询&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; dig -p 8053 &amp;#64;127.0.0.1 example.com
+&lt;span class="go"&gt;
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.8.2-RedHat-9.8.2-1.fc16 &amp;lt;&amp;lt;&amp;gt;&amp;gt; -p 8053 &amp;#64;127.0.0.1 example.com
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 2269
+;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; QUESTION SECTION:
+;example.com.                   IN      A
+
+;; ANSWER SECTION:
+example.com.            300     IN      A       127.0.0.1
+
+;; AUTHORITY SECTION:
+example.com.            300     IN      NS      ns.example.com.
+
+;; ADDITIONAL SECTION:
+ns.example.com.         300     IN      A       127.0.0.1
+
+;; Query time: 1 msec
+;; SERVER: 127.0.0.1#8053(127.0.0.1)
+;; WHEN: Mon Aug  6 16:35:14 2012
+;; MSG SIZE  rcvd: 78&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;修改DNS记录&lt;/h2&gt;
+&lt;p&gt;修改 &lt;code&gt;zone&lt;/code&gt; 的设置，添加 &lt;code&gt;allow-update&lt;/code&gt; 。因为BIND 9.7开始，BIND启动的时候会临时生成一个可以用来update的key。就先用这个key来操作好了。&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+zone &amp;quot;example.com.&amp;quot; {
+        type            master;
+        file            &amp;quot;example.com&amp;quot;;
+
+        allow-update    { key local-ddns; };
+};
+&lt;/pre&gt;
+&lt;p&gt;用 &lt;code&gt;nsupdate&lt;/code&gt; 添加一条记录&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; nsupdate -k session.key
+&lt;span class="gp"&gt;&amp;gt;&lt;/span&gt; server localhost 8053
+&lt;span class="gp"&gt;&amp;gt;&lt;/span&gt; update add www.example.com. 300 A 127.0.0.1
+&lt;span class="gp"&gt;&amp;gt;&lt;/span&gt; send
+&lt;span class="gp"&gt;&amp;gt;&lt;/span&gt; quit
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;用 &lt;code&gt;dig&lt;/code&gt; 查询结果&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; dig -p 8053 &amp;#64;127.0.0.1 www.example.com
+&lt;span class="go"&gt;
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.8.2-RedHat-9.8.2-1.fc16 &amp;lt;&amp;lt;&amp;gt;&amp;gt; -p 8053 &amp;#64;127.0.0.1 www.example.com
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 40774
+;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; QUESTION SECTION:
+;www.example.com.               IN      A
+
+;; ANSWER SECTION:
+www.example.com.        300     IN      A       127.0.0.1
+
+;; AUTHORITY SECTION:
+example.com.            300     IN      NS      ns.example.com.
+
+;; ADDITIONAL SECTION:
+ns.example.com.         300     IN      A       127.0.0.1
+
+;; Query time: 2 msec
+;; SERVER: 127.0.0.1#8053(127.0.0.1)
+;; WHEN: Mon Aug  6 16:47:02 2012
+;; MSG SIZE  rcvd: 82&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;删除一条记录可以用&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+update delete www.example.com. 300 A 127.0.0.1
+&lt;/pre&gt;
+&lt;p&gt;要一次删除 &lt;code&gt;www.example.com.&lt;/code&gt; 所有A记录，用&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+update delete www.example.com. A
+&lt;/pre&gt;
+&lt;p&gt;生成修改记录用的key&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; dnssec-keygen -T KEY -a HMAC-SHA512 -b 512 -n USER user
+&lt;span class="go"&gt;Kuser.+165+40835
+&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; cat Kuser.+165+40835.key
+&lt;span class="go"&gt;user. IN KEY 0 3 165 C25Jqxj2ZY8m18yaANh9FpvKhHPXksoOtlOH8XemcV4YB4JSfmbqEmbf lpZIBgeTHqPkMNv08jbyluawecL5yA==
+&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; cat Kuser.+165+40835.private
+&lt;span class="go"&gt;Private-key-format: v1.3
+Algorithm: 165 (HMAC_SHA512)
+Key: C25Jqxj2ZY8m18yaANh9FpvKhHPXksoOtlOH8XemcV4YB4JSfmbqEmbflpZIBgeTHqPkMNv08jbyluawecL5yA==
+Bits: AAA=
+Created: 20120807063255
+Publish: 20120807063255
+Activate: 20120807063255&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;修改 &lt;code&gt;named.conf&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+key &amp;quot;user.&amp;quot; {
+        algorithm       HMAC-SHA512;
+        secret          &amp;quot;C25Jqxj2ZY8m18yaANh9FpvKhHPXksoOtlOH8XemcV4YB4JSfmbqEmbflpZIBgeTHqPkMNv08jbyluawecL5yA==&amp;quot;;
+};
+
+zone &amp;quot;example.com.&amp;quot; {
+        type            master;
+        file            &amp;quot;example.com&amp;quot;;
+
+        allow-update    { key user.; };
+};
+&lt;/pre&gt;
+&lt;p&gt;此时用 &lt;code&gt;nsupdate -k Kuser.+165+40835.private&lt;/code&gt; 就可以修改DNS记录了&lt;/p&gt;
+&lt;div class="section" id="python"&gt;
+&lt;h3&gt;Python&lt;/h3&gt;
+&lt;p&gt;可以用 &lt;a class="reference external" href="http://www.dnspython.org/"&gt;dnspython&lt;/a&gt; 来修改DNS记录&lt;/p&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;dns.query&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;dns.tsig&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;dns.tsigkeyring&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;dns.update&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;dns.rdatatype&lt;/span&gt;
+
+&lt;span class="n"&gt;keyring&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tsigkeyring&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;from_text&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+    &lt;span class="s"&gt;'user.'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C25Jqxj2ZY8m18yaANh9FpvKhHPXksoOtlOH8XemcV4YB4JSfmbqEmbflpZIBgeTHqPkMNv08jbyluawecL5yA==&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+
+&lt;span class="n"&gt;update&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s"&gt;'example.com.'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;keyring&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;keyring&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;keyalgorithm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;dns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tsig&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HMAC_SHA512&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'www'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rdatatype&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'127.0.0.1'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tcp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'127.0.0.1'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;8053&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;运行&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; python dnsupdate.py
+&lt;span class="go"&gt;id 49584
+opcode UPDATE
+rcode NOERROR
+flags QR
+;ZONE
+example.com. IN SOA
+;PREREQ
+;UPDATE
+;ADDITIONAL&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="java"&gt;
+&lt;h3&gt;Java&lt;/h3&gt;
+&lt;p&gt;可以用 &lt;a class="reference external" href="http://www.dnsjava.org/"&gt;dnsjava&lt;/a&gt; 来修改DNS记录&lt;/p&gt;
+&lt;pre class="code java literal-block"&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;org.xbill.DNS.*&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+&lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;DNSUpdate&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;[])&lt;/span&gt; &lt;span class="kd"&gt;throws&lt;/span&gt; &lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;xbill&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;DNS&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;TextParseException&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;io&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;IOException&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;Name&lt;/span&gt; &lt;span class="n"&gt;zone&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;fromString&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;example.com.&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;Update&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Update&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;zone&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;Name&lt;/span&gt; &lt;span class="n"&gt;host&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;fromString&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;www&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;zone&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;TSIG&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;TSIG&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;
+            &lt;span class="n"&gt;TSIG&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;HMAC_SHA512&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+            &lt;span class="s"&gt;&amp;quot;user.&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+            &lt;span class="s"&gt;&amp;quot;C25Jqxj2ZY8m18yaANh9FpvKhHPXksoOtlOH8XemcV4YB4JSfmbqEmbflpZIBgeTHqPkMNv08jbyluawecL5yA==&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+
+        &lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;add&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;A&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;127.0.0.1&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+
+        &lt;span class="n"&gt;Resolver&lt;/span&gt; &lt;span class="n"&gt;resolver&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;SimpleResolver&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;127.0.0.1&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;resolver&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setTCP&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;resolver&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setPort&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8053&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;resolver&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setTSIGKey&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+
+        &lt;span class="n"&gt;Message&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;resolver&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;send&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+
+        &lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;out&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;println&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;};&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;编译运行&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; javac -cp dnsjava-2.1.3.jar DNSUpdate.java
+&lt;span class="gp"&gt;$&lt;/span&gt; java -cp .:dnsjava-2.1.3.jar DNSUpdate
+&lt;span class="go"&gt;;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: UPDATE, status: NOERROR, id: 54821
+;; flags: qr ; qd: 1 an: 0 au: 0 ad: 1
+;; TSIG ok
+;; ZONE:
+;;      example.com., type = SOA, class = IN
+
+;; PREREQUISITES:
+
+;; UPDATE RECORDS:
+
+;; ADDITIONAL RECORDS:
+user.                   0       ANY     TSIG    hmac-sha512. 1344326060 300 64 YmqR2FI00zkP+K8oikeip7QM+QSZgAJg/b+vCCFi18AFFarRdOrkNSRNouPMGec9qUko0Gf6AywU2W7YXsKUtA== NOERROR 0
+
+;; Message size: 138 bytes&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="master-slave"&gt;
+&lt;h2&gt;Master/Slave&lt;/h2&gt;
+&lt;p&gt;修改zone的设置，添加 &lt;code&gt;allow-transfer&lt;/code&gt; 和 &lt;code&gt;also-notify&lt;/code&gt; 。&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+zone &amp;quot;example.com.&amp;quot; {
+        type            master;
+        file            &amp;quot;example.com&amp;quot;;
+
+        allow-update    { key local-ddns; };
+        allow-transfer  { 127.0.0.1; };
+        also-notify     { 127.0.0.1 port 8153; };
+};
+&lt;/pre&gt;
+&lt;p&gt;slave的配置，只要把zone的 &lt;code&gt;masters&lt;/code&gt; 设置好就可以了。&lt;/p&gt;
+&lt;pre class="code bash literal-block"&gt;
+&lt;span class="c"&gt;#!/usr/bin/env bash
+&lt;/span&gt;
+&lt;span class="nv"&gt;ROOT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;$(pwd)&amp;quot;&lt;/span&gt;
+
+mkdir -p &lt;span class="s2"&gt;&amp;quot;${ROOT}/slave-keys&amp;quot;&lt;/span&gt;
+mkdir -p &lt;span class="s2"&gt;&amp;quot;${ROOT}/slave-zones&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; ! -e &lt;span class="s2"&gt;&amp;quot;slave.conf&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;; &lt;span class="k"&gt;then
+
+&lt;/span&gt;cat &amp;gt;&lt;span class="s2"&gt;&amp;quot;slave.conf&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;&amp;lt; EOF
+options {
+        listen-on               port 8153       { 127.0.0.1; };
+        directory               &amp;quot;${ROOT}/slave-zones&amp;quot;;
+        pid-file                &amp;quot;${ROOT}/slave.pid&amp;quot;;
+        session-keyfile         &amp;quot;${ROOT}/slave.session.key&amp;quot;;
+        managed-keys-directory  &amp;quot;${ROOT}/slave-keys&amp;quot;;
+
+        allow-query             { 127.0.0.1; };
+        recursion               no;
+};
+
+controls {};
+
+zone &amp;quot;example.com.&amp;quot; {
+        type    slave;
+        masters { 127.0.0.1 port 8053; };
+};
+EOF&lt;/span&gt;
+
+&lt;span class="k"&gt;fi
+
+&lt;/span&gt;named -c slave.conf -g
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dnssec"&gt;
+&lt;h2&gt;DNSSEC&lt;/h2&gt;
+&lt;p&gt;在zones目录下，生成ZSK&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; dnssec-keygen -a rsasha512 -b 1024 -n ZONE example.com.
+&lt;span class="go"&gt;Generating key pair......................++++++ ...............++++++
+Kexample.com.+010+41861&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;生成KSK&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; dnssec-keygen -a rsasha512 -b 1024 -n ZONE -f KSK example.com.
+&lt;span class="go"&gt;Generating key pair.........................++++++ .....................................++++++
+Kexample.com.+010+49764&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;修改 &lt;code&gt;example.com&lt;/code&gt; ，在最后添加两行&lt;/p&gt;
+&lt;pre class="code text literal-block"&gt;
+$INCLUDE &amp;quot;Kexample.com.+010+41861.key&amp;quot;
+$INCLUDE &amp;quot;Kexample.com.+010+49764.key&amp;quot;
+&lt;/pre&gt;
+&lt;p&gt;签名zone&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; dnssec-signzone example.com
+&lt;span class="go"&gt;Verifying the zone using the following algorithms: RSASHA512.
+Zone signing complete:
+Algorithm: RSASHA512: KSKs: 1 active, 0 stand-by, 0 revoked
+                      ZSKs: 1 active, 0 stand-by, 0 revoked
+example.com.signed&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;修改 &lt;code&gt;named.conf&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+zone &amp;quot;example.com.&amp;quot; {
+        type            master;
+        file            &amp;quot;example.com.signed&amp;quot;;
+};
+&lt;/pre&gt;
+&lt;p&gt;在options加上&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+dnssec-enable           yes;
+&lt;/pre&gt;
+&lt;p&gt;启动bind，查看DNSKEY&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; dig -p 8053 &amp;#64;localhost  +multi +noall +answer DNSKEY example.com.
+&lt;span class="go"&gt;example.com.            300 IN DNSKEY 256 3 10 (
+                                AwEAAbexLhdu6Fk91XVCZlXPuJUD4BfigFUFhEkijwrF
+                                CF6KCAuixIt4tob2l4yTw/txAbGuzNz5t4oI/GUifniJ
+                                oQO5WLn18YnhPtQ/TLgyDfTB01IAqK1AMNJ4bHINEn4V
+                                gh3q4V41xgh8GMdYN5LsD5qUKUpoy8hMLRSGSK6VVr6v
+                                ) ; key id = 41861
+example.com.            300 IN DNSKEY 257 3 10 (
+                                AwEAAboBxp1wNbmxhINtxORCNfwQQaZ3QlTtlxfV+jCR
+                                Y5R44ri1ygI5kZEToqiB7W6nnxbUi9T5HRGmJmprl7Qa
+                                pEzw4S8YaUXCdYAPy8tNFHMSsrj2d72r2gR2DSBp4C5Z
+                                D5XGdk9kV6GSbCl0DMd0nzabSLMVw/A8N7l9cVU+MVez
+                                ) ; key id = 49764&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;建立 &lt;code&gt;trusted-key.key&lt;/code&gt; 文件&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+example.com.            300 IN DNSKEY 257 3 10 AwEAAboBxp1wNbmxhINtxORCNfwQQaZ3QlTtlxfV+jCRY5R44ri1ygI5kZEToqiB7W6nnxbUi9T5HRGmJmprl7QapEzw4S8YaUXCdYAPy8tNFHMSsrj2d72r2gR2DSBp4C5ZD5XGdk9kV6GSbCl0DMd0nzabSLMVw/A8N7l9cVU+MVez
+&lt;/pre&gt;
+&lt;p&gt;用 &lt;code&gt;dig&lt;/code&gt; 来验证&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; dig -p 8053 &amp;#64;localhost A example.com. +sigchase +trusted-key&lt;span class="o"&gt;=&lt;/span&gt;trusted-key.key
+&lt;span class="go"&gt;;; RRset to chase:
+example.com.            300     IN      A       127.0.0.1
+
+
+;; RRSIG of the RRset to chase:
+example.com.            300     IN      RRSIG   A 10 2 300 20120909052125 20120810052125 41861 example.com. A5raSwawZlfWejUvvWG+DYTiAMhbWyTXyScEYNxJxSyOrzZGLD4gGlFI RGmt91nmyw2+f2sHHqlRtvEmcxzFydTwZJs0lTdkQ3PODov4btEah52N aJGADObHaIAqZYcvYPlIpDDcZNIDQxbJbQyI6+JmWoFJN4QwyqXLn9dr LTU=
+
+
+
+Launch a query to find a RRset of type DNSKEY for zone: example.com.
+
+;; DNSKEYset that signs the RRset to chase:
+example.com.            300     IN      DNSKEY  256 3 10 AwEAAbexLhdu6Fk91XVCZlXPuJUD4BfigFUFhEkijwrFCF6KCAuixIt4 tob2l4yTw/txAbGuzNz5t4oI/GUifniJoQO5WLn18YnhPtQ/TLgyDfTB 01IAqK1AMNJ4bHINEn4Vgh3q4V41xgh8GMdYN5LsD5qUKUpoy8hMLRSG SK6VVr6v
+example.com.            300     IN      DNSKEY  257 3 10 AwEAAboBxp1wNbmxhINtxORCNfwQQaZ3QlTtlxfV+jCRY5R44ri1ygI5 kZEToqiB7W6nnxbUi9T5HRGmJmprl7QapEzw4S8YaUXCdYAPy8tNFHMS srj2d72r2gR2DSBp4C5ZD5XGdk9kV6GSbCl0DMd0nzabSLMVw/A8N7l9 cVU+MVez
+
+
+;; RRSIG of the DNSKEYset that signs the RRset to chase:
+example.com.            300     IN      RRSIG   DNSKEY 10 2 300 20120909052125 20120810052125 41861 example.com. KEAnlTPJsxS1lg4vJv3MdblH9LgPq5Mcv5uxhjnujHiyJkPw9kl57lcp GyFOZcWcE226fBoM+YkzHhziiPmTnjxZBWK9unnsyBgfsGy+t6YlvorQ XB60O0AAgrbDouWg9HO3wpYjILXK37w/J+MkCYXPpj1o5+OU5Adtl/LK HJQ=
+example.com.            300     IN      RRSIG   DNSKEY 10 2 300 20120909052125 20120810052125 49764 example.com. V1fqbwK/USLsnHN2Q6tgN4mFMZtaEjtbhkSzUCPDq6TFsOEClHF09Do7 0mEDQCqW+r1DljpAPVzHBHzzKz5DAMLApn+qVeE+NaD0/WvMeh5nyvMQ 8jQ0102M7i9bVuRvnfSKRU74UxWD71Py6AS6wyg26KBgP9RIs4f5UEeN lPc=
+
+
+
+Launch a query to find a RRset of type DS for zone: example.com.
+;; NO ANSWERS: no more
+
+;; WARNING There is no DS for the zone: example.com.
+
+
+
+;; WE HAVE MATERIAL, WE NOW DO VALIDATION
+;; VERIFYING A RRset for example.com. with DNSKEY:41861: success
+;; OK We found DNSKEY (or more) to validate the RRset
+;; Ok, find a Trusted Key in the DNSKEY RRset: 49764
+;; VERIFYING DNSKEY RRset for example.com. with DNSKEY:49764: success
+
+;; Ok this DNSKEY is a Trusted Key, DNSSEC validation is ok: SUCCESS&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="recursive-resolver"&gt;
+&lt;h2&gt;recursive resolver&lt;/h2&gt;
+&lt;p&gt;建立 &lt;code&gt;trusted-keys&lt;/code&gt; 文件&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+trusted-keys {
+example.com.            257 3 10 &amp;quot;AwEAAboBxp1wNbmxhINtxORCNfwQQaZ3QlTtlxfV+jCRY5R44ri1ygI5kZEToqiB7W6nnxbUi9T5HRGmJmprl7QapEzw4S8YaUXCdYAPy8tNFHMSsrj2d72r2gR2DSBp4C5ZD5XGdk9kV6GSbCl0DMd0nzabSLMVw/A8N7l9cVU+MVez&amp;quot;;
+};
+&lt;/pre&gt;
+&lt;div class="section" id="bind"&gt;
+&lt;h3&gt;bind&lt;/h3&gt;
+&lt;p&gt;启动bind作为recursive resolver&lt;/p&gt;
+&lt;pre class="code bash literal-block"&gt;
+&lt;span class="c"&gt;#!/usr/bin/env bash
+&lt;/span&gt;
+&lt;span class="nv"&gt;ROOT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;$(pwd)&amp;quot;&lt;/span&gt;
+
+mkdir -p &lt;span class="s2"&gt;&amp;quot;${ROOT}/recursive-keys&amp;quot;&lt;/span&gt;
+mkdir -p &lt;span class="s2"&gt;&amp;quot;${ROOT}/recursive-zones&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; ! -e &lt;span class="s2"&gt;&amp;quot;recursive.conf&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;; &lt;span class="k"&gt;then
+
+&lt;/span&gt;cat &amp;gt;&lt;span class="s2"&gt;&amp;quot;recursive.conf&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;&amp;lt; EOF
+options {
+        listen-on               port 8253       { 127.0.0.1; };
+        directory               &amp;quot;${ROOT}/recursive-zones&amp;quot;;
+        pid-file                &amp;quot;${ROOT}/recursive.pid&amp;quot;;
+        session-keyfile         &amp;quot;${ROOT}/recursive.session.key&amp;quot;;
+        managed-keys-directory  &amp;quot;${ROOT}/recursive-keys&amp;quot;;
+
+        allow-query             { 127.0.0.1; };
+        recursion               yes;
+        dnssec-validation       yes;
+        forwarders { 127.0.0.1 port 8053; };
+};
+
+controls {};
+
+include &amp;quot;${ROOT}/trusted-keys&amp;quot;;
+EOF&lt;/span&gt;
+
+&lt;span class="k"&gt;fi
+
+&lt;/span&gt;named -c recursive.conf -g
+&lt;/pre&gt;
+&lt;p&gt;使用 &lt;code&gt;dig&lt;/code&gt; 查看结果&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; dig -p 8253 &amp;#64;localhost example.com. +dnssec
+&lt;span class="go"&gt;
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.8.2-RedHat-9.8.2-1.fc16 &amp;lt;&amp;lt;&amp;gt;&amp;gt; -p 8253 &amp;#64;localhost example.com. +dnssec
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 29620
+;; flags: qr rd ra ad; QUERY: 1, ANSWER: 2, AUTHORITY: 2, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags: do; udp: 4096
+;; QUESTION SECTION:
+;example.com.                   IN      A
+
+;; ANSWER SECTION:
+example.com.            78      IN      A       127.0.0.1
+example.com.            78      IN      RRSIG   A 10 2 300 20120909052125 20120810052125 41861 example.com. A5raSwawZlfWejUvvWG+DYTiAMhbWyTXyScEYNxJxSyOrzZGLD4gGlFI RGmt91nmyw2+f2sHHqlRtvEmcxzFydTwZJs0lTdkQ3PODov4btEah52N aJGADObHaIAqZYcvYPlIpDDcZNIDQxbJbQyI6+JmWoFJN4QwyqXLn9dr LTU=
+
+;; AUTHORITY SECTION:
+example.com.            78      IN      NS      ns.example.com.
+example.com.            78      IN      RRSIG   NS 10 2 300 20120909052125 20120810052125 41861 example.com. JMTkJtNQ75fRhHY+QgMqkVChHKAOiV+tnG3YiEKEBVmgBoslNaCdTFvw PJXfxCh776Nl+o5xbNkA6nZNcAA6UlM8/v9piK5+K1as7n5MJTiIDacC KiHYIwZvBrs8F3OVybXV+rTshFz4t19NNx8snJD9yP+UJLjmxV3Ej0OP QKo=
+
+;; Query time: 1 msec
+;; SERVER: 127.0.0.1#8253(127.0.0.1)
+;; WHEN: Fri Aug 10 15:39:16 2012
+;; MSG SIZE  rcvd: 415&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="unbound"&gt;
+&lt;h3&gt;unbound&lt;/h3&gt;
+&lt;p&gt;启动unbound作为recursive resolver&lt;/p&gt;
+&lt;pre class="code bash literal-block"&gt;
+&lt;span class="c"&gt;#!/usr/bin/env bash
+&lt;/span&gt;
+&lt;span class="nv"&gt;ROOT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;$(pwd)&amp;quot;&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; ! -e &lt;span class="s2"&gt;&amp;quot;unbound.conf&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;; &lt;span class="k"&gt;then
+
+&lt;/span&gt;cat &amp;gt;&lt;span class="s2"&gt;&amp;quot;unbound.conf&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;&amp;lt; EOF
+server:
+    num-threads: 1
+    port: 8353
+    directory: &amp;quot;${ROOT}&amp;quot;
+    trusted-keys-file: &amp;quot;${ROOT}/trusted-keys&amp;quot;
+    pidfile: &amp;quot;${ROOT}/unbound.pid&amp;quot;
+    verbosity: 1
+    use-syslog: no
+    do-daemonize: no
+    username: &amp;quot;$(whoami)&amp;quot;
+    do-not-query-localhost: no
+
+
+forward-zone:
+    name: &amp;quot;example.com.&amp;quot;
+    forward-addr: 127.0.0.1&amp;#64;8053
+EOF&lt;/span&gt;
+
+&lt;span class="k"&gt;fi
+
+&lt;/span&gt;unbound -c unbound.conf
+&lt;/pre&gt;
+&lt;p&gt;使用 &lt;code&gt;dig&lt;/code&gt; 查看结果&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; dig -p 8353 &amp;#64;localhost example.com. +dnssec
+&lt;span class="go"&gt;
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.8.2-RedHat-9.8.2-1.fc16 &amp;lt;&amp;lt;&amp;gt;&amp;gt; -p 8353 &amp;#64;localhost example.com. +dnssec
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 28672
+;; flags: qr rd ra ad; QUERY: 1, ANSWER: 2, AUTHORITY: 2, ADDITIONAL: 3
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags: do; udp: 4096
+;; QUESTION SECTION:
+;example.com.                   IN      A
+
+;; ANSWER SECTION:
+example.com.            300     IN      A       127.0.0.1
+example.com.            300     IN      RRSIG   A 10 2 300 20120909052125 20120810052125 41861 example.com. A5raSwawZlfWejUvvWG+DYTiAMhbWyTXyScEYNxJxSyOrzZGLD4gGlFI RGmt91nmyw2+f2sHHqlRtvEmcxzFydTwZJs0lTdkQ3PODov4btEah52N aJGADObHaIAqZYcvYPlIpDDcZNIDQxbJbQyI6+JmWoFJN4QwyqXLn9dr LTU=
+
+;; AUTHORITY SECTION:
+example.com.            300     IN      NS      ns.example.com.
+example.com.            300     IN      RRSIG   NS 10 2 300 20120909052125 20120810052125 41861 example.com. JMTkJtNQ75fRhHY+QgMqkVChHKAOiV+tnG3YiEKEBVmgBoslNaCdTFvw PJXfxCh776Nl+o5xbNkA6nZNcAA6UlM8/v9piK5+K1as7n5MJTiIDacC KiHYIwZvBrs8F3OVybXV+rTshFz4t19NNx8snJD9yP+UJLjmxV3Ej0OP QKo=
+
+;; ADDITIONAL SECTION:
+ns.example.com.         300     IN      A       127.0.0.1
+ns.example.com.         300     IN      RRSIG   A 10 3 300 20120909052125 20120810052125 41861 example.com. MgDjvx9Xmfg/p872Im2QhRgehKZi8yKr8E8dfueT+uhfp5KCx0g6pIX4 5VLJO/lYmdaG+vRQyj0FLTLntDIM9G/5rlKp9CISH4yD6nsyfQI63FM1 lwDM29fytCilHXvgWb64jbGf/lHxuKsaZjsvaJyRZeWyEzpFKNq8BB5v RHI=
+
+;; Query time: 1 msec
+;; SERVER: 127.0.0.1#8353(127.0.0.1)
+;; WHEN: Fri Aug 10 15:48:40 2012
+;; MSG SIZE  rcvd: 602&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="sshfp"&gt;
+&lt;h2&gt;SSHFP&lt;/h2&gt;
+&lt;p&gt;生成SSH密钥对&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; ssh-keygen -q -N &lt;span class="s1"&gt;''&lt;/span&gt; -f id_rsa
+&lt;/pre&gt;
+&lt;p&gt;转换成SSHFP记录，并把这行添加到 &lt;code&gt;zones/example.com&lt;/code&gt; 里&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; ssh-keygen -r example.com. -f id_rsa.pub
+&lt;span class="go"&gt;example.com. IN SSHFP 1 1 5727cac5dcca0d87c2b74f33e6e6106f09a03d27&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;SSH客户端使用的 &lt;code&gt;config&lt;/code&gt; 文件&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+Host example.com
+    Port 8022
+    VerifyHostKeyDNS yes
+    StrictHostKeyChecking ask
+&lt;/pre&gt;
+&lt;p&gt;运行一个临时的SSH Server&lt;/p&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="c"&gt;#!/usr/bin/env python2&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;twisted.python&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;log&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;startLogging&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;twisted.internet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;reactor&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;twisted.conch.ssh&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;factory&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;twisted.conch.ssh&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;keys&lt;/span&gt;
+
+&lt;span class="n"&gt;SSHD_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'id_rsa'&lt;/span&gt;
+
+&lt;span class="n"&gt;PUBLIC_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fromFile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SSHD_KEY&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;PRIVATE_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fromFile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SSHD_KEY&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;SSH_TYPE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PUBLIC_KEY&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sshType&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;FINGERPRINT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PUBLIC_KEY&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fingerprint&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SSHFactory&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;factory&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SSHFactory&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;publicKeys&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;SSH_TYPE&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;PUBLIC_KEY&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;privateKeys&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;SSH_TYPE&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;PRIVATE_KEY&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+
+&lt;span class="n"&gt;reactor&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;listenTCP&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8022&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;SSHFactory&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="n"&gt;reactor&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;劫持SSH客户端的DNS请求，将其发往8253端口&lt;/p&gt;
+&lt;pre class="code c literal-block"&gt;
+&lt;span class="cp"&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;netdb.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdint.h&amp;gt;
+#define __USE_GNU
+#include &amp;lt;dlfcn.h&amp;gt;
+&lt;/span&gt;
+
+&lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;in_port_t&lt;/span&gt; &lt;span class="n"&gt;sendto_port&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;in_addr_t&lt;/span&gt; &lt;span class="n"&gt;sendto_addr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;INADDR_NONE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;sockfd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;sockaddr&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;addr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;socklen_t&lt;/span&gt; &lt;span class="n"&gt;addrlen&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_connect&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;sockfd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;sockaddr&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;addr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;socklen_t&lt;/span&gt; &lt;span class="n"&gt;addrlen&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;_connect&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;_connect&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dlsym&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;RTLD_NEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;connect&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;sockaddr_in&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;addr_in&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;sockaddr_in&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;addr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ntohs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;addr_in&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;sin_port&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;53&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;_connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sockfd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;addr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;addrlen&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+  &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;sockaddr_in&lt;/span&gt; &lt;span class="n"&gt;new_addr_in&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sin_family&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;addr_in&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;sin_family&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sin_port&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;htons&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8253&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sin_addr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s_addr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;htonl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;INADDR_LOOPBACK&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sin_zero&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+  &lt;span class="p"&gt;};&lt;/span&gt;
+
+  &lt;span class="n"&gt;sendto_addr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;addr_in&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;sin_addr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s_addr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;sendto_port&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;addr_in&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;sin_port&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;_connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sockfd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;sockaddr&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;new_addr_in&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;sizeof&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new_addr_in&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kt"&gt;ssize_t&lt;/span&gt; &lt;span class="nf"&gt;recvfrom&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;sockfd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;size_t&lt;/span&gt; &lt;span class="n"&gt;len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;flags&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;sockaddr&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;src_addr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;socklen_t&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;addrlen&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;ssize_t&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;_recvfrom&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;sockfd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;size_t&lt;/span&gt; &lt;span class="n"&gt;len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;flags&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;sockaddr&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;src_addr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;socklen_t&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;addrlen&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;_recvfrom&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;_recvfrom&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dlsym&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;RTLD_NEXT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;recvfrom&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+  &lt;span class="kt"&gt;ssize_t&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;_recvfrom&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sockfd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;flags&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;src_addr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;addrlen&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;sockaddr_in&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;src_addr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;sin_addr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s_addr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sendto_addr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;sockaddr_in&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;src_addr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;sin_port&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sendto_port&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;编译，通过 &lt;code&gt;LD_PRELOAD&lt;/code&gt; 运行SSH客户端&lt;/p&gt;
+&lt;pre class="code console literal-block"&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nv"&gt;LD_PRELOAD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;$(pwd)/hook.so&amp;quot;&lt;/span&gt; ssh -v -i id_rsa -F config example.com
+&lt;span class="go"&gt;OpenSSH_5.8p2, OpenSSL 1.0.0i-fips 19 Apr 2012
+debug1: Reading configuration data config
+debug1: Applying options for example.com
+debug1: Connecting to example.com [127.0.0.1] port 8022.
+debug1: Connection established.
+debug1: identity file id_rsa type 1
+debug1: identity file id_rsa-cert type -1
+debug1: Remote protocol version 2.0, remote software version Twisted
+debug1: no match: Twisted
+debug1: Enabling compatibility mode for protocol 2.0
+debug1: Local version string SSH-2.0-OpenSSH_5.8
+debug1: SSH2_MSG_KEXINIT sent
+debug1: SSH2_MSG_KEXINIT received
+debug1: kex: server-&amp;gt;client aes128-ctr hmac-md5 none
+debug1: kex: client-&amp;gt;server aes128-ctr hmac-md5 none
+debug1: sending SSH2_MSG_KEXDH_INIT
+debug1: expecting SSH2_MSG_KEXDH_REPLY
+debug1: Server host key: RSA c4:04:b5:ef:1f:d3:0b:9a:44:13:a3:4e:e8:69:20:f2
+debug1: found 1 secure fingerprints in DNS
+debug1: matching host key fingerprint found in DNS
+debug1: ssh_rsa_verify: signature correct
+debug1: SSH2_MSG_NEWKEYS sent
+debug1: expecting SSH2_MSG_NEWKEYS
+debug1: SSH2_MSG_NEWKEYS received
+debug1: Roaming not allowed by server
+debug1: SSH2_MSG_SERVICE_REQUEST sent
+Connection closed by 127.0.0.1&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;现在就不再提示需要确认服务端公钥了&lt;/p&gt;
+&lt;/div&gt;
 </summary></entry><entry><title>Python代码阅读基础</title><link href="http://bhuztez.github.io/2012/python-code-reading-101.html" rel="alternate"></link><updated>2012-06-06T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2012-06-06:2012/python-code-reading-101.html</id><summary type="html">&lt;p&gt;在阅读Python代码的时候，别忘了Python标准库里几个比较有用的库， &lt;code&gt;pdb&lt;/code&gt; 、 &lt;code&gt;ast&lt;/code&gt; 和 &lt;code&gt;code&lt;/code&gt; 。 &lt;code&gt;pdb&lt;/code&gt; 用来调试， &lt;code&gt;ast&lt;/code&gt; 用来解析Python代码， &lt;code&gt;code&lt;/code&gt; 直接能给你一个 &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop"&gt;REPL&lt;/a&gt; 。&lt;/p&gt;
 &lt;!-- more --&gt;
 &lt;p&gt;比如，阅读 &lt;code&gt;nova-api&lt;/code&gt; 的代码，并不关心URL Routing是怎么实现的，想知道的只是URL和相应处理代码的对应关系。把 &lt;code&gt;nova-api&lt;/code&gt; 最后两行代码换成下面这两行。&lt;/p&gt;

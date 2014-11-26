@@ -12,8 +12,8 @@
 <body>
     <header>
         <nav>            <li class="selected"><a href="http://bhuztez.github.io/">Home</a></li>
-            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
             <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
         </nav>
         <div class="header_box">
             <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
@@ -61,6 +61,17 @@
                     <a href="http://bhuztez.github.io/2013/compiling-swt-application-with-gcj.html" rel="bookmark" title="Permanent Link to &quot;用gcj编译SWT程序&quot;">用gcj编译SWT程序</a>
                 </h2>
 <p>很久之前编译成功过一次，忘了记下编译用的参数，之后就再也想不起来了。现在重新编译一次，把用到的参数记录一下。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Aug 06, 2012</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2012/dns.html" rel="bookmark" title="Permanent Link to &quot;DNS基本配置&quot;">DNS基本配置</a>
+                </h2>
+<p>因为DNSSEC和SSHFP配置步骤还是有点多的，在这里记录一下</p>
 <div class="clear"></div>
                 <div class="info">
                 </div>
@@ -137,19 +148,13 @@
                 </div>
 
             </article>
-            <div class="clear"></div>            <h4 class="date">Nov 06, 2008</h4>
-            <article class="post">
-<h2 class="title">
-                    <a href="http://bhuztez.github.io/2008/pppd-plugin.html" rel="bookmark" title="Permanent Link to &quot;pppd插件编写&quot;">pppd插件编写</a>
-                </h2>
-<p>先 <code>yum install ppp-devel</code> ，接着就可以在代码中使用 <code>#include &lt;pppd/pppd.h&gt;</code> 和 <code>char pppd_version[] = VERSION;</code> 以确保plugin能被pppd使用。</p>
-<p>pap_passwd_hook被调用的过程还是很令人困惑的。首先，第一次被调用的时候，参数user是有分配空间的，为了让pap_passwd_hook被调用，是不能传入password的，导致第一次被调用的时候，参数passwd没有被分配空间，是NULL。若第一次修改了用户名，第二次调用的时候会传入修改过的用户名，而第二次passwd被分配了空间，此时可以strcpy。</p>
-<div class="clear"></div>
-                <div class="info">
+            <div class="clear"></div>
+                <div class="clear"></div>
+                <div class="pages">
+                    <a href="http://bhuztez.github.io/index2.html" class="next_page">Next&nbsp;&rarr;</a>
+                    <span>Page 1 of 2</span>
                 </div>
 
-            </article>
-            <div class="clear"></div>
             <div class="clear"></div>
             <footer>
                 <p>

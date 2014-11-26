@@ -21,12 +21,24 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content"><h1>Archives for 2009</h1>
+        <div id="content">            <h4 class="date">Nov 06, 2008</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2008/pppd-plugin.html" rel="bookmark" title="Permanent Link to &quot;pppd插件编写&quot;">pppd插件编写</a>
+                </h2>
+<p>先 <code>yum install ppp-devel</code> ，接着就可以在代码中使用 <code>#include &lt;pppd/pppd.h&gt;</code> 和 <code>char pppd_version[] = VERSION;</code> 以确保plugin能被pppd使用。</p>
+<p>pap_passwd_hook被调用的过程还是很令人困惑的。首先，第一次被调用的时候，参数user是有分配空间的，为了让pap_passwd_hook被调用，是不能传入password的，导致第一次被调用的时候，参数passwd没有被分配空间，是NULL。若第一次修改了用户名，第二次调用的时候会传入修改过的用户名，而第二次passwd被分配了空间，此时可以strcpy。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
 
-<dl>
-    <dt>2009-04-12</dt>
-    <dd><a href="http://bhuztez.github.io/2009/compiling-systemc.html">编译SystemC 2.2.0的问题</a></dd>
-</dl>
+            </article>
+            <div class="clear"></div>
+                <div class="clear"></div>
+                <div class="pages">
+                    <a href="http://bhuztez.github.io/index.html" class="prev_page">&larr;&nbsp;Previous</a>
+                    <span>Page 2 of 2</span>
+                </div>
 
             <div class="clear"></div>
             <footer>
