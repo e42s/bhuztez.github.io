@@ -18,4 +18,7 @@
 {% block title %}{{ SITENAME }} &middot; {{ article.title }}{% endblock %}
 {% block content %}
 {% include "article_stub.html" %}
+{% if DISQUS_SITENAME %}
+{% include 'disqus.html' %}
+{% endif %}
 {% endblock %}
