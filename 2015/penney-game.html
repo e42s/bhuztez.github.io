@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+      <meta charset="utf-8" />
+    <title>C-c C-k &middot; Penney's game</title>
+    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
+    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+
+
+
+</head>
+<body>
+    <header>
+        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
+            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        </nav>
+        <div class="header_box">
+            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h2>to impress your cat</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Feb 26, 2015</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2015/penney-game.html" rel="bookmark" title="Permanent Link to &quot;Penney's game&quot;">Penney's game</a>
+                </h2>
+<p>Penney's game 是个很简单的问题。可是网络上能找到的答案，要么到状态转移图就完了，要么就跳过中间步骤直接出答案了。</p>
+<!-- more -->
+<p>解这个问题，分析一下状态转移的情况，接着直接计算 <span class="formula"><i>P</i>⋅<span class="limits"><span class="limit">lim</span></span><sub><i>n</i> → ∞</sub><i>M</i><sup><i>n</i></sup></span>
+ 就可以了。其中，P是初始概率 <span class="formula">[1, 0, 0, ..., 0]</span>
+ 。M 是状态转移矩阵。把终止状态排在最后，可以观察到，终止状态对应的几个横行，左边都是零，最右边是个单位矩阵 <span class="formula"><span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>A</i>
+</span>
+<span class="arraycell align-c">
+<i>B</i>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>O</i>
+</span>
+<span class="arraycell align-c">
+<i>I</i>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span></span>
+ 。不妨令 <span class="formula"><i>M</i><sup><i>n</i></sup> = <span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>A</i><sub><i>n</i></sub>
+</span>
+<span class="arraycell align-c">
+<i>B</i><sub><i>n</i></sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>O</i>
+</span>
+<span class="arraycell align-c">
+<i>I</i>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span></span>
+ 有</p>
+<div class="formula">
+<span class="environment"><span class="arrayrow">
+<span class="arraycell align-r">
+<span class="array"><span class="arrayrow">
+<span class="arraycell align-l">
+<i>M</i><sup><i>n</i></sup>
+</span>
+<span class="arraycell align-c">
+ = 
+</span>
+<span class="arraycell align-l">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>A</i><sub><i>n</i></sub>
+</span>
+<span class="arraycell align-c">
+<i>B</i><sub><i>n</i></sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>O</i>
+</span>
+<span class="arraycell align-c">
+<i>I</i>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+
+</span>
+<span class="arraycell align-c">
+ = 
+</span>
+<span class="arraycell align-l">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>A</i><sub><i>n</i> − 1</sub>
+</span>
+<span class="arraycell align-c">
+<i>B</i><sub><i>n</i> − 1</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>O</i>
+</span>
+<span class="arraycell align-c">
+<i>I</i>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>A</i>
+</span>
+<span class="arraycell align-c">
+<i>B</i>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>O</i>
+</span>
+<span class="arraycell align-c">
+<i>I</i>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+
+</span>
+<span class="arraycell align-c">
+ = 
+</span>
+<span class="arraycell align-l">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>A</i><sub><i>n</i> − 1</sub>⋅<i>A</i>
+</span>
+<span class="arraycell align-c">
+<i>A</i><sub><i>n</i> − 1</sub>⋅<i>B</i> + <i>B</i><sub><i>n</i> − 1</sub>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>O</i>
+</span>
+<span class="arraycell align-c">
+<i>I</i>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-l">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-l">
+
+</span>
+<span class="arraycell align-c">
+ = 
+</span>
+<span class="arraycell align-l">
+<span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
+<span class="arraycell align-c">
+<i>A</i><sup><i>n</i></sup>
+</span>
+<span class="arraycell align-c">
+(<span class="limits"><sup class="limit"><i>n</i> − 1</sup><span class="limit"><span class="symbol">∑</span></span><sub class="limit"><i>i</i> = 0</sub></span><i>A</i><sup><i>i</i></sup>)⋅<i>B</i>
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+ 
+</span>
+<span class="arraycell align-c">
+ 
+</span>
+
+</span>
+<span class="arrayrow">
+<span class="arraycell align-c">
+<i>O</i>
+</span>
+<span class="arraycell align-c">
+<i>I</i>
+</span>
+
+</span>
+</span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>
+</span>
+
+</span>
+</span>
+</span>
+
+</span>
+</span>
+</div>
+<p>因为最终都是会进入终止状态的，所以 <span class="formula"><span class="limits"><span class="limit">lim</span></span><sub><i>n</i> → ∞</sub><i>A</i><sup><i>n</i></sup> = <i>O</i></span>
+ ，而 <span class="formula">(<i>I</i> − <i>A</i>)⋅(<span class="limits"><span class="limit"><span class="symbol">∑</span></span></span><span class="scripts"><sup class="script"><i>n</i> − 1</sup><sub class="script"><i>i</i> = 0</sub></span><i>A</i><sup><i>i</i></sup>) = <i>I</i> − <i>A</i><sup><i>n</i></sup></span>
+ 。于是， <span class="formula"><span class="limits"><span class="limit">lim</span></span><sub><i>n</i> → ∞</sub>(<i>I</i> − <i>A</i>)⋅(<span class="limits"><span class="limit"><span class="symbol">∑</span></span></span><span class="scripts"><sup class="script"><i>n</i> − 1</sup><sub class="script"><i>i</i> = 0</sub></span><i>A</i><sup><i>i</i></sup>) = <i>I</i></span>
+ 。因此这就相当于要求出 <span class="formula">(<i>I</i> − <i>A</i>)<sup> − 1</sup>⋅<i>B</i></span>
+ 。</p>
+<p>用J语言一行代码就可以了</p>
+<pre class="code literal-block">
+   solve=:];&amp;&gt;{.&#64;:(-&#64;:#&#64;:]([({.&quot;0 1%.(=&#64;i.&#64;:#-])&#64;:(}.&quot;0 1))}.)+/&#64;:(3 :'({.&quot;1 y)(;/}.&quot;1 y)}0$~(,])#y'&amp;]&quot;2)&#64;:(2 0 1|:(((,1&amp;-)&#64;:[,&quot;1 2])(i.&#64;:#,:&quot;0 1])&#64;:(((('HT',~&amp;.&gt;&quot;1 0]),[,.[)(1 i:~(]-:({.~-&#64;:#))&amp;&gt;)&quot;0 1,~)([:(([:/:#&amp;&gt;){])'';#}.~.&#64;:(,;&#64;:(&lt;\&amp;.&gt;)))))))
+   1r2 solve 'HHT';'HTT'
+┌───┬───┐
+│HHT│2r3│
+├───┼───┤
+│HTT│1r3│
+└───┴───┘
+</pre>
+<p>假如你阅读上面这行代码有困难，可以看下面的解释</p>
+<pre class="code literal-block">
+   NB. 求一个序列的中间状态
+   &lt;\ 'HHT'
+┌─┬──┬───┐
+│H│HH│HHT│
+└─┴──┴───┘
+   NB. 对每个序列分别求中间状态
+   &lt;\&amp;.&gt; 'HHT';'HTT'
+┌──────────┬──────────┐
+│┌─┬──┬───┐│┌─┬──┬───┐│
+││H│HH│HHT│││H│HT│HTT││
+│└─┴──┴───┘│└─┴──┴───┘│
+└──────────┴──────────┘
+   NB. 把结果拼到一起
+   ; &lt;\&amp;.&gt; 'HHT';'HTT'
+┌─┬──┬───┬─┬──┬───┐
+│H│HH│HHT│H│HT│HTT│
+└─┴──┴───┴─┴──┴───┘
+   NB. 把终止状态放最前面
+   (, ;&#64;:(&lt;\&amp;.&gt;)) 'HHT';'HTT'
+┌───┬───┬─┬──┬───┬─┬──┬───┐
+│HHT│HTT│H│HH│HHT│H│HT│HTT│
+└───┴───┴─┴──┴───┴─┴──┴───┘
+   NB. 去重
+   ~. (, ;&#64;:(&lt;\&amp;.&gt;)) 'HHT';'HTT'
+┌───┬───┬─┬──┬──┐
+│HHT│HTT│H│HH│HT│
+└───┴───┴─┴──┴──┘
+   NB. 把最前面的终止状态去掉
+   (# }. ~.&#64;:(, ;&#64;:(&lt;\&amp;.&gt;))) 'HHT';'HTT'
+┌─┬──┬──┐
+│H│HH│HT│
+└─┴──┴──┘
+   NB. 再把起始状态补上
+   ('' ; # }. ~.&#64;:(, ;&#64;:(&lt;\&amp;.&gt;))) 'HHT';'HTT'
+┌┬─┬──┬──┐
+││H│HH│HT│
+└┴─┴──┴──┘
+   NB. 按长度排序
+   (([:/:#&amp;&gt;){])('' ; # }. ~.&#64;:(, ;&#64;:(&lt;\&amp;.&gt;))) 'HHT';'HTT'
+┌─┬──┬──┐
+│H│HH│HT│
+└─┴──┴──┘
+   NB. 这样就得到了所有非终止状态
+   non_terminal =: [: (([:/:#&amp;&gt;){]) ('' ; # }. ~.&#64;:(, ;&#64;:(&lt;\&amp;.&gt;)))
+   non_terminal 'HHT';'HTT'
+┌┬─┬──┬──┐
+││H│HH│HT│
+└┴─┴──┴──┘
+   NB. 在最后加上终止状态就得到了所有状态
+   (,~ non_terminal) 'HHT';'HTT'
+┌┬─┬──┬──┬───┬───┐
+││H│HH│HT│HHT│HTT│
+└┴─┴──┴──┴───┴───┘
+   NB. 抛一次硬币，在中间状态的序列后面加上H和T
+   (('HT' ,~&amp;.&gt;&quot;1 0 ]) non_terminal) 'HHT';'HTT'
+┌───┬───┐
+│H  │T  │
+├───┼───┤
+│HH │HT │
+├───┼───┤
+│HHH│HHT│
+├───┼───┤
+│HTH│HTT│
+└───┴───┘
+   NB. 不妨认为终止状态的下一个状态是他本身
+   ((('HT' ,~&amp;.&gt;&quot;1 0 ]) , [ ,. [) non_terminal) 'HHT';'HTT'
+┌───┬───┐
+│H  │T  │
+├───┼───┤
+│HH │HT │
+├───┼───┤
+│HHH│HHT│
+├───┼───┤
+│HTH│HTT│
+├───┼───┤
+│HHT│HHT│
+├───┼───┤
+│HTT│HTT│
+└───┴───┘
+   NB. 这样就得到了，所有抛一次硬币后的可能序列
+   next =: ('HT' ,~&amp;.&gt;&quot;1 0 ]) , [ ,. [
+   NB. 排成表格
+   ((,~ ,. next) non_terminal) 'HHT';'HTT'
+┌───┬───┬───┐
+│   │H  │T  │
+├───┼───┼───┤
+│H  │HH │HT │
+├───┼───┼───┤
+│HH │HHH│HHT│
+├───┼───┼───┤
+│HT │HTH│HTT│
+├───┼───┼───┤
+│HHT│HHT│HHT│
+├───┼───┼───┤
+│HTT│HTT│HTT│
+└───┴───┴───┘
+   NB. 接下来要判断序列是否以某个状态结尾
+   'H' -: 'H'
+1
+   'H' -: 'HH'
+0
+   'HT' -: 'HT'
+1
+   _1 {. 'HHHT'
+T
+   _2 {. 'HHHT'
+HT
+   _3 {. 'HHHT'
+HHT
+   -&#64;:# 'HT'
+_2
+   'HHHT' ({.~ -&#64;:#) 'HT'
+HT
+   'HHHT' (] -: ({.~ -&#64;:#)) 'HT'
+1
+   endswith =: ] -: ({.~ -&#64;:#)
+   'HHHT' endswith 'HHT'
+1
+   'HHHT' endswith 'HHH'
+0
+   ((next (endswith &amp; &gt;)&quot;0 1 ,~) non_terminal) 'HHT';'HTT'
+1 1 0 0 0 0
+1 0 0 0 0 0
+
+1 1 1 0 0 0
+1 0 0 1 0 0
+
+1 1 1 0 0 0
+1 0 0 1 1 0
+
+1 1 0 0 0 0
+1 0 0 0 0 1
+
+1 0 0 1 1 0
+1 0 0 1 1 0
+
+1 0 0 0 0 1
+1 0 0 0 0 1
+   NB. 找出最长的那个状态
+   1 i:~&quot;0 1 ((next (endswith &amp; &gt;)&quot;0 1 ,~) non_terminal) 'HHT';'HTT'
+1 0
+2 3
+2 4
+1 5
+4 4
+5 5
+   transition =: (1 i:~ endswith&amp;&gt;)&quot;0 1
+   ((next (transition { ]) ,~) non_terminal) 'HHT';'HTT'
+┌───┬───┐
+│H  │   │
+├───┼───┤
+│HH │HT │
+├───┼───┤
+│HH │HHT│
+├───┼───┤
+│H  │HTT│
+├───┼───┤
+│HHT│HHT│
+├───┼───┤
+│HTT│HTT│
+└───┴───┘
+   ((next (] ,. transition { ]) ,~) non_terminal) 'HHT';'HTT'
+┌───┬───┬───┐
+│   │H  │   │
+├───┼───┼───┤
+│H  │HH │HT │
+├───┼───┼───┤
+│HH │HH │HHT│
+├───┼───┼───┤
+│HT │H  │HTT│
+├───┼───┼───┤
+│HHT│HHT│HHT│
+├───┼───┼───┤
+│HTT│HTT│HTT│
+└───┴───┴───┘
+   ((next ((' ';'H';'T') , ] ,. transition { ]) ,~) non_terminal) 'HHT';'HTT'
+┌───┬───┬───┐
+│   │H  │T  │
+├───┼───┼───┤
+│   │H  │   │
+├───┼───┼───┤
+│H  │HH │HT │
+├───┼───┼───┤
+│HH │HH │HHT│
+├───┼───┼───┤
+│HT │H  │HTT│
+├───┼───┼───┤
+│HHT│HHT│HHT│
+├───┼───┼───┤
+│HTT│HTT│HTT│
+└───┴───┴───┘
+   NB. 这样就得到了状态转移表
+   table =: (' ';'H';'T') , ] ,. transition { ]
+   transition_table =: (next table ,~) non_terminal
+   transition_table 'HHT';'HTT'
+┌───┬───┬───┐
+│   │H  │T  │
+├───┼───┼───┤
+│   │H  │   │
+├───┼───┼───┤
+│H  │HH │HT │
+├───┼───┼───┤
+│HH │HH │HHT│
+├───┼───┼───┤
+│HT │H  │HTT│
+├───┼───┼───┤
+│HHT│HHT│HHT│
+├───┼───┼───┤
+│HTT│HTT│HTT│
+└───┴───┴───┘
+
+   NB. 接下来从状态转移表计算出状态转移矩阵
+   0.2 (2 0 1 |: (((,1&amp;-)&#64;:[,&quot;1 2])(i.&#64;:#,:&quot;0 1])&#64;:((next transition,~)non_terminal))) 'HHT';'HTT'
+0.2 0 1
+0.2 1 2
+0.2 2 2
+0.2 3 1
+0.2 4 4
+0.2 5 5
+
+0.8 0 0
+0.8 1 3
+0.8 2 4
+0.8 3 5
+0.8 4 4
+0.8 5 5
+
+   mat =: 3 : '({.&quot;1 y) (;/ }.&quot;1 y) } 0 $~ (],]) # y'
+   matrix =: +/&#64;:(mat&amp;]&quot;2)&#64;:(2 0 1 |: (((, 1&amp;-)&#64;:[ ,&quot;1 2 ]) (i.&#64;:# ,:&quot;0 1 ])&#64;:((next transition ,~) non_terminal)))
+   0.2 matrix 'HHT';'HTT'
+0.8 0.2   0   0   0   0
+  0   0 0.2 0.8   0   0
+  0   0 0.2   0 0.8   0
+  0 0.2   0   0   0 0.8
+  0   0   0   0   1   0
+  0   0   0   0   0   1
+
+   NB. 有了状态转移矩阵，就可以代入上面的公式得到结果了
+   0.2 (-&#64;:#&#64;:] ([ }.&quot;0 1 }.) matrix) 'HHT';'HTT'
+0.8 0.2   0   0
+  0   0 0.2 0.8
+  0   0 0.2   0
+  0 0.2   0   0
+   0.2 (-&#64;:#&#64;:] ([ {.&quot;0 1 }.) matrix) 'HHT';'HTT'
+  0   0
+  0   0
+0.8   0
+  0 0.8
+   prob =: (-&#64;:#&#64;:] ([ ({.&quot;0 1 %. (=&#64;i.&#64;:# - ])&#64;:(}.&quot;0 1)) }.) matrix)
+   0.2 prob 'HHT';'HTT'
+0.238095    0.761905
+0.238095    0.761905
+       1 4.45607e_18
+0.047619    0.952381
+   ((] (+/ .*) ]) ^:_) 0.2 matrix 'HHT';'HTT'
+0 0 0 0 0.238095 0.761905
+0 0 0 0 0.238095 0.761905
+0 0 0 0        1        0
+0 0 0 0 0.047619 0.952381
+0 0 0 0        1        0
+0 0 0 0        0        1
+   0.2 (]  (; &amp; &gt;) ({.&#64;:prob)) 'HHT';'HTT'
+┌───┬────────┐
+│HHT│0.238095│
+├───┼────────┤
+│HTT│0.761905│
+└───┴────────┘
+   NB. 所有定义的中间函数
+   solve =: ] ;&amp;&gt; {.&#64;:prob
+   prob = -&#64;:#&#64;:] ([ ({.&quot;0 1 %. (=&#64;i.&#64;:# - ])&#64;:(}.&quot;0 1)) }.) matrix
+   matrix =: +/&#64;:(mat&amp;]&quot;2)&#64;:(2 0 1 |: (((, 1&amp;-)&#64;:[ ,&quot;1 2 ]) (i.&#64;:# ,:&quot;0 1 ])&#64;:((next transition ,~) non_terminal)))
+   mat =: 3 : '({.&quot;1 y) (;/ }.&quot;1 y) } 0 $~ (],]) # y'
+   transition =: (1 i:~ endswith&amp;&gt;)&quot;0 1
+   endswith =: ] -: ({.~ -&#64;:#)
+   next =: ('HT' ,~&amp;.&gt;&quot;1 0 ]) , [ ,. [
+   non_terminal =: [: (([:/:#&amp;&gt;){]) '' ; # }. ~.&#64;:(, ;&#64;:(&lt;\&amp;.&gt;))
+   table =: (' ';'H';'T') , ] ,. transition { ]
+   transition_table =: (next table ,~) non_terminal
+   NB. 合并到一起
+   solve=:];&amp;&gt;{.&#64;:(-&#64;:#&#64;:]([({.&quot;0 1%.(=&#64;i.&#64;:#-])&#64;:(}.&quot;0 1))}.)+/&#64;:(3 :'({.&quot;1 y)(;/}.&quot;1 y)}0$~(,])#y'&amp;]&quot;2)&#64;:(2 0 1|:(((,1&amp;-)&#64;:[,&quot;1 2])(i.&#64;:#,:&quot;0 1])&#64;:(((('HT',~&amp;.&gt;&quot;1 0]),[,.[)(1 i:~(]-:({.~-&#64;:#))&amp;&gt;)&quot;0 1,~)([:(([:/:#&amp;&gt;){])'';#}.~.&#64;:(,;&#64;:(&lt;\&amp;.&gt;)))))))
+   NB. J语言还支持分数的形式
+   1r2 solve 'HHT';'HTT'
+┌───┬───┐
+│HHT│2r3│
+├───┼───┤
+│HTT│1r3│
+└───┴───┘
+</pre>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div><div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'bhuztez-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

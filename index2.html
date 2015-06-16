@@ -21,13 +21,112 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 06, 2008</h4>
+        <div id="content">            <h4 class="date">Dec 28, 2014</h4>
             <article class="post">
 <h2 class="title">
-                    <a href="http://bhuztez.github.io/2008/pppd-plugin.html" rel="bookmark" title="Permanent Link to &quot;pppd插件编写&quot;">pppd插件编写</a>
+                    <a href="http://bhuztez.github.io/2014/math-the-new-porn.html" rel="bookmark" title="Permanent Link to &quot;Math is the new porn&quot;">Math is the new porn</a>
                 </h2>
-<p>先 <code>yum install ppp-devel</code> ，接着就可以在代码中使用 <code>#include &lt;pppd/pppd.h&gt;</code> 和 <code>char pppd_version[] = VERSION;</code> 以确保plugin能被pppd使用。</p>
-<p>pap_passwd_hook被调用的过程还是很令人困惑的。首先，第一次被调用的时候，参数user是有分配空间的，为了让pap_passwd_hook被调用，是不能传入password的，导致第一次被调用的时候，参数passwd没有被分配空间，是NULL。若第一次修改了用户名，第二次调用的时候会传入修改过的用户名，而第二次passwd被分配了空间，此时可以strcpy。</p>
+<p>按现在流行的说法，smart is the new sexy, math is the new porn。在某种程度上，事实也的确如此。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Dec 26, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/scope.html" rel="bookmark" title="Permanent Link to &quot;变量的作用域&quot;">变量的作用域</a>
+                </h2>
+<p>假如一门语言允许你自己定义函数，那么就会出现作用域的问题。作用域的问题就是怎么找变量定义的问题。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Dec 09, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/scalable-source-routing.html" rel="bookmark" title="Permanent Link to &quot;Scalable Source Routing&quot;">Scalable Source Routing</a>
+                </h2>
+<p>有很多关于adhoc network如何避免flooding的研究。其中一个是Scalable Source Routing，其主要思路借鉴自DHT。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Dec 08, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/access-control-with-datalog.html" rel="bookmark" title="Permanent Link to &quot;用Datalog管理权限&quot;">用Datalog管理权限</a>
+                </h2>
+<p>用普通SQL数据库管理权限是一件很别扭的事。一方面是有大量不必要的数据冗余，取消起来也特别麻烦。另外一方面，只要出现几条例外的规则，就不得不在代码里硬编码部分权限。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Nov 23, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/pouring-water.html" rel="bookmark" title="Permanent Link to &quot;Pouring Water&quot;">Pouring Water</a>
+                </h2>
+<p>Pouring Water看上去是个很简单的问题，有容量分别为a升，b升的两个没有刻度的容器，问量出c升水要多少步。简单是简单，只是分情况讨论的数量实在是有点多，很多人一看就直接放弃了。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Nov 17, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/metamath.html" rel="bookmark" title="Permanent Link to &quot;Metamath&quot;">Metamath</a>
+                </h2>
+<p><a class="reference external" href="http://metamath.org/">Metamath</a> 是一个很独特的证明检查程序。Metamath语义非常简单，完全可以自己实现一遍。而且更加专注于证明本身，并不需要打补丁以便更好的支持新的理论。比如Unimath为了更好的支持Homotopy Type Theory就对Coq打了补丁。这一点很重要，要是我们不能检查证明检查程序本身正确与否，我们写的证明即使通过了检查，也不能说明证明没问题。而一个证明检查程序本身太复杂，超过了人力能检查的极限，那么出现重大缺陷就几乎不可避免了，比如Coq的 <a class="reference external" href="http://inutile.club/estatis/falso/">Falso</a> 。很不幸的是，Metamath风格的证明检查工具一直没有流行起来。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Nov 04, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/distinct-game24-solution.html" rel="bookmark" title="Permanent Link to &quot;二十四点去重&quot;">二十四点去重</a>
+                </h2>
+<p>二十四点解法去重的思路很简单，就是根据把语法树根据等价公式找出相邻的语法树，得到以语法树为节点的边的集合，根据这个集合，进行unification，这样就把结果分组了，有几个组就是有几个不同的结果。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Oct 19, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/keep-grub-on-fedora.html" rel="bookmark" title="Permanent Link to &quot;在Fedora上继续使用GRUB&quot;">在Fedora上继续使用GRUB</a>
+                </h2>
+<p>Fedora从某个版本开始默认使用GRUB2了。实在搞不明白无比复杂的GRUB2，还是继续用GRUB吧。可是没过多久fedora-logos里都不带GRUB的背景图了，只好果断抛弃，用generic-logos。另外还在 <code>/etc/yum.conf</code> 里把GRUB2什么的统统禁掉，免得distro-sync完了以后GRUB没了。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Oct 10, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/http-server-in-erlang.html" rel="bookmark" title="Permanent Link to &quot;用Erlang写HTTP Server&quot;">用Erlang写HTTP Server</a>
+                </h2>
+<p>很多人都在吹嘘REST架构。然而他们所谓的REST架构往往指的就是正确使用HTTP语义。REST架构的确是建立在正确使用HTTP语义之上的，然而在正确使用HTTP语义只是实现REST架构的基础。而那些吹嘘REST架构的人，往往号称自己是Web程序员。他们能对SSH框架，Rails框架侃侃而谈，却对HTTP协议一无所知，所以才会觉得REST很新鲜。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div>            <h4 class="date">Aug 03, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/chinese-remainder-theorem.html" rel="bookmark" title="Permanent Link to &quot;中国剩余定理&quot;">中国剩余定理</a>
+                </h2>
+<p>本文纯属搞笑，切勿当真</p>
+<p>中国剩余定理这个叫法是对这种方法的极大误解。根据中国人只追求实用的天赋，肯定不会没事去证明某种数学性质的。要是给不出解法，就算证明了一个很重要的性质，一句这有啥用就噎死了。中国剩余定理实际上是为了解一种同余方程组。中国剩余定理很可能不是中国人最早证明的，完整的解法也很可能不是中国人最早给出的，只是因为孙子算经中对这种同余方程组给出了不完整的解法，这就叫中国剩余定理了，和费马大定理有异曲同工之妙。</p>
 <div class="clear"></div>
                 <div class="info">
                 </div>
@@ -37,7 +136,8 @@
                 <div class="clear"></div>
                 <div class="pages">
                     <a href="http://bhuztez.github.io/index.html" class="prev_page">&larr;&nbsp;Previous</a>
-                    <span>Page 2 of 2</span>
+                    <a href="http://bhuztez.github.io/index3.html" class="next_page">Next&nbsp;&rarr;</a>
+                    <span>Page 2 of 4</span>
                 </div>
 
             <div class="clear"></div>

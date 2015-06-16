@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+      <meta charset="utf-8" />
+    <title>C-c C-k &middot; 八皇后问题</title>
+    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
+    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+
+
+
+</head>
+<body>
+    <header>
+        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
+            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        </nav>
+        <div class="header_box">
+            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h2>to impress your cat</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Mar 06, 2015</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2015/eight-queens-problem.html" rel="bookmark" title="Permanent Link to &quot;八皇后问题&quot;">八皇后问题</a>
+                </h2>
+<p>八皇后问题不算太难，可写起来也是挺麻烦的。有家奇怪的公司为了炒作，提出了C++在十行之内解八皇后的挑战，尽管他们自己办不到。</p>
+<!-- more -->
+<p>这当然也是可以做到啦，查查标准库文档一会儿就写出来了。</p>
+<pre class="code c++ literal-block">
+<span class="cp">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;bitset&gt;
+#include &lt;numeric&gt;
+#include &lt;utility&gt;
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">queens</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">};</span> <span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">next_permutation</span><span class="p">(</span><span class="n">queens</span><span class="p">,</span><span class="n">queens</span><span class="o">+</span><span class="mi">8</span><span class="p">);</span> <span class="p">)</span>
+    <span class="k">if</span> <span class="p">((</span><span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">bitset</span><span class="o">&lt;</span><span class="mi">15</span><span class="o">&gt;</span><span class="p">(</span><span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">accumulate</span><span class="p">(</span><span class="n">queens</span><span class="p">,</span><span class="n">queens</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">[](</span><span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">((</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">a</span><span class="p">.</span><span class="n">second</span><span class="p">))</span><span class="o">|</span><span class="n">a</span><span class="p">.</span><span class="n">first</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">);}).</span><span class="n">first</span><span class="p">).</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">bitset</span><span class="o">&lt;</span><span class="mi">15</span><span class="o">&gt;</span><span class="p">(</span><span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">accumulate</span><span class="p">(</span><span class="n">queens</span><span class="p">,</span> <span class="n">queens</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">[](</span><span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">((</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="mi">7</span><span class="o">+</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">.</span><span class="n">second</span><span class="p">))</span><span class="o">|</span><span class="n">a</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">);}).</span><span class="n">first</span><span class="p">).</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">8</span><span class="p">))</span>
+      <span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">queens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">queens</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">queens</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">queens</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">queens</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">queens</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">queens</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">queens</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="o">::</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+<p>可是要代码短，还是得用J语言啊。下面的解法很直观，很占内存，可也是很短的。</p>
+<pre class="code literal-block">
+   NB. 分解成两个问题
+   NB. 1) 生成全排列，这样每条横线，每条竖线上都只有一个皇后
+   NB. 2) 检查每条斜线上是否最多只有一个皇后
+
+   NB. 生成全排列很简单
+   (i.!3)A.i.3
+0 1 2
+0 2 1
+1 0 2
+1 2 0
+2 0 1
+2 1 0
+   NB. 0表示空，1表示皇后
+   #:2^(i.!3)A.i.3
+0 0 1
+0 1 0
+1 0 0
+
+0 0 1
+1 0 0
+0 1 0
+
+0 1 0
+0 0 1
+1 0 0
+
+0 1 0
+1 0 0
+0 0 1
+
+1 0 0
+0 0 1
+0 1 0
+
+1 0 0
+0 1 0
+0 0 1
+
+   NB. 沿从右上往左下的斜线相加
+   +//.&quot;2 #:2^(i.!3)A.i.3
+0 0 3 0 0
+0 1 1 1 0
+0 1 1 1 0
+0 2 0 0 1
+1 0 0 2 0
+1 0 1 0 1
+
+   NB. 判断是否大于1
+   1 &lt; +//.&quot;2 #:2^(i.!3)A.i.3
+0 0 1 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 1 0 0 0
+0 0 0 1 0
+0 0 0 0 0
+
+   NB. 因为是从上到下算下去的，得转一下
+   |: 1 &lt; +//.&quot;2 #:2^(i.!3)A.i.3
+0 0 0 0 0 0
+0 0 0 1 0 0
+1 0 0 0 0 0
+0 0 0 0 1 0
+0 0 0 0 0 0
+
+   NB. 按竖行分别取或
+   +./ |: 1 &lt; +//.&quot;2 #:2^(i.!3)A.i.3
+1 0 0 1 1 0
+
+   NB. 取反
+   -. +./ |: 1 &lt; +//.&quot;2 #:2^(i.!3)A.i.3
+0 1 1 0 0 1
+
+   NB. 定义d，是否在从右上往左下的斜线上皇后数小于等于1
+   d=:3 :'-.+./|:1&lt;+//.&quot;2 y'
+   d #:2^(i.!3)A.i.3
+0 1 1 0 0 1
+
+   NB. 取出对应的矩阵
+   (d#]) #:2^(i.!3)A.i.3
+0 0 1
+1 0 0
+0 1 0
+
+0 1 0
+0 0 1
+1 0 0
+
+1 0 0
+0 1 0
+0 0 1
+
+   NB. 把矩阵沿竖直方向翻转，这样找出左上往右下的斜线上皇后数小于等于1的
+   (|.&#64;d#]) #:2^(i.!3)A.i.3
+0 0 1
+0 1 0
+1 0 0
+
+0 1 0
+1 0 0
+0 0 1
+
+1 0 0
+0 0 1
+0 1 0
+
+   NB. 定义q，用来找出所有N皇后矩阵
+   q=:3 :'((d*.|.&#64;d)#])#:2^(i.!y)A.i.y'
+   # q 8
+92
+   q 4
+0 0 1 0
+1 0 0 0
+0 0 0 1
+0 1 0 0
+
+0 1 0 0
+0 0 0 1
+1 0 0 0
+0 0 1 0
+   q 6
+0 0 0 0 1 0
+0 0 1 0 0 0
+1 0 0 0 0 0
+0 0 0 0 0 1
+0 0 0 1 0 0
+0 1 0 0 0 0
+
+0 0 0 1 0 0
+1 0 0 0 0 0
+0 0 0 0 1 0
+0 1 0 0 0 0
+0 0 0 0 0 1
+0 0 1 0 0 0
+
+0 0 1 0 0 0
+0 0 0 0 0 1
+0 1 0 0 0 0
+0 0 0 0 1 0
+1 0 0 0 0 0
+0 0 0 1 0 0
+
+0 1 0 0 0 0
+0 0 0 1 0 0
+0 0 0 0 0 1
+1 0 0 0 0 0
+0 0 1 0 0 0
+0 0 0 0 1 0
+
+   NB. 太棒了，不到80个字符就已经能解出八皇后问题了
+   d=:3 :'-.+./|:1&lt;+//.&quot;2 y'
+   q=:3 :'((d*.|.&#64;d)#])#:2^(i.!y)A.i.y'
+</pre>
+<p>用和上面C++相同的算法，在J语言里可以这么写</p>
+<pre class="code literal-block">
+(i.(([:*./&quot;1[:(#=+/&#64;:~:)&quot;1(+,:-)&quot;1)#])i.&#64;:!A.i.)8
+</pre>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div><div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'bhuztez-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

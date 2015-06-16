@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+      <meta charset="utf-8" />
+    <title>C-c C-k &middot; 如何实现Prolog解释器</title>
+    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
+    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+
+
+
+</head>
+<body>
+    <header>
+        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
+            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        </nav>
+        <div class="header_box">
+            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h2>to impress your cat</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Mar 23, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/how-to-write-a-prolog-interpreter.html" rel="bookmark" title="Permanent Link to &quot;如何实现Prolog解释器&quot;">如何实现Prolog解释器</a>
+                </h2>
+<p>Prolog语言本身就不太容易理解。要写个Prolog解释器就更不容易了。还好有 <a class="reference external" href="http://wambook.sourceforge.net/">Warren's Abstract Machine: A Tutorial Reconstruction</a> 。</p>
+<!-- more -->
+<p>WAMBOOK里把实现Prolog的过程分成L0、L1、L2、L3四个阶段。也就是把一个困难的问题，分解成了四个比较容易的问题。这样只看slides，也是能自己写出来的，未必需要先把WAMBOOK完整看一遍。</p>
+<p>WAMBOOK有一个不好的地方是，它是按C的思路来讲的。C语言和Prolog语言的语义相差比较大，用C语言实现Prolog解释器会比较繁琐。而用Erlang就比较容易了。假如你不是很确定你是否理解了unification，不妨看看 <a class="reference external" href="http://gradworks.umi.com/33/80/3380156.html">miniKanren的论文</a> 。Unification以外的部分就不推荐了，毕竟现在说的是如何实现Prolog解释器，而且都是用很费解的宏写的。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div><div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'bhuztez-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

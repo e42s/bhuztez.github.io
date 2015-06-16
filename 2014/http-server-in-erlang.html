@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+      <meta charset="utf-8" />
+    <title>C-c C-k &middot; 用Erlang写HTTP Server</title>
+    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
+    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+
+
+
+</head>
+<body>
+    <header>
+        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
+            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        </nav>
+        <div class="header_box">
+            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h2>to impress your cat</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Oct 10, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/http-server-in-erlang.html" rel="bookmark" title="Permanent Link to &quot;用Erlang写HTTP Server&quot;">用Erlang写HTTP Server</a>
+                </h2>
+<p>很多人都在吹嘘REST架构。然而他们所谓的REST架构往往指的就是正确使用HTTP语义。REST架构的确是建立在正确使用HTTP语义之上的，然而在正确使用HTTP语义只是实现REST架构的基础。而那些吹嘘REST架构的人，往往号称自己是Web程序员。他们能对SSH框架，Rails框架侃侃而谈，却对HTTP协议一无所知，所以才会觉得REST很新鲜。</p>
+<!-- more -->
+<p>了解HTTP语义最好的方法，当然是照着RFC自己实现一遍了。推荐用Erlang来写。用Erlang你不再需要担心线程进程或者事件驱动，也不需要自己去解析HTTP Header，那当然是很方便了。</p>
+<pre class="code erlang literal-block">
+<span class="p">-</span><span class="ni">module</span><span class="p">(</span><span class="n">server</span><span class="p">).</span>
+<span class="p">-</span><span class="ni">export</span><span class="p">([</span><span class="n">start</span><span class="o">/</span><span class="mi">0</span><span class="p">,</span> <span class="n">accept</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span> <span class="n">handle_connection</span><span class="o">/</span><span class="mi">1</span><span class="p">]).</span>
+
+<span class="nf">start</span><span class="p">()</span> <span class="o">-&gt;</span>
+    <span class="p">{</span><span class="n">ok</span><span class="p">,</span> <span class="nv">Socket</span><span class="p">}</span> <span class="o">=</span> <span class="nn">gen_tcp</span><span class="p">:</span><span class="nf">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">,</span> <span class="p">[</span><span class="n">binary</span><span class="p">,</span> <span class="p">{</span><span class="n">packet</span><span class="p">,</span> <span class="n">http</span><span class="p">},</span> <span class="p">{</span><span class="n">active</span><span class="p">,</span> <span class="n">false</span><span class="p">},</span> <span class="p">{</span><span class="n">reuseaddr</span><span class="p">,</span> <span class="n">true</span><span class="p">}]),</span>
+    <span class="nv">Pid</span> <span class="o">=</span> <span class="nb">spawn</span><span class="p">(</span><span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">accept</span><span class="p">,</span> <span class="p">[</span><span class="nv">Socket</span><span class="p">]),</span>
+    <span class="n">ok</span> <span class="o">=</span> <span class="nn">gen_tcp</span><span class="p">:</span><span class="nf">controlling_process</span><span class="p">(</span><span class="nv">Socket</span><span class="p">,</span> <span class="nv">Pid</span><span class="p">),</span>
+    <span class="n">ok</span><span class="p">.</span>
+
+<span class="nf">accept</span><span class="p">(</span><span class="nv">Socket</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="p">{</span><span class="n">ok</span><span class="p">,</span> <span class="nv">Conn</span><span class="p">}</span> <span class="o">=</span> <span class="nn">gen_tcp</span><span class="p">:</span><span class="nf">accept</span><span class="p">(</span><span class="nv">Socket</span><span class="p">),</span>
+    <span class="nv">Pid</span> <span class="o">=</span> <span class="nb">spawn</span><span class="p">(</span><span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">handle_connection</span><span class="p">,</span> <span class="p">[</span><span class="nv">Conn</span><span class="p">]),</span>
+    <span class="n">ok</span> <span class="o">=</span> <span class="nn">gen_tcp</span><span class="p">:</span><span class="nf">controlling_process</span><span class="p">(</span><span class="nv">Conn</span><span class="p">,</span> <span class="nv">Pid</span><span class="p">),</span>
+    <span class="o">?</span><span class="nv">MODULE</span><span class="p">:</span><span class="nf">accept</span><span class="p">(</span><span class="nv">Socket</span><span class="p">).</span>
+
+<span class="nf">handle_connection</span><span class="p">(</span><span class="nv">Socket</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="p">{</span><span class="n">ok</span><span class="p">,</span> <span class="p">{</span><span class="n">http_request</span><span class="p">,</span> <span class="nv">Method</span><span class="p">,</span> <span class="nv">Path</span><span class="p">,</span> <span class="nv">Version</span><span class="p">}}</span> <span class="o">=</span> <span class="nn">gen_tcp</span><span class="p">:</span><span class="nf">recv</span><span class="p">(</span><span class="nv">Socket</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="nv">Headers</span> <span class="o">=</span> <span class="n">recv_headers</span><span class="p">(</span><span class="nv">Socket</span><span class="p">),</span>
+    <span class="n">ok</span> <span class="o">=</span> <span class="nn">inet</span><span class="p">:</span><span class="nf">setopts</span><span class="p">(</span><span class="nv">Socket</span><span class="p">,</span> <span class="p">[{</span><span class="n">packet</span><span class="p">,</span> <span class="n">raw</span><span class="p">}]),</span>
+    <span class="n">handle_request</span><span class="p">(</span><span class="nv">Socket</span><span class="p">,</span> <span class="nv">Method</span><span class="p">,</span> <span class="nv">Path</span><span class="p">,</span> <span class="nv">Version</span><span class="p">,</span> <span class="nv">Headers</span><span class="p">).</span>
+
+<span class="nf">recv_headers</span><span class="p">(</span><span class="nv">Socket</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="k">case</span> <span class="nn">gen_tcp</span><span class="p">:</span><span class="nf">recv</span><span class="p">(</span><span class="nv">Socket</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">of</span>
+        <span class="p">{</span><span class="n">ok</span><span class="p">,</span> <span class="p">{</span><span class="n">http_header</span><span class="p">,</span> <span class="p">_,</span> <span class="nv">Field</span><span class="p">,</span> <span class="p">_,</span> <span class="nv">Value</span><span class="p">}}</span> <span class="o">-&gt;</span>
+            <span class="p">[{</span><span class="nv">Field</span><span class="p">,</span> <span class="nv">Value</span><span class="p">}|</span><span class="n">recv_headers</span><span class="p">(</span><span class="nv">Socket</span><span class="p">)];</span>
+        <span class="p">{</span><span class="n">ok</span><span class="p">,</span> <span class="n">http_eoh</span><span class="p">}</span> <span class="o">-&gt;</span>
+            <span class="p">[]</span>
+    <span class="k">end</span><span class="p">.</span>
+
+<span class="nf">handle_request</span><span class="p">(</span><span class="nv">Socket</span><span class="p">,</span> <span class="n">'GET'</span><span class="p">,</span> <span class="p">{</span><span class="n">abs_path</span><span class="p">,</span> <span class="s">&quot;/&quot;</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="p">_)</span> <span class="o">-&gt;</span>
+    <span class="n">ok</span> <span class="o">=</span> <span class="nn">gen_tcp</span><span class="p">:</span><span class="nb">send</span><span class="p">(</span>
+           <span class="nv">Socket</span><span class="p">,</span>
+           <span class="p">[</span><span class="o">&lt;&lt;</span><span class="s">&quot;HTTP/1.1 200 OK</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+            <span class="o">&lt;&lt;</span><span class="s">&quot;Connection: close</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+            <span class="o">&lt;&lt;</span><span class="s">&quot;Content-Type: text-plain</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+            <span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+            <span class="o">&lt;&lt;</span><span class="s">&quot;OK</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="o">&gt;&gt;</span><span class="p">]),</span>
+    <span class="n">ok</span>  <span class="o">=</span> <span class="nn">gen_tcp</span><span class="p">:</span><span class="nf">close</span><span class="p">(</span><span class="nv">Socket</span><span class="p">).</span>
+</pre>
+<p>运行</p>
+<pre class="code literal-block">
+erl -make
+erl -run server
+</pre>
+<p>在浏览器里打开 <a class="reference external" href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a> ，你就会看到 OK 。现在你就可以开始动手实现HTTP协议了。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div><div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'bhuztez-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

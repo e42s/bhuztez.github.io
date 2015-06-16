@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+      <meta charset="utf-8" />
+    <title>C-c C-k &middot; Erlang代码热更新</title>
+    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
+    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+
+
+
+</head>
+<body>
+    <header>
+        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
+            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        </nav>
+        <div class="header_box">
+            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h2>to impress your cat</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Jun 04, 2015</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2015/how-erlang-change-code.html" rel="bookmark" title="Permanent Link to &quot;Erlang代码热更新&quot;">Erlang代码热更新</a>
+                </h2>
+<p>Erlang代码热更新是一件很简单的事。很多教程都偏重于介绍工具的使用，而忽略了热更新过程本身。Erlang官方文档里面倒是都有，只是内容分的比较散，更适合熟悉Erlang的人查阅。</p>
+<!-- more -->
+<p>Erlang代码热更新的核心就是 <code>M:F(A)</code> 。以这种形式调用函数，Erlang会自动使用模块M的最新版本。这样你在Emacs里 <code>C-c C-k</code> 之后，不仅新启动的进程会用新版本的代码，已经启动的进程也一样会用新版本的代码，比如gen_server，就是始终以这种形式调用callback的。不过这样就假设了状态的数据格式是不变的，只适合在开发时使用，真正部署时不能就这么直接更新上去。</p>
+<p>release_handler首先会沿着supervisor tree找出所有受影响的子进程。子进程依赖的模块，要么已经在Child Specification里有了，要么Child Specification里写的是dynamic，可以通过发get_modules消息获得。接着在载入新版本模块之前，必须暂停这些子进程，不然只要一运行 <code>M:F(A)</code> 就立即跳到新版本模块了。等新版本模块载入之后，再发送消息告诉这些子进程代码变了，需要执行 <code>code_change</code> 了。另外，release_handler还会把引用了旧版本代码的进程都杀掉，因为同一个模块在Erlang里只能有两个版本，那些进程不退出，就再也更新不了了。引用旧版本代码指的是，比如在状态中有调用下面这样的函数返回的函数。</p>
+<pre class="code literal-block">
+f(X) -&gt;
+    fun () -&gt;
+        g(X)
+    end.
+</pre>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div><div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'bhuztez-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

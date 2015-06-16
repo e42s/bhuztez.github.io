@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+      <meta charset="utf-8" />
+    <title>C-c C-k &middot; 不动点组合子</title>
+    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
+    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+
+
+
+</head>
+<body>
+    <header>
+        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
+            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        </nav>
+        <div class="header_box">
+            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h2>to impress your cat</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Mar 29, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/y-combinator.html" rel="bookmark" title="Permanent Link to &quot;不动点组合子&quot;">不动点组合子</a>
+                </h2>
+<p>最近有一个很奇怪的现象。也许仅仅是因为刚好有一家公司叫Y Combinator，有不少人在写博客鼓吹不动点组合子，以学会不动点组合子为荣。</p>
+<!-- more -->
+<p>一般来说，当你发现需要用不动点组合子时，一定是哪里出了问题。比如在Erlang R17之前，你要在Erlang Shell里写递归函数，就得重新发明不动点组合子了。讨厌不动点组合子才是正常的。</p>
+<p>比如阶乘，像下面这样的代码是不行的。在定义函数时，Fact变量还没有定义。</p>
+<pre class="code erlang literal-block">
+<span class="nv">Fact</span> <span class="o">=</span> <span class="k">fun</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="p">(</span><span class="nv">N</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nv">N</span><span class="o">*</span><span class="nv">Fact</span><span class="p">(</span><span class="nv">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">end</span><span class="p">.</span>
+</pre>
+<p>可以多接受一个参数，用来传入函数本身，在递归时再继续传下去，这样就没问题了。</p>
+<pre class="code erlang literal-block">
+<span class="nv">X1</span> <span class="o">=</span> <span class="k">fun</span><span class="p">(_,</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="p">(</span><span class="nv">F</span><span class="p">,</span><span class="nv">N</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nv">N</span><span class="o">*</span><span class="nv">F</span><span class="p">(</span><span class="nv">F</span><span class="p">,</span><span class="nv">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">end</span><span class="p">,</span>
+<span class="nv">Y1</span> <span class="o">=</span> <span class="k">fun</span><span class="p">(</span><span class="nv">F</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">fun</span><span class="p">(</span><span class="nv">N</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nv">F</span><span class="p">(</span><span class="nv">F</span><span class="p">,</span><span class="nv">N</span><span class="p">)</span> <span class="k">end</span> <span class="k">end</span><span class="p">,</span>
+<span class="nv">Fact1</span> <span class="o">=</span> <span class="nv">Y1</span><span class="p">(</span><span class="nv">X1</span><span class="p">).</span>
+</pre>
+<p>这已经有和不动点组合子相当的功能了。可这样的写法很别扭。当然更希望写成下面这样。</p>
+<pre class="code erlang literal-block">
+<span class="nv">X2</span> <span class="o">=</span> <span class="k">fun</span><span class="p">(_,</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="p">(</span><span class="nv">F</span><span class="p">,</span><span class="nv">N</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nv">N</span><span class="o">*</span><span class="nv">F</span><span class="p">(</span><span class="nv">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">end</span><span class="p">.</span>
+</pre>
+<p>想要达到下面这样的效果</p>
+<pre class="code erlang literal-block">
+<span class="nv">Y2</span> <span class="o">=</span> <span class="k">fun</span><span class="p">(</span><span class="nv">F</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nv">G</span> <span class="o">=</span> <span class="k">fun</span><span class="p">(</span><span class="nv">N</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nv">F</span><span class="p">(</span><span class="nv">G</span><span class="p">,</span><span class="nv">N</span><span class="p">)</span> <span class="k">end</span> <span class="k">end</span><span class="p">.</span>
+</pre>
+<p>使用和上面类似的技巧，就可以了</p>
+<pre class="code erlang literal-block">
+<span class="nv">Y2</span> <span class="o">=</span> <span class="k">fun</span><span class="p">(</span><span class="nv">F</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nv">H</span> <span class="o">=</span> <span class="k">fun</span><span class="p">(</span><span class="nv">G</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">fun</span><span class="p">(</span><span class="nv">N</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nv">F</span><span class="p">(</span><span class="nv">G</span><span class="p">(</span><span class="nv">G</span><span class="p">),</span><span class="nv">N</span><span class="p">)</span> <span class="k">end</span> <span class="k">end</span><span class="p">,</span> <span class="nv">H</span><span class="p">(</span><span class="nv">H</span><span class="p">)</span> <span class="k">end</span><span class="p">.</span>
+<span class="nv">Fact2</span> <span class="o">=</span> <span class="nv">Y2</span><span class="p">(</span><span class="nv">X2</span><span class="p">).</span>
+</pre>
+<p>在lambda calculus里，每个函数只接受一个参数</p>
+<pre class="code erlang literal-block">
+<span class="nv">X3</span> <span class="o">=</span> <span class="k">fun</span><span class="p">(</span><span class="nv">F</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">fun</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="p">(</span><span class="nv">N</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nv">N</span><span class="o">*</span><span class="nv">F</span><span class="p">(</span><span class="nv">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">end</span> <span class="k">end</span><span class="p">.</span>
+<span class="nv">Y3</span> <span class="o">=</span> <span class="k">fun</span><span class="p">(</span><span class="nv">F</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="k">fun</span> <span class="p">(</span><span class="nv">X</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nv">X</span><span class="p">(</span><span class="nv">X</span><span class="p">)</span> <span class="k">end</span><span class="p">)(</span><span class="k">fun</span><span class="p">(</span><span class="nv">G</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">fun</span><span class="p">(</span><span class="nv">N</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nv">F</span><span class="p">(</span><span class="nv">G</span><span class="p">(</span><span class="nv">G</span><span class="p">)))(</span><span class="nv">N</span><span class="p">)</span> <span class="k">end</span> <span class="k">end</span><span class="p">)</span> <span class="k">end</span><span class="p">.</span>
+<span class="nv">Fact3</span> <span class="o">=</span> <span class="nv">Y3</span><span class="p">(</span><span class="nv">X3</span><span class="p">).</span>
+</pre>
+<p>你一定看出来了这个形式和Haskell Curry提出的不动点组合子并不一致。我想你也猜到为什么了。</p>
+<p>上面的写法的问题是得为不同的参数个数分别定义一个组合子。所以Erlang R17里引入了新的写法解决这个问题。</p>
+<pre class="code erlang literal-block">
+<span class="nv">Fact</span> <span class="o">=</span> <span class="k">fun</span> <span class="nv">F</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">F</span><span class="p">(</span><span class="nv">N</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nv">N</span><span class="o">*</span><span class="nv">F</span><span class="p">(</span><span class="nv">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">end</span><span class="p">.</span>
+</pre>
+<p>终于不用再写不动点组合子了。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div><div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'bhuztez-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

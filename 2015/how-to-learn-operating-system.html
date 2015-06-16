@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+      <meta charset="utf-8" />
+    <title>C-c C-k &middot; 操作系统入门</title>
+    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
+    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+
+
+
+</head>
+<body>
+    <header>
+        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
+            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        </nav>
+        <div class="header_box">
+            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h2>to impress your cat</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Jan 15, 2015</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2015/how-to-learn-operating-system.html" rel="bookmark" title="Permanent Link to &quot;操作系统入门&quot;">操作系统入门</a>
+                </h2>
+<p>好的操作系统教程很少。很多教程都是从bootloader该怎么写开始的，而bootloader一点都不好写。比如我就照着各种教程在bootloader上死了无数次了。</p>
+<!-- more -->
+<p>首先这是在学写操作系统，而不是把每个问题都搞对，先跑起来才是最重要的事。能绕过的就应该绕过，有的抄的代码就应该抄，而不是自己写。从这个角度看，MIT 6.828 Lab里的JOS是个不错的例子。</p>
+<p>JOS的问题是，他帮你把必要的非核心代码都实现了，也还是自己去实现了个bootloader，有点过头了，并不适合一个人从零开始学操作系统。用QEMU是没错的，实际上QEMU有-kernel参数，可以直接启动一个elf格式的支持multiboot的内核，并不需要自己写bootloader。启动需要的硬件信息也可以直接从multiboot info里取到，并不需要自己去取。自己去取更麻烦，各种历史遗留问题一点都不好处理。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div><div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'bhuztez-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

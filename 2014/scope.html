@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+      <meta charset="utf-8" />
+    <title>C-c C-k &middot; 变量的作用域</title>
+    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
+    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+
+
+
+</head>
+<body>
+    <header>
+        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
+            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        </nav>
+        <div class="header_box">
+            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h2>to impress your cat</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Dec 26, 2014</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2014/scope.html" rel="bookmark" title="Permanent Link to &quot;变量的作用域&quot;">变量的作用域</a>
+                </h2>
+<p>假如一门语言允许你自己定义函数，那么就会出现作用域的问题。作用域的问题就是怎么找变量定义的问题。</p>
+<!-- more -->
+<p>假如不允许自定义函数，只需要一个变量名到变量值的映射就可以了。不妨把这种映射关系称为Environment。</p>
+<pre class="code literal-block">
+%% 赋值前 {print: &lt;fun&gt;}
+var a = 1
+%% 赋值后 {print: &lt;fun&gt;, a: 1}
+print(a)
+</pre>
+<p>现在来定义一个函数</p>
+<pre class="code literal-block">
+var a = 1
+fun f(a)
+    print(a)
+end fun
+f(2)
+print(a)
+</pre>
+<p>此时我们期望的结果是</p>
+<pre class="code literal-block">
+2
+1
+</pre>
+<p>要是在执行 f(2) 时，我们直接把a指向2，那么结果就是</p>
+<pre class="code literal-block">
+2
+2
+</pre>
+<p>所以，函数f需要一个独立的Environment。在执行f(2)先把当前Environment保存下来（比如存在一个栈里，因为f函数里也可以去调用别的函数），建一个新的Environment，把a指向2，之后才开始执行f函数。</p>
+<pre class="code literal-block">
++------------------------------+
+| {a:2}                        |
++------------------------------+
+| {print: &lt;fun&gt;, a:1, f:&lt;fun&gt;} |
++------------------------------+
+</pre>
+<p>不过这样就找不到print了。不过你一定想到了，只要沿着栈往下找总能找到的。</p>
+<p>定义作用域规则，假如变量在当前Environment里，找不到就到外层Environment里找，直到找到为止，假如找到最外面也没有，那就是根本就没定义。</p>
+<p>现在问题来了，看下面这个程序</p>
+<pre class="code literal-block">
+var a = 1
+
+fun f()
+    print(a)
+end
+
+fun g(a)
+    f()
+end
+
+g(2)
+</pre>
+<p>假如使用上述规则，那么结果就是</p>
+<pre class="code literal-block">
+2
+</pre>
+<p>原因很简单，因为当前栈是像下面这样的</p>
+<pre class="code literal-block">
++-----------------------------------------+
+| {}                                      |
++-----------------------------------------+
+| {a:2}                                   |
++-----------------------------------------+
+| {print: &lt;fun&gt;, a:1, f: &lt;fun&gt;, g: &lt;fun&gt;} |
++-----------------------------------------+
+</pre>
+<p>这意味着，在定义函数时，除了当前Environment里定义的，我们不知道其他变量到底是在哪里定义的。</p>
+<p>我们把程序改一改</p>
+<pre class="code literal-block">
+var a = 1
+
+fun f()
+    print(a)
+end
+
+fun g(print)
+    f()
+end
+
+g(2)
+</pre>
+<p>现在栈是像下面这样的</p>
+<pre class="code literal-block">
++-----------------------------------------+
+| {}                                      |
++-----------------------------------------+
+| {print:2}                               |
++-----------------------------------------+
+| {print: &lt;fun&gt;, a:1, f: &lt;fun&gt;, g: &lt;fun&gt;} |
++-----------------------------------------+
+</pre>
+<p>运行到 print(a) 那行就出错了。那该咋办？我们可以把这叫做动态作用域，宣称这是最powerful的作用域，假如你不会用，那是因为你笨。这样问题就解决了。</p>
+<p>可是我是弱智啊。我只能在定义时，就把所有会用到的变量都先存起来。找变量时，只在当前Environment里找。</p>
+<pre class="code literal-block">
++-------------------------------------------------+
+| {print: &lt;fun&gt;, a:1}                             |
++-------------------------------------------------+
+| {print:2,                                       |
+|  f: {&lt;fun&gt;,{print: &lt;fun&gt;,a:1}}}                 |
++-------------------------------------------------+
+| {print: &lt;fun&gt;, a:1,                             |
+|  f: {&lt;fun&gt;,{print:&lt;fun&gt;, a:1}},                 |
+|  g: {&lt;fun&gt;,{a:1, f: {&lt;fun&gt;,{print:&lt;fun&gt;,a:1}}}} |
++-------------------------------------------------+
+</pre>
+<p>这样就没问题了。这就是所谓的lexical scope</p>
+<p>看下面这个程序</p>
+<pre class="code literal-block">
+var a = 1
+
+fun f()
+    var a = a + 1
+    print(a)
+end
+
+f()
+</pre>
+<p>在函数 f 里，a既是在外部定义的，又是在内部定义的。这样就有矛盾了。</p>
+<p>有些语言的应对方式是在函数内部可以有多个Environment，规则类似动态作用域。</p>
+<pre class="code literal-block">
++---------------------------------+
+| +-----------------------------+ |
+| | {a: 2}                      | |
+| +-----------------------------+ |
+| | {print: &lt;fun&gt;, a:1}         | |
+| +-----------------------------+ |
++---------------------------------+
+| {print: &lt;fun&gt;, a:1,             |
+|  f: {&lt;fun&gt;,{print:&lt;fun&gt;, a:1}}} |
++---------------------------------+
+</pre>
+<p>这样上面这段程序就能运行了。</p>
+<p>有些语言不喜欢你这么定义，直接就不让你运行这样的程序。这似乎没啥问题。</p>
+<p>有的语言的规则是local by default的，赋值就相当于定义了一个本地的变量。也就是</p>
+<pre class="code literal-block">
+a = 1
+</pre>
+<p>相当于</p>
+<pre class="code literal-block">
+var a = 1
+</pre>
+<p>这看上去也没什么问题。可是要是这语言变量的值是可以改的，那就糟了。内层函数就没法改外层函数变量的值了。这就需要引入 nonlocal 关键字了。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div><div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'bhuztez-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

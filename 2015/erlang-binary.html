@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+      <meta charset="utf-8" />
+    <title>C-c C-k &middot; Erlang字符串输出</title>
+    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
+    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+
+
+
+</head>
+<body>
+    <header>
+        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
+            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        </nav>
+        <div class="header_box">
+            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h2>to impress your cat</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">May 08, 2015</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2015/erlang-binary.html" rel="bookmark" title="Permanent Link to &quot;Erlang字符串输出&quot;">Erlang字符串输出</a>
+                </h2>
+<p>经常有人莫名其妙的抱怨Erlang字符串处理效率低下。在过去，Erlang确实是用简单的list来表示字符串的，不停拼接list效率确实不行。可现在这已经是老黄历了。</p>
+<!-- more -->
+<p>Erlang里引入了binary。在拼接字符串的时候没必要复制，直接构造一个新的list就完事了。反正标准库函数一般都能接受这种用法，最后就直接就当 iovec 发出去了。</p>
+<pre class="code erlang literal-block">
+<span class="nv">IOList3</span> <span class="o">=</span> <span class="p">[</span><span class="nv">IOList1</span><span class="p">,</span> <span class="nv">IOList2</span><span class="p">].</span>
+</pre>
+<p>这里先无视各种不常用的情况，iolist的类型定义可以写成</p>
+<pre class="code erlang literal-block">
+<span class="p">-</span><span class="ni">type</span> <span class="n">iolist</span><span class="p">()</span> <span class="p">::</span> <span class="n">binary</span><span class="p">()</span> <span class="p">|</span> <span class="p">[</span><span class="n">iolist</span><span class="p">()].</span>
+</pre>
+<p>我就是要把两个binary拼起来怎么办？比如</p>
+<pre class="code erlang literal-block">
+<span class="nv">Bin3</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="nv">Bin1</span><span class="o">/</span><span class="n">binary</span><span class="p">,</span> <span class="nv">Bin2</span><span class="o">/</span><span class="n">binary</span><span class="o">&gt;&gt;</span>
+</pre>
+<p>Erlang会机智的计算出Bin1, Bin2 长度之和，先占好空间，再把字符串都复制进去。和你在别的语言里手动复制字符串并没有什么区别。</p>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div><div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'bhuztez-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>
