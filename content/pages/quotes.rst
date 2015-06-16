@@ -61,3 +61,21 @@ Quotes
     -- C.A.R. Hoare [#]_
 
 .. [#] http://en.wikiquote.org/wiki/C._A._R._Hoare
+
+
+.. epigraph::
+
+    The fundamental cause of the trouble is that in the modern world the stupid are cocksure while the intelligent are full of doubt.
+
+    -- Bertrand Russell [#]_
+
+.. [#] http://en.wikiquote.org/wiki/Bertrand_Russell
+
+
+.. epigraph::
+
+    Research is the transformation of money into knowledge. Innovation is the transformation of knowledge into money.
+
+    -- Geoff Nicholson [#]_
+
+.. [#] http://www.theguardian.com/money/2010/apr/25/post-it-notes
