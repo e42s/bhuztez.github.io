@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>C-c C-k</title><link href="http://bhuztez.github.io/" rel="alternate"></link><link href="http://bhuztez.github.io/feeds.atom" rel="self"></link><id>http://bhuztez.github.io/</id><updated>2015-06-09T00:00:00+08:00</updated><entry><title>概率论基础</title><link href="http://bhuztez.github.io/2015/probability-theory.html" rel="alternate"></link><updated>2015-06-09T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2015-06-09:2015/probability-theory.html</id><summary type="html">&lt;p&gt;在大数据，机器学习大行其道的今天，很多人却避而不谈概率，甚至会有人认为概率不重要。即便是很多提到概率的，也不能把概率讲清楚。要理解概率还是得看E.T. Jaynes的 &lt;a class="reference external" href="http://omega.albany.edu:8008/JaynesBook.html"&gt;Probability Theory: the Logic of Science&lt;/a&gt; 和 A.N. Kolmogorov 的 &lt;a class="reference external" href="http://www.kolmogorov.com/Foundations.html"&gt;Foundations of the Theory of Probability&lt;/a&gt; 。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>C-c C-k</title><link href="http://bhuztez.github.io/" rel="alternate"></link><link href="http://bhuztez.github.io/feeds.atom" rel="self"></link><id>http://bhuztez.github.io/</id><updated>2015-10-07T00:00:00+08:00</updated><entry><title>把Android设备变成USB摄像头</title><link href="http://bhuztez.github.io/2015/turn-android-into-usb-webcam.html" rel="alternate"></link><updated>2015-10-07T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2015-10-07:2015/turn-android-into-usb-webcam.html</id><summary type="html">&lt;p&gt;闲置的山寨Android设备也不能浪费啊。看上去只要装个&lt;a class="reference external" href="https://play.google.com/store/apps/details?id=com.pas.webcam&amp;amp;hl=en"&gt;IP WebCam&lt;/a&gt;就好了。实际上却比这折腾的多了。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;首先，有些奇怪的设备在刚插入时，没法直接使用设备，会先进入给你的机器装驱动的模式，这样就没法用ADB了。需要用 usb_modeswitch 才行。&lt;/p&gt;
+&lt;p&gt;先用lsusb找到新插入USB设备的ID。&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+Bus 001 Device 001: ID 0001:0002 Vender Info
+&lt;/pre&gt;
+&lt;p&gt;假如是像上面这样的，可以用以下命令。可能还需要 &lt;code&gt;--huawei-mode&lt;/code&gt; 之类的参数&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+usb_modeswitch -v 0001 -p 0002
+&lt;/pre&gt;
+&lt;p&gt;ADB能连上之后，装上IP WebCam，设置好端口转发，就能用比如vlc，看摄像头的视频了。&lt;/p&gt;
+&lt;p&gt;参考&lt;a class="reference external" href="https://github.com/bluezio/ipwebcam-gst/blob/master/prepare-videochat.sh"&gt;ipwebcam-gst&lt;/a&gt;里的说明，检查是不是能用GStreamer播放。&lt;/p&gt;
+&lt;p&gt;安装&lt;a class="reference external" href="https://github.com/umlaeute/v4l2loopback"&gt;v4l2loopback&lt;/a&gt;内核模块。这样就能有 /dev/video0 了。可是有点小问题，在Fedora上并不能用GStreamer的v4l2sink把视频传进去，需要修改一下代码。&lt;/p&gt;
+&lt;p&gt;注意，Skype需要一些特别的参数，参考v4l2loopback &lt;a class="reference external" href="https://github.com/umlaeute/v4l2loopback/wiki/Skype"&gt;Wiki&lt;/a&gt;里的说明&lt;/p&gt;
+</summary></entry><entry><title>概率论基础</title><link href="http://bhuztez.github.io/2015/probability-theory.html" rel="alternate"></link><updated>2015-06-09T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2015-06-09:2015/probability-theory.html</id><summary type="html">&lt;p&gt;在大数据，机器学习大行其道的今天，很多人却避而不谈概率，甚至会有人认为概率不重要。即便是很多提到概率的，也不能把概率讲清楚。要理解概率还是得看E.T. Jaynes的 &lt;a class="reference external" href="http://omega.albany.edu:8008/JaynesBook.html"&gt;Probability Theory: the Logic of Science&lt;/a&gt; 和 A.N. Kolmogorov 的 &lt;a class="reference external" href="http://www.kolmogorov.com/Foundations.html"&gt;Foundations of the Theory of Probability&lt;/a&gt; 。&lt;/p&gt;
 &lt;!-- more --&gt;
 &lt;p&gt;概率论的形式化早已经完成。到现在还讲不清楚，真的很奇怪了。可现实偏偏是这样的。概率论不见的有多难啊，怎么也比SVM那些fancy的技巧容易多了。先列出符合直觉的事件运算必须满足的性质，给每个事件指定个概率，找到能同时满足这些条件的理论，就是概率公理了。有了概率公理，就可以根据定义得出条件概率的计算公式，进而可以得到Bayes公式。而根据Wallis Derivation可以得到最大熵原理，加上各种约束条件就能解出各种不同的分布了。还有Hammersley-Clifford定理告诉我们，Markov性质和Gibbs Measure的意义是一样的。&lt;/p&gt;
 </summary></entry><entry><title>Erlang代码热更新</title><link href="http://bhuztez.github.io/2015/how-erlang-change-code.html" rel="alternate"></link><updated>2015-06-04T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2015-06-04:2015/how-erlang-change-code.html</id><summary type="html">&lt;p&gt;Erlang代码热更新是一件很简单的事。很多教程都偏重于介绍工具的使用，而忽略了热更新过程本身。Erlang官方文档里面倒是都有，只是内容分的比较散，更适合熟悉Erlang的人查阅。&lt;/p&gt;
