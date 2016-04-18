@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>C-c C-k</title><link href="http://bhuztez.github.io/" rel="alternate"></link><link href="http://bhuztez.github.io/feeds.atom" rel="self"></link><id>http://bhuztez.github.io/</id><updated>2015-10-07T00:00:00+08:00</updated><entry><title>把Android设备变成USB摄像头</title><link href="http://bhuztez.github.io/2015/turn-android-into-usb-webcam.html" rel="alternate"></link><updated>2015-10-07T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2015-10-07:2015/turn-android-into-usb-webcam.html</id><summary type="html">&lt;p&gt;闲置的山寨Android设备也不能浪费啊。看上去只要装个&lt;a class="reference external" href="https://play.google.com/store/apps/details?id=com.pas.webcam&amp;amp;hl=en"&gt;IP WebCam&lt;/a&gt;就好了。实际上却比这折腾的多了。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>C-c C-k</title><link href="http://bhuztez.github.io/" rel="alternate"></link><link href="http://bhuztez.github.io/feeds.atom" rel="self"></link><id>http://bhuztez.github.io/</id><updated>2016-04-08T00:00:00+08:00</updated><entry><title>创建Fedora chroot</title><link href="http://bhuztez.github.io/2016/chroot.html" rel="alternate"></link><updated>2016-04-08T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2016-04-08:2016/chroot.html</id><summary type="html">&lt;p&gt;在Fedora 21之前，要创建chroot都比较容易，可以参考 &lt;a class="reference external" href="http://blog.parahard.com/2011/06/five-steps-to-create-fedora-chroot-jail.html"&gt;Five steps to create Fedora chroot jail using yum&lt;/a&gt; 。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;自从Fedora 21开始，fedora-release不再像以前那样了。fedora-release会依赖bash，bash又会依赖更多包，一个个去找过来是不现实的。所以只能强制安装了。&lt;/p&gt;
+&lt;p&gt;先建好目录，初始化RPM的db&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+mkdir -p /path/to/chroot/root
+rpm --root &amp;quot;/path/to/chroot/root&amp;quot; --initdb
+&lt;/pre&gt;
+&lt;p&gt;装包时，需要让rpm相信自己是root。比如可以用 &lt;code&gt;userns spawn -n chroot --user -- /bin/bash&lt;/code&gt; 来建一个user namespace，因为安装需要联网，所以不建新的network namespace。更新的Fedora已经用dnf替换yum了，所以更推荐使用dnf来安装。&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+rpm -ivh --nodeps --root &amp;quot;/path/to/chroot/root&amp;quot; fedora-repos-23-1.noarch.rpm fedora-release-23-1.noarch.rpm
+dnf --installroot=&amp;quot;/path/to/chroot/root&amp;quot; install coreutils bash
+&lt;/pre&gt;
+&lt;p&gt;安装完成后，就可以进入chroot了&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;
+chroot &amp;quot;/path/to/chroot/root&amp;quot; /bin/bash
+&lt;/pre&gt;
+</summary></entry><entry><title>把Android设备变成USB摄像头</title><link href="http://bhuztez.github.io/2015/turn-android-into-usb-webcam.html" rel="alternate"></link><updated>2015-10-07T00:00:00+08:00</updated><author><name>me</name></author><id>tag:bhuztez.github.io,2015-10-07:2015/turn-android-into-usb-webcam.html</id><summary type="html">&lt;p&gt;闲置的山寨Android设备也不能浪费啊。看上去只要装个&lt;a class="reference external" href="https://play.google.com/store/apps/details?id=com.pas.webcam&amp;amp;hl=en"&gt;IP WebCam&lt;/a&gt;就好了。实际上却比这折腾的多了。&lt;/p&gt;
 &lt;!-- more --&gt;
 &lt;p&gt;首先，有些奇怪的设备在刚插入时，没法直接使用设备，会先进入给你的机器装驱动的模式，这样就没法用ADB了。需要用 usb_modeswitch 才行。&lt;/p&gt;
 &lt;p&gt;先用lsusb找到新插入USB设备的ID。&lt;/p&gt;

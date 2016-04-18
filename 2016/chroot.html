@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+      <meta charset="utf-8" />
+    <title>C-c C-k &middot; 创建Fedora chroot</title>
+    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
+    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+
+
+
+</head>
+<body>
+    <header>
+        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
+            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        </nav>
+        <div class="header_box">
+            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h2>to impress your cat</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Apr 08, 2016</h4>
+            <article class="post">
+<h2 class="title">
+                    <a href="http://bhuztez.github.io/2016/chroot.html" rel="bookmark" title="Permanent Link to &quot;创建Fedora chroot&quot;">创建Fedora chroot</a>
+                </h2>
+<p>在Fedora 21之前，要创建chroot都比较容易，可以参考 <a class="reference external" href="http://blog.parahard.com/2011/06/five-steps-to-create-fedora-chroot-jail.html">Five steps to create Fedora chroot jail using yum</a> 。</p>
+<!-- more -->
+<p>自从Fedora 21开始，fedora-release不再像以前那样了。fedora-release会依赖bash，bash又会依赖更多包，一个个去找过来是不现实的。所以只能强制安装了。</p>
+<p>先建好目录，初始化RPM的db</p>
+<pre class="code literal-block">
+mkdir -p /path/to/chroot/root
+rpm --root &quot;/path/to/chroot/root&quot; --initdb
+</pre>
+<p>装包时，需要让rpm相信自己是root。比如可以用 <code>userns spawn -n chroot --user -- /bin/bash</code> 来建一个user namespace，因为安装需要联网，所以不建新的network namespace。更新的Fedora已经用dnf替换yum了，所以更推荐使用dnf来安装。</p>
+<pre class="code literal-block">
+rpm -ivh --nodeps --root &quot;/path/to/chroot/root&quot; fedora-repos-23-1.noarch.rpm fedora-release-23-1.noarch.rpm
+dnf --installroot=&quot;/path/to/chroot/root&quot; install coreutils bash
+</pre>
+<p>安装完成后，就可以进入chroot了</p>
+<pre class="code literal-block">
+chroot &quot;/path/to/chroot/root&quot; /bin/bash
+</pre>
+<div class="clear"></div>
+                <div class="info">
+                </div>
+
+            </article>
+            <div class="clear"></div><div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'bhuztez-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>
