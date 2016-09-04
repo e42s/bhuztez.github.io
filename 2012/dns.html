@@ -3,23 +3,23 @@
 <head>
       <meta charset="utf-8" />
     <title>C-c C-k &middot; DNS基本配置</title>
-    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
-    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+    <link rel="shortcut icon" href="https://bhuztez.github.io/favicon.ico" />
+    <link href="https://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
 
 
 
 </head>
 <body>
     <header>
-        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
-            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
-            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        <nav>            <li><a href="https://bhuztez.github.io/">Home</a></li>
+            <li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
         </nav>
         <div class="header_box">
-            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h1><a href="https://bhuztez.github.io/">C-c C-k</a></h1>
             <h2>to impress your cat</h2>
         </div>
     </header>
@@ -27,7 +27,7 @@
         <div id="content">            <h4 class="date">Aug 06, 2012</h4>
             <article class="post">
 <h2 class="title">
-                    <a href="http://bhuztez.github.io/2012/dns.html" rel="bookmark" title="Permanent Link to &quot;DNS基本配置&quot;">DNS基本配置</a>
+                    <a href="https://bhuztez.github.io/2012/dns.html" rel="bookmark" title="Permanent Link to &quot;DNS基本配置&quot;">DNS基本配置</a>
                 </h2>
 <p>因为DNSSEC和SSHFP配置步骤还是有点多的，在这里记录一下</p>
 <!-- more -->
@@ -41,16 +41,16 @@
 </tbody>
 </table>
 <pre class="code bash literal-block">
-<span class="c">#!/usr/bin/env bash
+<span class="ch">#!/usr/bin/env bash
 </span>
-<span class="nv">ROOT</span><span class="o">=</span><span class="s2">&quot;$(pwd)&quot;</span>
+<span class="nv">ROOT</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">&quot;</span>
 
-mkdir -p <span class="s2">&quot;${ROOT}/keys&quot;</span>
-mkdir -p <span class="s2">&quot;${ROOT}/zones&quot;</span>
+mkdir -p <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/keys&quot;</span>
+mkdir -p <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/zones&quot;</span>
 
-<span class="k">if</span> <span class="o">[[</span> ! -e <span class="s2">&quot;named.conf&quot;</span> <span class="o">]]</span>; <span class="k">then
+<span class="k">if</span> <span class="o">[[</span> ! -e <span class="s2">&quot;named.conf&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
 
-</span>cat &gt;<span class="s2">&quot;named.conf&quot;</span> <span class="s">&lt;&lt; EOF
+cat &gt;<span class="s2">&quot;named.conf&quot;</span> <span class="s">&lt;&lt; EOF
 options {
         listen-on               port 8053       { 127.0.0.1; };
         directory               &quot;${ROOT}/zones&quot;;
@@ -65,9 +65,9 @@ options {
 controls {};
 EOF</span>
 
-<span class="k">fi
+<span class="k">fi</span>
 
-</span>named -c named.conf -g
+named -c named.conf -g
 </pre>
 </div>
 <div class="section" id="zone">
@@ -96,7 +96,7 @@ ns.example.com.             A       127.0.0.1
 </pre>
 <p>使用 <code>dig</code> 来查询</p>
 <pre class="code console literal-block">
-<span class="gp">$</span> dig -p 8053 &#64;127.0.0.1 example.com
+<span class="gp">$</span> dig -p <span class="m">8053</span> &#64;127.0.0.1 example.com
 <span class="go">
 ; &lt;&lt;&gt;&gt; DiG 9.8.2-RedHat-9.8.2-1.fc16 &lt;&lt;&gt;&gt; -p 8053 &#64;127.0.0.1 example.com
 ; (1 server found)
@@ -139,14 +139,14 @@ zone &quot;example.com.&quot; {
 <pre class="code console literal-block">
 <span class="gp">$</span> nsupdate -k session.key
 <span class="gp">&gt;</span> server localhost 8053
-<span class="gp">&gt;</span> update add www.example.com. 300 A 127.0.0.1
+<span class="gp">&gt;</span> update add www.example.com. <span class="m">300</span> A 127.0.0.1
 <span class="gp">&gt;</span> send
 <span class="gp">&gt;</span> quit
 <span class="gp">$</span>
 </pre>
 <p>用 <code>dig</code> 查询结果</p>
 <pre class="code console literal-block">
-<span class="gp">$</span> dig -p 8053 &#64;127.0.0.1 www.example.com
+<span class="gp">$</span> dig -p <span class="m">8053</span> &#64;127.0.0.1 www.example.com
 <span class="go">
 ; &lt;&lt;&gt;&gt; DiG 9.8.2-RedHat-9.8.2-1.fc16 &lt;&lt;&gt;&gt; -p 8053 &#64;127.0.0.1 www.example.com
 ; (1 server found)
@@ -183,7 +183,7 @@ update delete www.example.com. A
 </pre>
 <p>生成修改记录用的key</p>
 <pre class="code console literal-block">
-<span class="gp">$</span> dnssec-keygen -T KEY -a HMAC-SHA512 -b 512 -n USER user
+<span class="gp">$</span> dnssec-keygen -T KEY -a HMAC-SHA512 -b <span class="m">512</span> -n USER user
 <span class="go">Kuser.+165+40835
 </span><span class="gp">$</span> cat Kuser.+165+40835.key
 <span class="go">user. IN KEY 0 3 165 C25Jqxj2ZY8m18yaANh9FpvKhHPXksoOtlOH8XemcV4YB4JSfmbqEmbf lpZIBgeTHqPkMNv08jbyluawecL5yA==
@@ -222,17 +222,17 @@ zone &quot;example.com.&quot; {
 <span class="kn">import</span> <span class="nn">dns.rdatatype</span>
 
 <span class="n">keyring</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">tsigkeyring</span><span class="o">.</span><span class="n">from_text</span><span class="p">({</span>
-    <span class="s">'user.'</span><span class="p">:</span> <span class="s">&quot;C25Jqxj2ZY8m18yaANh9FpvKhHPXksoOtlOH8XemcV4YB4JSfmbqEmbflpZIBgeTHqPkMNv08jbyluawecL5yA==&quot;</span>
+    <span class="s1">'user.'</span><span class="p">:</span> <span class="s2">&quot;C25Jqxj2ZY8m18yaANh9FpvKhHPXksoOtlOH8XemcV4YB4JSfmbqEmbflpZIBgeTHqPkMNv08jbyluawecL5yA==&quot;</span>
 <span class="p">})</span>
 
 <span class="n">update</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">update</span><span class="o">.</span><span class="n">Update</span><span class="p">(</span>
-    <span class="s">'example.com.'</span><span class="p">,</span>
+    <span class="s1">'example.com.'</span><span class="p">,</span>
     <span class="n">keyring</span><span class="o">=</span><span class="n">keyring</span><span class="p">,</span>
     <span class="n">keyalgorithm</span><span class="o">=</span><span class="n">dns</span><span class="o">.</span><span class="n">tsig</span><span class="o">.</span><span class="n">HMAC_SHA512</span><span class="p">)</span>
 
-<span class="n">update</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">'www'</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">dns</span><span class="o">.</span><span class="n">rdatatype</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="s">'127.0.0.1'</span><span class="p">)</span>
+<span class="n">update</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">'www'</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">dns</span><span class="o">.</span><span class="n">rdatatype</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="s1">'127.0.0.1'</span><span class="p">)</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">tcp</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="s">'127.0.0.1'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8053</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">tcp</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="s1">'127.0.0.1'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8053</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">response</span>
 </pre>
 <p>运行</p>
@@ -314,16 +314,16 @@ zone &quot;example.com.&quot; {
 </pre>
 <p>slave的配置，只要把zone的 <code>masters</code> 设置好就可以了。</p>
 <pre class="code bash literal-block">
-<span class="c">#!/usr/bin/env bash
+<span class="ch">#!/usr/bin/env bash
 </span>
-<span class="nv">ROOT</span><span class="o">=</span><span class="s2">&quot;$(pwd)&quot;</span>
+<span class="nv">ROOT</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">&quot;</span>
 
-mkdir -p <span class="s2">&quot;${ROOT}/slave-keys&quot;</span>
-mkdir -p <span class="s2">&quot;${ROOT}/slave-zones&quot;</span>
+mkdir -p <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/slave-keys&quot;</span>
+mkdir -p <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/slave-zones&quot;</span>
 
-<span class="k">if</span> <span class="o">[[</span> ! -e <span class="s2">&quot;slave.conf&quot;</span> <span class="o">]]</span>; <span class="k">then
+<span class="k">if</span> <span class="o">[[</span> ! -e <span class="s2">&quot;slave.conf&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
 
-</span>cat &gt;<span class="s2">&quot;slave.conf&quot;</span> <span class="s">&lt;&lt; EOF
+cat &gt;<span class="s2">&quot;slave.conf&quot;</span> <span class="s">&lt;&lt; EOF
 options {
         listen-on               port 8153       { 127.0.0.1; };
         directory               &quot;${ROOT}/slave-zones&quot;;
@@ -343,22 +343,22 @@ zone &quot;example.com.&quot; {
 };
 EOF</span>
 
-<span class="k">fi
+<span class="k">fi</span>
 
-</span>named -c slave.conf -g
+named -c slave.conf -g
 </pre>
 </div>
 <div class="section" id="dnssec">
 <h2>DNSSEC</h2>
 <p>在zones目录下，生成ZSK</p>
 <pre class="code console literal-block">
-<span class="gp">$</span> dnssec-keygen -a rsasha512 -b 1024 -n ZONE example.com.
+<span class="gp">$</span> dnssec-keygen -a rsasha512 -b <span class="m">1024</span> -n ZONE example.com.
 <span class="go">Generating key pair......................++++++ ...............++++++
 Kexample.com.+010+41861</span>
 </pre>
 <p>生成KSK</p>
 <pre class="code console literal-block">
-<span class="gp">$</span> dnssec-keygen -a rsasha512 -b 1024 -n ZONE -f KSK example.com.
+<span class="gp">$</span> dnssec-keygen -a rsasha512 -b <span class="m">1024</span> -n ZONE -f KSK example.com.
 <span class="go">Generating key pair.........................++++++ .....................................++++++
 Kexample.com.+010+49764</span>
 </pre>
@@ -389,7 +389,7 @@ dnssec-enable           yes;
 </pre>
 <p>启动bind，查看DNSKEY</p>
 <pre class="code console literal-block">
-<span class="gp">$</span> dig -p 8053 &#64;localhost  +multi +noall +answer DNSKEY example.com.
+<span class="gp">$</span> dig -p <span class="m">8053</span> &#64;localhost  +multi +noall +answer DNSKEY example.com.
 <span class="go">example.com.            300 IN DNSKEY 256 3 10 (
                                 AwEAAbexLhdu6Fk91XVCZlXPuJUD4BfigFUFhEkijwrF
                                 CF6KCAuixIt4tob2l4yTw/txAbGuzNz5t4oI/GUifniJ
@@ -409,7 +409,7 @@ example.com.            300 IN DNSKEY 257 3 10 AwEAAboBxp1wNbmxhINtxORCNfwQQaZ3Q
 </pre>
 <p>用 <code>dig</code> 来验证</p>
 <pre class="code console literal-block">
-<span class="gp">$</span> dig -p 8053 &#64;localhost A example.com. +sigchase +trusted-key<span class="o">=</span>trusted-key.key
+<span class="gp">$</span> dig -p <span class="m">8053</span> &#64;localhost A example.com. +sigchase +trusted-key<span class="o">=</span>trusted-key.key
 <span class="go">;; RRset to chase:
 example.com.            300     IN      A       127.0.0.1
 
@@ -460,16 +460,16 @@ example.com.            257 3 10 &quot;AwEAAboBxp1wNbmxhINtxORCNfwQQaZ3QlTtlxfV+
 <h3>bind</h3>
 <p>启动bind作为recursive resolver</p>
 <pre class="code bash literal-block">
-<span class="c">#!/usr/bin/env bash
+<span class="ch">#!/usr/bin/env bash
 </span>
-<span class="nv">ROOT</span><span class="o">=</span><span class="s2">&quot;$(pwd)&quot;</span>
+<span class="nv">ROOT</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">&quot;</span>
 
-mkdir -p <span class="s2">&quot;${ROOT}/recursive-keys&quot;</span>
-mkdir -p <span class="s2">&quot;${ROOT}/recursive-zones&quot;</span>
+mkdir -p <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/recursive-keys&quot;</span>
+mkdir -p <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/recursive-zones&quot;</span>
 
-<span class="k">if</span> <span class="o">[[</span> ! -e <span class="s2">&quot;recursive.conf&quot;</span> <span class="o">]]</span>; <span class="k">then
+<span class="k">if</span> <span class="o">[[</span> ! -e <span class="s2">&quot;recursive.conf&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
 
-</span>cat &gt;<span class="s2">&quot;recursive.conf&quot;</span> <span class="s">&lt;&lt; EOF
+cat &gt;<span class="s2">&quot;recursive.conf&quot;</span> <span class="s">&lt;&lt; EOF
 options {
         listen-on               port 8253       { 127.0.0.1; };
         directory               &quot;${ROOT}/recursive-zones&quot;;
@@ -488,13 +488,13 @@ controls {};
 include &quot;${ROOT}/trusted-keys&quot;;
 EOF</span>
 
-<span class="k">fi
+<span class="k">fi</span>
 
-</span>named -c recursive.conf -g
+named -c recursive.conf -g
 </pre>
 <p>使用 <code>dig</code> 查看结果</p>
 <pre class="code console literal-block">
-<span class="gp">$</span> dig -p 8253 &#64;localhost example.com. +dnssec
+<span class="gp">$</span> dig -p <span class="m">8253</span> &#64;localhost example.com. +dnssec
 <span class="go">
 ; &lt;&lt;&gt;&gt; DiG 9.8.2-RedHat-9.8.2-1.fc16 &lt;&lt;&gt;&gt; -p 8253 &#64;localhost example.com. +dnssec
 ; (1 server found)
@@ -526,14 +526,14 @@ example.com.            78      IN      RRSIG   NS 10 2 300 20120909052125 20120
 <h3>unbound</h3>
 <p>启动unbound作为recursive resolver</p>
 <pre class="code bash literal-block">
-<span class="c">#!/usr/bin/env bash
+<span class="ch">#!/usr/bin/env bash
 </span>
-<span class="nv">ROOT</span><span class="o">=</span><span class="s2">&quot;$(pwd)&quot;</span>
+<span class="nv">ROOT</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">&quot;</span>
 
 
-<span class="k">if</span> <span class="o">[[</span> ! -e <span class="s2">&quot;unbound.conf&quot;</span> <span class="o">]]</span>; <span class="k">then
+<span class="k">if</span> <span class="o">[[</span> ! -e <span class="s2">&quot;unbound.conf&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
 
-</span>cat &gt;<span class="s2">&quot;unbound.conf&quot;</span> <span class="s">&lt;&lt; EOF
+cat &gt;<span class="s2">&quot;unbound.conf&quot;</span> <span class="s">&lt;&lt; EOF
 server:
     num-threads: 1
     port: 8353
@@ -552,13 +552,13 @@ forward-zone:
     forward-addr: 127.0.0.1&#64;8053
 EOF</span>
 
-<span class="k">fi
+<span class="k">fi</span>
 
-</span>unbound -c unbound.conf
+unbound -c unbound.conf
 </pre>
 <p>使用 <code>dig</code> 查看结果</p>
 <pre class="code console literal-block">
-<span class="gp">$</span> dig -p 8353 &#64;localhost example.com. +dnssec
+<span class="gp">$</span> dig -p <span class="m">8353</span> &#64;localhost example.com. +dnssec
 <span class="go">
 ; &lt;&lt;&gt;&gt; DiG 9.8.2-RedHat-9.8.2-1.fc16 &lt;&lt;&gt;&gt; -p 8353 &#64;localhost example.com. +dnssec
 ; (1 server found)
@@ -611,7 +611,7 @@ Host example.com
 </pre>
 <p>运行一个临时的SSH Server</p>
 <pre class="code python literal-block">
-<span class="c">#!/usr/bin/env python2</span>
+<span class="ch">#!/usr/bin/env python2</span>
 
 <span class="kn">from</span> <span class="nn">twisted.python</span> <span class="kn">import</span> <span class="n">log</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -621,7 +621,7 @@ Host example.com
 <span class="kn">from</span> <span class="nn">twisted.conch.ssh</span> <span class="kn">import</span> <span class="n">factory</span>
 <span class="kn">from</span> <span class="nn">twisted.conch.ssh</span> <span class="kn">import</span> <span class="n">keys</span>
 
-<span class="n">SSHD_KEY</span> <span class="o">=</span> <span class="s">'id_rsa'</span>
+<span class="n">SSHD_KEY</span> <span class="o">=</span> <span class="s1">'id_rsa'</span>
 
 <span class="n">PUBLIC_KEY</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="n">SSHD_KEY</span><span class="p">)</span>
 <span class="n">PRIVATE_KEY</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="n">SSHD_KEY</span><span class="p">)</span>
@@ -639,20 +639,20 @@ Host example.com
 </pre>
 <p>劫持SSH客户端的DNS请求，将其发往8253端口</p>
 <pre class="code c literal-block">
-<span class="cp">#include &lt;sys/types.h&gt;
-#include &lt;sys/socket.h&gt;
-#include &lt;netinet/in.h&gt;
-#include &lt;netdb.h&gt;
-#include &lt;errno.h&gt;
+<span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;sys/socket.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;netinet/in.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;netdb.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;errno.h&gt;</span><span class="cp">
 </span>
-<span class="cp">#include &lt;stdio.h&gt;
-#include &lt;stdint.h&gt;
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
 #define __USE_GNU
-#include &lt;dlfcn.h&gt;
+#include</span> <span class="cpf">&lt;dlfcn.h&gt;</span><span class="cp">
 </span>
 
-<span class="k">static</span> <span class="kt">in_port_t</span> <span class="n">sendto_port</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="k">static</span> <span class="kt">in_addr_t</span> <span class="n">sendto_addr</span> <span class="o">=</span> <span class="n">INADDR_NONE</span><span class="p">;</span>
+<span class="k">static</span> <span class="n">in_port_t</span> <span class="n">sendto_port</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">static</span> <span class="n">in_addr_t</span> <span class="n">sendto_addr</span> <span class="o">=</span> <span class="n">INADDR_NONE</span><span class="p">;</span>
 
 <span class="kt">int</span> <span class="nf">connect</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">addr</span><span class="p">,</span> <span class="kt">socklen_t</span> <span class="n">addrlen</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">static</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">_connect</span><span class="p">)(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">addr</span><span class="p">,</span> <span class="kt">socklen_t</span> <span class="n">addrlen</span><span class="p">)</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
@@ -685,7 +685,7 @@ Host example.com
 </pre>
 <p>编译，通过 <code>LD_PRELOAD</code> 运行SSH客户端</p>
 <pre class="code console literal-block">
-<span class="gp">$</span> <span class="nv">LD_PRELOAD</span><span class="o">=</span><span class="s2">&quot;$(pwd)/hook.so&quot;</span> ssh -v -i id_rsa -F config example.com
+<span class="gp">$</span> <span class="nv">LD_PRELOAD</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/hook.so&quot;</span> ssh -v -i id_rsa -F config example.com
 <span class="go">OpenSSH_5.8p2, OpenSSL 1.0.0i-fips 19 Apr 2012
 debug1: Reading configuration data config
 debug1: Applying options for example.com
@@ -741,7 +741,7 @@ Connection closed by 127.0.0.1</span>
                 &middot;
                 Powered by <a href="http://getpelican.com">Pelican</a>
                 &middot;
-                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+                <a href="https://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
             </footer>
         </div>
         <div class="clear"></div>

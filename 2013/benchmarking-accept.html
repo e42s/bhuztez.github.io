@@ -3,23 +3,23 @@
 <head>
       <meta charset="utf-8" />
     <title>C-c C-k &middot; 比谁accept()快</title>
-    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
-    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+    <link rel="shortcut icon" href="https://bhuztez.github.io/favicon.ico" />
+    <link href="https://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
 
 
 
 </head>
 <body>
     <header>
-        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
-            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
-            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        <nav>            <li><a href="https://bhuztez.github.io/">Home</a></li>
+            <li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
         </nav>
         <div class="header_box">
-            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h1><a href="https://bhuztez.github.io/">C-c C-k</a></h1>
             <h2>to impress your cat</h2>
         </div>
     </header>
@@ -27,25 +27,25 @@
         <div id="content">            <h4 class="date">Nov 23, 2013</h4>
             <article class="post">
 <h2 class="title">
-                    <a href="http://bhuztez.github.io/2013/benchmarking-accept.html" rel="bookmark" title="Permanent Link to &quot;比谁accept()快&quot;">比谁accept()快</a>
+                    <a href="https://bhuztez.github.io/2013/benchmarking-accept.html" rel="bookmark" title="Permanent Link to &quot;比谁accept()快&quot;">比谁accept()快</a>
                 </h2>
 <p>不知道为什么<a class="reference external" href="http://avplayer.org/">国内技术第一的开源社区</a>会去<a class="reference external" href="http://avboost.com/t/asio/347">反驳</a>一个<a class="reference external" href="http://my.oschina.net/u/200693/blog/34462">很不合理的benchmark</a>。那个benchmark竟然用了Erlang臭名昭著的 <code>io:format</code> ，莫名其妙地把 <code>socket</code> 设置成 <code>active</code> ，还不自量力地和C++去比速度，C++代码还是Boost库文档里的<a class="reference external" href="http://www.boost.org/doc/libs/1_55_0/doc/html/boost_asio/example/cpp03/echo/async_tcp_echo_server.cpp">例子</a>。</p>
 <!-- more -->
 <p>而国内技术第一的开源社区给出的benchmark实际上就是比 <code>accept()</code> 。所以要把 <code>accept</code> 的 <code>process</code> 的 <code>priority</code> 设置成 <code>max</code> 才行。另外，Erlang默认的port数量设得比较小，需要把 <code>ERL_MAX_PORTS</code> 改得大一点。</p>
-<p>国内技术第一的开源社区的benchmark就一次10000个连接，结束得太快了。我又懒得改ulimit上限，同时只有4000个就只有4000个吧，总数设成80万个连接。不会C++，就用C写了<a class="reference external" href="http://bhuztez.github.io/accept/client.c">个</a>。</p>
-<p><a class="reference external" href="http://bhuztez.github.io/accept/server.c">C版本</a>的结果</p>
+<p>国内技术第一的开源社区的benchmark就一次10000个连接，结束得太快了。我又懒得改ulimit上限，同时只有4000个就只有4000个吧，总数设成80万个连接。不会C++，就用C写了<a class="reference external" href="https://bhuztez.github.io/accept/client.c">个</a>。</p>
+<p><a class="reference external" href="https://bhuztez.github.io/accept/server.c">C版本</a>的结果</p>
 <pre class="code literal-block">
 real    1m34.921s
 user    0m0.498s
 sys     1m9.674s
 </pre>
-<p><a class="reference external" href="http://bhuztez.github.io/accept/server.cpp">Boost/ASIO版本</a>的结果</p>
+<p><a class="reference external" href="https://bhuztez.github.io/accept/server.cpp">Boost/ASIO版本</a>的结果</p>
 <pre class="code literal-block">
 real    1m34.972s
 user    0m0.495s
 sys     1m10.013s
 </pre>
-<p><a class="reference external" href="http://bhuztez.github.io/accept/server.erl">Erlang版本</a>的结果</p>
+<p><a class="reference external" href="https://bhuztez.github.io/accept/server.erl">Erlang版本</a>的结果</p>
 <pre class="code literal-block">
 real    1m39.437s
 user    0m0.520s
@@ -78,7 +78,7 @@ sys     1m11.655s
                 &middot;
                 Powered by <a href="http://getpelican.com">Pelican</a>
                 &middot;
-                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+                <a href="https://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
             </footer>
         </div>
         <div class="clear"></div>

@@ -3,23 +3,23 @@
 <head>
       <meta charset="utf-8" />
     <title>C-c C-k &middot; 编译SystemC 2.2.0的问题</title>
-    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
-    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+    <link rel="shortcut icon" href="https://bhuztez.github.io/favicon.ico" />
+    <link href="https://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
 
 
 
 </head>
 <body>
     <header>
-        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
-            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
-            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        <nav>            <li><a href="https://bhuztez.github.io/">Home</a></li>
+            <li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
         </nav>
         <div class="header_box">
-            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h1><a href="https://bhuztez.github.io/">C-c C-k</a></h1>
             <h2>to impress your cat</h2>
         </div>
     </header>
@@ -27,14 +27,13 @@
         <div id="content">            <h4 class="date">Apr 12, 2009</h4>
             <article class="post">
 <h2 class="title">
-                    <a href="http://bhuztez.github.io/2009/compiling-systemc.html" rel="bookmark" title="Permanent Link to &quot;编译SystemC 2.2.0的问题&quot;">编译SystemC 2.2.0的问题</a>
+                    <a href="https://bhuztez.github.io/2009/compiling-systemc.html" rel="bookmark" title="Permanent Link to &quot;编译SystemC 2.2.0的问题&quot;">编译SystemC 2.2.0的问题</a>
                 </h2>
 <p>居然连编译都有困难，SystemC的表现令人失望。看了<a class="reference external" href="http://forums.fedoraforum.org/showthread.php?t=199153">这个帖子</a>的#7之后，才发现居然还是个低级错误，要修改 <code>systemc-2.2.0/src/sysc/utils/sc_utils_ids.cpp</code> 这个文件，更加C++一点的写法是像下面这样的：</p>
 <!-- more -->
 <pre class="code c++ literal-block">
-<span class="cp">#include &lt;cstdlib&gt;
-#include &lt;cstring&gt;
-</span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstdlib&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cstring&gt;</span>
 </pre>
 <p>另外，SCV在我这里就连configure都不行，后来一看，竟然从2006年到现在还没更新过，怪不得里面用的automake的版本号都小得有点离奇。</p>
 <div class="clear"></div>
@@ -62,7 +61,7 @@
                 &middot;
                 Powered by <a href="http://getpelican.com">Pelican</a>
                 &middot;
-                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+                <a href="https://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
             </footer>
         </div>
         <div class="clear"></div>

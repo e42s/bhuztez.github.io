@@ -3,23 +3,23 @@
 <head>
       <meta charset="utf-8" />
     <title>C-c C-k &middot; pppd插件编写</title>
-    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
-    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+    <link rel="shortcut icon" href="https://bhuztez.github.io/favicon.ico" />
+    <link href="https://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
 
 
 
 </head>
 <body>
     <header>
-        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
-            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
-            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        <nav>            <li><a href="https://bhuztez.github.io/">Home</a></li>
+            <li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
         </nav>
         <div class="header_box">
-            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h1><a href="https://bhuztez.github.io/">C-c C-k</a></h1>
             <h2>to impress your cat</h2>
         </div>
     </header>
@@ -27,7 +27,7 @@
         <div id="content">            <h4 class="date">Nov 06, 2008</h4>
             <article class="post">
 <h2 class="title">
-                    <a href="http://bhuztez.github.io/2008/pppd-plugin.html" rel="bookmark" title="Permanent Link to &quot;pppd插件编写&quot;">pppd插件编写</a>
+                    <a href="https://bhuztez.github.io/2008/pppd-plugin.html" rel="bookmark" title="Permanent Link to &quot;pppd插件编写&quot;">pppd插件编写</a>
                 </h2>
 <p>先 <code>yum install ppp-devel</code> ，接着就可以在代码中使用 <code>#include &lt;pppd/pppd.h&gt;</code> 和 <code>char pppd_version[] = VERSION;</code> 以确保plugin能被pppd使用。</p>
 <p>pap_passwd_hook被调用的过程还是很令人困惑的。首先，第一次被调用的时候，参数user是有分配空间的，为了让pap_passwd_hook被调用，是不能传入password的，导致第一次被调用的时候，参数passwd没有被分配空间，是NULL。若第一次修改了用户名，第二次调用的时候会传入修改过的用户名，而第二次passwd被分配了空间，此时可以strcpy。</p>
@@ -37,7 +37,7 @@
 <span class="k">static</span> <span class="kt">char</span> <span class="n">pwd</span><span class="p">[</span><span class="n">MAXSECRETLEN</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 <span class="k">static</span> <span class="kt">int</span> <span class="n">is_name_modified</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="k">static</span> <span class="kt">option_t</span> <span class="n">options</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="k">static</span> <span class="n">option_t</span> <span class="n">options</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="p">{</span> <span class="s">&quot;pwd&quot;</span><span class="p">,</span> <span class="n">o_string</span><span class="p">,</span> <span class="n">pwd</span><span class="p">,</span>
       <span class="s">&quot;pwd&quot;</span><span class="p">,</span>
       <span class="n">OPT_STATIC</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">MAXSECRETLEN</span><span class="o">-</span><span class="mi">1</span> <span class="p">},</span>
@@ -89,7 +89,7 @@
                 &middot;
                 Powered by <a href="http://getpelican.com">Pelican</a>
                 &middot;
-                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+                <a href="https://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
             </footer>
         </div>
         <div class="clear"></div>

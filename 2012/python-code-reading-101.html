@@ -3,23 +3,23 @@
 <head>
       <meta charset="utf-8" />
     <title>C-c C-k &middot; Python代码阅读基础</title>
-    <link rel="shortcut icon" href="http://bhuztez.github.io/favicon.ico" />
-    <link href="http://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="http://bhuztez.github.io/theme/css/math.css" type="text/css" />
+    <link rel="shortcut icon" href="https://bhuztez.github.io/favicon.ico" />
+    <link href="https://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
 
 
 
 </head>
 <body>
     <header>
-        <nav>            <li><a href="http://bhuztez.github.io/">Home</a></li>
-            <li><a href="http://bhuztez.github.io/archives.html">Archives</a></li>
-            <li><a href="http://bhuztez.github.io/quotes.html">Quotes</a></li>
+        <nav>            <li><a href="https://bhuztez.github.io/">Home</a></li>
+            <li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+            <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
         </nav>
         <div class="header_box">
-            <h1><a href="http://bhuztez.github.io/">C-c C-k</a></h1>
+            <h1><a href="https://bhuztez.github.io/">C-c C-k</a></h1>
             <h2>to impress your cat</h2>
         </div>
     </header>
@@ -27,7 +27,7 @@
         <div id="content">            <h4 class="date">Jun 06, 2012</h4>
             <article class="post">
 <h2 class="title">
-                    <a href="http://bhuztez.github.io/2012/python-code-reading-101.html" rel="bookmark" title="Permanent Link to &quot;Python代码阅读基础&quot;">Python代码阅读基础</a>
+                    <a href="https://bhuztez.github.io/2012/python-code-reading-101.html" rel="bookmark" title="Permanent Link to &quot;Python代码阅读基础&quot;">Python代码阅读基础</a>
                 </h2>
 <p>在阅读Python代码的时候，别忘了Python标准库里几个比较有用的库， <code>pdb</code> 、 <code>ast</code> 和 <code>code</code> 。 <code>pdb</code> 用来调试， <code>ast</code> 用来解析Python代码， <code>code</code> 直接能给你一个 <a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> 。</p>
 <!-- more -->
@@ -87,13 +87,13 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <span class="go">{'method': ['GET']}
 </span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">_kargs</span>
 <span class="go">{'requirements': {'id': '[^\\/]+(?&lt;!\\\\)'}, 'controller': &lt;nova.api.openstack.wsgi.Resource object at 0x5093b50&gt;, 'action': 'show'}
-</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">_kargs</span><span class="p">[</span><span class="s">'controller'</span><span class="p">]</span>
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">_kargs</span><span class="p">[</span><span class="s1">'controller'</span><span class="p">]</span>
 <span class="go">&lt;nova.api.openstack.wsgi.Resource object at 0x5093b50&gt;
-</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">_kargs</span><span class="p">[</span><span class="s">'controller'</span><span class="p">]</span><span class="o">.</span><span class="n">__class__</span>
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">_kargs</span><span class="p">[</span><span class="s1">'controller'</span><span class="p">]</span><span class="o">.</span><span class="n">__class__</span>
 <span class="go">&lt;class 'nova.api.openstack.wsgi.Resource'&gt;
-</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">_kargs</span><span class="p">[</span><span class="s">'controller'</span><span class="p">]</span><span class="o">.</span><span class="n">controller</span>
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">_kargs</span><span class="p">[</span><span class="s1">'controller'</span><span class="p">]</span><span class="o">.</span><span class="n">controller</span>
 <span class="go">&lt;nova.api.openstack.compute.contrib.floating_ips.FloatingIPController object at 0x4d07d50&gt;
-</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">_kargs</span><span class="p">[</span><span class="s">'controller'</span><span class="p">]</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">show</span><span class="o">.</span><span class="n">__doc__</span>
+</span><span class="n"></span><span class="gp">&gt;&gt;&gt; </span><span class="n">route</span><span class="o">.</span><span class="n">_kargs</span><span class="p">[</span><span class="s1">'controller'</span><span class="p">]</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">show</span><span class="o">.</span><span class="n">__doc__</span>
 <span class="go">'Return data about the given floating ip.'</span>
 </pre>
 <div class="clear"></div>
@@ -121,7 +121,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
                 &middot;
                 Powered by <a href="http://getpelican.com">Pelican</a>
                 &middot;
-                <a href="http://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
+                <a href="https://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
             </footer>
         </div>
         <div class="clear"></div>
