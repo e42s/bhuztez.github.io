@@ -1,35 +1,30 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!doctype html>
+<html>
 <head>
-      <meta charset="utf-8" />
-    <title>C-c C-k &middot; 变量的作用域</title>
-    <link rel="shortcut icon" href="https://bhuztez.github.io/favicon.ico" />
-    <link href="https://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
-
-
-
+<meta charset="utf-8" />
+<title>变量的作用域</title>
+<link rel="canonical" href="https://bhuztez.github.io/2014/scope.html" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
 </head>
 <body>
-    <header>
-        <nav>            <li><a href="https://bhuztez.github.io/">Home</a></li>
-            <li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
-            <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
-        </nav>
-        <div class="header_box">
-            <h1><a href="https://bhuztez.github.io/">C-c C-k</a></h1>
-            <h2>to impress your cat</h2>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 26, 2014</h4>
-            <article class="post">
-<h2 class="title">
-                    <a href="https://bhuztez.github.io/2014/scope.html" rel="bookmark" title="Permanent Link to &quot;变量的作用域&quot;">变量的作用域</a>
-                </h2>
-<p>假如一门语言允许你自己定义函数，那么就会出现作用域的问题。作用域的问题就是怎么找变量定义的问题。</p>
+<header>
+<nav>
+<li><a href="https://bhuztez.github.io/">Home</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+</nav>
+</header>
+<div class="content">
+<div>2014-12-26</div>
+<article>
+<h1>变量的作用域</h1>
+<div class="info">
+<ul class="tags">
+</ul>
+<div class="clear"></div>
+</div><p>假如一门语言允许你自己定义函数，那么就会出现作用域的问题。作用域的问题就是怎么找变量定义的问题。</p>
 <!-- more -->
 <p>假如不允许自定义函数，只需要一个变量名到变量值的映射就可以了。不妨把这种映射关系称为Environment。</p>
 <pre class="code literal-block">
@@ -171,35 +166,18 @@ a = 1
 var a = 1
 </pre>
 <p>这看上去也没什么问题。可是要是这语言变量的值是可以改的，那就糟了。内层函数就没法改外层函数变量的值了。这就需要引入 nonlocal 关键字了。</p>
-<div class="clear"></div>
-                <div class="info">
-                </div>
 
-            </article>
-            <div class="clear"></div><div id="disqus_thread"></div>
+</article>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'bhuztez-github-io';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'bhuztez-github-io';
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-                &middot;
-                <a href="https://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
-    </div>
+</div>
 </body>
 </html>

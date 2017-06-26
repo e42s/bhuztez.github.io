@@ -1,68 +1,46 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!doctype html>
+<html>
 <head>
-      <meta charset="utf-8" />
-    <title>C-c C-k &middot; 在Fedora上继续使用GRUB</title>
-    <link rel="shortcut icon" href="https://bhuztez.github.io/favicon.ico" />
-    <link href="https://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
-
-
-
+<meta charset="utf-8" />
+<title>在Fedora上继续使用GRUB</title>
+<link rel="canonical" href="https://bhuztez.github.io/2014/keep-grub-on-fedora.html" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
 </head>
 <body>
-    <header>
-        <nav>            <li><a href="https://bhuztez.github.io/">Home</a></li>
-            <li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
-            <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
-        </nav>
-        <div class="header_box">
-            <h1><a href="https://bhuztez.github.io/">C-c C-k</a></h1>
-            <h2>to impress your cat</h2>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Oct 19, 2014</h4>
-            <article class="post">
-<h2 class="title">
-                    <a href="https://bhuztez.github.io/2014/keep-grub-on-fedora.html" rel="bookmark" title="Permanent Link to &quot;在Fedora上继续使用GRUB&quot;">在Fedora上继续使用GRUB</a>
-                </h2>
-<p>Fedora从某个版本开始默认使用GRUB2了。实在搞不明白无比复杂的GRUB2，还是继续用GRUB吧。可是没过多久fedora-logos里都不带GRUB的背景图了，只好果断抛弃，用generic-logos。另外还在 <code>/etc/yum.conf</code> 里把GRUB2什么的统统禁掉，免得distro-sync完了以后GRUB没了。</p>
+<header>
+<nav>
+<li><a href="https://bhuztez.github.io/">Home</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+</nav>
+</header>
+<div class="content">
+<div>2014-10-19</div>
+<article>
+<h1>在Fedora上继续使用GRUB</h1>
+<div class="info">
+<ul class="tags">
+</ul>
+<div class="clear"></div>
+</div><p>Fedora从某个版本开始默认使用GRUB2了。实在搞不明白无比复杂的GRUB2，还是继续用GRUB吧。可是没过多久fedora-logos里都不带GRUB的背景图了，只好果断抛弃，用generic-logos。另外还在 <code>/etc/yum.conf</code> 里把GRUB2什么的统统禁掉，免得distro-sync完了以后GRUB没了。</p>
 <!-- more -->
 <pre class="code literal-block">
 exclude=grub2 grub-efi grub2-efi
 </pre>
-<div class="clear"></div>
-                <div class="info">
-                </div>
 
-            </article>
-            <div class="clear"></div><div id="disqus_thread"></div>
+</article>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'bhuztez-github-io';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'bhuztez-github-io';
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-                &middot;
-                <a href="https://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
-    </div>
+</div>
 </body>
 </html>

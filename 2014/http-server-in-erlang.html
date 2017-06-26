@@ -1,35 +1,30 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!doctype html>
+<html>
 <head>
-      <meta charset="utf-8" />
-    <title>C-c C-k &middot; 用Erlang写HTTP Server</title>
-    <link rel="shortcut icon" href="https://bhuztez.github.io/favicon.ico" />
-    <link href="https://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
-
-
-
+<meta charset="utf-8" />
+<title>用Erlang写HTTP Server</title>
+<link rel="canonical" href="https://bhuztez.github.io/2014/http-server-in-erlang.html" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
 </head>
 <body>
-    <header>
-        <nav>            <li><a href="https://bhuztez.github.io/">Home</a></li>
-            <li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
-            <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
-        </nav>
-        <div class="header_box">
-            <h1><a href="https://bhuztez.github.io/">C-c C-k</a></h1>
-            <h2>to impress your cat</h2>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Oct 10, 2014</h4>
-            <article class="post">
-<h2 class="title">
-                    <a href="https://bhuztez.github.io/2014/http-server-in-erlang.html" rel="bookmark" title="Permanent Link to &quot;用Erlang写HTTP Server&quot;">用Erlang写HTTP Server</a>
-                </h2>
-<p>很多人都在吹嘘REST架构。然而他们所谓的REST架构往往指的就是正确使用HTTP语义。REST架构的确是建立在正确使用HTTP语义之上的，然而在正确使用HTTP语义只是实现REST架构的基础。而那些吹嘘REST架构的人，往往号称自己是Web程序员。他们能对SSH框架，Rails框架侃侃而谈，却对HTTP协议一无所知，所以才会觉得REST很新鲜。</p>
+<header>
+<nav>
+<li><a href="https://bhuztez.github.io/">Home</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+</nav>
+</header>
+<div class="content">
+<div>2014-10-10</div>
+<article>
+<h1>用Erlang写HTTP Server</h1>
+<div class="info">
+<ul class="tags">
+</ul>
+<div class="clear"></div>
+</div><p>很多人都在吹嘘REST架构。然而他们所谓的REST架构往往指的就是正确使用HTTP语义。REST架构的确是建立在正确使用HTTP语义之上的，然而在正确使用HTTP语义只是实现REST架构的基础。而那些吹嘘REST架构的人，往往号称自己是Web程序员。他们能对SSH框架，Rails框架侃侃而谈，却对HTTP协议一无所知，所以才会觉得REST很新鲜。</p>
 <!-- more -->
 <p>了解HTTP语义最好的方法，当然是照着RFC自己实现一遍了。推荐用Erlang来写。用Erlang你不再需要担心线程进程或者事件驱动，也不需要自己去解析HTTP Header，那当然是很方便了。</p>
 <pre class="code erlang literal-block">
@@ -78,35 +73,18 @@ erl -make
 erl -run server
 </pre>
 <p>在浏览器里打开 <a class="reference external" href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a> ，你就会看到 OK 。现在你就可以开始动手实现HTTP协议了。</p>
-<div class="clear"></div>
-                <div class="info">
-                </div>
 
-            </article>
-            <div class="clear"></div><div id="disqus_thread"></div>
+</article>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'bhuztez-github-io';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'bhuztez-github-io';
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-                &middot;
-                <a href="https://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
-    </div>
+</div>
 </body>
 </html>

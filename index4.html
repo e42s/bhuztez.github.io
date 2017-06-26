@@ -1,32 +1,42 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!doctype html>
+<html>
 <head>
-    <meta charset="utf-8" />
-    <title>C-c C-k</title>
-    <link rel="shortcut icon" href="https://bhuztez.github.io/favicon.ico" />
-    <link href="https://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
+<meta charset="utf-8" />
+<title>C-c C-k</title>
+<link rel="canonical" href="https://bhuztez.github.io/index4.html" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
 </head>
 <body>
-    <header>
-        <nav>            <li><a href="https://bhuztez.github.io/">Home</a></li>
-            <li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
-            <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
-        </nav>
-        <div class="header_box">
-            <h1><a href="https://bhuztez.github.io/">C-c C-k</a></h1>
-            <h2>to impress your cat</h2>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Apr 13, 2012</h4>
-            <article class="post">
-<h2 class="title">
-                    <a href="https://bhuztez.github.io/2012/there-is-an-old-joke.html" rel="bookmark" title="Permanent Link to &quot;老笑话了&quot;">老笑话了</a>
-                </h2>
-<p>去年爆出了hash collision DoS的问题 <a class="footnote-reference" href="#hash-collision-dos" id="id2">[1]</a> ，其实这是一个老笑话了 <a class="footnote-reference" href="#an-old-joke" id="id3">[2]</a> ：</p>
+<header>
+<nav>
+<li><a href="https://bhuztez.github.io/">Home</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+</nav>
+</header>
+<div class="index content">
+<div>2012-06-06</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2012/python-code-reading-101.html">Python代码阅读基础</a></h1>
+<div class="info">
+<ul class="tags">
+</ul>
+<div class="clear"></div>
+</div><p>在阅读Python代码的时候，别忘了Python标准库里几个比较有用的库， <code>pdb</code> 、 <code>ast</code> 和 <code>code</code> 。 <code>pdb</code> 用来调试， <code>ast</code> 用来解析Python代码， <code>code</code> 直接能给你一个 <a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> 。</p>
+
+<a href="https://bhuztez.github.io/2012/python-code-reading-101.html">阅读全文</a>
+</article>
+<hr/>
+<div>2012-04-13</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2012/there-is-an-old-joke.html">老笑话了</a></h1>
+<div class="info">
+<ul class="tags">
+</ul>
+<div class="clear"></div>
+</div><p>去年爆出了hash collision DoS的问题 <a class="footnote-reference" href="#hash-collision-dos" id="id2">[1]</a> ，其实这是一个老笑话了 <a class="footnote-reference" href="#an-old-joke" id="id3">[2]</a> ：</p>
 <blockquote>
 <p>老妈平时买菜总爱拎着个弹簧秤。然而昨天我在菜市场里看到的一幕，可比老妈的弹簧秤高明多了。</p>
 <p>一老大爷走到卖西红柿的摊前问：“多少钱一斤？”摊主回答：“两块五。”大爷挑了三个西红柿放到秤盘里。摊主说：“一斤半，三块七。”大爷说：“我就做个汤，不用那么多。”说着就去掉了个儿最大的那个西红柿。摊主迅速地又瞧一眼说：“一斤二两，三块钱。”</p>
@@ -44,73 +54,62 @@
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>这是我能找到的最早的有明确时间的转载了， <a class="reference external" href="https://blog.delphij.net/2006/04/zz-56.html">https://blog.delphij.net/2006/04/zz-56.html</a></td></tr>
 </tbody>
-</table><div class="clear"></div>
-                <div class="info">
-                </div>
-
-            </article>
-            <div class="clear"></div>            <h4 class="date">Sep 17, 2010</h4>
-            <article class="post">
-<h2 class="title">
-                    <a href="https://bhuztez.github.io/2010/django-query-to-sql.html" rel="bookmark" title="Permanent Link to &quot;用Django ORM动态生成SQL&quot;">用Django ORM动态生成SQL</a>
-                </h2>
-<p>去年的时候，就想自己仿个 <a class="reference external" href="https://github.com/">GitHub</a> 玩玩。可是， <a class="reference external" href="http://git-scm.com/">Git</a> 并不像 <a class="reference external" href="http://mercurial.selenic.com/">Mercurial</a> 那样原生支持HTTP协议，得用SSH来限制用户访问。 <a class="reference external" href="https://github.com/">GitHub</a> 和 <a class="reference external" href="http://gitorious.org/">Gitorious</a> 也都是那么做的。 而 <a class="reference external" href="http://eagain.net/gitweb/?p=gitosis.git">Gitosis</a> 和 <a class="reference external" href="https://github.com/sitaramc/gitolite">Gitolite</a> 用起来都不是很方便， 后来看到 <a class="reference external" href="http://twistedmatrix.com/">Twisted</a> 也实现了SSH协议，想在上面改改就拿来用，毕竟不能直接拿来用，也一直没去看，就这样不了了之了。直到某日，看到 <a class="reference external" href="http://deadpuck.net/blag/serving-git/">Serving Git</a> 。这样SSH的问题就解决了。顺着那篇文章的思路下来，就想用 <a class="reference external" href="http://www.djangoproject.com/">Django</a> 弄个Web界面让用户来管理密钥，很快就弄好了，没有遇到任何困难。</p>
+</table>
+<a href="https://bhuztez.github.io/2012/there-is-an-old-joke.html">阅读全文</a>
+</article>
+<hr/>
+<div>2010-09-17</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2010/django-query-to-sql.html">用Django ORM动态生成SQL</a></h1>
+<div class="info">
+<ul class="tags">
+</ul>
 <div class="clear"></div>
-                <div class="info">
-                </div>
+</div><p>去年的时候，就想自己仿个 <a class="reference external" href="https://github.com/">GitHub</a> 玩玩。可是， <a class="reference external" href="http://git-scm.com/">Git</a> 并不像 <a class="reference external" href="http://mercurial.selenic.com/">Mercurial</a> 那样原生支持HTTP协议，得用SSH来限制用户访问。 <a class="reference external" href="https://github.com/">GitHub</a> 和 <a class="reference external" href="http://gitorious.org/">Gitorious</a> 也都是那么做的。 而 <a class="reference external" href="http://eagain.net/gitweb/?p=gitosis.git">Gitosis</a> 和 <a class="reference external" href="https://github.com/sitaramc/gitolite">Gitolite</a> 用起来都不是很方便， 后来看到 <a class="reference external" href="http://twistedmatrix.com/">Twisted</a> 也实现了SSH协议，想在上面改改就拿来用，毕竟不能直接拿来用，也一直没去看，就这样不了了之了。直到某日，看到 <a class="reference external" href="http://deadpuck.net/blag/serving-git/">Serving Git</a> 。这样SSH的问题就解决了。顺着那篇文章的思路下来，就想用 <a class="reference external" href="http://www.djangoproject.com/">Django</a> 弄个Web界面让用户来管理密钥，很快就弄好了，没有遇到任何困难。</p>
 
-            </article>
-            <div class="clear"></div>            <h4 class="date">Jan 02, 2010</h4>
-            <article class="post">
-<h2 class="title">
-                    <a href="https://bhuztez.github.io/2010/install-octave-forge-from-aur.html" rel="bookmark" title="Permanent Link to &quot;ArchLinux从AUR安装octave-forge遇到gcc-fortran conflicts with gcc-libs&quot;">ArchLinux从AUR安装octave-forge遇到gcc-fortran conflicts with gcc-libs</a>
-                </h2>
-<p>从<a class="reference external" href="http://aur.archlinux.org/packages.php?ID=20824">这里</a>看，应该2009年8月31日才加上的。其实 <code>gcc-fortran</code> 是不一定要的，把 <code>makedepends</code> 那行去掉就好了，囧</p><div class="clear"></div>
-                <div class="info">
-                </div>
-
-            </article>
-            <div class="clear"></div>            <h4 class="date">Apr 12, 2009</h4>
-            <article class="post">
-<h2 class="title">
-                    <a href="https://bhuztez.github.io/2009/compiling-systemc.html" rel="bookmark" title="Permanent Link to &quot;编译SystemC 2.2.0的问题&quot;">编译SystemC 2.2.0的问题</a>
-                </h2>
-<p>居然连编译都有困难，SystemC的表现令人失望。看了<a class="reference external" href="http://forums.fedoraforum.org/showthread.php?t=199153">这个帖子</a>的#7之后，才发现居然还是个低级错误，要修改 <code>systemc-2.2.0/src/sysc/utils/sc_utils_ids.cpp</code> 这个文件，更加C++一点的写法是像下面这样的：</p>
+<a href="https://bhuztez.github.io/2010/django-query-to-sql.html">阅读全文</a>
+</article>
+<hr/>
+<div>2010-01-02</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2010/install-octave-forge-from-aur.html">ArchLinux从AUR安装octave-forge遇到gcc-fortran conflicts with gcc-libs</a></h1>
+<div class="info">
+<ul class="tags">
+</ul>
 <div class="clear"></div>
-                <div class="info">
-                </div>
+</div><p>从<a class="reference external" href="http://aur.archlinux.org/packages.php?ID=20824">这里</a>看，应该2009年8月31日才加上的。其实 <code>gcc-fortran</code> 是不一定要的，把 <code>makedepends</code> 那行去掉就好了，囧</p>
+<a href="https://bhuztez.github.io/2010/install-octave-forge-from-aur.html">阅读全文</a>
+</article>
+<hr/>
+<div>2009-04-12</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2009/compiling-systemc.html">编译SystemC 2.2.0的问题</a></h1>
+<div class="info">
+<ul class="tags">
+</ul>
+<div class="clear"></div>
+</div><p>居然连编译都有困难，SystemC的表现令人失望。看了<a class="reference external" href="http://forums.fedoraforum.org/showthread.php?t=199153">这个帖子</a>的#7之后，才发现居然还是个低级错误，要修改 <code>systemc-2.2.0/src/sysc/utils/sc_utils_ids.cpp</code> 这个文件，更加C++一点的写法是像下面这样的：</p>
 
-            </article>
-            <div class="clear"></div>            <h4 class="date">Nov 06, 2008</h4>
-            <article class="post">
-<h2 class="title">
-                    <a href="https://bhuztez.github.io/2008/pppd-plugin.html" rel="bookmark" title="Permanent Link to &quot;pppd插件编写&quot;">pppd插件编写</a>
-                </h2>
-<p>先 <code>yum install ppp-devel</code> ，接着就可以在代码中使用 <code>#include &lt;pppd/pppd.h&gt;</code> 和 <code>char pppd_version[] = VERSION;</code> 以确保plugin能被pppd使用。</p>
+<a href="https://bhuztez.github.io/2009/compiling-systemc.html">阅读全文</a>
+</article>
+<hr/>
+<div>2008-11-06</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2008/pppd-plugin.html">pppd插件编写</a></h1>
+<div class="info">
+<ul class="tags">
+</ul>
+<div class="clear"></div>
+</div><p>先 <code>yum install ppp-devel</code> ，接着就可以在代码中使用 <code>#include &lt;pppd/pppd.h&gt;</code> 和 <code>char pppd_version[] = VERSION;</code> 以确保plugin能被pppd使用。</p>
 <p>pap_passwd_hook被调用的过程还是很令人困惑的。首先，第一次被调用的时候，参数user是有分配空间的，为了让pap_passwd_hook被调用，是不能传入password的，导致第一次被调用的时候，参数passwd没有被分配空间，是NULL。若第一次修改了用户名，第二次调用的时候会传入修改过的用户名，而第二次passwd被分配了空间，此时可以strcpy。</p>
-<div class="clear"></div>
-                <div class="info">
-                </div>
 
-            </article>
-            <div class="clear"></div>
-                <div class="clear"></div>
-                <div class="pages">
-                    <a href="https://bhuztez.github.io/index3.html" class="prev_page">&larr;&nbsp;Previous</a>
-                    <span>Page 4 of 4</span>
-                </div>
-
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-                &middot;
-                <a href="https://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
-    </div>
+<a href="https://bhuztez.github.io/2008/pppd-plugin.html">阅读全文</a>
+</article>
+<hr/>
+<div class="paginator">
+<a href="index3.html" class="prev">&larr;&nbsp;上一页</a>
+<span>4 / 4</span>
+</div>
+</div>
 </body>
 </html>

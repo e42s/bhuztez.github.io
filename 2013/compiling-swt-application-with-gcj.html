@@ -1,35 +1,30 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!doctype html>
+<html>
 <head>
-      <meta charset="utf-8" />
-    <title>C-c C-k &middot; 用gcj编译SWT程序</title>
-    <link rel="shortcut icon" href="https://bhuztez.github.io/favicon.ico" />
-    <link href="https://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
-
-
-
+<meta charset="utf-8" />
+<title>用gcj编译SWT程序</title>
+<link rel="canonical" href="https://bhuztez.github.io/2013/compiling-swt-application-with-gcj.html" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
 </head>
 <body>
-    <header>
-        <nav>            <li><a href="https://bhuztez.github.io/">Home</a></li>
-            <li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
-            <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
-        </nav>
-        <div class="header_box">
-            <h1><a href="https://bhuztez.github.io/">C-c C-k</a></h1>
-            <h2>to impress your cat</h2>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 02, 2013</h4>
-            <article class="post">
-<h2 class="title">
-                    <a href="https://bhuztez.github.io/2013/compiling-swt-application-with-gcj.html" rel="bookmark" title="Permanent Link to &quot;用gcj编译SWT程序&quot;">用gcj编译SWT程序</a>
-                </h2>
-<p>很久之前编译成功过一次，忘了记下编译用的参数，之后就再也想不起来了。现在重新编译一次，把用到的参数记录一下。</p>
+<header>
+<nav>
+<li><a href="https://bhuztez.github.io/">Home</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+</nav>
+</header>
+<div class="content">
+<div>2013-01-02</div>
+<article>
+<h1>用gcj编译SWT程序</h1>
+<div class="info">
+<ul class="tags">
+</ul>
+<div class="clear"></div>
+</div><p>很久之前编译成功过一次，忘了记下编译用的参数，之后就再也想不起来了。现在重新编译一次，把用到的参数记录一下。</p>
 <!-- more -->
 <p>gcj可以把Java程序编译成本地指令集。比如下面这个程序， <code>gcj -s -o SwingHelloWorld --main=SwingHelloWorld -Os SwingHelloWorld.java</code> 就可以了。运行再关掉，可以明显的感觉到比用JVM快了一点。</p>
 <pre class="code java literal-block">
@@ -98,35 +93,18 @@ gcj-dbtool -a swt.db /usr/lib64/java/swt.jar libswt.so
 gij -verbose:class --cp .:/usr/lib64/java/swt.jar SWTHelloWorld
 gij -verbose:class --cp .:/usr/lib64/java/swt.jar -Dgnu.gcj.precompiled.db.path=swt.db SWTHelloWorld
 </pre>
-<div class="clear"></div>
-                <div class="info">
-                </div>
 
-            </article>
-            <div class="clear"></div><div id="disqus_thread"></div>
+</article>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'bhuztez-github-io';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'bhuztez-github-io';
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-                &middot;
-                <a href="https://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
-    </div>
+</div>
 </body>
 </html>

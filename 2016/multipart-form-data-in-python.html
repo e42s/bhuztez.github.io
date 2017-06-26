@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Python模拟HTML表单提交</title>
+<link rel="canonical" href="https://bhuztez.github.io/2016/multipart-form-data-in-python.html" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+</head>
+<body>
+<header>
+<nav>
+<li><a href="https://bhuztez.github.io/">Home</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+</nav>
+</header>
+<div class="content">
+<div>2016-06-30</div>
+<article>
+<h1>Python模拟HTML表单提交</h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/python.html">Python</a></li>
+<li><a href="https://bhuztez.github.io/tag/http.html">HTTP</a></li>
+</ul>
+<div class="clear"></div>
+</div><p>HTML表单里有一种类型是 <code>multipart/form-data</code> ，</p>
+<p>搜了一下结果发现要么是远古时期的，要么推荐用requests，就是没有人推荐用标准库的方法。Python明明自带MIME库了，用标准库就足够了嘛。</p>
+<!-- more -->
+<pre class="code python literal-block">
+<span class="kn">from</span> <span class="nn">urllib2</span> <span class="kn">import</span> <span class="n">Request</span>
+<span class="kn">from</span> <span class="nn">email.message</span> <span class="kn">import</span> <span class="n">Message</span>
+
+
+<span class="k">class</span> <span class="nc">Form</span><span class="p">(</span><span class="n">Message</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">Message</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="s1">'Content-Type'</span><span class="p">,</span> <span class="s1">'multipart/form-data'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_payload</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">_write_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_generator</span><span class="p">):</span>
+        <span class="c1"># DARK MAGIC followed</span>
+        <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">Field</span><span class="p">(</span><span class="n">Message</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">text</span><span class="p">):</span>
+        <span class="n">Message</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="s1">'Content-Disposition'</span><span class="p">,</span><span class="s1">'form-data'</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_payload</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="bp">None</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">make_request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">form_data</span><span class="p">):</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">Form</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">form_data</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="n">form</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">as_string</span><span class="p">()</span>
+    <span class="c1"># THIS IS A SEPARATION BARRIER</span>
+    <span class="c1"># NEVER LET CODE MOVE ACROSS THIS</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Content-Type'</span><span class="p">:</span> <span class="n">form</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]}</span>
+
+    <span class="k">return</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">headers</span><span class="p">)</span>
+</pre>
+
+</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'bhuztez-github-io';
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+</body>
+</html>

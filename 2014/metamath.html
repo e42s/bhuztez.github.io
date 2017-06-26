@@ -1,67 +1,45 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!doctype html>
+<html>
 <head>
-      <meta charset="utf-8" />
-    <title>C-c C-k &middot; Metamath</title>
-    <link rel="shortcut icon" href="https://bhuztez.github.io/favicon.ico" />
-    <link href="https://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
-
-
-
+<meta charset="utf-8" />
+<title>Metamath</title>
+<link rel="canonical" href="https://bhuztez.github.io/2014/metamath.html" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
 </head>
 <body>
-    <header>
-        <nav>            <li><a href="https://bhuztez.github.io/">Home</a></li>
-            <li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
-            <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
-        </nav>
-        <div class="header_box">
-            <h1><a href="https://bhuztez.github.io/">C-c C-k</a></h1>
-            <h2>to impress your cat</h2>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 17, 2014</h4>
-            <article class="post">
-<h2 class="title">
-                    <a href="https://bhuztez.github.io/2014/metamath.html" rel="bookmark" title="Permanent Link to &quot;Metamath&quot;">Metamath</a>
-                </h2>
-<p><a class="reference external" href="http://metamath.org/">Metamath</a> 是一个很独特的证明检查程序。Metamath语义非常简单，完全可以自己实现一遍。而且更加专注于证明本身，并不需要打补丁以便更好的支持新的理论。比如Unimath为了更好的支持Homotopy Type Theory就对Coq打了补丁。这一点很重要，要是我们不能检查证明检查程序本身正确与否，我们写的证明即使通过了检查，也不能说明证明没问题。而一个证明检查程序本身太复杂，超过了人力能检查的极限，那么出现重大缺陷就几乎不可避免了，比如Coq的 <a class="reference external" href="http://inutile.club/estatis/falso/">Falso</a> 。很不幸的是，Metamath风格的证明检查工具一直没有流行起来。</p>
+<header>
+<nav>
+<li><a href="https://bhuztez.github.io/">Home</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+</nav>
+</header>
+<div class="content">
+<div>2014-11-17</div>
+<article>
+<h1>Metamath</h1>
+<div class="info">
+<ul class="tags">
+</ul>
+<div class="clear"></div>
+</div><p><a class="reference external" href="http://metamath.org/">Metamath</a> 是一个很独特的证明检查程序。Metamath语义非常简单，完全可以自己实现一遍。而且更加专注于证明本身，并不需要打补丁以便更好的支持新的理论。比如Unimath为了更好的支持Homotopy Type Theory就对Coq打了补丁。这一点很重要，要是我们不能检查证明检查程序本身正确与否，我们写的证明即使通过了检查，也不能说明证明没问题。而一个证明检查程序本身太复杂，超过了人力能检查的极限，那么出现重大缺陷就几乎不可避免了，比如Coq的 <a class="reference external" href="http://inutile.club/estatis/falso/">Falso</a> 。很不幸的是，Metamath风格的证明检查工具一直没有流行起来。</p>
 <!-- more -->
 <p>Metamath特别简单，主要是因为两点，一是没有内置任何Type Theory，二是没有作用域的概念。大部分数学书根本就没有定义用到的数学符号里作用域的规则。为了能表达free variable的概念，不可避免要引入特殊的语句。Metamath取消了作用域，这意味着你必须给原本不同作用域中的变量取不同的名字，但是避免了引入特殊的语句。</p>
 <p>Metamath也有做的比较糟糕的地方。现在Metamath把所有内容都写同一个文件里，实际上这是没有必要的，也对别人的参与产生了一点小麻烦，毕竟只有一个文件，那必须等都很合理了才会放进去，而不是可以先在一个不同的文件里放一个实验性质的证明。这也妨碍了用其他程序来生成证明，毕竟不可能有通用的proof assistant，对于所有理论的证明都能提供足够的帮助，根据不同情况用SMT Solver，计算机代数软件什么的来生成证明是很必要的。</p>
-<div class="clear"></div>
-                <div class="info">
-                </div>
 
-            </article>
-            <div class="clear"></div><div id="disqus_thread"></div>
+</article>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'bhuztez-github-io';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'bhuztez-github-io';
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-                &middot;
-                <a href="https://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
-    </div>
+</div>
 </body>
 </html>

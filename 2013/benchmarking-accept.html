@@ -1,35 +1,30 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!doctype html>
+<html>
 <head>
-      <meta charset="utf-8" />
-    <title>C-c C-k &middot; 比谁accept()快</title>
-    <link rel="shortcut icon" href="https://bhuztez.github.io/favicon.ico" />
-    <link href="https://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
-
-
-
+<meta charset="utf-8" />
+<title>比谁accept()快</title>
+<link rel="canonical" href="https://bhuztez.github.io/2013/benchmarking-accept.html" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
 </head>
 <body>
-    <header>
-        <nav>            <li><a href="https://bhuztez.github.io/">Home</a></li>
-            <li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
-            <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
-        </nav>
-        <div class="header_box">
-            <h1><a href="https://bhuztez.github.io/">C-c C-k</a></h1>
-            <h2>to impress your cat</h2>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 23, 2013</h4>
-            <article class="post">
-<h2 class="title">
-                    <a href="https://bhuztez.github.io/2013/benchmarking-accept.html" rel="bookmark" title="Permanent Link to &quot;比谁accept()快&quot;">比谁accept()快</a>
-                </h2>
-<p>不知道为什么<a class="reference external" href="http://avplayer.org/">国内技术第一的开源社区</a>会去<a class="reference external" href="http://avboost.com/t/asio/347">反驳</a>一个<a class="reference external" href="http://my.oschina.net/u/200693/blog/34462">很不合理的benchmark</a>。那个benchmark竟然用了Erlang臭名昭著的 <code>io:format</code> ，莫名其妙地把 <code>socket</code> 设置成 <code>active</code> ，还不自量力地和C++去比速度，C++代码还是Boost库文档里的<a class="reference external" href="http://www.boost.org/doc/libs/1_55_0/doc/html/boost_asio/example/cpp03/echo/async_tcp_echo_server.cpp">例子</a>。</p>
+<header>
+<nav>
+<li><a href="https://bhuztez.github.io/">Home</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+</nav>
+</header>
+<div class="content">
+<div>2013-11-23</div>
+<article>
+<h1>比谁accept()快</h1>
+<div class="info">
+<ul class="tags">
+</ul>
+<div class="clear"></div>
+</div><p>不知道为什么<a class="reference external" href="http://avplayer.org/">国内技术第一的开源社区</a>会去<a class="reference external" href="http://avboost.com/t/asio/347">反驳</a>一个<a class="reference external" href="http://my.oschina.net/u/200693/blog/34462">很不合理的benchmark</a>。那个benchmark竟然用了Erlang臭名昭著的 <code>io:format</code> ，莫名其妙地把 <code>socket</code> 设置成 <code>active</code> ，还不自量力地和C++去比速度，C++代码还是Boost库文档里的<a class="reference external" href="http://www.boost.org/doc/libs/1_55_0/doc/html/boost_asio/example/cpp03/echo/async_tcp_echo_server.cpp">例子</a>。</p>
 <!-- more -->
 <p>而国内技术第一的开源社区给出的benchmark实际上就是比 <code>accept()</code> 。所以要把 <code>accept</code> 的 <code>process</code> 的 <code>priority</code> 设置成 <code>max</code> 才行。另外，Erlang默认的port数量设得比较小，需要把 <code>ERL_MAX_PORTS</code> 改得大一点。</p>
 <p>国内技术第一的开源社区的benchmark就一次10000个连接，结束得太快了。我又懒得改ulimit上限，同时只有4000个就只有4000个吧，总数设成80万个连接。不会C++，就用C写了<a class="reference external" href="https://bhuztez.github.io/accept/client.c">个</a>。</p>
@@ -53,35 +48,18 @@ sys     1m11.655s
 </pre>
 <p>可以看到，区区80万个连接，Erlang就比C++慢了5秒。对于每天HTTP请求数动辄上十亿的巨型网站来说，每80亿个连接，Erlang仅 <code>accept()</code> 就会比C++多花5万秒啊，一天也就8万多秒，哪里还有时间来运行业务逻辑啊。</p>
 <p>整天摆弄micro benchmark，不去探索不去尝试的弊病，Rob Pike早就<a class="reference external" href="http://doc.cat-v.org/bell_labs/utah2000/">吐槽</a>过了。</p>
-<div class="clear"></div>
-                <div class="info">
-                </div>
 
-            </article>
-            <div class="clear"></div><div id="disqus_thread"></div>
+</article>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'bhuztez-github-io';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'bhuztez-github-io';
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-                &middot;
-                <a href="https://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
-    </div>
+</div>
 </body>
 </html>

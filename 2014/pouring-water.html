@@ -1,35 +1,30 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!doctype html>
+<html>
 <head>
-      <meta charset="utf-8" />
-    <title>C-c C-k &middot; Pouring Water</title>
-    <link rel="shortcut icon" href="https://bhuztez.github.io/favicon.ico" />
-    <link href="https://bhuztez.github.io/feeds.atom" type="application/atom+xml" rel="alternate" title="C-c C-k Full Atom Feed" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
-
-
-
+<meta charset="utf-8" />
+<title>Pouring Water</title>
+<link rel="canonical" href="https://bhuztez.github.io/2014/pouring-water.html" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
 </head>
 <body>
-    <header>
-        <nav>            <li><a href="https://bhuztez.github.io/">Home</a></li>
-            <li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
-            <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
-        </nav>
-        <div class="header_box">
-            <h1><a href="https://bhuztez.github.io/">C-c C-k</a></h1>
-            <h2>to impress your cat</h2>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 23, 2014</h4>
-            <article class="post">
-<h2 class="title">
-                    <a href="https://bhuztez.github.io/2014/pouring-water.html" rel="bookmark" title="Permanent Link to &quot;Pouring Water&quot;">Pouring Water</a>
-                </h2>
-<p>Pouring Water看上去是个很简单的问题，有容量分别为a升，b升的两个没有刻度的容器，问量出c升水要多少步。简单是简单，只是分情况讨论的数量实在是有点多，很多人一看就直接放弃了。</p>
+<header>
+<nav>
+<li><a href="https://bhuztez.github.io/">Home</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+</nav>
+</header>
+<div class="content">
+<div>2014-11-23</div>
+<article>
+<h1>Pouring Water</h1>
+<div class="info">
+<ul class="tags">
+</ul>
+<div class="clear"></div>
+</div><p>Pouring Water看上去是个很简单的问题，有容量分别为a升，b升的两个没有刻度的容器，问量出c升水要多少步。简单是简单，只是分情况讨论的数量实在是有点多，很多人一看就直接放弃了。</p>
 <!-- more -->
 <p>以下是证明思路，具体证明就不写了</p>
 <p>首先看简单的情形：</p>
@@ -182,35 +177,18 @@
 <p>k1 * a = c * r1 (mod b)</p>
 <p>k2 * a = c * r2 (mod b)</p>
 <p>因此,最后当 r1 = 0 时,r2 = gcd(a, b),k2 * a = c * gcd(a, b) (mod b) 一开始 k1 , k2 都是 gcd(a, b) 的倍数,迭代过程中,始终减去的都是整数倍的 k1 ,所以,最终 k1 , k2 一直是 gcd(a, b) 的倍数。所以,最终 k2 * a / gcd(a,b) = c (mod b) 再回到 b 是 a 的整数倍的情况。假如也使用上述方法求解,一步就计算结束了,得到 c/a 和 0。 c/a满足要求。而 0 不满足要求,改成 1 即可满足要求。</p>
-<div class="clear"></div>
-                <div class="info">
-                </div>
 
-            </article>
-            <div class="clear"></div><div id="disqus_thread"></div>
+</article>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'bhuztez-github-io';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+var disqus_shortname = 'bhuztez-github-io';
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-                &middot;
-                <a href="https://bhuztez.github.io/feeds.atom" rel="alternate">Atom Feed</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
-    </div>
+</div>
 </body>
 </html>
