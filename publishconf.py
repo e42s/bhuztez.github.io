@@ -13,11 +13,10 @@ from pelicanconf import *
 SITEURL = 'https://bhuztez.github.io'
 RELATIVE_URLS = False
 
-FEED_ALL_ATOM = 'feeds.atom'
+FEED_ALL_ATOM = 'feeds.atom.xml'
+FEED_ALL_RSS = 'feeds.rss.xml'
 
 DELETE_OUTPUT_DIRECTORY = True
 
 # Following items are often useful when publishing
-
 DISQUS_SITENAME = "bhuztez-github-io"
-#GOOGLE_ANALYTICS = ""

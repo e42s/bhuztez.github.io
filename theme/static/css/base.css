@@ -7,6 +7,15 @@ a {
     outline: none;
 }
 
+pre.code {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+pre.pycon {
+    white-space: pre-wrap;
+}
+
 div.info ul.tags {
     float: left;
     list-style: inside;

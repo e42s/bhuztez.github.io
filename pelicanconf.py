@@ -13,8 +13,10 @@ STATIC_PATHS = ['.']
 IGNORE_FILES = ['.#*', '*~']
 
 THEME = 'theme'
+KATEX_MIRROR = 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1'
+
 PLUGIN_PATHS = ['plugins']
-PLUGINS = ['more']
+PLUGINS = ['more', 'katex']
 
 TIMEZONE = 'Asia/Shanghai'
 

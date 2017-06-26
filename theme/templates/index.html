@@ -18,11 +18,11 @@
 <hr/>
 <div class="paginator">
 {% if articles_previous_page %}
-<a href="{{ articles_previous_page.url }}" class="prev">&larr;&nbsp;上一页</a>
+<a href="{{ articles_previous_page.url }}" class="prev">上一页</a>
 {% endif %}
 <span>{{ articles_page.number }} / {{ articles_paginator.num_pages }}</span>
 {% if articles_next_page %}
-<a href="{{ SITEURL }}/{{ articles_next_page.url }}" class="next">下一页&nbsp;&rarr;</a>
+<a href="{{ SITEURL }}/{{ articles_next_page.url }}" class="next">下一页</a>
 {% endif %}
 </div>
 {% endif %}
