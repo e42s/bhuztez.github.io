@@ -5,8 +5,17 @@
 <title>C-c C-k</title>
 <link rel="canonical" href="https://bhuztez.github.io/index.html" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
-<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" title="math" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+function remove_node(node){node.parentNode.removeChild(node);}
+window.onload=function(){
+Array.prototype.slice.call(document.querySelectorAll(".formula")).forEach(function(e){katex.render(e.getAttribute("alt"),e,{displayMode:e.tagName==="DIV"})});
+remove_node(document.querySelector("link[title='math']"));
+};
+</script>
 </head>
 <body>
 <header>
@@ -142,7 +151,7 @@
 <hr/>
 <div class="paginator">
 <span>1 / 4</span>
-<a href="https://bhuztez.github.io/index2.html" class="next">下一页&nbsp;&rarr;</a>
+<a href="https://bhuztez.github.io/index2.html" class="next">下一页</a>
 </div>
 </div>
 </body>

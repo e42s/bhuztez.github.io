@@ -5,8 +5,17 @@
 <title>比谁accept()快</title>
 <link rel="canonical" href="https://bhuztez.github.io/2013/benchmarking-accept.html" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
-<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" title="math" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+function remove_node(node){node.parentNode.removeChild(node);}
+window.onload=function(){
+Array.prototype.slice.call(document.querySelectorAll(".formula")).forEach(function(e){katex.render(e.getAttribute("alt"),e,{displayMode:e.tagName==="DIV"})});
+remove_node(document.querySelector("link[title='math']"));
+};
+</script>
 </head>
 <body>
 <header>
