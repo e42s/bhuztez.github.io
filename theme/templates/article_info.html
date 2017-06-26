@@ -1,0 +1,8 @@
+<div class="info">
+<ul class="tags">
+{% for tag in article.tags %}
+<li><a href="{{ SITEURL }}/{{ tag.save_as }}">{{ tag.name }}</a></li>
+{% endfor %}
+</ul>
+<div class="clear"></div>
+</div>

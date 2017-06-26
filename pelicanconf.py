@@ -1,10 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
-AUTHOR = u'me'
-SITENAME = u'C-c C-k'
-SITESUBTITLE = u'to impress your cat'
+AUTHOR = 'bhuztez'
+SITENAME = 'C-c C-k'
+SITESUBTITLE = ''
 SITEURL = ''
 
 PATH = 'content'
@@ -12,7 +12,8 @@ PATH = 'content'
 STATIC_PATHS = ['.']
 IGNORE_FILES = ['.#*', '*~']
 
-THEME = 'blue-penguin'
+THEME = 'theme'
+PLUGIN_PATHS = ['plugins']
 PLUGINS = ['more']
 
 TIMEZONE = 'Asia/Shanghai'
@@ -44,7 +45,7 @@ CATEGORIES_SAVE_AS = False
 
 AUTHOR_SAVE_AS = False
 AUTHORS_SAVE_AS = False
-TAG_SAVE_AS = False
+TAG_SAVE_AS = 'tag/{slug}.html'
 TAGS_SAVE_AS = False
 
 # Feed generation is usually not desired when developing
@@ -58,6 +59,4 @@ LINKS = ()
 SOCIAL = ()
 
 DEFAULT_PAGINATION = 10
-
-# Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+RELATIVE_URLS = True

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="index content">
+{% for article in articles_page.object_list %}
+{% if not loop.first %}
+<hr/>
+{% endif %}
+<div>{{ article.date.strftime("%Y-%m-%d") }}</div>
+<article>
+<h1><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h1>
+{% include "article_info.html" %}
+{{ article.summary }}
+<a href="{{ SITEURL }}/{{ article.url }}">阅读全文</a>
+</article>
+{% endfor %}
+{% if articles_page.has_other_pages %}
+<hr/>
+<div class="paginator">
+{% if articles_previous_page %}
+<a href="{{ articles_previous_page.url }}" class="prev">&larr;&nbsp;上一页</a>
+{% endif %}
+<span>{{ articles_page.number }} / {{ articles_paginator.num_pages }}</span>
+{% if articles_next_page %}
+<a href="{{ SITEURL }}/{{ articles_next_page.url }}" class="next">下一页&nbsp;&rarr;</a>
+{% endif %}
+</div>
+{% endif %}
+</div>
+{% endblock content %}

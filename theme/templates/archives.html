@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Archives{% endblock title %}
+
+{% block content %}
+<div class="archive content">
+<h1>{{ self.title() }}</h1>
+{% set year = None %}
+{% for article in dates %}
+{% if article.date.year != year %}
+{% set year = article.date.year %}
+<h2>{{ year }}</h2>
+{% endif %}
+<a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+{% endfor %}
+</div>
+{% endblock content %}

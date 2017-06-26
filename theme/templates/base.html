@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
+<link rel="canonical" href="{{ SITEURL }}/{{ output_file }}" />
+<link rel="stylesheet" href="{{ SITEURL }}/theme/css/base.css" type="text/css" />
+<link rel="stylesheet" href="{{ SITEURL }}/theme/css/math.css" type="text/css" />
+<link rel="stylesheet" href="{{ SITEURL }}/theme/css/pygments.css" type="text/css" />
+</head>
+<body>
+<header>
+<nav>
+<li{% if output_file == "index.html" %} class="selected"{% endif %}><a href="{{ SITEURL }}/{% if RELATIVE_URLS %}index.html{% endif %}">Home</a></li>
+<li{% if output_file == "archives.html" %} class="selected"{% endif %}><a href="{{ SITEURL }}/archives.html">Archives</a></li>
+{% for title, link in MENUITEMS %}
+<li{% if output_file == link %} class="selected"{% endif %}><a href="{{ SITEURL }}/{{ link }}">{{ title }}</a></li>
+{% endfor %}
+</nav>
+</header>
+{% block content %}{% endblock content %}
+</body>
+</html>
