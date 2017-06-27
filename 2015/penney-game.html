@@ -21,25 +21,22 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
 <div>2015-02-26</div>
 <article>
 <h1>Penney's game</h1>
-<div class="info">
-<ul class="tags">
-</ul>
-<div class="clear"></div>
-</div><p>Penney's game 是个很简单的问题。可是网络上能找到的答案，要么到状态转移图就完了，要么就跳过中间步骤直接出答案了。</p>
+<p>Penney's game是个很简单的问题。可是网络上能找到的答案，要么到状态转移图就完了，要么就跳过中间步骤直接出答案了。</p>
 <!-- more -->
-<p>解这个问题，分析一下状态转移的情况，接着直接计算 <span alt="P \cdot \lim_{n \to \infty}{M^n}" class="formula">
+<p>解这个问题，分析一下状态转移的情况，接着直接计算<span alt="P \cdot \lim_{n \to \infty}{M^n}" class="formula">
 <i>P</i>⋅<span class="limits"><span class="limit">lim</span></span><sub><i>n</i> → ∞</sub><i>M</i><sup><i>n</i></sup></span>
- 就可以了。其中，P是初始概率 <span alt="[1, 0, 0, ..., 0]" class="formula">
+就可以了。其中，P是初始概率<span alt="[1, 0, 0, ..., 0]" class="formula">
 [1, 0, 0, ..., 0]</span>
- 。M 是状态转移矩阵。把终止状态排在最后，可以观察到，终止状态对应的几个横行，左边都是零，最右边是个单位矩阵 <span alt="\left[\begin{matrix} A &amp; B \\ O &amp; I \end{matrix}\right]" class="formula">
+。M是状态转移矩阵。把终止状态排在最后，可以观察到，终止状态对应的几个横行，左边都是零，最右边是个单位矩阵<span alt="\left[\begin{matrix} A &amp; B \\ O &amp; I \end{matrix}\right]" class="formula">
 <span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
 <span class="arraycell align-c">
 <i>A</i>
@@ -68,7 +65,7 @@ remove_node(document.querySelector("link[title='math']"));
 
 </span>
 </span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span></span>
- 。不妨令 <span alt="M^n = \left[\begin{matrix} A_n &amp; B_n \\ O &amp; I \end{matrix}\right]" class="formula">
+。不妨令<span alt="M^n = \left[\begin{matrix} A_n &amp; B_n \\ O &amp; I \end{matrix}\right]" class="formula">
 <i>M</i><sup><i>n</i></sup> = <span class="array"><span class="arrayrow"><span class="bracket align-left">⎡</span></span><span class="arrayrow"><span class="bracket align-left">⎢</span></span><span class="arrayrow"><span class="bracket align-left">⎣</span></span></span><span class="array"><span class="arrayrow">
 <span class="arraycell align-c">
 <i>A</i><sub><i>n</i></sub>
@@ -97,7 +94,7 @@ remove_node(document.querySelector("link[title='math']"));
 
 </span>
 </span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span></span>
- 有</p>
+有</p>
 <div alt="\begin{array}{lcl} M^n &amp;=&amp; \left[\begin{matrix} A_n &amp; B_n \\ O &amp; I \end{matrix}\right] \\     &amp;=&amp; \left[\begin{matrix} A_{n-1} &amp; B_{n-1} \\ O &amp; I \end{matrix}\right] \cdot \left[\begin{matrix} A &amp; B \\ O &amp; I \end{matrix}\right] \\     &amp;=&amp; \left[\begin{matrix} A_{n-1} \cdot A &amp; A_{n-1} \cdot B + B_{n-1} \\ O &amp; I \end{matrix}\right] \\     &amp;=&amp; \left[\begin{matrix} A^n &amp; (\sum_{i=0}^{n-1} A^i) \cdot B \\ O &amp; I \end{matrix}\right] \end{array}" class="formula">
 <span class="array"><span class="arrayrow">
 <span class="arraycell align-l">
@@ -320,15 +317,15 @@ remove_node(document.querySelector("link[title='math']"));
 </span>
 </span>
 </div>
-<p>因为最终都是会进入终止状态的，所以 <span alt="\lim_{n \to \infty} A^n = O" class="formula">
+<p>因为最终都是会进入终止状态的，所以<span alt="\lim_{n \to \infty} A^n = O" class="formula">
 <span class="limits"><span class="limit">lim</span></span><sub><i>n</i> → ∞</sub><i>A</i><sup><i>n</i></sup> = <i>O</i></span>
- ，而 <span alt="(I-A) \cdot (\sum_{i=0}^{n-1} A^i) = I - A^n" class="formula">
+，而<span alt="(I-A) \cdot (\sum_{i=0}^{n-1} A^i) = I - A^n" class="formula">
 (<i>I</i> − <i>A</i>)⋅(<span class="limits"><span class="limit"><span class="symbol">∑</span></span></span><span class="scripts"><sup class="script"><i>n</i> − 1</sup><sub class="script"><i>i</i> = 0</sub></span><i>A</i><sup><i>i</i></sup>) = <i>I</i> − <i>A</i><sup><i>n</i></sup></span>
- 。于是， <span alt="\lim_{n \to \infty} (I-A) \cdot (\sum_{i=0}^{n-1} A^i) = I" class="formula">
+。于是，<span alt="\lim_{n \to \infty} (I-A) \cdot (\sum_{i=0}^{n-1} A^i) = I" class="formula">
 <span class="limits"><span class="limit">lim</span></span><sub><i>n</i> → ∞</sub>(<i>I</i> − <i>A</i>)⋅(<span class="limits"><span class="limit"><span class="symbol">∑</span></span></span><span class="scripts"><sup class="script"><i>n</i> − 1</sup><sub class="script"><i>i</i> = 0</sub></span><i>A</i><sup><i>i</i></sup>) = <i>I</i></span>
- 。因此这就相当于要求出 <span alt="(I-A)^{-1}\cdot B" class="formula">
+。因此这就相当于要求出<span alt="(I-A)^{-1}\cdot B" class="formula">
 (<i>I</i> − <i>A</i>)<sup> − 1</sup>⋅<i>B</i></span>
- 。</p>
+。</p>
 <p>用J语言一行代码就可以了</p>
 <pre class="code literal-block">
    solve=:];&amp;&gt;{.&#64;:(-&#64;:#&#64;:]([({.&quot;0 1%.(=&#64;i.&#64;:#-])&#64;:(}.&quot;0 1))}.)+/&#64;:(3 :'({.&quot;1 y)(;/}.&quot;1 y)}0$~(,])#y'&amp;]&quot;2)&#64;:(2 0 1|:(((,1&amp;-)&#64;:[,&quot;1 2])(i.&#64;:#,:&quot;0 1])&#64;:(((('HT',~&amp;.&gt;&quot;1 0]),[,.[)(1 i:~(]-:({.~-&#64;:#))&amp;&gt;)&quot;0 1,~)([:(([:/:#&amp;&gt;){])'';#}.~.&#64;:(,;&#64;:(&lt;\&amp;.&gt;)))))))

@@ -21,23 +21,20 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
 <div>2014-12-09</div>
 <article>
 <h1>Scalable Source Routing</h1>
-<div class="info">
-<ul class="tags">
-</ul>
-<div class="clear"></div>
-</div><p>有很多关于adhoc network如何避免flooding的研究。其中一个是Scalable Source Routing，其主要思路借鉴自DHT。</p>
+<p>有很多关于adhoc network如何避免flooding的研究。其中一个是Scalable Source Routing，其主要思路借鉴自DHT。</p>
 <!-- more -->
 <p>现在考虑一种简化的DHT。DHT是为了在N个节点上存储好多Key -&gt; Value的数据。假如你的节点编号为 1 2 3 4 5 ，那么 hash(Key) 为 1 的那就存到节点1，依次类推。假如你其实只有2 4两个节点在工作。你要把1 2 3 4 5看成一个环，也就是5的下一个节点是1。此时，把hash(Key)为5 1 2的数据存在节点2，把hash(Key)为3 4的数据存在节点4。</p>
 <p>不过怎么存数据和你没什么关系。把这种思路用于路由协议的时候，现在假设有7个节点1 2 3 4 5 6 7。比如节点3要记住一条到节点2的路径和一条到节点4的路径。这样，比如节点1要找到节点4的路径，因为节点1知道一条到节点2的路径，所以节点1可以问节点2，节点2可以问节点3，节点3知道一条到节点4的路径，把这几条路径串起来，就是一条从节点1到节点4的路径，当然了，你得去掉这中间出现的环，不然就是在兜圈子嘛。假如只剩下1 3 5 7，那么1要记住到3和7的路径，也就是要记住按逻辑编号排成一圈之后你的neighbour的编号。</p>
-<p>一个个节点问过去是很慢的，所以你还需要从真正的DHT，比如Chord, Kademlia里借鉴点东西来加快找路径的速度。这样就能避免flooding了。这样做经常不能返回当前的延时最短路径 <a class="footnote-reference" href="#ssr" id="id1">[1]</a> 。</p>
+<p>一个个节点问过去是很慢的，所以你还需要从真正的DHT，比如Chord, Kademlia里借鉴点东西来加快找路径的速度。这样就能避免flooding了。这样做经常不能返回当前的延时最短路径<a class="footnote-reference" href="#ssr" id="id1">[1]</a>。</p>
 <table class="docutils footnote" frame="void" id="ssr" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">

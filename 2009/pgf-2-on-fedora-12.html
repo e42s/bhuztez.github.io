@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>ArchLinux从AUR安装octave-forge遇到gcc-fortran conflicts with gcc-libs</title>
-<link rel="canonical" href="https://bhuztez.github.io/2010/install-octave-forge-from-aur.html" />
+<title>在Fedora 12上使用PGF 2.0</title>
+<link rel="canonical" href="https://bhuztez.github.io/2009/pgf-2-on-fedora-12.html" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" title="math" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
@@ -21,19 +21,26 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
-<div>2010-01-02</div>
+<div>2009-12-07</div>
 <article>
-<h1>ArchLinux从AUR安装octave-forge遇到gcc-fortran conflicts with gcc-libs</h1>
+<h1>在Fedora 12上使用PGF 2.0</h1>
 <div class="info">
 <ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/fedora.html">Fedora</a></li>
+<li><a href="https://bhuztez.github.io/tag/pgftikz.html">PGF/TikZ</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
 </ul>
 <div class="clear"></div>
-</div><p>从<a class="reference external" href="http://aur.archlinux.org/packages.php?ID=20824">这里</a>看，应该2009年8月31日才加上的。其实 <code>gcc-fortran</code> 是不一定要的，把 <code>makedepends</code> 那行去掉就好了，囧</p>
+</div>
+<p>Fedora 12还在使用好多年以前的TeX Live 2007，里面的PGF/TikZ还是老版本的。PGF/TikZ早就已经<a class="reference external" href="http://sourceforge.net/project/showfiles.php?group_id=142562">2.0</a>了。</p>
+<!-- more -->
+<p>下载解压，除了<code>doc</code>都应该放在<code>~/texmf/tex</code>目录下。<code>pgfmanual.pdf</code>第37页有个<a class="reference external" href="http://old.nabble.com/Problem-of-placment---page-37-of-the-manual-td15847007.html">错误</a>，要把<code>placments</code>改成<code>positioning</code>。</p>
 
 </article>
 <div id="disqus_thread"></div>

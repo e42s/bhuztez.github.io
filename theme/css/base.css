@@ -16,10 +16,28 @@ pre.pycon {
     white-space: pre-wrap;
 }
 
+code {
+    background: #F0F0F0;
+    border: 1px solid #CCCCCC;
+    padding: 0.2em;
+    margin: 0 0.2em;
+}
+
+blockquote {
+    margin: 1em 0.5em;
+    padding: 0 0.75em;
+    border-left: 0.5em solid #CCCCCC;
+}
+
+blockquote p {
+    margin: 0.2em 0;
+    padding: 0;
+}
+
 div.info ul.tags {
     float: left;
     list-style: inside;
-    margin: 0.2em 0;
+    margin: 0.5em 0;
     padding: 0;
     font-size: 0.7em;
 }

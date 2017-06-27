@@ -21,8 +21,9 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
@@ -33,10 +34,11 @@ remove_node(document.querySelector("link[title='math']"));
 <ul class="tags">
 <li><a href="https://bhuztez.github.io/tag/python.html">Python</a></li>
 <li><a href="https://bhuztez.github.io/tag/http.html">HTTP</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
 </ul>
 <div class="clear"></div>
-</div><p>HTML表单里有一种类型是 <code>multipart/form-data</code> ，</p>
-<p>搜了一下结果发现要么是远古时期的，要么推荐用requests，就是没有人推荐用标准库的方法。Python明明自带MIME库了，用标准库就足够了嘛。</p>
+</div>
+<p>HTML表单里有一种类型是<code>multipart/form-data</code>，Python的urllib并不支持。搜了一下结果发现要么是远古时期的，要么推荐用requests，就是没有人推荐用标准库的方法。Python自带了MIME库，用标准库就足够了。</p>
 <!-- more -->
 <pre class="code python literal-block">
 <span class="kn">from</span> <span class="nn">urllib2</span> <span class="kn">import</span> <span class="n">Request</span>

@@ -21,8 +21,9 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
@@ -31,22 +32,26 @@ remove_node(document.querySelector("link[title='math']"));
 <h1>把Android设备变成USB摄像头</h1>
 <div class="info">
 <ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/android.html">Android</a></li>
+<li><a href="https://bhuztez.github.io/tag/webcam.html">Webcam</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
 </ul>
 <div class="clear"></div>
-</div><p>闲置的山寨Android设备也不能浪费啊。看上去只要装个<a class="reference external" href="https://play.google.com/store/apps/details?id=com.pas.webcam&amp;hl=en">IP WebCam</a>就好了。实际上却比这折腾的多了。</p>
+</div>
+<p>闲置的山寨Android设备也不能浪费啊。看上去只要装个<a class="reference external" href="https://play.google.com/store/apps/details?id=com.pas.webcam&amp;hl=en">IP WebCam</a>就好了。实际上却比这折腾的多了。</p>
 <!-- more -->
 <p>首先，有些奇怪的设备在刚插入时，没法直接使用设备，会先进入给你的机器装驱动的模式，这样就没法用ADB了。需要用 usb_modeswitch 才行。</p>
 <p>先用lsusb找到新插入USB设备的ID。</p>
 <pre class="code literal-block">
 Bus 001 Device 001: ID 0001:0002 Vender Info
 </pre>
-<p>假如是像上面这样的，可以用以下命令。可能还需要 <code>--huawei-mode</code> 之类的参数</p>
+<p>假如是像上面这样的，可以用以下命令。可能还需要<code>--huawei-mode</code>之类的参数</p>
 <pre class="code literal-block">
 usb_modeswitch -v 0001 -p 0002
 </pre>
 <p>ADB能连上之后，装上IP WebCam，设置好端口转发，就能用比如vlc，看摄像头的视频了。</p>
 <p>参考<a class="reference external" href="https://github.com/bluezio/ipwebcam-gst/blob/master/prepare-videochat.sh">ipwebcam-gst</a>里的说明，检查是不是能用GStreamer播放。</p>
-<p>安装<a class="reference external" href="https://github.com/umlaeute/v4l2loopback">v4l2loopback</a>内核模块。这样就能有 /dev/video0 了。可是有点小问题，在Fedora上并不能用GStreamer的v4l2sink把视频传进去，需要修改一下代码。</p>
+<p>安装<a class="reference external" href="https://github.com/umlaeute/v4l2loopback">v4l2loopback</a>内核模块。这样就能有<code>/dev/video0</code>了。可是有点小问题，在Fedora上并不能用GStreamer的v4l2sink把视频传进去，需要修改一下代码。</p>
 <p>注意，Skype需要一些特别的参数，参考v4l2loopback <a class="reference external" href="https://github.com/umlaeute/v4l2loopback/wiki/Skype">Wiki</a>里的说明</p>
 
 </article>

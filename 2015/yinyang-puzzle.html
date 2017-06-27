@@ -21,19 +21,16 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
 <div>2015-01-21</div>
 <article>
 <h1>阴阳谜题</h1>
-<div class="info">
-<ul class="tags">
-</ul>
-<div class="clear"></div>
-</div><p>阴阳谜题是个很简单的问题，不过是揭示了call/cc is poor man's goto。可是总是有人觉得能搞明白阴阳谜题是一件很值得夸耀的事。</p>
+<p>阴阳谜题是个很简单的问题，不过是揭示了call/cc is poor man's goto。可是总是有人觉得能搞明白阴阳谜题是一件很值得夸耀的事。</p>
 <!-- more -->
 <p>阴阳谜题可以写成下面这样，无非这里每次 cc() 都会产生一个平行宇宙。</p>
 <pre class="code literal-block">
@@ -43,7 +40,7 @@ yang = cc()
 echo '*'
 yin(yang)
 </pre>
-<p>pi-calculus足够用来表达call/cc的语义，可以把以下代码放到 <a class="reference external" href="http://bhuztez.github.io/pi-diagram/">这里</a> 观察运行过程。</p>
+<p>pi-calculus足够用来表达call/cc的语义，可以把以下代码放到<a class="reference external" href="http://bhuztez.github.io/pi-diagram/">这里</a>观察运行过程。</p>
 <pre class="code literal-block">
 proc yin_cc(O,A,B) {
     new Yin in {

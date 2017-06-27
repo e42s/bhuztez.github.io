@@ -21,8 +21,9 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
@@ -31,9 +32,12 @@ remove_node(document.querySelector("link[title='math']"));
 <h1>在Fedora上继续使用GRUB</h1>
 <div class="info">
 <ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/fedora.html">Fedora</a></li>
+<li><a href="https://bhuztez.github.io/tag/grub.html">GRUB</a></li>
 </ul>
 <div class="clear"></div>
-</div><p>Fedora从某个版本开始默认使用GRUB2了。实在搞不明白无比复杂的GRUB2，还是继续用GRUB吧。可是没过多久fedora-logos里都不带GRUB的背景图了，只好果断抛弃，用generic-logos。另外还在 <code>/etc/yum.conf</code> 里把GRUB2什么的统统禁掉，免得distro-sync完了以后GRUB没了。</p>
+</div>
+<p>Fedora从某个版本开始默认使用GRUB2了。实在搞不明白无比复杂的GRUB2，还是继续用GRUB吧。可是没过多久fedora-logos里都不带GRUB的背景图了，只好果断抛弃，用generic-logos。另外还在<code>/etc/yum.conf</code>里把GRUB2什么的统统禁掉，免得distro-sync完了以后GRUB没了。</p>
 <!-- more -->
 <pre class="code literal-block">
 exclude=grub2 grub-efi grub2-efi

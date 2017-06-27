@@ -21,8 +21,9 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
@@ -31,9 +32,11 @@ remove_node(document.querySelector("link[title='math']"));
 <h1>Heartbleed漏洞</h1>
 <div class="info">
 <ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/openssl.html">OpenSSL</a></li>
 </ul>
 <div class="clear"></div>
-</div><p>最近爆出的<a class="reference external" href="http://heartbleed.com/">Heartbleed</a>漏洞实际上宣告了互联网安全已经破产了很久了。不管怎么样，还是首先提醒一下，这次的漏洞后果非常非常严重，至少应该尽快更新所有用到受影响版本的OpenSSL软件。不仅仅是服务端程序受影响，客户端程序也同样受影响，而且很多软件都选择自行编译一份OpenSSL库，所以即便使用的操作系统不受影响，自行安装的程序只要需要联网就很可能受影响。你可以检查一下软件安装目录下的文件。Windows下有libeay32.dll、ssleay32.dll或者类似名字的文件，Mac OS X下有libssl.dynlib或者类似名字的文件，Linux下有libssl.so或者类似名字的文件，非常有可能是受影响的。假如发现了这些文件，而在4月8日以后软件开发商没有发布过修补这个漏洞的新版本，请务必要第一时间联系软件开发商及时更新软件。</p>
+</div>
+<p>最近爆出的<a class="reference external" href="http://heartbleed.com/">Heartbleed</a>漏洞实际上宣告了互联网安全已经破产了很久了。不管怎么样，还是首先提醒一下，这次的漏洞后果非常非常严重，至少应该尽快更新所有用到受影响版本的OpenSSL软件。不仅仅是服务端程序受影响，客户端程序也同样受影响，而且很多软件都选择自行编译一份OpenSSL库，所以即便使用的操作系统不受影响，自行安装的程序只要需要联网就很可能受影响。你可以检查一下软件安装目录下的文件。Windows下有libeay32.dll、ssleay32.dll或者类似名字的文件，Mac OS X下有libssl.dynlib或者类似名字的文件，Linux下有libssl.so或者类似名字的文件，非常有可能是受影响的。假如发现了这些文件，而在4月8日以后软件开发商没有发布过修补这个漏洞的新版本，请务必要第一时间联系软件开发商及时更新软件。</p>
 <!-- more -->
 <p>这次的问题是出现在对TLS协议的heartbeat的处理上，这也是漏洞会被命名为Heartbleed的原因。我觉得TLS协议上的Heartbeat的设计也很有问题。为什么Heartbeat的payload是可变长度且可长达64K，而不是固定的长度比如64个字节？假如可变的是padding的长度而不是payload的长度，这次的漏洞根本就不会出现。同时，OpenSSL对malloc的封装把问题变得更严重了，越界读到的内存基本都在OpenSSL之前申请的范围之内，也就是都算得上是敏感内容。我感觉这里的内存分配应该把不同数据内容不同连接隔离开啊，每一片内存前后放两个内存页用来在发生越界的时候直接crash掉程序。<a class="reference external" href="http://article.gmane.org/gmane.comp.encryption.openssl.user/51243">Akamai最近向OpenSSL提交了一个补丁</a>，表明他们在几年前就已经应用了这样的想法，不过他们只把这种措施限制在ASN.1格式处理上了，也就是只保护了证书和私钥，其他数据还是混在一起的，<a class="reference external" href="https://blogs.akamai.com/2014/04/heartbleed-update-v3.html">私钥还是有可能从中间结果泄露</a>。</p>
 <p>要通过<a class="reference external" href="http://blog.regehr.org/archives/1125">静态分析</a>找出这个漏洞也不是不可能的。很不幸，Coverity没有发现问题，Frama-C是可以检查出问题，但是要让OpenSSL都能通过Frama-C检查也不是一件容易的事。很难想像，<a class="reference external" href="http://blogs.wsj.com/digits/2014/04/11/nsa-says-it-wasnt-previously-aware-of-heartbleed/">NSA没在第一时间发现这个漏洞</a>。</p>

@@ -21,8 +21,9 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
@@ -31,25 +32,29 @@ remove_node(document.querySelector("link[title='math']"));
 <h1>创建Fedora chroot</h1>
 <div class="info">
 <ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/fedora.html">Fedora</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
 </ul>
 <div class="clear"></div>
-</div><p>在Fedora 21之前，要创建chroot都比较容易，可以参考 <a class="reference external" href="http://blog.parahard.com/2011/06/five-steps-to-create-fedora-chroot-jail.html">Five steps to create Fedora chroot jail using yum</a> 。</p>
+</div>
+<p>在Fedora 21之前，要创建chroot都比较容易，可以参考 <a class="reference external" href="http://blog.parahard.com/2011/06/five-steps-to-create-fedora-chroot-jail.html">Five steps to create Fedora chroot jail using yum</a> 。</p>
 <!-- more -->
 <p>自从Fedora 21开始，fedora-release不再像以前那样了。fedora-release会依赖bash，bash又会依赖更多包，一个个去找过来是不现实的。所以只能强制安装了。</p>
 <p>先建好目录，初始化RPM的db</p>
-<pre class="code literal-block">
-mkdir -p /path/to/chroot/root
-rpm --root &quot;/path/to/chroot/root&quot; --initdb
+<pre class="code console literal-block">
+<span class="gp">$</span> mkdir -p /path/to/chroot/root
+<span class="gp">$</span> rpm --root <span class="s2">&quot;/path/to/chroot/root&quot;</span> --initdb
 </pre>
-<p>装包时，需要让rpm相信自己是root。比如可以用 <code>userns spawn -n chroot --user -- /bin/bash</code> 来建一个user namespace，因为安装需要联网，所以不建新的network namespace。更新的Fedora已经用dnf替换yum了，所以更推荐使用dnf来安装。</p>
-<pre class="code literal-block">
-rpm -ivh --nodeps --root &quot;/path/to/chroot/root&quot; fedora-repos-23-1.noarch.rpm fedora-release-23-1.noarch.rpm
-dnf --installroot=&quot;/path/to/chroot/root&quot; install coreutils bash
+<p>装包时，需要让rpm相信自己是root。比如可以用<code>userns spawn -n chroot --user -- /bin/bash</code>来建一个user namespace，因为安装需要联网，所以不建新的network namespace。更新的Fedora已经用dnf替换yum了，所以更推荐使用dnf来安装。</p>
+<pre class="code console literal-block">
+<span class="gp">$</span> rpm -ivh --nodeps --root <span class="s2">&quot;/path/to/chroot/root&quot;</span> fedora-repos-23-1.noarch.rpm fedora-release-23-1.noarch.rpm
+<span class="gp">$</span> dnf --installroot<span class="o">=</span><span class="s2">&quot;/path/to/chroot/root&quot;</span> install coreutils bash
 </pre>
 <p>安装完成后，就可以进入chroot了</p>
 <pre class="code literal-block">
-chroot &quot;/path/to/chroot/root&quot; /bin/bash
+$ chroot &quot;/path/to/chroot/root&quot; /bin/bash
 </pre>
+<p>不知道为什么，最近的DNF事实上并不需要初始化RPM的db，直接install就可以了。</p>
 
 </article>
 <div id="disqus_thread"></div>

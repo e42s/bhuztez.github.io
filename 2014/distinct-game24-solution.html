@@ -21,19 +21,16 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
 <div>2014-11-04</div>
 <article>
 <h1>二十四点去重</h1>
-<div class="info">
-<ul class="tags">
-</ul>
-<div class="clear"></div>
-</div><p>二十四点解法去重的思路很简单，就是根据把语法树根据等价公式找出相邻的语法树，得到以语法树为节点的边的集合，根据这个集合，进行unification，这样就把结果分组了，有几个组就是有几个不同的结果。</p>
+<p>二十四点解法去重的思路很简单，就是根据把语法树根据等价公式找出相邻的语法树，得到以语法树为节点的边的集合，根据这个集合，进行unification，这样就把结果分组了，有几个组就是有几个不同的结果。</p>
 <!-- more -->
 <pre class="code erlang literal-block">
 <span class="p">-</span><span class="ni">module</span><span class="p">(</span><span class="n">game24</span><span class="p">).</span>

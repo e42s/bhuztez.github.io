@@ -21,8 +21,9 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
@@ -31,11 +32,13 @@ remove_node(document.querySelector("link[title='math']"));
 <h1>LISP中的Macro</h1>
 <div class="info">
 <ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/lisp.html">LISP</a></li>
 </ul>
 <div class="clear"></div>
-</div><p>Paul Graham 在 The Roots of Lisp 一文中把 John McCarthy 的论文复述了一遍，还画蛇添足引入了 defun ，结果文中的解释器其实并不能自举。需要引入Macro之后才可以，讽刺的是，Paul Graham 整天吹嘘 Macro 多么强大，在这里却忘记了。</p>
+</div>
+<p>Paul Graham在The Roots of Lisp一文中把John McCarthy的论文复述了一遍，还画蛇添足引入了<code>defun</code>，结果文中的解释器其实并不能自举。需要引入Macro之后才可以，讽刺的是，Paul Graham整天吹嘘Macro多么强大，在这里却忘记了。</p>
 <!-- more -->
-<p>得像下面这样用 macro 来定义 defun 。</p>
+<p>得像下面这样用macro来定义<code>defun</code>。</p>
 <pre class="code literal-block">
 (label defun
   (macro (n p e)
@@ -51,7 +54,7 @@ remove_node(document.querySelector("link[title='math']"));
   )
 )
 </pre>
-<p>比如定义 caar 为</p>
+<p>比如定义<code>caar</code>为</p>
 <pre class="code literal-block">
 (defun caar (x) (car (car x)))
 </pre>

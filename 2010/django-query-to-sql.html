@@ -21,8 +21,9 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
@@ -31,11 +32,17 @@ remove_node(document.querySelector("link[title='math']"));
 <h1>用Django ORM动态生成SQL</h1>
 <div class="info">
 <ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/django.html">Django</a></li>
+<li><a href="https://bhuztez.github.io/tag/twisted.html">Twisted</a></li>
+<li><a href="https://bhuztez.github.io/tag/git.html">Git</a></li>
+<li><a href="https://bhuztez.github.io/tag/ssh.html">SSH</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
 </ul>
 <div class="clear"></div>
-</div><p>去年的时候，就想自己仿个 <a class="reference external" href="https://github.com/">GitHub</a> 玩玩。可是， <a class="reference external" href="http://git-scm.com/">Git</a> 并不像 <a class="reference external" href="http://mercurial.selenic.com/">Mercurial</a> 那样原生支持HTTP协议，得用SSH来限制用户访问。 <a class="reference external" href="https://github.com/">GitHub</a> 和 <a class="reference external" href="http://gitorious.org/">Gitorious</a> 也都是那么做的。 而 <a class="reference external" href="http://eagain.net/gitweb/?p=gitosis.git">Gitosis</a> 和 <a class="reference external" href="https://github.com/sitaramc/gitolite">Gitolite</a> 用起来都不是很方便， 后来看到 <a class="reference external" href="http://twistedmatrix.com/">Twisted</a> 也实现了SSH协议，想在上面改改就拿来用，毕竟不能直接拿来用，也一直没去看，就这样不了了之了。直到某日，看到 <a class="reference external" href="http://deadpuck.net/blag/serving-git/">Serving Git</a> 。这样SSH的问题就解决了。顺着那篇文章的思路下来，就想用 <a class="reference external" href="http://www.djangoproject.com/">Django</a> 弄个Web界面让用户来管理密钥，很快就弄好了，没有遇到任何困难。</p>
+</div>
+<p>去年就想自己仿个<a class="reference external" href="https://github.com/">GitHub</a>。可是，<a class="reference external" href="http://git-scm.com/">Git</a>并不像<a class="reference external" href="http://mercurial.selenic.com/">Mercurial</a>那样原生支持HTTP协议，一般都是用SSH协议来限制用户访问。比如，GitHub和<a class="reference external" href="http://gitorious.org/">Gitorious</a>都是那么做的。 而<a class="reference external" href="http://eagain.net/gitweb/?p=gitosis.git">Gitosis</a>和<a class="reference external" href="https://github.com/sitaramc/gitolite">Gitolite</a>用起来并不是很方便。后来看到<a class="reference external" href="http://deadpuck.net/blag/serving-git/">Serving Git</a>一文，就决定用<a class="reference external" href="http://twistedmatrix.com/">Twisted</a>来处理SSH协议。顺便用<a class="reference external" href="http://www.djangoproject.com/">Django</a>弄了个Web界面让用户来上传公钥密钥。</p>
 <!-- more -->
-<p>不过，既然是用 <a class="reference external" href="http://twistedmatrix.com/">Twisted</a> ，用 <a class="reference external" href="http://www.djangoproject.com/">Django</a> 来操作数据库总觉得有点怪怪的。尽管自己测试的时候，下面这样的代码运行起来也没什么问题。</p>
+<p>下面的代码是可以运行的。不过，Twisted是异步的，而Django操作数据库会阻塞，查一次公钥就把整个线程卡住了，要等查好了才能继续，这样并不对。</p>
 <pre class="code python literal-block">
 <span class="k">class</span> <span class="nc">PublicKeyChecker</span><span class="p">(</span><span class="n">SSHPublicKeyDatabase</span><span class="p">):</span>
 
@@ -46,7 +53,7 @@ remove_node(document.querySelector("link[title='math']"));
             <span class="n">user__username</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
             <span class="n">keystring</span> <span class="o">=</span> <span class="n">keystring</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
 </pre>
-<p>因为 <tt class="docutils literal">PublicKeyChecker</tt> 继承自 <tt class="docutils literal">SSHPublicKeyDatabase</tt> ， 看了下 <tt class="docutils literal">twisted.conch.checkers</tt> ，看到了一个 <tt class="docutils literal">maybeDeferred</tt>  <a class="footnote-reference" href="#deferred" id="id1">[1]</a> 。下面就是相关部分的代码：</p>
+<p>因为<code>PublicKeyChecker</code>继承自<code>SSHPublicKeyDatabase</code>， 看了下<code>twisted.conch.checkers</code>，看到了一个<code>maybeDeferred</code> <a class="footnote-reference" href="#deferred" id="id1">[1]</a>。下面就是相关部分的代码：</p>
 <pre class="code python literal-block">
 <span class="k">class</span> <span class="nc">SSHPublicKeyDatabase</span><span class="p">:</span>
 
@@ -56,7 +63,7 @@ remove_node(document.querySelector("link[title='math']"));
         <span class="n">d</span><span class="o">.</span><span class="n">addErrback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ebRequestAvatarId</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">d</span>
 </pre>
-<p><a class="reference external" href="http://twistedmatrix.com/">Twisted</a> 里需要用 <tt class="docutils literal">twisted.enterprise.adbapi</tt> 来操作数据库，而这玩意儿需要直接传入SQL语句 <a class="footnote-reference" href="#adbapi" id="id2">[2]</a> 。在 <a class="reference external" href="http://www.djangoproject.com/">Django</a> 里是用ORM解决问题的，还是希望在这里尽量不要硬编码SQL语句了。看了看 <a class="reference external" href="http://www.djangoproject.com/">Django</a> 的源代码，找到了这么个办法，可以得到对应 <tt class="docutils literal">queryset</tt> 的SQL语句。</p>
+<p>Twisted里用<code>twisted.enterprise.adbapi</code>来操作数据库，而需要直接传入SQL语句<a class="footnote-reference" href="#adbapi" id="id2">[2]</a>。在Django里是用ORM解决问题的，还是希望在这里尽量不要硬编码SQL语句了。看了看Django的源代码，这样就可以得到对应<code>queryset</code>的SQL语句。</p>
 <pre class="code python literal-block">
 <span class="n">qs</span> <span class="o">=</span> <span class="n">PublicKey</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
     <span class="n">user__username</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
@@ -65,7 +72,7 @@ remove_node(document.querySelector("link[title='math']"));
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">qs</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get_compiler</span><span class="p">(</span><span class="n">using</span><span class="o">=</span><span class="n">qs</span><span class="o">.</span><span class="n">db</span><span class="p">)</span>
 <span class="n">sql</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">as_sql</span><span class="p">()</span>
 </pre>
-<p>但是， <tt class="docutils literal">sqlite3</tt> 会对这样生成的SQL语句报错。需要用 <tt class="docutils literal">cursor.convert_query(sql)</tt> 把里面的 <tt class="docutils literal">%s</tt> 之类的转换成 &quot;<tt class="docutils literal">?</tt>&quot;（问号）。</p>
+<p>但是，<code>sqlite3</code>会对这样生成的SQL语句报错。需要用<code>cursor.convert_query(sql)</code>把里面的<code>%s</code>之类的转换成<code>?</code>。</p>
 <pre class="code python literal-block">
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 <span class="n">sql</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">convert_query</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
@@ -74,7 +81,7 @@ remove_node(document.querySelector("link[title='math']"));
 <pre class="code python literal-block">
 <span class="k">return</span> <span class="n">dbpool</span><span class="o">.</span><span class="n">runQuery</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
 </pre>
-<p>我们只需要知道有没有，不需要取回这么多数据，因为 <tt class="docutils literal">[:1]</tt> 会直接取出结果，所以用 <tt class="docutils literal">qs.query.set_limits</tt> 。</p>
+<p>我们只需要知道有没有，并不需要把所有数据都取回来，因为<code>[:1]</code>会直接取出结果，所以用<code>qs.query.set_limits</code>。</p>
 <pre class="code python literal-block">
 <span class="n">qs</span> <span class="o">=</span> <span class="n">PublicKey</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
     <span class="n">user__username</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
@@ -104,7 +111,7 @@ remove_node(document.querySelector("link[title='math']"));
 <table class="docutils footnote" frame="void" id="deferred" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>关于 <tt class="docutils literal">Deferred</tt> 可以参考 <a class="reference external" href="http://twistedmatrix.com/documents/current/core/howto/defer.html">Deferred Reference</a> （2010年8月22日查阅）</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>关于<code>Deferred</code>可以参考 <a class="reference external" href="http://twistedmatrix.com/documents/current/core/howto/defer.html">Deferred Reference</a> （2010年8月22日查阅）</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="adbapi" rules="none">

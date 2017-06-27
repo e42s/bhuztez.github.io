@@ -21,8 +21,9 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
@@ -31,13 +32,22 @@ remove_node(document.querySelector("link[title='math']"));
 <h1>DNS基本配置</h1>
 <div class="info">
 <ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/dns.html">DNS</a></li>
+<li><a href="https://bhuztez.github.io/tag/dnssec.html">DNSSEC</a></li>
+<li><a href="https://bhuztez.github.io/tag/ssh.html">SSH</a></li>
+<li><a href="https://bhuztez.github.io/tag/bind.html">BIND</a></li>
+<li><a href="https://bhuztez.github.io/tag/unbound.html">Unbound</a></li>
+<li><a href="https://bhuztez.github.io/tag/python.html">Python</a></li>
+<li><a href="https://bhuztez.github.io/tag/java.html">Java</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
 </ul>
 <div class="clear"></div>
-</div><p>因为DNSSEC和SSHFP配置步骤还是有点多的，在这里记录一下</p>
+</div>
+<p>因为DNSSEC和SSHFP配置步骤还是有点多的，在这里记录一下</p>
 <!-- more -->
 <div class="section" id="dns-server">
 <h2>运行一个临时的DNS Server</h2>
-<p>在配置文件里把文件/目录地址改到当前目录下。BIND 9.7多了一个 session-keyfile <a class="footnote-reference" href="#bind97-session-key" id="id1">[1]</a> 。</p>
+<p>在配置文件里把文件<code>/</code>目录地址改到当前目录下。BIND 9.7多了一个session-keyfile<a class="footnote-reference" href="#bind97-session-key" id="id1">[1]</a>。</p>
 <table class="docutils footnote" frame="void" id="bind97-session-key" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -76,14 +86,14 @@ named -c named.conf -g
 </div>
 <div class="section" id="zone">
 <h2>添加一个zone</h2>
-<p>修改 <code>named.conf</code> ，添加一个zone。</p>
+<p>修改<code>named.conf</code>，添加一个zone。</p>
 <pre class="code literal-block">
 zone &quot;example.com.&quot; {
         type    master;
         file    &quot;example.com&quot;;
 };
 </pre>
-<p>在 <code>zones</code> 目录下，新建 <code>example.com</code> 文件</p>
+<p>在<code>zones</code>目录下，新建<code>example.com</code>文件</p>
 <pre class="code literal-block">
 $ORIGIN .
 $TTL 300
@@ -98,7 +108,7 @@ example.com         IN SOA  example.com. root.example.com. (
                     A       127.0.0.1
 ns.example.com.             A       127.0.0.1
 </pre>
-<p>使用 <code>dig</code> 来查询</p>
+<p>使用<code>dig</code>来查询</p>
 <pre class="code console literal-block">
 <span class="gp">$</span> dig -p <span class="m">8053</span> &#64;127.0.0.1 example.com
 <span class="go">
@@ -130,7 +140,7 @@ ns.example.com.         300     IN      A       127.0.0.1
 </div>
 <div class="section" id="id2">
 <h2>修改DNS记录</h2>
-<p>修改 <code>zone</code> 的设置，添加 <code>allow-update</code> 。因为BIND 9.7开始，BIND启动的时候会临时生成一个可以用来update的key。就先用这个key来操作好了。</p>
+<p>修改<code>zone</code>的设置，添加<code>allow-update</code>。因为BIND 9.7开始，BIND启动的时候会临时生成一个可以用来update的key。就先用这个key来操作好了。</p>
 <pre class="code literal-block">
 zone &quot;example.com.&quot; {
         type            master;
@@ -139,7 +149,7 @@ zone &quot;example.com.&quot; {
         allow-update    { key local-ddns; };
 };
 </pre>
-<p>用 <code>nsupdate</code> 添加一条记录</p>
+<p>用<code>nsupdate</code>添加一条记录</p>
 <pre class="code console literal-block">
 <span class="gp">$</span> nsupdate -k session.key
 <span class="gp">&gt;</span> server localhost 8053
@@ -148,7 +158,7 @@ zone &quot;example.com.&quot; {
 <span class="gp">&gt;</span> quit
 <span class="gp">$</span>
 </pre>
-<p>用 <code>dig</code> 查询结果</p>
+<p>用<code>dig</code>查询结果</p>
 <pre class="code console literal-block">
 <span class="gp">$</span> dig -p <span class="m">8053</span> &#64;127.0.0.1 www.example.com
 <span class="go">
@@ -181,7 +191,7 @@ ns.example.com.         300     IN      A       127.0.0.1
 <pre class="code literal-block">
 update delete www.example.com. 300 A 127.0.0.1
 </pre>
-<p>要一次删除 <code>www.example.com.</code> 所有A记录，用</p>
+<p>要一次删除<code>www.example.com.</code>所有A记录，用</p>
 <pre class="code literal-block">
 update delete www.example.com. A
 </pre>
@@ -200,7 +210,7 @@ Created: 20120807063255
 Publish: 20120807063255
 Activate: 20120807063255</span>
 </pre>
-<p>修改 <code>named.conf</code></p>
+<p>修改<code>named.conf</code></p>
 <pre class="code literal-block">
 key &quot;user.&quot; {
         algorithm       HMAC-SHA512;
@@ -214,10 +224,10 @@ zone &quot;example.com.&quot; {
         allow-update    { key user.; };
 };
 </pre>
-<p>此时用 <code>nsupdate -k Kuser.+165+40835.private</code> 就可以修改DNS记录了</p>
+<p>此时用<code>nsupdate -k Kuser.+165+40835.private</code>就可以修改DNS记录了</p>
 <div class="section" id="python">
 <h3>Python</h3>
-<p>可以用 <a class="reference external" href="http://www.dnspython.org/">dnspython</a> 来修改DNS记录</p>
+<p>可以用<a class="reference external" href="http://www.dnspython.org/">dnspython</a>来修改DNS记录</p>
 <pre class="code python literal-block">
 <span class="kn">import</span> <span class="nn">dns.query</span>
 <span class="kn">import</span> <span class="nn">dns.tsig</span>
@@ -255,7 +265,7 @@ example.com. IN SOA
 </div>
 <div class="section" id="java">
 <h3>Java</h3>
-<p>可以用 <a class="reference external" href="http://www.dnsjava.org/">dnsjava</a> 来修改DNS记录</p>
+<p>可以用<a class="reference external" href="http://www.dnsjava.org/">dnsjava</a>来修改DNS记录</p>
 <pre class="code java literal-block">
 <span class="kn">import</span> <span class="nn">org.xbill.DNS.*</span><span class="o">;</span>
 
@@ -305,7 +315,7 @@ user.                   0       ANY     TSIG    hmac-sha512. 1344326060 300 64 Y
 </div>
 <div class="section" id="master-slave">
 <h2>Master/Slave</h2>
-<p>修改zone的设置，添加 <code>allow-transfer</code> 和 <code>also-notify</code> 。</p>
+<p>修改zone的设置，添加<code>allow-transfer</code>和<code>also-notify</code>。</p>
 <pre class="code literal-block">
 zone &quot;example.com.&quot; {
         type            master;
@@ -316,7 +326,7 @@ zone &quot;example.com.&quot; {
         also-notify     { 127.0.0.1 port 8153; };
 };
 </pre>
-<p>slave的配置，只要把zone的 <code>masters</code> 设置好就可以了。</p>
+<p>slave的配置，只要把zone的<code>masters</code>设置好就可以了。</p>
 <pre class="code bash literal-block">
 <span class="ch">#!/usr/bin/env bash
 </span>
@@ -366,7 +376,7 @@ Kexample.com.+010+41861</span>
 <span class="go">Generating key pair.........................++++++ .....................................++++++
 Kexample.com.+010+49764</span>
 </pre>
-<p>修改 <code>example.com</code> ，在最后添加两行</p>
+<p>修改<code>example.com</code>，在最后添加两行</p>
 <pre class="code text literal-block">
 $INCLUDE &quot;Kexample.com.+010+41861.key&quot;
 $INCLUDE &quot;Kexample.com.+010+49764.key&quot;
@@ -380,7 +390,7 @@ Algorithm: RSASHA512: KSKs: 1 active, 0 stand-by, 0 revoked
                       ZSKs: 1 active, 0 stand-by, 0 revoked
 example.com.signed</span>
 </pre>
-<p>修改 <code>named.conf</code></p>
+<p>修改<code>named.conf</code></p>
 <pre class="code literal-block">
 zone &quot;example.com.&quot; {
         type            master;
@@ -407,11 +417,11 @@ example.com.            300 IN DNSKEY 257 3 10 (
                                 D5XGdk9kV6GSbCl0DMd0nzabSLMVw/A8N7l9cVU+MVez
                                 ) ; key id = 49764</span>
 </pre>
-<p>建立 <code>trusted-key.key</code> 文件</p>
+<p>建立<code>trusted-key.key</code>文件</p>
 <pre class="code literal-block">
 example.com.            300 IN DNSKEY 257 3 10 AwEAAboBxp1wNbmxhINtxORCNfwQQaZ3QlTtlxfV+jCRY5R44ri1ygI5kZEToqiB7W6nnxbUi9T5HRGmJmprl7QapEzw4S8YaUXCdYAPy8tNFHMSsrj2d72r2gR2DSBp4C5ZD5XGdk9kV6GSbCl0DMd0nzabSLMVw/A8N7l9cVU+MVez
 </pre>
-<p>用 <code>dig</code> 来验证</p>
+<p>用<code>dig</code>来验证</p>
 <pre class="code console literal-block">
 <span class="gp">$</span> dig -p <span class="m">8053</span> &#64;localhost A example.com. +sigchase +trusted-key<span class="o">=</span>trusted-key.key
 <span class="go">;; RRset to chase:
@@ -454,7 +464,7 @@ Launch a query to find a RRset of type DS for zone: example.com.
 </div>
 <div class="section" id="recursive-resolver">
 <h2>recursive resolver</h2>
-<p>建立 <code>trusted-keys</code> 文件</p>
+<p>建立<code>trusted-keys</code>文件</p>
 <pre class="code literal-block">
 trusted-keys {
 example.com.            257 3 10 &quot;AwEAAboBxp1wNbmxhINtxORCNfwQQaZ3QlTtlxfV+jCRY5R44ri1ygI5kZEToqiB7W6nnxbUi9T5HRGmJmprl7QapEzw4S8YaUXCdYAPy8tNFHMSsrj2d72r2gR2DSBp4C5ZD5XGdk9kV6GSbCl0DMd0nzabSLMVw/A8N7l9cVU+MVez&quot;;
@@ -496,7 +506,7 @@ EOF</span>
 
 named -c recursive.conf -g
 </pre>
-<p>使用 <code>dig</code> 查看结果</p>
+<p>使用<code>dig</code>查看结果</p>
 <pre class="code console literal-block">
 <span class="gp">$</span> dig -p <span class="m">8253</span> &#64;localhost example.com. +dnssec
 <span class="go">
@@ -560,7 +570,7 @@ EOF</span>
 
 unbound -c unbound.conf
 </pre>
-<p>使用 <code>dig</code> 查看结果</p>
+<p>使用<code>dig</code>查看结果</p>
 <pre class="code console literal-block">
 <span class="gp">$</span> dig -p <span class="m">8353</span> &#64;localhost example.com. +dnssec
 <span class="go">
@@ -601,12 +611,12 @@ ns.example.com.         300     IN      RRSIG   A 10 3 300 20120909052125 201208
 <pre class="code console literal-block">
 <span class="gp">$</span> ssh-keygen -q -N <span class="s1">''</span> -f id_rsa
 </pre>
-<p>转换成SSHFP记录，并把这行添加到 <code>zones/example.com</code> 里</p>
+<p>转换成SSHFP记录，并把这行添加到<code>zones/example.com</code>里</p>
 <pre class="code console literal-block">
 <span class="gp">$</span> ssh-keygen -r example.com. -f id_rsa.pub
 <span class="go">example.com. IN SSHFP 1 1 5727cac5dcca0d87c2b74f33e6e6106f09a03d27</span>
 </pre>
-<p>SSH客户端使用的 <code>config</code> 文件</p>
+<p>SSH客户端使用的<code>config</code>文件</p>
 <pre class="code literal-block">
 Host example.com
     Port 8022
@@ -687,7 +697,7 @@ Host example.com
   <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
-<p>编译，通过 <code>LD_PRELOAD</code> 运行SSH客户端</p>
+<p>编译，通过<code>LD_PRELOAD</code>运行SSH客户端</p>
 <pre class="code console literal-block">
 <span class="gp">$</span> <span class="nv">LD_PRELOAD</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/hook.so&quot;</span> ssh -v -i id_rsa -F config example.com
 <span class="go">OpenSSH_5.8p2, OpenSSL 1.0.0i-fips 19 Apr 2012

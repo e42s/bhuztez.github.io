@@ -21,8 +21,9 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
@@ -31,9 +32,11 @@ remove_node(document.querySelector("link[title='math']"));
 <h1>用Datalog管理权限</h1>
 <div class="info">
 <ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/datalog.html">Datalog</a></li>
 </ul>
 <div class="clear"></div>
-</div><p>用普通SQL数据库管理权限是一件很别扭的事。一方面是有大量不必要的数据冗余，取消起来也特别麻烦。另外一方面，只要出现几条例外的规则，就不得不在代码里硬编码部分权限。</p>
+</div>
+<p>用普通SQL数据库管理权限是一件很别扭的事。一方面是有大量不必要的数据冗余，取消起来也特别麻烦。另外一方面，只要出现几条例外的规则，就不得不在代码里硬编码部分权限。</p>
 <!-- more -->
 <p>而在分配权限时，往往先把人分出一些角色，而服务则要为不同角色指定不同权限。这个思路更接近Datalog，而不是SQL。用普通SQL数据库管理权限相当于人工把权限都展开了。用Datalog就没法用数据库了，这也就不需要专用的运行数据库机器了。因为规则数量大大减少，用纯文本记录都是可行的，这样反而备份更方便，随便用一下git/hg之类的工具，就自动有很多备份了嘛。也不存在数据库瓶颈了，因为全都复制一份在本地查询了。因为也保留了完全的历史，出现问题要找也方便的多。</p>
 

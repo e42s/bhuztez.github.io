@@ -21,8 +21,9 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
@@ -31,14 +32,16 @@ remove_node(document.querySelector("link[title='math']"));
 <h1>中国剩余定理</h1>
 <div class="info">
 <ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/number-theory.html">Number Theory</a></li>
 </ul>
 <div class="clear"></div>
-</div><p>本文纯属搞笑，切勿当真</p>
+</div>
+<p>本文纯属搞笑，切勿当真</p>
 <p>中国剩余定理这个叫法是对这种方法的极大误解。根据中国人只追求实用的天赋，肯定不会没事去证明某种数学性质的。要是给不出解法，就算证明了一个很重要的性质，一句这有啥用就噎死了。中国剩余定理实际上是为了解一种同余方程组。中国剩余定理很可能不是中国人最早证明的，完整的解法也很可能不是中国人最早给出的，只是因为孙子算经中对这种同余方程组给出了不完整的解法，这就叫中国剩余定理了，和费马大定理有异曲同工之妙。</p>
 <!-- more -->
-<p>求正整数 <span alt="x" class="formula">
+<p>求正整数<span alt="x" class="formula">
 <i>x</i></span>
- 使得</p>
+使得</p>
 <div alt="\left\{\begin{array}{l l} x \equiv a_1 &amp; (mod\ m_1) \\ x \equiv a_2 &amp; (mod\ m_2) \\ \ldots \\ x \equiv a_n &amp; (mod\ m_n) \end{array}\right." class="formula">
 <span class="array"><span class="arrayrow"><span class="bracket align-left">⎧</span></span><span class="arrayrow"><span class="bracket align-left">⎪</span></span><span class="arrayrow"><span class="bracket align-left">⎪</span></span><span class="arrayrow"><span class="bracket align-left">⎨</span></span><span class="arrayrow"><span class="bracket align-left">⎪</span></span><span class="arrayrow"><span class="bracket align-left">⎪</span></span><span class="arrayrow"><span class="bracket align-left">⎩</span></span></span><span class="array"><span class="arrayrow">
 <span class="arraycell align-l">
@@ -99,30 +102,30 @@ remove_node(document.querySelector("link[title='math']"));
 </span>
 </span><span class="emptydot"></span>
 </div>
-<p>找出任意一个满足这个同余方程组的 <span alt="x" class="formula">
+<p>找出任意一个满足这个同余方程组的<span alt="x" class="formula">
 <i>x</i></span>
- 后，根据中国剩余定理即可得到最小的 <span alt="x" class="formula">
+后，根据中国剩余定理即可得到最小的<span alt="x" class="formula">
 <i>x</i></span>
- 。</p>
+。</p>
 <p>用构造法，求 <span alt="b_i, i \in \{1, 2, \ldots, n\}" class="formula">
 <i>b</i><sub><i>i</i></sub>, <i>i</i> ∈ {1, 2, …, <i>n</i>}</span>
  使得</p>
 <div alt="\forall ( j \in \{1, 2, \ldots, n\}, j \ne i) m_j \mid b_i" class="formula">
 ∀(<i>j</i> ∈ {1, 2, …, <i>n</i>}, <i>j</i> ≠ <i>i</i>)<i>m</i><sub><i>j</i></sub>∣<i>b</i><sub><i>i</i></sub>
 </div>
-<p>记 <span alt="b_i" class="formula">
+<p>记<span alt="b_i" class="formula">
 <i>b</i><sub><i>i</i></sub></span>
- 和 <span alt="m_i" class="formula">
+和<span alt="m_i" class="formula">
 <i>m</i><sub><i>i</i></sub></span>
- 的最大公约数为 <span alt="gcd(b_i, m_i)" class="formula">
+的最大公约数为<span alt="gcd(b_i, m_i)" class="formula">
 <i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span>
- 。若有</p>
+。若有</p>
 <div alt="gcd(b_i, m_i) \mid a_i" class="formula">
 <i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)∣<i>a</i><sub><i>i</i></sub>
 </div>
-<p>且存在 <span alt="k_i, i \in \{1, 2, \ldots, n\}" class="formula">
+<p>且存在<span alt="k_i, i \in \{1, 2, \ldots, n\}" class="formula">
 <i>k</i><sub><i>i</i></sub>, <i>i</i> ∈ {1, 2, …, <i>n</i>}</span>
- 满足</p>
+满足</p>
 <div alt="k_i b_i \equiv gcd(b_i, m_i) (mod\ m_i) i \in \{1, 2, \ldots, n\}" class="formula">
 <i>k</i><sub><i>i</i></sub><i>b</i><sub><i>i</i></sub> ≡ <i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)(<i>mod</i> <i>m</i><sub><i>i</i></sub>)<i>i</i> ∈ {1, 2, …, <i>n</i>}
 </div>
@@ -130,11 +133,11 @@ remove_node(document.querySelector("link[title='math']"));
 <div alt="x = \sum_{i=1}^{n} \frac{a_i}{gcd(b_i, m_i)} k_i b_i" class="formula">
 <i>x</i> = <span class="limits"><sup class="limit"><i>n</i></sup><span class="limit"><span class="symbol">∑</span></span><sub class="limit"><i>i</i> = 1</sub></span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>a</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span><i>k</i><sub><i>i</i></sub><i>b</i><sub><i>i</i></sub>
 </div>
-<p>对于任意 <span alt="j" class="formula">
+<p>对于任意<span alt="j" class="formula">
 <i>j</i></span>
  ，满足 <span alt="j \in \{1, 2, \ldots, n\}" class="formula">
 <i>j</i> ∈ {1, 2, …, <i>n</i>}</span>
- ，有</p>
+，有</p>
 <div alt="\forall ( i \in \{1, 2, \ldots, n\}, i \ne j) m_j \mid b_i" class="formula">
 ∀(<i>i</i> ∈ {1, 2, …, <i>n</i>}, <i>i</i> ≠ <i>j</i>)<i>m</i><sub><i>j</i></sub>∣<i>b</i><sub><i>i</i></sub>
 </div>
@@ -208,57 +211,57 @@ remove_node(document.querySelector("link[title='math']"));
 </div>
 <p><span alt="bi" class="formula">
 <i>bi</i></span>
- 可以直接取 <span alt="\prod_{j \ne i} m_j" class="formula">
+可以直接取<span alt="\prod_{j \ne i} m_j" class="formula">
 <span class="limits"><span class="limit"><span class="symbol">∏</span></span></span><sub><i>j</i> ≠ <i>i</i></sub><i>m</i><sub><i>j</i></sub></span>
- ，求 <span alt="k_i" class="formula">
+，求<span alt="k_i" class="formula">
 <i>k</i><sub><i>i</i></sub></span>
- 却比较困难。</p>
+却比较困难。</p>
 <p>因为</p>
 <div alt="k_i b_i\ mod\ m_i \equiv gcd(b_i, m_i) \cdot \left(k_i \frac{b_i}{gcd(b_i,m_i)}\ mod\ \frac{m_i}{gcd(b_i,m_i)}\right)" class="formula">
 <i>k</i><sub><i>i</i></sub><i>b</i><sub><i>i</i></sub> <i>mod</i> <i>m</i><sub><i>i</i></sub> ≡ <i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)⋅<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><i>k</i><sub><i>i</i></sub><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>b</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span> <i>mod</i> <span class="fraction"><span class="ignored">(</span><span class="numerator"><i>m</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
 </div>
-<p>所以， <span alt="k_i" class="formula">
+<p>所以，<span alt="k_i" class="formula">
 <i>k</i><sub><i>i</i></sub></span>
- 满足</p>
+满足</p>
 <div alt="k_i \frac{b_i}{gcd(b_i,m_i)} \equiv 1 \left(mod\ \frac{m_i}{gcd(b_i, m_i)}\right)" class="formula">
 <i>k</i><sub><i>i</i></sub><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>b</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span> ≡ 1<span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><i>mod</i> <span class="fraction"><span class="ignored">(</span><span class="numerator"><i>m</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
 </div>
-<p>这个问题也可以表示成，已知 <span alt="a, m" class="formula">
+<p>这个问题也可以表示成，已知<span alt="a, m" class="formula">
 <i>a</i>, <i>m</i></span>
- ，且 <span alt="gcd(a,m) = 1" class="formula">
+，且<span alt="gcd(a,m) = 1" class="formula">
 <i>gcd</i>(<i>a</i>, <i>m</i>) = 1</span>
- ，求 <span alt="k" class="formula">
+，求<span alt="k" class="formula">
 <i>k</i></span>
- 使得</p>
+使得</p>
 <div alt="ka \equiv 1 (mod\ m)" class="formula">
 <i>ka</i> ≡ 1(<i>mod</i> <i>m</i>)
 </div>
 <div class="section" id="id2">
 <h2>欧拉定理</h2>
 <p>有一种解法，不知道从哪里流传出来的，利用了欧拉定理。</p>
-<p>欧拉定理指出，若 <span alt="gcd(a, m) = 1" class="formula">
+<p>欧拉定理指出，若<span alt="gcd(a, m) = 1" class="formula">
 <i>gcd</i>(<i>a</i>, <i>m</i>) = 1</span>
- ，有</p>
+，有</p>
 <div alt="a^{\varphi(m)} \equiv 1 (mod\ m)" class="formula">
 <i>a</i><sup><i>φ</i>(<i>m</i>)</sup> ≡ 1(<i>mod</i> <i>m</i>)
 </div>
-<p>所以， <span alt="k" class="formula">
+<p>所以，<span alt="k" class="formula">
 <i>k</i></span>
- 取 <span alt="a^{\varphi(m)-1}" class="formula">
+取<span alt="a^{\varphi(m)-1}" class="formula">
 <i>a</i><sup><i>φ</i>(<i>m</i>) − 1</sup></span>
- 即可。</p>
-<p>因为除了量子计算机，我们并没有有效的办法能计算出 <span alt="\varphi(m)" class="formula">
+即可。</p>
+<p>因为除了量子计算机，我们并没有有效的办法能计算出<span alt="\varphi(m)" class="formula">
 <i>φ</i>(<i>m</i>)</span>
 ，至少古人不能使用这种方法。</p>
 </div>
 <div class="section" id="id3">
 <h2>大衍求一术</h2>
 <p>中国古代有一种求解的方法，叫做大衍求一术。很多介绍中国剩余定理的文章都没有提到大衍求一术。而提到大衍求一术的很多都只讲了什么是大衍求一术，而没有解释为什么。而大衍求一术乍一看完全不知道这是在算什么。</p>
-<p>数书九章中记载的大衍求一术是这样的。按如下放置四个数，不断作以下变换，直到 <span alt="r1" class="formula">
+<p>数书九章中记载的大衍求一术是这样的。按如下放置四个数，不断作以下变换，直到<span alt="r1" class="formula">
 <i>r</i>1</span>
- 或 <span alt="r2" class="formula">
+或<span alt="r2" class="formula">
 <i>r</i>2</span>
- 为1为止。</p>
+为1为止。</p>
 <div alt="\left(\begin{matrix} k_1 &amp; r_1 \\ k_2 &amp; r_2 \end{matrix}\right) \to \left\{\begin{array}{ll} \left(\begin{matrix} k_1 &amp; r_1 \\ k_2+k_1 \left\lfloor\frac{r_2}{r_1}\right\rfloor &amp; r_2\ mod\ r_1 \end{matrix}\right) &amp; , r_1 &lt; r_2 \\ \left(\begin{matrix} k_1 + k_2 \left\lfloor\frac{r_1}{r_2}\right\rfloor &amp; r_1\ mod\ r_2 \\ k_2 &amp; r_2 \end{matrix}\right) &amp; , r_1 &gt; r_2 \end{array}\right." class="formula">
 <span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
 <span class="arraycell align-c">
@@ -463,9 +466,9 @@ remove_node(document.querySelector("link[title='math']"));
 </span>
 </span><span class="emptydot"></span>
 </div>
-<p>当 <span alt="r_1 &lt; r_2" class="formula">
+<p>当<span alt="r_1 &lt; r_2" class="formula">
 <i>r</i><sub>1</sub> &lt; <i>r</i><sub>2</sub></span>
- 时，</p>
+时，</p>
 <div alt="\begin{array}{lll} \left(k_2 + k_1 \left\lfloor\frac{r_2}{r_1}\right\rfloor\right) \cdot a &amp; \equiv - r_2 + r_1 \left\lfloor \frac{r_2}{r_1}\right\rfloor &amp; (mod\ m) \\ &amp; \equiv - r_2 + r_2 - r_2\ mod\ r_1 &amp; (mod\ m) \\ &amp; \equiv - r_2\ mod\ r_1 &amp; (mod\ m) \end{array}" class="formula">
 <span class="array"><span class="arrayrow">
 <span class="arraycell align-l">
@@ -529,9 +532,9 @@ remove_node(document.querySelector("link[title='math']"));
 </span>
 </span>
 </div>
-<p>当 <span alt="r_1 &gt; r_2" class="formula">
+<p>当<span alt="r_1 &gt; r_2" class="formula">
 <i>r</i><sub>1</sub> &gt; <i>r</i><sub>2</sub></span>
- 时，</p>
+时，</p>
 <div alt="\begin{array}{lll} \left(k_1 + k_2 \left\lfloor\frac{r_1}{r_2}\right\rfloor\right) \cdot a &amp; \equiv r_1 - r_2 \left\lfloor\frac{r_1}{r_2}\right\rfloor &amp; (mod\ m) \\ &amp; \equiv r_1 - r_1 + r_1\ mod\ r_2 &amp; (mod\ m) \\ &amp; \equiv r_1\ mod\ r_2 &amp; (mod\ m) \end{array}" class="formula">
 <span class="array"><span class="arrayrow">
 <span class="arraycell align-l">
@@ -596,15 +599,15 @@ remove_node(document.querySelector("link[title='math']"));
 </span>
 </div>
 <p>所以，这两个等式在变换过程中始终成立。</p>
-<p>最终，若 <span alt="r_1 = 1" class="formula">
+<p>最终，若<span alt="r_1 = 1" class="formula">
 <i>r</i><sub>1</sub> = 1</span>
 </p>
 <div alt="k_1 a \equiv 1 (mod\ m)" class="formula">
 <i>k</i><sub>1</sub><i>a</i> ≡ 1(<i>mod</i> <i>m</i>)
 </div>
-<p>若 <span alt="r_2 = 1" class="formula">
+<p>若<span alt="r_2 = 1" class="formula">
 <i>r</i><sub>2</sub> = 1</span>
- ，作以下变换</p>
+，作以下变换</p>
 <div alt="\left(\begin{matrix} k_1 &amp; r_1 \\ k_2 &amp; 1 \end{matrix}\right) \to \left(\begin{matrix} k_1 + k_2 (r_1 - 1) &amp; 1 \\ k_2 &amp; 1 \end{matrix}\right)" class="formula">
 <span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
 <span class="arraycell align-c">
@@ -922,7 +925,7 @@ remove_node(document.querySelector("link[title='math']"));
 </span>
 </div>
 <p>所以，这两个等式在变换过程中始终成立。</p>
-<p>最终，若 <span alt="r_1=1" class="formula">
+<p>最终，若<span alt="r_1=1" class="formula">
 <i>r</i><sub>1</sub> = 1</span>
 </p>
 <div alt="k_1 a \equiv 1 (mod\ m)" class="formula">
@@ -932,14 +935,14 @@ remove_node(document.querySelector("link[title='math']"));
 <div class="section" id="id5">
 <h2>辗转相除法</h2>
 <p>辗转相除法是一种求最大公约数的方法。西方所谓的欧几里德算法就是辗转相除法。而扩展欧几里德算法其实就是同一种算法，只不过得到了更多结果。</p>
-<p>已知 <span alt="a,b" class="formula">
+<p>已知<span alt="a,b" class="formula">
 <i>a</i>, <i>b</i></span>
- ，求 <span alt="gcd(a,b)" class="formula">
+，求<span alt="gcd(a,b)" class="formula">
 <i>gcd</i>(<i>a</i>, <i>b</i>)</span>
- 。</p>
-<p>按如下放置两个数，不断作以下变换，直到 <span alt="r1" class="formula">
+。</p>
+<p>按如下放置两个数，不断作以下变换，直到<span alt="r1" class="formula">
 <i>r</i>1</span>
- 为0</p>
+为0</p>
 <div alt="\left(\begin{matrix} r_1 \\ r_2 \end{matrix}\right) \to \left(\begin{matrix} r_2\ mod\ r_1 \\ r_1 \end{matrix}\right)" class="formula">
 <span class="array"><span class="arrayrow"><span class="bracket align-left">⎛</span></span><span class="arrayrow"><span class="bracket align-left">⎜</span></span><span class="arrayrow"><span class="bracket align-left">⎝</span></span></span><span class="array"><span class="arrayrow">
 <span class="arraycell align-c">
@@ -1001,9 +1004,9 @@ remove_node(document.querySelector("link[title='math']"));
 </span>
 </span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
 </div>
-<p>不妨设 <span alt="r_1 = s_1 \cdot gcd(r_1, r_2),  r_2 = s_2 \cdot gcd(r1, r2)" class="formula">
+<p>不妨设<span alt="r_1 = s_1 \cdot gcd(r_1, r_2),  r_2 = s_2 \cdot gcd(r1, r2)" class="formula">
 <i>r</i><sub>1</sub> = <i>s</i><sub>1</sub>⋅<i>gcd</i>(<i>r</i><sub>1</sub>, <i>r</i><sub>2</sub>), <i>r</i><sub>2</sub> = <i>s</i><sub>2</sub>⋅<i>gcd</i>(<i>r</i>1, <i>r</i>2)</span>
- ，则</p>
+，则</p>
 <div alt="\begin{array}{ll} r2\ mod\ r1 &amp;= (s_2 \cdot gcd(r_1, r_2))\ mod\ (s_1 \cdot gcd(r_1, r_2)) \\             &amp;= (s_2\ mod\ s_1) \cdot gcd(r_1, r_2) \end{array}" class="formula">
 <span class="array"><span class="arrayrow">
 <span class="arraycell align-l">
@@ -1034,25 +1037,25 @@ remove_node(document.querySelector("link[title='math']"));
 </span>
 </span>
 </div>
-<p>因为 <span alt="gcd(s_2\ mod\ s_1, s_1) = 1" class="formula">
+<p>因为<span alt="gcd(s_2\ mod\ s_1, s_1) = 1" class="formula">
 <i>gcd</i>(<i>s</i><sub>2</sub> <i>mod</i> <i>s</i><sub>1</sub>, <i>s</i><sub>1</sub>) = 1</span>
- ，所以</p>
+，所以</p>
 <div alt="gcd(r_2\ mod\ r_1, r_1) = gcd(r_1, r_2)" class="formula">
 <i>gcd</i>(<i>r</i><sub>2</sub> <i>mod</i> <i>r</i><sub>1</sub>, <i>r</i><sub>1</sub>) = <i>gcd</i>(<i>r</i><sub>1</sub>, <i>r</i><sub>2</sub>)
 </div>
-<p>因此， <span alt="gcd(r1, r2)" class="formula">
+<p>因此，<span alt="gcd(r1, r2)" class="formula">
 <i>gcd</i>(<i>r</i>1, <i>r</i>2)</span>
- 始终是 <span alt="gcd(a, b)" class="formula">
+始终是<span alt="gcd(a, b)" class="formula">
 <i>gcd</i>(<i>a</i>, <i>b</i>)</span>
 </p>
-<p>当 <span alt="s_1=1" class="formula">
+<p>当<span alt="s_1=1" class="formula">
 <i>s</i><sub>1</sub> = 1</span>
- 时， <span alt="s_2\ mod\ s_1 = 0" class="formula">
+时，<span alt="s_2\ mod\ s_1 = 0" class="formula">
 <i>s</i><sub>2</sub> <i>mod</i> <i>s</i><sub>1</sub> = 0</span>
- ，计算结束，得到了 <span alt="gcd(a, b)" class="formula">
+，计算结束，得到了<span alt="gcd(a, b)" class="formula">
 <i>gcd</i>(<i>a</i>, <i>b</i>)</span>
 </p>
-<p>如下图所示，辗转相除法从后往前看，有 <span alt="r_1 = gcd(a, b) = gcd(r_n, r_{n+1})" class="formula">
+<p>如下图所示，辗转相除法从后往前看，有<span alt="r_1 = gcd(a, b) = gcd(r_n, r_{n+1})" class="formula">
 <i>r</i><sub>1</sub> = <i>gcd</i>(<i>a</i>, <i>b</i>) = <i>gcd</i>(<i>r</i><sub><i>n</i></sub>, <i>r</i><sub><i>n</i> + 1</sub>)</span>
 </p>
 <div alt="\left(\begin{matrix} a \\ b \end{matrix}\right) \to \ldots \to \left(\begin{matrix} r_4 \\ r_5 \end{matrix}\right) \to \left(\begin{matrix} r_3 \\ r_4 \end{matrix}\right) \to \left(\begin{matrix} r_2 \\ r_3 \end{matrix}\right) \to \left(\begin{matrix} r_1 \\ r_2 \end{matrix}\right) \to \left(\begin{matrix} 0 \\ r_1 \end{matrix}\right)" class="formula">
@@ -1166,66 +1169,66 @@ remove_node(document.querySelector("link[title='math']"));
 </span>
 </span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎞</span></span><span class="arrayrow"><span class="bracket align-right">⎟</span></span><span class="arrayrow"><span class="bracket align-right">⎠</span></span></span>
 </div>
-<p>求解 <span alt="k_1" class="formula">
+<p>求解<span alt="k_1" class="formula">
 <i>k</i><sub>1</sub></span>
- ，使得 <span alt="k_1 r_1 \equiv gcd(r_1, r_2) (mod\ r_2)" class="formula">
+，使得<span alt="k_1 r_1 \equiv gcd(r_1, r_2) (mod\ r_2)" class="formula">
 <i>k</i><sub>1</sub><i>r</i><sub>1</sub> ≡ <i>gcd</i>(<i>r</i><sub>1</sub>, <i>r</i><sub>2</sub>)(<i>mod</i> <i>r</i><sub>2</sub>)</span>
 </p>
-<p>因为 <span alt="r_1 = gcd(r_1, r_2)" class="formula">
+<p>因为<span alt="r_1 = gcd(r_1, r_2)" class="formula">
 <i>r</i><sub>1</sub> = <i>gcd</i>(<i>r</i><sub>1</sub>, <i>r</i><sub>2</sub>)</span>
- 所以 <span alt="k_1 = 1" class="formula">
+所以<span alt="k_1 = 1" class="formula">
 <i>k</i><sub>1</sub> = 1</span>
 </p>
-<p>求解 <span alt="k_2" class="formula">
+<p>求解<span alt="k_2" class="formula">
 <i>k</i><sub>2</sub></span>
- ，使得 <span alt="k_2 r_2 \equiv gcd(r_2, r_3) (mod\ r_3)" class="formula">
+，使得<span alt="k_2 r_2 \equiv gcd(r_2, r_3) (mod\ r_3)" class="formula">
 <i>k</i><sub>2</sub><i>r</i><sub>2</sub> ≡ <i>gcd</i>(<i>r</i><sub>2</sub>, <i>r</i><sub>3</sub>)(<i>mod</i> <i>r</i><sub>3</sub>)</span>
 </p>
-<p>不妨设 <span alt="r_3 - q_2 r_2 = r_1" class="formula">
+<p>不妨设<span alt="r_3 - q_2 r_2 = r_1" class="formula">
 <i>r</i><sub>3</sub> − <i>q</i><sub>2</sub><i>r</i><sub>2</sub> = <i>r</i><sub>1</sub></span>
 </p>
-<p>因为 <span alt="r_1 = gcd(r_2, r_3)" class="formula">
+<p>因为<span alt="r_1 = gcd(r_2, r_3)" class="formula">
 <i>r</i><sub>1</sub> = <i>gcd</i>(<i>r</i><sub>2</sub>, <i>r</i><sub>3</sub>)</span>
 </p>
-<p>可得 <span alt="r_3 - q_2 r_2 = gcd(r_2, r_3)" class="formula">
+<p>可得<span alt="r_3 - q_2 r_2 = gcd(r_2, r_3)" class="formula">
 <i>r</i><sub>3</sub> − <i>q</i><sub>2</sub><i>r</i><sub>2</sub> = <i>gcd</i>(<i>r</i><sub>2</sub>, <i>r</i><sub>3</sub>)</span>
 </p>
-<p>所以 <span alt="k_2 = -q_2" class="formula">
+<p>所以<span alt="k_2 = -q_2" class="formula">
 <i>k</i><sub>2</sub> =  − <i>q</i><sub>2</sub></span>
 </p>
-<p>求解 <span alt="k_3" class="formula">
+<p>求解<span alt="k_3" class="formula">
 <i>k</i><sub>3</sub></span>
- ，使得 <span alt="k_3 r_3 \equiv gcd(r_3, r_4) (mod\ r_3)" class="formula">
+，使得<span alt="k_3 r_3 \equiv gcd(r_3, r_4) (mod\ r_3)" class="formula">
 <i>k</i><sub>3</sub><i>r</i><sub>3</sub> ≡ <i>gcd</i>(<i>r</i><sub>3</sub>, <i>r</i><sub>4</sub>)(<i>mod</i> <i>r</i><sub>3</sub>)</span>
 </p>
-<p>不妨设 <span alt="r_4 - q_3 r_3 = r_2" class="formula">
+<p>不妨设<span alt="r_4 - q_3 r_3 = r_2" class="formula">
 <i>r</i><sub>4</sub> − <i>q</i><sub>3</sub><i>r</i><sub>3</sub> = <i>r</i><sub>2</sub></span>
 </p>
-<p>因为 <span alt="r_3 - q_2 r_2 = gcd(r_3, r_4)" class="formula">
+<p>因为<span alt="r_3 - q_2 r_2 = gcd(r_3, r_4)" class="formula">
 <i>r</i><sub>3</sub> − <i>q</i><sub>2</sub><i>r</i><sub>2</sub> = <i>gcd</i>(<i>r</i><sub>3</sub>, <i>r</i><sub>4</sub>)</span>
 </p>
-<p>可得 <span alt="r_3 - q_2(r_4 - q_3 r_3) = gcd(r_3, r_4)" class="formula">
+<p>可得<span alt="r_3 - q_2(r_4 - q_3 r_3) = gcd(r_3, r_4)" class="formula">
 <i>r</i><sub>3</sub> − <i>q</i><sub>2</sub>(<i>r</i><sub>4</sub> − <i>q</i><sub>3</sub><i>r</i><sub>3</sub>) = <i>gcd</i>(<i>r</i><sub>3</sub>, <i>r</i><sub>4</sub>)</span>
 </p>
-<p>即 <span alt="r_3(1 + q_2 q_3) - q_2 r_4 = gcd(r_3, r_4)" class="formula">
+<p>即<span alt="r_3(1 + q_2 q_3) - q_2 r_4 = gcd(r_3, r_4)" class="formula">
 <i>r</i><sub>3</sub>(1 + <i>q</i><sub>2</sub><i>q</i><sub>3</sub>) − <i>q</i><sub>2</sub><i>r</i><sub>4</sub> = <i>gcd</i>(<i>r</i><sub>3</sub>, <i>r</i><sub>4</sub>)</span>
 </p>
-<p>所以 <span alt="k_3 = 1 + q_2 q_3" class="formula">
+<p>所以<span alt="k_3 = 1 + q_2 q_3" class="formula">
 <i>k</i><sub>3</sub> = 1 + <i>q</i><sub>2</sub><i>q</i><sub>3</sub></span>
 </p>
-<p>不难看出，假设存在 <span alt="k_{n+1} r_{n+1} + k_n r_{n+2} = gcd(r_{n+2}, r_{n+3})" class="formula">
+<p>不难看出，假设存在<span alt="k_{n+1} r_{n+1} + k_n r_{n+2} = gcd(r_{n+2}, r_{n+3})" class="formula">
 <i>k</i><sub><i>n</i> + 1</sub><i>r</i><sub><i>n</i> + 1</sub> + <i>k</i><sub><i>n</i></sub><i>r</i><sub><i>n</i> + 2</sub> = <i>gcd</i>(<i>r</i><sub><i>n</i> + 2</sub>, <i>r</i><sub><i>n</i> + 3</sub>)</span>
 </p>
-<p>不妨设 <span alt="r_{n+3} - q_{n+2} r_{n+2} = r_{n+1}" class="formula">
+<p>不妨设<span alt="r_{n+3} - q_{n+2} r_{n+2} = r_{n+1}" class="formula">
 <i>r</i><sub><i>n</i> + 3</sub> − <i>q</i><sub><i>n</i> + 2</sub><i>r</i><sub><i>n</i> + 2</sub> = <i>r</i><sub><i>n</i> + 1</sub></span>
 </p>
-<p>可得 <span alt="k_{n+1}(r_{n+3} - q_{n+2} r_{n+2}) + k_n r_{n+2} = gcd(r_{n+2}, r_{n+3})" class="formula">
+<p>可得<span alt="k_{n+1}(r_{n+3} - q_{n+2} r_{n+2}) + k_n r_{n+2} = gcd(r_{n+2}, r_{n+3})" class="formula">
 <i>k</i><sub><i>n</i> + 1</sub>(<i>r</i><sub><i>n</i> + 3</sub> − <i>q</i><sub><i>n</i> + 2</sub><i>r</i><sub><i>n</i> + 2</sub>) + <i>k</i><sub><i>n</i></sub><i>r</i><sub><i>n</i> + 2</sub> = <i>gcd</i>(<i>r</i><sub><i>n</i> + 2</sub>, <i>r</i><sub><i>n</i> + 3</sub>)</span>
 </p>
-<p>即 <span alt="(k_n - k_{n+1} q_{n+2}) r_{n+2} + k_{n+1} r_{n+3} = gcd(r_{n+2}, r_{n+3})" class="formula">
+<p>即<span alt="(k_n - k_{n+1} q_{n+2}) r_{n+2} + k_{n+1} r_{n+3} = gcd(r_{n+2}, r_{n+3})" class="formula">
 (<i>k</i><sub><i>n</i></sub> − <i>k</i><sub><i>n</i> + 1</sub><i>q</i><sub><i>n</i> + 2</sub>)<i>r</i><sub><i>n</i> + 2</sub> + <i>k</i><sub><i>n</i> + 1</sub><i>r</i><sub><i>n</i> + 3</sub> = <i>gcd</i>(<i>r</i><sub><i>n</i> + 2</sub>, <i>r</i><sub><i>n</i> + 3</sub>)</span>
 </p>
-<p>所以 <span alt="k_{n+2} = k_n - k_{n+1} q_{n+2}" class="formula">
+<p>所以<span alt="k_{n+2} = k_n - k_{n+1} q_{n+2}" class="formula">
 <i>k</i><sub><i>n</i> + 2</sub> = <i>k</i><sub><i>n</i></sub> − <i>k</i><sub><i>n</i> + 1</sub><i>q</i><sub><i>n</i> + 2</sub></span>
 </p>
 <p>即</p>
@@ -1956,9 +1959,9 @@ remove_node(document.querySelector("link[title='math']"));
 </span>
 </span><span class="array"><span class="arrayrow"><span class="bracket align-right">⎤</span></span><span class="arrayrow"><span class="bracket align-right">⎥</span></span><span class="arrayrow"><span class="bracket align-right">⎦</span></span></span>
 </div>
-<p>所以 <span alt="s_2" class="formula">
+<p>所以<span alt="s_2" class="formula">
 <i>s</i><sub>2</sub></span>
- 就是结果</p>
+就是结果</p>
 <p>更合理的思路是，把辗转相除法写成矩阵形式后，观察到</p>
 <div alt="\left[\begin{matrix} r_{n+2} &amp; r_{n+3} \end{matrix}\right] \cdot \left[\begin{matrix} s_1 &amp; s_2 \\ t_1 &amp; t_2 \end{matrix}\right] = \left[\begin{matrix} 0 &amp; r_1 \end{matrix}\right]" class="formula">
 <span class="symbol">[</span><span class="array"><span class="arrayrow">
@@ -2008,10 +2011,10 @@ remove_node(document.querySelector("link[title='math']"));
 </span>
 </span><span class="symbol">]</span>
 </div>
-<p>发现 <span alt="r_{n+2} s_2 \equiv r_1 \equiv gcd(r_{n+2}, r_{n+3}) (mod\ r_{n+3})" class="formula">
+<p>发现<span alt="r_{n+2} s_2 \equiv r_1 \equiv gcd(r_{n+2}, r_{n+3}) (mod\ r_{n+3})" class="formula">
 <i>r</i><sub><i>n</i> + 2</sub><i>s</i><sub>2</sub> ≡ <i>r</i><sub>1</sub> ≡ <i>gcd</i>(<i>r</i><sub><i>n</i> + 2</sub>, <i>r</i><sub><i>n</i> + 3</sub>)(<i>mod</i> <i>r</i><sub><i>n</i> + 3</sub>)</span>
 </p>
-<p>且有循环不变式 <span alt="r_{n+2} s_{m+2} \equiv r_{m+1} (mod\ r_{n+3})" class="formula">
+<p>且有循环不变式<span alt="r_{n+2} s_{m+2} \equiv r_{m+1} (mod\ r_{n+3})" class="formula">
 <i>r</i><sub><i>n</i> + 2</sub><i>s</i><sub><i>m</i> + 2</sub> ≡ <i>r</i><sub><i>m</i> + 1</sub>(<i>mod</i> <i>r</i><sub><i>n</i> + 3</sub>)</span>
 </p>
 <p>这样就得到了扩展欧几里德算法</p>

@@ -21,8 +21,9 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li><a href="https://bhuztez.github.io/">Home</a></li>
-<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
 <li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
 </nav>
 </header>
 <div class="content">
@@ -31,9 +32,12 @@ remove_node(document.querySelector("link[title='math']"));
 <h1>用Erlang写HTTP Server</h1>
 <div class="info">
 <ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/erlang.html">Erlang</a></li>
+<li><a href="https://bhuztez.github.io/tag/http.html">HTTP</a></li>
 </ul>
 <div class="clear"></div>
-</div><p>很多人都在吹嘘REST架构。然而他们所谓的REST架构往往指的就是正确使用HTTP语义。REST架构的确是建立在正确使用HTTP语义之上的，然而在正确使用HTTP语义只是实现REST架构的基础。而那些吹嘘REST架构的人，往往号称自己是Web程序员。他们能对SSH框架，Rails框架侃侃而谈，却对HTTP协议一无所知，所以才会觉得REST很新鲜。</p>
+</div>
+<p>很多人都在吹嘘REST架构。然而他们所谓的REST架构往往指的就是正确使用HTTP语义。REST架构的确是建立在正确使用HTTP语义之上的，然而在正确使用HTTP语义只是实现REST架构的基础。而那些吹嘘REST架构的人，往往号称自己是Web程序员。他们能对SSH框架，Rails框架侃侃而谈，却对HTTP协议一无所知，所以才会觉得REST很新鲜。</p>
 <!-- more -->
 <p>了解HTTP语义最好的方法，当然是照着RFC自己实现一遍了。推荐用Erlang来写。用Erlang你不再需要担心线程进程或者事件驱动，也不需要自己去解析HTTP Header，那当然是很方便了。</p>
 <pre class="code erlang literal-block">
@@ -81,7 +85,7 @@ remove_node(document.querySelector("link[title='math']"));
 erl -make
 erl -run server
 </pre>
-<p>在浏览器里打开 <a class="reference external" href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a> ，你就会看到 OK 。现在你就可以开始动手实现HTTP协议了。</p>
+<p>在浏览器里打开<a class="reference external" href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a>，你就会看到 OK 。现在你就可以开始动手实现HTTP协议了。</p>
 
 </article>
 <div id="disqus_thread"></div>
