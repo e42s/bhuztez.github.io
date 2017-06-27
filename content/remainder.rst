@@ -1,8 +1,10 @@
+============
 中国剩余定理
 ============
 
 :date: 2014-08-03
 :slug: chinese-remainder-theorem
+:tags: Number Theory
 
 本文纯属搞笑，切勿当真
 
@@ -10,7 +12,7 @@
 
 .. more
 
-求正整数 :math:`x` 使得
+求正整数\ :math:`x`\ 使得
 
 .. math::
 
@@ -22,7 +24,7 @@
     \end{array}\right.
 
 
-找出任意一个满足这个同余方程组的 :math:`x` 后，根据中国剩余定理即可得到最小的 :math:`x` 。
+找出任意一个满足这个同余方程组的\ :math:`x`\ 后，根据中国剩余定理即可得到最小的\ :math:`x`\ 。
 
 用构造法，求 :math:`b_i, i \in \{1, 2, \ldots, n\}` 使得
 
@@ -30,17 +32,17 @@
 
     \forall ( j \in \{1, 2, \ldots, n\}, j \ne i) m_j \mid b_i
 
-记 :math:`b_i` 和 :math:`m_i` 的最大公约数为 :math:`gcd(b_i, m_i)` 。若有
+记\ :math:`b_i`\ 和\ :math:`m_i`\ 的最大公约数为\ :math:`gcd(b_i, m_i)`\ 。若有
 
 .. math::
 
     gcd(b_i, m_i) \mid a_i
 
-且存在 :math:`k_i, i \in \{1, 2, \ldots, n\}` 满足
+且存在\ :math:`k_i, i \in \{1, 2, \ldots, n\}`\ 满足
 
 .. math::
 
-     k_i b_i \equiv gcd(b_i, m_i) (mod\ m_i) i \in \{1, 2, \ldots, n\} 
+     k_i b_i \equiv gcd(b_i, m_i) (mod\ m_i) i \in \{1, 2, \ldots, n\}
 
 不妨设
 
@@ -48,7 +50,7 @@
 
     x = \sum_{i=1}^{n} \frac{a_i}{gcd(b_i, m_i)} k_i b_i
 
-对于任意 :math:`j` ，满足 :math:`j \in \{1, 2, \ldots, n\}` ，有
+对于任意\ :math:`j` ，满足 :math:`j \in \{1, 2, \ldots, n\}`\ ，有
 
 .. math::
 
@@ -72,7 +74,7 @@
     \end{array}
 
 
-:math:`bi` 可以直接取 :math:`\prod_{j \ne i} m_j` ，求 :math:`k_i` 却比较困难。
+:math:`bi`\ 可以直接取\ :math:`\prod_{j \ne i} m_j`\ ，求\ :math:`k_i`\ 却比较困难。
 
 因为
 
@@ -81,14 +83,14 @@
     k_i b_i\ mod\ m_i \equiv gcd(b_i, m_i) \cdot \left(k_i \frac{b_i}{gcd(b_i,m_i)}\ mod\ \frac{m_i}{gcd(b_i,m_i)}\right)
 
 
-所以， :math:`k_i` 满足
+所以，\ :math:`k_i`\ 满足
 
 .. math::
 
     k_i \frac{b_i}{gcd(b_i,m_i)} \equiv 1 \left(mod\ \frac{m_i}{gcd(b_i, m_i)}\right)
 
 
-这个问题也可以表示成，已知 :math:`a, m` ，且 :math:`gcd(a,m) = 1` ，求 :math:`k` 使得
+这个问题也可以表示成，已知\ :math:`a, m`\ ，且\ :math:`gcd(a,m) = 1`\ ，求\ :math:`k`\ 使得
 
 .. math::
 
@@ -100,15 +102,15 @@
 
 有一种解法，不知道从哪里流传出来的，利用了欧拉定理。
 
-欧拉定理指出，若 :math:`gcd(a, m) = 1` ，有
+欧拉定理指出，若\ :math:`gcd(a, m) = 1`\ ，有
 
 .. math::
 
-     a^{\varphi(m)} \equiv 1 (mod\ m) 
+     a^{\varphi(m)} \equiv 1 (mod\ m)
 
-所以， :math:`k` 取 :math:`a^{\varphi(m)-1}` 即可。
+所以，\ :math:`k`\ 取\ :math:`a^{\varphi(m)-1}`\ 即可。
 
-因为除了量子计算机，我们并没有有效的办法能计算出 :math:`\varphi(m)`，至少古人不能使用这种方法。
+因为除了量子计算机，我们并没有有效的办法能计算出\ :math:`\varphi(m)`\ ，至少古人不能使用这种方法。
 
 
 大衍求一术
@@ -116,7 +118,7 @@
 
 中国古代有一种求解的方法，叫做大衍求一术。很多介绍中国剩余定理的文章都没有提到大衍求一术。而提到大衍求一术的很多都只讲了什么是大衍求一术，而没有解释为什么。而大衍求一术乍一看完全不知道这是在算什么。
 
-数书九章中记载的大衍求一术是这样的。按如下放置四个数，不断作以下变换，直到 :math:`r1` 或 :math:`r2` 为1为止。
+数书九章中记载的大衍求一术是这样的。按如下放置四个数，不断作以下变换，直到\ :math:`r1`\ 或\ :math:`r2`\ 为1为止。
 
 .. math::
 
@@ -164,7 +166,7 @@
    \end{array}\right.
 
 
-当 :math:`r_1 < r_2` 时，
+当\ :math:`r_1 < r_2`\ 时，
 
 .. math::
 
@@ -175,10 +177,10 @@
     \end{array}
 
 
-当 :math:`r_1 > r_2` 时，
+当\ :math:`r_1 > r_2`\ 时，
 
 .. math::
- 
+
     \begin{array}{lll}
     \left(k_1 + k_2 \left\lfloor\frac{r_1}{r_2}\right\rfloor\right) \cdot a & \equiv r_1 - r_2 \left\lfloor\frac{r_1}{r_2}\right\rfloor & (mod\ m) \\
     & \equiv r_1 - r_1 + r_1\ mod\ r_2 & (mod\ m) \\
@@ -188,13 +190,13 @@
 
 所以，这两个等式在变换过程中始终成立。
 
-最终，若 :math:`r_1 = 1`
+最终，若\ :math:`r_1 = 1`
 
 .. math::
 
     k_1 a \equiv 1 (mod\ m)
 
-若 :math:`r_2 = 1` ，作以下变换
+若\ :math:`r_2 = 1`\ ，作以下变换
 
 .. math::
 
@@ -224,7 +226,7 @@
 
 现在用扩展欧几里德算法来求解。把循环不变式换成
 
-.. math:: 
+.. math::
 
     \left\{\begin{array}{ll}
     k_1 a \equiv r_1 & (mod\ m) \\
@@ -273,7 +275,7 @@
 
 所以，这两个等式在变换过程中始终成立。
 
-最终，若 :math:`r_1=1`
+最终，若\ :math:`r_1=1`
 
 .. math::
 
@@ -285,9 +287,9 @@
 
 辗转相除法是一种求最大公约数的方法。西方所谓的欧几里德算法就是辗转相除法。而扩展欧几里德算法其实就是同一种算法，只不过得到了更多结果。
 
-已知 :math:`a,b` ，求 :math:`gcd(a,b)` 。
+已知\ :math:`a,b`\ ，求\ :math:`gcd(a,b)`\ 。
 
-按如下放置两个数，不断作以下变换，直到 :math:`r1` 为0
+按如下放置两个数，不断作以下变换，直到\ :math:`r1`\ 为0
 
 .. math::
 
@@ -309,28 +311,28 @@
     \end{matrix}\right)
 
 
-不妨设 :math:`r_1 = s_1 \cdot gcd(r_1, r_2),  r_2 = s_2 \cdot gcd(r1, r2)` ，则
+不妨设\ :math:`r_1 = s_1 \cdot gcd(r_1, r_2),  r_2 = s_2 \cdot gcd(r1, r2)`\ ，则
 
 .. math::
 
      \begin{array}{ll}
      r2\ mod\ r1 &= (s_2 \cdot gcd(r_1, r_2))\ mod\ (s_1 \cdot gcd(r_1, r_2)) \\
-                 &= (s_2\ mod\ s_1) \cdot gcd(r_1, r_2) 
+                 &= (s_2\ mod\ s_1) \cdot gcd(r_1, r_2)
      \end{array}
 
 
-因为 :math:`gcd(s_2\ mod\ s_1, s_1) = 1` ，所以
+因为\ :math:`gcd(s_2\ mod\ s_1, s_1) = 1`\ ，所以
 
 .. math::
 
     gcd(r_2\ mod\ r_1, r_1) = gcd(r_1, r_2)
 
 
-因此， :math:`gcd(r1, r2)` 始终是 :math:`gcd(a, b)`
+因此，\ :math:`gcd(r1, r2)`\ 始终是\ :math:`gcd(a, b)`
 
-当 :math:`s_1=1` 时， :math:`s_2\ mod\ s_1 = 0` ，计算结束，得到了 :math:`gcd(a, b)`
+当\ :math:`s_1=1`\ 时，\ :math:`s_2\ mod\ s_1 = 0`\ ，计算结束，得到了\ :math:`gcd(a, b)`
 
-如下图所示，辗转相除法从后往前看，有 :math:`r_1 = gcd(a, b) = gcd(r_n, r_{n+1})`
+如下图所示，辗转相除法从后往前看，有\ :math:`r_1 = gcd(a, b) = gcd(r_n, r_{n+1})`
 
 .. math::
 
@@ -342,10 +344,10 @@
     r_5
     \end{matrix}\right) \to \left(\begin{matrix}
     r_3 \\
-    r_4    
+    r_4
     \end{matrix}\right) \to \left(\begin{matrix}
     r_2 \\
-    r_3    
+    r_3
     \end{matrix}\right) \to \left(\begin{matrix}
     r_1 \\
     r_2
@@ -355,41 +357,41 @@
     \end{matrix}\right)
 
 
-求解 :math:`k_1` ，使得 :math:`k_1 r_1 \equiv gcd(r_1, r_2) (mod\ r_2)`
+求解\ :math:`k_1`\ ，使得\ :math:`k_1 r_1 \equiv gcd(r_1, r_2) (mod\ r_2)`
 
-因为 :math:`r_1 = gcd(r_1, r_2)` 所以 :math:`k_1 = 1`
+因为\ :math:`r_1 = gcd(r_1, r_2)`\ 所以\ :math:`k_1 = 1`
 
-求解 :math:`k_2` ，使得 :math:`k_2 r_2 \equiv gcd(r_2, r_3) (mod\ r_3)`
+求解\ :math:`k_2`\ ，使得\ :math:`k_2 r_2 \equiv gcd(r_2, r_3) (mod\ r_3)`
 
-不妨设 :math:`r_3 - q_2 r_2 = r_1`
+不妨设\ :math:`r_3 - q_2 r_2 = r_1`
 
-因为 :math:`r_1 = gcd(r_2, r_3)`
+因为\ :math:`r_1 = gcd(r_2, r_3)`
 
-可得 :math:`r_3 - q_2 r_2 = gcd(r_2, r_3)`
+可得\ :math:`r_3 - q_2 r_2 = gcd(r_2, r_3)`
 
-所以 :math:`k_2 = -q_2`
+所以\ :math:`k_2 = -q_2`
 
-求解 :math:`k_3` ，使得 :math:`k_3 r_3 \equiv gcd(r_3, r_4) (mod\ r_3)`
+求解\ :math:`k_3`\ ，使得\ :math:`k_3 r_3 \equiv gcd(r_3, r_4) (mod\ r_3)`
 
-不妨设 :math:`r_4 - q_3 r_3 = r_2`
+不妨设\ :math:`r_4 - q_3 r_3 = r_2`
 
-因为 :math:`r_3 - q_2 r_2 = gcd(r_3, r_4)`
+因为\ :math:`r_3 - q_2 r_2 = gcd(r_3, r_4)`
 
-可得 :math:`r_3 - q_2(r_4 - q_3 r_3) = gcd(r_3, r_4)`
+可得\ :math:`r_3 - q_2(r_4 - q_3 r_3) = gcd(r_3, r_4)`
 
-即 :math:`r_3(1 + q_2 q_3) - q_2 r_4 = gcd(r_3, r_4)`
+即\ :math:`r_3(1 + q_2 q_3) - q_2 r_4 = gcd(r_3, r_4)`
 
-所以 :math:`k_3 = 1 + q_2 q_3`
+所以\ :math:`k_3 = 1 + q_2 q_3`
 
-不难看出，假设存在 :math:`k_{n+1} r_{n+1} + k_n r_{n+2} = gcd(r_{n+2}, r_{n+3})`
+不难看出，假设存在\ :math:`k_{n+1} r_{n+1} + k_n r_{n+2} = gcd(r_{n+2}, r_{n+3})`
 
-不妨设 :math:`r_{n+3} - q_{n+2} r_{n+2} = r_{n+1}`
+不妨设\ :math:`r_{n+3} - q_{n+2} r_{n+2} = r_{n+1}`
 
-可得 :math:`k_{n+1}(r_{n+3} - q_{n+2} r_{n+2}) + k_n r_{n+2} = gcd(r_{n+2}, r_{n+3})`
+可得\ :math:`k_{n+1}(r_{n+3} - q_{n+2} r_{n+2}) + k_n r_{n+2} = gcd(r_{n+2}, r_{n+3})`
 
-即 :math:`(k_n - k_{n+1} q_{n+2}) r_{n+2} + k_{n+1} r_{n+3} = gcd(r_{n+2}, r_{n+3})`
+即\ :math:`(k_n - k_{n+1} q_{n+2}) r_{n+2} + k_{n+1} r_{n+3} = gcd(r_{n+2}, r_{n+3})`
 
-所以 :math:`k_{n+2} = k_n - k_{n+1} q_{n+2}`
+所以\ :math:`k_{n+2} = k_n - k_{n+1} q_{n+2}`
 
 即
 
@@ -549,7 +551,7 @@
     0 & r_1
     \end{matrix}\right]
 
-所以 :math:`s_2` 就是结果
+所以\ :math:`s_2`\ 就是结果
 
 更合理的思路是，把辗转相除法写成矩阵形式后，观察到
 
@@ -566,8 +568,8 @@
     \end{matrix}\right]
 
 
-发现 :math:`r_{n+2} s_2 \equiv r_1 \equiv gcd(r_{n+2}, r_{n+3}) (mod\ r_{n+3})`
+发现\ :math:`r_{n+2} s_2 \equiv r_1 \equiv gcd(r_{n+2}, r_{n+3}) (mod\ r_{n+3})`
 
-且有循环不变式 :math:`r_{n+2} s_{m+2} \equiv r_{m+1} (mod\ r_{n+3})`
+且有循环不变式\ :math:`r_{n+2} s_{m+2} \equiv r_{m+1} (mod\ r_{n+3})`
 
 这样就得到了扩展欧几里德算法

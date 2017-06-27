@@ -4,11 +4,9 @@ Python模拟HTML表单提交
 
 :date: 2016-06-30
 :slug: multipart-form-data-in-python
-:tags: Python, HTTP
+:tags: Python, HTTP, How-to
 
-HTML表单里有一种类型是 :code:`multipart/form-data` ，
-
-搜了一下结果发现要么是远古时期的，要么推荐用requests，就是没有人推荐用标准库的方法。Python明明自带MIME库了，用标准库就足够了嘛。
+HTML表单里有一种类型是\ :code:`multipart/form-data`\ ，Python的urllib并不支持。搜了一下结果发现要么是远古时期的，要么推荐用requests，就是没有人推荐用标准库的方法。Python自带了MIME库，用标准库就足够了。
 
 .. more
 

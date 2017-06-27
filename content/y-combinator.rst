@@ -4,7 +4,7 @@
 
 :date: 2014-03-29
 :slug: y-combinator
-
+:tags: Erlang
 
 最近有一个很奇怪的现象。也许仅仅是因为刚好有一家公司叫Y Combinator，有不少人在写博客鼓吹不动点组合子，以学会不动点组合子为荣。
 

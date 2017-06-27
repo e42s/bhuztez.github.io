@@ -1,3 +1,4 @@
+{% if article.tags %}
 <div class="info">
 <ul class="tags">
 {% for tag in article.tags %}
@@ -6,3 +7,4 @@
 </ul>
 <div class="clear"></div>
 </div>
+{% endif %}

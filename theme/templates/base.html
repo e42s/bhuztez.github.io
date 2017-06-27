@@ -21,10 +21,10 @@ remove_node(document.querySelector("link[title='math']"));
 <header>
 <nav>
 <li{% if output_file == "index.html" %} class="selected"{% endif %}><a href="{{ SITEURL }}/{% if RELATIVE_URLS %}index.html{% endif %}">Home</a></li>
-<li{% if output_file == "archives.html" %} class="selected"{% endif %}><a href="{{ SITEURL }}/archives.html">Archives</a></li>
 {% for title, link in MENUITEMS %}
 <li{% if output_file == link %} class="selected"{% endif %}><a href="{{ SITEURL }}/{{ link }}">{{ title }}</a></li>
 {% endfor %}
+<li{% if output_file == "archives.html" %} class="selected"{% endif %}><a href="{{ SITEURL }}/archives.html">Archives</a></li>
 </nav>
 </header>
 {% block content %}{% endblock content %}

@@ -5,11 +5,11 @@ Penney's game
 :date: 2015-02-26
 :slug: penney-game
 
-Penney's game 是个很简单的问题。可是网络上能找到的答案，要么到状态转移图就完了，要么就跳过中间步骤直接出答案了。
+Penney's game是个很简单的问题。可是网络上能找到的答案，要么到状态转移图就完了，要么就跳过中间步骤直接出答案了。
 
 .. more
 
-解这个问题，分析一下状态转移的情况，接着直接计算 :math:`P \cdot \lim_{n \to \infty}{M^n}` 就可以了。其中，P是初始概率 :math:`[1, 0, 0, ..., 0]` 。M 是状态转移矩阵。把终止状态排在最后，可以观察到，终止状态对应的几个横行，左边都是零，最右边是个单位矩阵 :math:`\left[\begin{matrix} A & B \\ O & I \end{matrix}\right]` 。不妨令 :math:`M^n = \left[\begin{matrix} A_n & B_n \\ O & I \end{matrix}\right]` 有
+解这个问题，分析一下状态转移的情况，接着直接计算\ :math:`P \cdot \lim_{n \to \infty}{M^n}`\ 就可以了。其中，P是初始概率\ :math:`[1, 0, 0, ..., 0]`\ 。M是状态转移矩阵。把终止状态排在最后，可以观察到，终止状态对应的几个横行，左边都是零，最右边是个单位矩阵\ :math:`\left[\begin{matrix} A & B \\ O & I \end{matrix}\right]`\ 。不妨令\ :math:`M^n = \left[\begin{matrix} A_n & B_n \\ O & I \end{matrix}\right]`\ 有
 
 .. math::
 
@@ -20,7 +20,7 @@ Penney's game 是个很简单的问题。可是网络上能找到的答案，要
         &=& \left[\begin{matrix} A^n & (\sum_{i=0}^{n-1} A^i) \cdot B \\ O & I \end{matrix}\right]
     \end{array}
 
-因为最终都是会进入终止状态的，所以 :math:`\lim_{n \to \infty} A^n = O` ，而 :math:`(I-A) \cdot (\sum_{i=0}^{n-1} A^i) = I - A^n` 。于是， :math:`\lim_{n \to \infty} (I-A) \cdot (\sum_{i=0}^{n-1} A^i) = I` 。因此这就相当于要求出 :math:`(I-A)^{-1}\cdot B` 。
+因为最终都是会进入终止状态的，所以\ :math:`\lim_{n \to \infty} A^n = O`\ ，而\ :math:`(I-A) \cdot (\sum_{i=0}^{n-1} A^i) = I - A^n`\ 。于是，\ :math:`\lim_{n \to \infty} (I-A) \cdot (\sum_{i=0}^{n-1} A^i) = I`\ 。因此这就相当于要求出\ :math:`(I-A)^{-1}\cdot B`\ 。
 
 用J语言一行代码就可以了
 

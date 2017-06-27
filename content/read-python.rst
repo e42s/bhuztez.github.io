@@ -1,8 +1,10 @@
-Python代码阅读基础
-==================
+==============
+Python代码阅读
+==============
 
 :date: 2012-06-06
 :slug: python-code-reading-101
+:tags: Python, OpenStack
 
 在阅读Python代码的时候，别忘了Python标准库里几个比较有用的库， :code:`pdb` 、 :code:`ast` 和 :code:`code` 。 :code:`pdb` 用来调试， :code:`ast` 用来解析Python代码， :code:`code` 直接能给你一个 `REPL`_ 。
 

@@ -1,12 +1,14 @@
+=======================
 用Django ORM动态生成SQL
 =======================
 
 :date: 2010-09-17
 :slug: django-query-to-sql
+:tags: Django, Twisted, Git, SSH, How-to
 
-去年的时候，就想自己仿个 GitHub_ 玩玩。可是， Git_ 并不像 Mercurial_ 那样原生支持HTTP协议，得用SSH来限制用户访问。 GitHub_ 和 Gitorious_ 也都是那么做的。 而 Gitosis_ 和 Gitolite_ 用起来都不是很方便， 后来看到 Twisted_ 也实现了SSH协议，想在上面改改就拿来用，毕竟不能直接拿来用，也一直没去看，就这样不了了之了。直到某日，看到 `Serving Git <http://deadpuck.net/blag/serving-git/>`_ 。这样SSH的问题就解决了。顺着那篇文章的思路下来，就想用 Django_ 弄个Web界面让用户来管理密钥，很快就弄好了，没有遇到任何困难。
+去年就想自己仿个\ GitHub_\ 。可是，\ Git_\ 并不像\ Mercurial_\ 那样原生支持HTTP协议，一般都是用SSH协议来限制用户访问。比如，GitHub和\ Gitorious_\ 都是那么做的。 而\ Gitosis_\ 和\ Gitolite_\ 用起来并不是很方便。后来看到\ `Serving Git <http://deadpuck.net/blag/serving-git/>`_\ 一文，就决定用\ Twisted_\ 来处理SSH协议。顺便用\ Django_\ 弄了个Web界面让用户来上传公钥密钥。
 
-.. _GitHub: https://github.com/ 
+.. _GitHub: https://github.com/
 .. _Git: http://git-scm.com/
 .. _Mercurial: http://mercurial.selenic.com/
 .. _Gitorious: http://gitorious.org/
@@ -17,7 +19,7 @@
 
 .. more
 
-不过，既然是用 Twisted_ ，用 Django_ 来操作数据库总觉得有点怪怪的。尽管自己测试的时候，下面这样的代码运行起来也没什么问题。
+下面的代码是可以运行的。不过，Twisted是异步的，而Django操作数据库会阻塞，查一次公钥就把整个线程卡住了，要等查好了才能继续，这样并不对。
 
 .. code:: python
 
@@ -31,7 +33,7 @@
                 keystring = keystring).exists()
 
 
-因为 ``PublicKeyChecker`` 继承自 ``SSHPublicKeyDatabase`` ， 看了下 ``twisted.conch.checkers`` ，看到了一个 ``maybeDeferred``  [#deferred]_ 。下面就是相关部分的代码：
+因为\ :code:`PublicKeyChecker`\ 继承自\ :code:`SSHPublicKeyDatabase`\ ， 看了下\ :code:`twisted.conch.checkers`\ ，看到了一个\ :code:`maybeDeferred` [#deferred]_\ 。下面就是相关部分的代码：
 
 .. code:: python
 
@@ -44,18 +46,18 @@
             return d
 
 
-Twisted_ 里需要用 ``twisted.enterprise.adbapi`` 来操作数据库，而这玩意儿需要直接传入SQL语句 [#adbapi]_ 。在 Django_ 里是用ORM解决问题的，还是希望在这里尽量不要硬编码SQL语句了。看了看 Django_ 的源代码，找到了这么个办法，可以得到对应 ``queryset`` 的SQL语句。
+Twisted里用\ :code:`twisted.enterprise.adbapi`\ 来操作数据库，而需要直接传入SQL语句\ [#adbapi]_\ 。在Django里是用ORM解决问题的，还是希望在这里尽量不要硬编码SQL语句了。看了看Django的源代码，这样就可以得到对应\ :code:`queryset`\ 的SQL语句。
 
 .. code:: python
 
     qs = PublicKey.objects.filter(
         user__username = credentials.username,
         keystring = keystring)
-    
+
     compiler = qs.query.get_compiler(using=qs.db)
     sql, params = compiler.as_sql()
 
-但是， ``sqlite3`` 会对这样生成的SQL语句报错。需要用 ``cursor.convert_query(sql)`` 把里面的 ``%s`` 之类的转换成 "``?``"（问号）。
+但是，\ :code:`sqlite3`\ 会对这样生成的SQL语句报错。需要用\ :code:`cursor.convert_query(sql)`\ 把里面的\ :code:`%s`\ 之类的转换成\ :code:`?`\ 。
 
 .. code:: python
 
@@ -69,7 +71,7 @@ Twisted_ 里需要用 ``twisted.enterprise.adbapi`` 来操作数据库，而这�
     return dbpool.runQuery(sql, params)
 
 
-我们只需要知道有没有，不需要取回这么多数据，因为 ``[:1]`` 会直接取出结果，所以用 ``qs.query.set_limits`` 。
+我们只需要知道有没有，并不需要把所有数据都取回来，因为\ :code:`[:1]`\ 会直接取出结果，所以用\ :code:`qs.query.set_limits`\ 。
 
 .. code:: python
 
@@ -77,7 +79,6 @@ Twisted_ 里需要用 ``twisted.enterprise.adbapi`` 来操作数据库，而这�
         user__username = credentials.username,
         keystring = keystring).only("id")
     qs.query.set_limits(0,1)
-
 
 把前面的连起来
 
@@ -92,16 +93,16 @@ Twisted_ 里需要用 ``twisted.enterprise.adbapi`` 来操作数据库，而这�
                 user__username = credentials.username,
                 keystring = keystring).only("id")
             qs.query.set_limits(0,1)
-        
+
             compiler = qs.query.get_compiler(using=qs.db)
             sql, params = compiler.as_sql()
- 
+
             cursor = compiler.connection.cursor()
             sql = cursor.convert_query(sql)
-        
+
             return dbpool.runQuery(sql, params)
 
 
-.. [#deferred] 关于 ``Deferred`` 可以参考 `Deferred Reference <http://twistedmatrix.com/documents/current/core/howto/defer.html>`_ （2010年8月22日查阅）
+.. [#deferred] 关于\ :code:`Deferred`\ 可以参考 `Deferred Reference <http://twistedmatrix.com/documents/current/core/howto/defer.html>`_ （2010年8月22日查阅）
 
 .. [#adbapi] 参考 `twisted.enterprise.adbapi: Twisted RDBMS support <http://twistedmatrix.com/documents/current/core/howto/rdbms.html>`_ （2010年8月22日查阅）

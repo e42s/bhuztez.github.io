@@ -24,15 +24,13 @@ DEFAULT_LANG = u'zh'
 LOCALE = "C"
 DEFAULT_DATE_FORMAT = '%Y-%m-%d'
 
-# DOCUTILS_SETTINGS = {"math_output": "MathML"}
-
 ARTICLE_URL = '{date:%Y}/{slug}.html'
 ARTICLE_SAVE_AS = '{date:%Y}/{slug}.html'
 
 PAGE_URL = '{slug}.html'
 PAGE_SAVE_AS = '{slug}.html'
 DISPLAY_PAGES_ON_MENU = False
-MENUITEMS = [('Quotes', 'quotes.html')]
+MENUITEMS = [('How-tos', 'tag/how-to.html'), ('Quotes', 'quotes.html')]
 
 ARCHIVES_SAVE_AS = 'archives.html'
 YEAR_ARCHIVE_SAVE_AS = '{date:%Y}/index.html'

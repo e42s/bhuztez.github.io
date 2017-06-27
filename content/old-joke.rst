@@ -3,10 +3,9 @@
 
 :date: 2012-04-13
 :slug: there-is-an-old-joke
+:tags: Joke
 
-
-去年爆出了hash collision DoS的问题 [#hash-collision-dos]_ ，其实这是一个老笑话了 [#an-old-joke]_ ：
-
+去年爆出了hash collision DoS的问题\ [#hash-collision-dos]_\ ，其实这是一个老笑话了\ [#an-old-joke]_\ ：
 
     老妈平时买菜总爱拎着个弹簧秤。然而昨天我在菜市场里看到的一幕，可比老妈的弹簧秤高明多了。
  
@@ -18,5 +17,5 @@
 
 
 .. [#hash-collision-dos] `multiple implementations denial-of-service via hash algorithm collision <http://www.ocert.org/advisories/ocert-2011-003.html>`_
-.. [#an-old-joke] 这是我能找到的最早的有明确时间的转载了， `<https://blog.delphij.net/2006/04/zz-56.html>`_
+.. [#an-old-joke] 这是我能找到的最早的有明确时间的转载了，\ `<https://blog.delphij.net/2006/04/zz-56.html>`_
 

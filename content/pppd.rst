@@ -1,16 +1,16 @@
-pppd插件编写
+============
+编写pppd插件
 ============
 
 :date: 2008-11-06
 :slug: pppd-plugin
+:tags: PPP, How-to
 
-先 :code:`yum install ppp-devel` ，接着就可以在代码中使用 :code:`#include <pppd/pppd.h>` 和 :code:`char pppd_version[] = VERSION;` 以确保plugin能被pppd使用。
-
-pap_passwd_hook被调用的过程还是很令人困惑的。首先，第一次被调用的时候，参数user是有分配空间的，为了让pap_passwd_hook被调用，是不能传入password的，导致第一次被调用的时候，参数passwd没有被分配空间，是NULL。若第一次修改了用户名，第二次调用的时候会传入修改过的用户名，而第二次passwd被分配了空间，此时可以strcpy。
+pppd关于插件的说明，只有代码树最顶上那个\ :code:`PLUGINS`\ 文件。按里面的说法，先\ :code:`yum install ppp-devel`\ ，在C代码中加上\ :code:`#include <pppd/pppd.h>`\ 和\ :code:`char pppd_version[] = VERSION;`\ 以确保plugin能被pppd使用，就可以了。
 
 .. more
 
-所以还得这么干：
+然而，有些需要注意的地方在里面并没有提到，得看现成的插件代码才知道是怎么回事。比如\ :code:`pad_passwd_hook`\ ，是会被多次调用的，而且第一次调用时，\ :code:`passwd`\ 参数是个空指针。假如你的插件需要修改用户名，你还需要自行判断之前有没有修改过。以下是参考代码
 
 .. code:: c
 
@@ -24,14 +24,13 @@ pap_passwd_hook被调用的过程还是很令人困惑的。首先，第一次�
         { NULL }
     };
 
-    static int pap_passwd_hooker(char *user, char* passwd) {
-        // Note: Do not modify the username twice in a session.
+    static int
+    get_credentials(char *user, char *passwd) {
         if (!is_name_modified) {
             modify(user);
             is_name_modified = 1;
         }
 
-        // Note: passwd == NULL the first time this function is called
         if (passwd != NULL) {
             strcpy(passwd, pwd);
         }
@@ -39,7 +38,8 @@ pap_passwd_hook被调用的过程还是很令人困惑的。首先，第一次�
         return 1;
     }
 
-    void plugin_init(void) {
+    void
+    plugin_init(void) {
         add_options(options);
-        pap_passwd_hook = pap_passwd_hooker;
+        pap_passwd_hook = get_credentials;
     }

@@ -6,7 +6,7 @@
 :slug: probability-theory
 
 
-在大数据，机器学习大行其道的今天，很多人却避而不谈概率，甚至会有人认为概率不重要。即便是很多提到概率的，也不能把概率讲清楚。要理解概率还是得看E.T. Jaynes的 `Probability Theory: the Logic of Science <http://omega.albany.edu:8008/JaynesBook.html>`_ 和 A.N. Kolmogorov 的 `Foundations of the Theory of Probability <http://www.kolmogorov.com/Foundations.html>`_ 。
+在大数据，机器学习大行其道的今天，很多人却避而不谈概率，甚至会有人认为概率不重要。即便是很多提到概率的，也不能把概率讲清楚。要理解概率还是得看E.T. Jayne的\ `Probability Theory: the Logic of Science <http://omega.albany.edu:8008/JaynesBook.html>`_\ 和A.N. Kolmogorov的\ `Foundations of the Theory of Probability <http://www.kolmogorov.com/Foundations.html>`_\ 。
 
 .. more
 

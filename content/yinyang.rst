@@ -21,7 +21,7 @@
     yin(yang)
 
 
-pi-calculus足够用来表达call/cc的语义，可以把以下代码放到 `这里 <http://bhuztez.github.io/pi-diagram/>`_ 观察运行过程。
+pi-calculus足够用来表达call/cc的语义，可以把以下代码放到\ `这里 <http://bhuztez.github.io/pi-diagram/>`_\ 观察运行过程。
 
 .. code::
 

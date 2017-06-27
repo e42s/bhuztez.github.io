@@ -1,8 +1,10 @@
+===========
 DNS基本配置
 ===========
 
 :date: 2012-08-06
 :slug: dns
+:tags: DNS, DNSSEC, SSH, BIND, Unbound, Python, Java, How-to
 
 因为DNSSEC和SSHFP配置步骤还是有点多的，在这里记录一下
 
@@ -12,7 +14,7 @@ DNS基本配置
 运行一个临时的DNS Server
 ------------------------
 
-在配置文件里把文件/目录地址改到当前目录下。BIND 9.7多了一个 session-keyfile [#bind97-session-key]_ 。
+在配置文件里把文件\ :code:`/`\ 目录地址改到当前目录下。BIND 9.7多了一个session-keyfile\ [#bind97-session-key]_\ 。
 
 .. [#bind97-session-key] `New Features in BIND 9.7 <http://www.isc.org/software/bind/new-features/9.7>`_
 
@@ -50,7 +52,7 @@ DNS基本配置
 添加一个zone
 ------------
 
-修改 :code:`named.conf` ，添加一个zone。
+修改\ :code:`named.conf`\ ，添加一个zone。
 
 .. code::
 
@@ -59,7 +61,7 @@ DNS基本配置
             file    "example.com";
     };
 
-在 :code:`zones` 目录下，新建 :code:`example.com` 文件
+在\ :code:`zones`\ 目录下，新建\ :code:`example.com`\ 文件
 
 .. code::
 
@@ -77,7 +79,7 @@ DNS基本配置
     ns.example.com.		A	127.0.0.1
 
 
-使用 :code:`dig` 来查询
+使用\ :code:`dig`\ 来查询
 
 .. code:: console
 
@@ -112,7 +114,7 @@ DNS基本配置
 修改DNS记录
 -----------
 
-修改 :code:`zone` 的设置，添加 :code:`allow-update` 。因为BIND 9.7开始，BIND启动的时候会临时生成一个可以用来update的key。就先用这个key来操作好了。
+修改\ :code:`zone`\ 的设置，添加\ :code:`allow-update`\ 。因为BIND 9.7开始，BIND启动的时候会临时生成一个可以用来update的key。就先用这个key来操作好了。
 
 .. code::
 
@@ -123,7 +125,7 @@ DNS基本配置
             allow-update    { key local-ddns; };
     };
 
-用 :code:`nsupdate` 添加一条记录
+用\ :code:`nsupdate`\ 添加一条记录
 
 .. code:: console
 
@@ -134,7 +136,7 @@ DNS基本配置
     > quit
     $
 
-用 :code:`dig` 查询结果
+用\ :code:`dig`\ 查询结果
 
 .. code:: console
 
@@ -173,7 +175,7 @@ DNS基本配置
     update delete www.example.com. 300 A 127.0.0.1
 
 
-要一次删除 :code:`www.example.com.` 所有A记录，用
+要一次删除\ :code:`www.example.com.`\ 所有A记录，用
 
 .. code::
 
@@ -197,7 +199,7 @@ DNS基本配置
     Activate: 20120807063255
 
 
-修改 :code:`named.conf`
+修改\ :code:`named.conf`
 
 .. code::
 
@@ -214,12 +216,12 @@ DNS基本配置
     };
 
 
-此时用 :code:`nsupdate -k Kuser.+165+40835.private` 就可以修改DNS记录了
+此时用\ :code:`nsupdate -k Kuser.+165+40835.private`\ 就可以修改DNS记录了
 
 Python
 ~~~~~~
 
-可以用 `dnspython <http://www.dnspython.org/>`_ 来修改DNS记录
+可以用\ `dnspython <http://www.dnspython.org/>`_\ 来修改DNS记录
 
 .. code:: python
 
@@ -262,7 +264,7 @@ Python
 Java
 ~~~~
 
-可以用 `dnsjava <http://www.dnsjava.org/>`_ 来修改DNS记录
+可以用\ `dnsjava <http://www.dnsjava.org/>`_\ 来修改DNS记录
 
 .. code:: java
 
@@ -316,7 +318,7 @@ Java
 Master/Slave
 ------------
 
-修改zone的设置，添加 :code:`allow-transfer` 和 :code:`also-notify` 。
+修改zone的设置，添加\ :code:`allow-transfer`\ 和\ :code:`also-notify`\ 。
 
 .. code::
 
@@ -330,7 +332,7 @@ Master/Slave
     };
 
 
-slave的配置，只要把zone的 :code:`masters` 设置好就可以了。
+slave的配置，只要把zone的\ :code:`masters`\ 设置好就可以了。
 
 .. code:: bash
 
@@ -388,7 +390,7 @@ DNSSEC
     Kexample.com.+010+49764
 
 
-修改 :code:`example.com` ，在最后添加两行
+修改\ :code:`example.com`\ ，在最后添加两行
 
 .. code:: text
 
@@ -408,7 +410,7 @@ DNSSEC
     example.com.signed
 
 
-修改 :code:`named.conf`
+修改\ :code:`named.conf`
 
 .. code::
 
@@ -443,14 +445,14 @@ DNSSEC
                                     ) ; key id = 49764
 
 
-建立 :code:`trusted-key.key` 文件
+建立\ :code:`trusted-key.key`\ 文件
 
 .. code::
 
     example.com.            300 IN DNSKEY 257 3 10 AwEAAboBxp1wNbmxhINtxORCNfwQQaZ3QlTtlxfV+jCRY5R44ri1ygI5kZEToqiB7W6nnxbUi9T5HRGmJmprl7QapEzw4S8YaUXCdYAPy8tNFHMSsrj2d72r2gR2DSBp4C5ZD5XGdk9kV6GSbCl0DMd0nzabSLMVw/A8N7l9cVU+MVez
 
 
-用 :code:`dig` 来验证
+用\ :code:`dig`\ 来验证
 
 .. code:: console
 
@@ -496,7 +498,7 @@ DNSSEC
 recursive resolver
 ------------------
 
-建立 :code:`trusted-keys` 文件
+建立\ :code:`trusted-keys`\ 文件
 
 .. code::
 
@@ -544,7 +546,7 @@ bind
 
     named -c recursive.conf -g
 
-使用 :code:`dig` 查看结果
+使用\ :code:`dig`\ 查看结果
 
 .. code:: console
 
@@ -614,7 +616,7 @@ unbound
     unbound -c unbound.conf
 
 
-使用 :code:`dig` 查看结果
+使用\ :code:`dig`\ 查看结果
 
 .. code:: console
 
@@ -658,14 +660,14 @@ SSHFP
 
     $ ssh-keygen -q -N '' -f id_rsa
 
-转换成SSHFP记录，并把这行添加到 :code:`zones/example.com` 里
+转换成SSHFP记录，并把这行添加到\ :code:`zones/example.com`\ 里
 
 .. code:: console
 
     $ ssh-keygen -r example.com. -f id_rsa.pub
     example.com. IN SSHFP 1 1 5727cac5dcca0d87c2b74f33e6e6106f09a03d27
 
-SSH客户端使用的 :code:`config` 文件
+SSH客户端使用的\ :code:`config`\ 文件
 
 .. code::
 
@@ -755,7 +757,7 @@ SSH客户端使用的 :code:`config` 文件
     }
 
 
-编译，通过 :code:`LD_PRELOAD` 运行SSH客户端
+编译，通过\ :code:`LD_PRELOAD`\ 运行SSH客户端
 
 .. code:: console
 
