@@ -27,6 +27,99 @@ remove_node(document.querySelector("link[title='math']"));
 </nav>
 </header>
 <div class="index content">
+<div>2014-04-13</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2014/heartbleed.html">Heartbleed漏洞</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/openssl.html">OpenSSL</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>最近爆出的<a class="reference external" href="http://heartbleed.com/">Heartbleed</a>漏洞实际上宣告了互联网安全已经破产了很久了。不管怎么样，还是首先提醒一下，这次的漏洞后果非常非常严重，至少应该尽快更新所有用到受影响版本的OpenSSL软件。不仅仅是服务端程序受影响，客户端程序也同样受影响，而且很多软件都选择自行编译一份OpenSSL库，所以即便使用的操作系统不受影响，自行安装的程序只要需要联网就很可能受影响。你可以检查一下软件安装目录下的文件。Windows下有libeay32.dll、ssleay32.dll或者类似名字的文件，Mac OS X下有libssl.dynlib或者类似名字的文件，Linux下有libssl.so或者类似名字的文件，非常有可能是受影响的。假如发现了这些文件，而在4月8日以后软件开发商没有发布过修补这个漏洞的新版本，请务必要第一时间联系软件开发商及时更新软件。</p>
+
+<a href="https://bhuztez.github.io/2014/heartbleed.html">阅读全文</a>
+</article>
+<hr/>
+<div>2014-03-29</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2014/y-combinator.html">不动点组合子</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/erlang.html">Erlang</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>最近有一个很奇怪的现象。也许仅仅是因为刚好有一家公司叫Y Combinator，有不少人在写博客鼓吹不动点组合子，以学会不动点组合子为荣。</p>
+
+<a href="https://bhuztez.github.io/2014/y-combinator.html">阅读全文</a>
+</article>
+<hr/>
+<div>2014-03-23</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2014/how-to-write-a-prolog-interpreter.html">如何实现Prolog解释器</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/prolog.html">Prolog</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>Prolog语言本身就不太容易理解。要理解Prolog，不如先写个简单的Prolog解释器。然而这也不那么容易，还好有<a class="reference external" href="http://wambook.sourceforge.net/">Warren's Abstract Machine: A Tutorial Reconstruction</a>。</p>
+
+<a href="https://bhuztez.github.io/2014/how-to-write-a-prolog-interpreter.html">阅读全文</a>
+</article>
+<hr/>
+<div>2013-11-23</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2013/benchmarking-accept.html">比谁accept()快</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/joke.html">Joke</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>不知道为什么<a class="reference external" href="http://avplayer.org/">国内技术第一的开源社区</a>会去<a class="reference external" href="http://avboost.com/t/asio/347">反驳</a>一个<a class="reference external" href="http://my.oschina.net/u/200693/blog/34462">很不合理的benchmark</a>。那个benchmark竟然用了Erlang臭名昭著的<code>io:format</code>，莫名其妙的把<code>socket</code>设置成<code>active</code>，还不自量力的和C++去比速度，C++代码还是Boost库文档里的<a class="reference external" href="http://www.boost.org/doc/libs/1_55_0/doc/html/boost_asio/example/cpp03/echo/async_tcp_echo_server.cpp">例子</a>。</p>
+
+<a href="https://bhuztez.github.io/2013/benchmarking-accept.html">阅读全文</a>
+</article>
+<hr/>
+<div>2013-01-02</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2013/compiling-swt-application-with-gcj.html">用gcj编译SWT程序</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/swt.html">SWT</a></li>
+<li><a href="https://bhuztez.github.io/tag/java.html">Java</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>很久之前编译成功过一次，忘了记下编译用的参数，之后就再也想不起来了。现在重新编译一次，把用到的参数记录一下。</p>
+
+<a href="https://bhuztez.github.io/2013/compiling-swt-application-with-gcj.html">阅读全文</a>
+</article>
+<hr/>
+<div>2012-08-06</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2012/dns.html">DNS基本配置</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/dns.html">DNS</a></li>
+<li><a href="https://bhuztez.github.io/tag/dnssec.html">DNSSEC</a></li>
+<li><a href="https://bhuztez.github.io/tag/ssh.html">SSH</a></li>
+<li><a href="https://bhuztez.github.io/tag/bind.html">BIND</a></li>
+<li><a href="https://bhuztez.github.io/tag/unbound.html">Unbound</a></li>
+<li><a href="https://bhuztez.github.io/tag/python.html">Python</a></li>
+<li><a href="https://bhuztez.github.io/tag/java.html">Java</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>因为DNSSEC和SSHFP配置步骤还是有点多的，在这里记录一下</p>
+
+<a href="https://bhuztez.github.io/2012/dns.html">阅读全文</a>
+</article>
+<hr/>
 <div>2012-06-06</div>
 <article>
 <h1><a href="https://bhuztez.github.io/2012/python-code-reading-101.html">Python代码阅读</a></h1>
@@ -37,7 +130,7 @@ remove_node(document.querySelector("link[title='math']"));
 </ul>
 <div class="clear"></div>
 </div>
-<p>在阅读Python代码的时候，别忘了Python标准库里几个比较有用的库， <code>pdb</code> 、 <code>ast</code> 和 <code>code</code> 。 <code>pdb</code> 用来调试， <code>ast</code> 用来解析Python代码， <code>code</code> 直接能给你一个 <a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> 。</p>
+<p>在阅读Python代码的时候，别忘了Python标准库里几个比较有用的库，<code>pdb</code>、<code>ast</code>和<code>code</code>。<code>pdb</code>用来调试，<code>ast</code>用来解析Python代码，<code>code</code>直接能给你一个<a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a>。</p>
 
 <a href="https://bhuztez.github.io/2012/python-code-reading-101.html">阅读全文</a>
 </article>
@@ -51,25 +144,8 @@ remove_node(document.querySelector("link[title='math']"));
 </ul>
 <div class="clear"></div>
 </div>
-<p>去年爆出了hash collision DoS的问题<a class="footnote-reference" href="#hash-collision-dos" id="id2">[1]</a>，其实这是一个老笑话了<a class="footnote-reference" href="#an-old-joke" id="id3">[2]</a>：</p>
-<blockquote>
-<p>老妈平时买菜总爱拎着个弹簧秤。然而昨天我在菜市场里看到的一幕，可比老妈的弹簧秤高明多了。</p>
-<p>一老大爷走到卖西红柿的摊前问：“多少钱一斤？”摊主回答：“两块五。”大爷挑了三个西红柿放到秤盘里。摊主说：“一斤半，三块七。”大爷说：“我就做个汤，不用那么多。”说着就去掉了个儿最大的那个西红柿。摊主迅速地又瞧一眼说：“一斤二两，三块钱。”</p>
-<p>我在一旁看着，心想，怎么这西红柿越大越不压称，难道那个大西红柿是空心的。实在看不过去了，就提醒大爷：“他称的不对。”没想到大爷对我摆了摆手，毫不在意，伸手就往外掏钱。</p>
-<p>那摊主见大爷如此爽快，索性拿眼睛瞥着我，一副得意洋洋的样子。没想到的是，大爷并没有拿摊主已经装在塑料袋里的两个西红柿，而是拿起刚才去掉的那大的，放下七毛钱，扭头就走……</p>
-</blockquote>
-<table class="docutils footnote" frame="void" id="hash-collision-dos" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td><a class="reference external" href="http://www.ocert.org/advisories/ocert-2011-003.html">multiple implementations denial-of-service via hash algorithm collision</a></td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="an-old-joke" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>这是我能找到的最早的有明确时间的转载了，<a class="reference external" href="https://blog.delphij.net/2006/04/zz-56.html">https://blog.delphij.net/2006/04/zz-56.html</a></td></tr>
-</tbody>
-</table>
+<p>根据<a class="reference external" href="https://en.wikipedia.org/wiki/Robustness_principle">Robustness principle</a>，接受来自网络的数据，你应该假设最坏情况一定会出现。</p>
+
 <a href="https://bhuztez.github.io/2012/there-is-an-old-joke.html">阅读全文</a>
 </article>
 <hr/>
@@ -109,96 +185,10 @@ remove_node(document.querySelector("link[title='math']"));
 <a href="https://bhuztez.github.io/2010/qq-2009-on-fedora-12.html">阅读全文</a>
 </article>
 <hr/>
-<div>2010-09-17</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2010/django-query-to-sql.html">用Django ORM动态生成SQL</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/django.html">Django</a></li>
-<li><a href="https://bhuztez.github.io/tag/twisted.html">Twisted</a></li>
-<li><a href="https://bhuztez.github.io/tag/git.html">Git</a></li>
-<li><a href="https://bhuztez.github.io/tag/ssh.html">SSH</a></li>
-<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>去年就想自己仿个<a class="reference external" href="https://github.com/">GitHub</a>。可是，<a class="reference external" href="http://git-scm.com/">Git</a>并不像<a class="reference external" href="http://mercurial.selenic.com/">Mercurial</a>那样原生支持HTTP协议，一般都是用SSH协议来限制用户访问。比如，GitHub和<a class="reference external" href="http://gitorious.org/">Gitorious</a>都是那么做的。 而<a class="reference external" href="http://eagain.net/gitweb/?p=gitosis.git">Gitosis</a>和<a class="reference external" href="https://github.com/sitaramc/gitolite">Gitolite</a>用起来并不是很方便。后来看到<a class="reference external" href="http://deadpuck.net/blag/serving-git/">Serving Git</a>一文，就决定用<a class="reference external" href="http://twistedmatrix.com/">Twisted</a>来处理SSH协议。顺便用<a class="reference external" href="http://www.djangoproject.com/">Django</a>弄了个Web界面让用户来上传公钥密钥。</p>
-
-<a href="https://bhuztez.github.io/2010/django-query-to-sql.html">阅读全文</a>
-</article>
-<hr/>
-<div>2010-09-15</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2010/translation-is-hard.html">翻译难</a></h1>
-<p>电影《阿凡达》中有一个不可思议的细节：格蕾丝·奥古斯汀博士在潘多拉星设立了一所学校来教授英语<a class="footnote-reference" href="#english-school-on-pandora" id="id2">[1]</a>。纳美人怎么发的出、听的见地球人的声音？同样的，我们真的能把一段话准确的从一种语言翻译到另一种语言？</p>
-
-<a href="https://bhuztez.github.io/2010/translation-is-hard.html">阅读全文</a>
-</article>
-<hr/>
-<div>2009-12-23</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2009/breaking-baidu-hi-captcha-with-tesseract.html">用Tesseract识别百度空间留言验证码</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/tesseract.html">Tesseract</a></li>
-<li><a href="https://bhuztez.github.io/tag/baidu.html">Baidu</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>本文写于很多年前，现在百度空间已经关闭了，所以发出来也无妨。主要是为了说明现有的工具都很强大了，不要想当然的以为画几个字符上去就可以当验证码了。现在的Tesseract相比当时有很多改进，里面提到的很多步骤都已经没必要了。</p>
-
-<a href="https://bhuztez.github.io/2009/breaking-baidu-hi-captcha-with-tesseract.html">阅读全文</a>
-</article>
-<hr/>
-<div>2009-12-07</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2009/pgf-2-on-fedora-12.html">在Fedora 12上使用PGF 2.0</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/fedora.html">Fedora</a></li>
-<li><a href="https://bhuztez.github.io/tag/pgftikz.html">PGF/TikZ</a></li>
-<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>Fedora 12还在使用好多年以前的TeX Live 2007，里面的PGF/TikZ还是老版本的。PGF/TikZ早就已经<a class="reference external" href="http://sourceforge.net/project/showfiles.php?group_id=142562">2.0</a>了。</p>
-
-<a href="https://bhuztez.github.io/2009/pgf-2-on-fedora-12.html">阅读全文</a>
-</article>
-<hr/>
-<div>2009-04-12</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2009/compiling-systemc.html">编译SystemC 2.2.0</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/systemc.html">SystemC</a></li>
-<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>下载了SystemC 2.2.0，结果很失望，编译不过去。看了<a class="reference external" href="http://forums.fedoraforum.org/showthread.php?t=199153">这个帖子</a>的#7之后，才发现居然还是个低级错误。</p>
-
-<a href="https://bhuztez.github.io/2009/compiling-systemc.html">阅读全文</a>
-</article>
-<hr/>
-<div>2008-11-06</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2008/pppd-plugin.html">编写pppd插件</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/ppp.html">PPP</a></li>
-<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>pppd关于插件的说明，只有代码树最顶上那个<code>PLUGINS</code>文件。按里面的说法，先<code>yum install ppp-devel</code>，在C代码中加上<code>#include &lt;pppd/pppd.h&gt;</code>和<code>char pppd_version[] = VERSION;</code>以确保plugin能被pppd使用，就可以了。</p>
-
-<a href="https://bhuztez.github.io/2008/pppd-plugin.html">阅读全文</a>
-</article>
-<hr/>
 <div class="paginator">
 <a href="index3.html" class="prev">上一页</a>
-<span>4 / 4</span>
+<span>4 / 5</span>
+<a href="https://bhuztez.github.io/index5.html" class="next">下一页</a>
 </div>
 </div>
 </body>

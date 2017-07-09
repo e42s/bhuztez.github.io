@@ -37,9 +37,9 @@ remove_node(document.querySelector("link[title='math']"));
 </ul>
 <div class="clear"></div>
 </div>
-<p>在阅读Python代码的时候，别忘了Python标准库里几个比较有用的库， <code>pdb</code> 、 <code>ast</code> 和 <code>code</code> 。 <code>pdb</code> 用来调试， <code>ast</code> 用来解析Python代码， <code>code</code> 直接能给你一个 <a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> 。</p>
+<p>在阅读Python代码的时候，别忘了Python标准库里几个比较有用的库，<code>pdb</code>、<code>ast</code>和<code>code</code>。<code>pdb</code>用来调试，<code>ast</code>用来解析Python代码，<code>code</code>直接能给你一个<a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a>。</p>
 <!-- more -->
-<p>比如，阅读 <code>nova-api</code> 的代码，并不关心URL Routing是怎么实现的，想知道的只是URL和相应处理代码的对应关系。把 <code>nova-api</code> 最后两行代码换成下面这两行。</p>
+<p>比如，阅读<code>nova-api</code>的代码，并不关心URL Routing是怎么实现的，想知道的只是URL和相应处理代码的对应关系。把<code>nova-api</code>最后两行代码换成下面这两行。</p>
 <pre class="code python literal-block">
 <span class="kn">import</span> <span class="nn">code</span>
 <span class="n">code</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="nb">locals</span><span class="p">())</span>

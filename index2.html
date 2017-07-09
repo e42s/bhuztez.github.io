@@ -27,6 +27,73 @@ remove_node(document.querySelector("link[title='math']"));
 </nav>
 </header>
 <div class="index content">
+<div>2015-05-14</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2015/osv-erlang.html">在OSv上运行Erlang</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/osv.html">OSv</a></li>
+<li><a href="https://bhuztez.github.io/tag/erlang.html">Erlang</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p><a class="reference external" href="http://osv.io/">OSv</a>是为直接在虚拟机里运行应用程序设计的Unikernel。他们的目标是，除了一些固有的限制，比如因为只有一个地址空间，不支持多进程，以外，普通的Linux程序能直接在OSv上运行。</p>
+
+<a href="https://bhuztez.github.io/2015/osv-erlang.html">阅读全文</a>
+</article>
+<hr/>
+<div>2015-05-08</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2015/erlang-binary.html">Erlang字符串输出</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/erlang.html">Erlang</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>经常有人莫名其妙的抱怨Erlang字符串处理效率低下。在过去，Erlang确实是用简单的list来表示字符串的，不停拼接list效率确实不行。可现在这已经是老黄历了。</p>
+
+<a href="https://bhuztez.github.io/2015/erlang-binary.html">阅读全文</a>
+</article>
+<hr/>
+<div>2015-03-06</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2015/eight-queens-problem.html">八皇后问题</a></h1>
+<p>八皇后问题不算太难，可写起来也是挺麻烦的。有家奇怪的公司为了炒作，提出了C++在十行之内解八皇后的挑战，尽管他们自己办不到。</p>
+
+<a href="https://bhuztez.github.io/2015/eight-queens-problem.html">阅读全文</a>
+</article>
+<hr/>
+<div>2015-02-26</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2015/penney-game.html">Penney's game</a></h1>
+<p>Penney's game是个很简单的问题。可是网络上能找到的答案，要么到状态转移图就完了，要么就跳过中间步骤直接出答案了。</p>
+
+<a href="https://bhuztez.github.io/2015/penney-game.html">阅读全文</a>
+</article>
+<hr/>
+<div>2015-02-26</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2015/workflow-and-pi-calculus.html">工作流原理</a></h1>
+<p>工作流是一个很简单的概念。自己实现工作流引擎的也不在少数，甚至有一些很奇怪的号称支持中国特色流程的。可是很多就算看了文档和代码，也很难理解为啥这可以工作，特别是他是怎么保证某个任务确实会执行。这方面就缺一个简单易懂的文章列表。</p>
+
+<a href="https://bhuztez.github.io/2015/workflow-and-pi-calculus.html">阅读全文</a>
+</article>
+<hr/>
+<div>2015-02-02</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2015/dialyzer.html">Dialyzer</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/erlang.html">Erlang</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>动态类型语言的静态类型分析突然变成了一件时髦的事。Facebook推出的Hack语言吸引了大量关注。王垠靠PySonar也收获了很多粉丝。可是Erlang依旧被认为是老土。</p>
+
+<a href="https://bhuztez.github.io/2015/dialyzer.html">阅读全文</a>
+</article>
+<hr/>
 <div>2015-01-21</div>
 <article>
 <h1><a href="https://bhuztez.github.io/2015/yinyang-puzzle.html">阴阳谜题</a></h1>
@@ -65,63 +132,9 @@ remove_node(document.querySelector("link[title='math']"));
 <a href="https://bhuztez.github.io/2014/math-the-new-porn.html">阅读全文</a>
 </article>
 <hr/>
-<div>2014-12-26</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2014/scope.html">变量的作用域</a></h1>
-<p>假如一门语言允许你自己定义函数，那么就会出现作用域的问题。作用域的问题就是怎么找变量定义的问题。</p>
-
-<a href="https://bhuztez.github.io/2014/scope.html">阅读全文</a>
-</article>
-<hr/>
-<div>2014-12-09</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2014/scalable-source-routing.html">Scalable Source Routing</a></h1>
-<p>有很多关于adhoc network如何避免flooding的研究。其中一个是Scalable Source Routing，其主要思路借鉴自DHT。</p>
-
-<a href="https://bhuztez.github.io/2014/scalable-source-routing.html">阅读全文</a>
-</article>
-<hr/>
-<div>2014-12-08</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2014/access-control-with-datalog.html">用Datalog管理权限</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/datalog.html">Datalog</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>用普通SQL数据库管理权限是一件很别扭的事。一方面是有大量不必要的数据冗余，取消起来也特别麻烦。另外一方面，只要出现几条例外的规则，就不得不在代码里硬编码部分权限。</p>
-
-<a href="https://bhuztez.github.io/2014/access-control-with-datalog.html">阅读全文</a>
-</article>
-<hr/>
-<div>2014-11-23</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2014/pouring-water.html">Pouring Water</a></h1>
-<p>Pouring Water看上去是个很简单的问题，有容量分别为a升，b升的两个没有刻度的容器，问量出c升水要多少步。简单是简单，只是分情况讨论的数量实在是有点多，很多人一看就直接放弃了。</p>
-
-<a href="https://bhuztez.github.io/2014/pouring-water.html">阅读全文</a>
-</article>
-<hr/>
-<div>2014-11-17</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2014/metamath.html">Metamath</a></h1>
-<p><a class="reference external" href="http://metamath.org/">Metamath</a>是一个很独特的证明检查程序。Metamath语义非常简单，完全可以自己实现一遍。而且更加专注于证明本身，并不需要打补丁以便更好的支持新的理论。比如Unimath为了更好的支持Homotopy Type Theory就对Coq打了补丁。这一点很重要，要是我们不能检查证明检查程序本身正确与否，我们写的证明即使通过了检查，也不能说明证明没问题。而一个证明检查程序本身太复杂，超过了人力能检查的极限，那么出现重大缺陷就几乎不可避免了，比如Coq的<a class="reference external" href="http://inutile.club/estatis/falso/">Falso</a>。很不幸的是，Metamath风格的证明检查工具一直没有流行起来。</p>
-
-<a href="https://bhuztez.github.io/2014/metamath.html">阅读全文</a>
-</article>
-<hr/>
-<div>2014-11-04</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2014/distinct-game24-solution.html">二十四点去重</a></h1>
-<p>二十四点解法去重的思路很简单，就是根据把语法树根据等价公式找出相邻的语法树，得到以语法树为节点的边的集合，根据这个集合，进行unification，这样就把结果分组了，有几个组就是有几个不同的结果。</p>
-
-<a href="https://bhuztez.github.io/2014/distinct-game24-solution.html">阅读全文</a>
-</article>
-<hr/>
 <div class="paginator">
 <a href="index.html" class="prev">上一页</a>
-<span>2 / 4</span>
+<span>2 / 5</span>
 <a href="https://bhuztez.github.io/index3.html" class="next">下一页</a>
 </div>
 </div>

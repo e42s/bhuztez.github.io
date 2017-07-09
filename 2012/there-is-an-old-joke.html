@@ -36,7 +36,9 @@ remove_node(document.querySelector("link[title='math']"));
 </ul>
 <div class="clear"></div>
 </div>
-<p>去年爆出了hash collision DoS的问题<a class="footnote-reference" href="#hash-collision-dos" id="id2">[1]</a>，其实这是一个老笑话了<a class="footnote-reference" href="#an-old-joke" id="id3">[2]</a>：</p>
+<p>根据<a class="reference external" href="https://en.wikipedia.org/wiki/Robustness_principle">Robustness principle</a>，接受来自网络的数据，你应该假设最坏情况一定会出现。</p>
+<!-- more -->
+<p>去年爆出了hash collision DoS的问题<a class="footnote-reference" href="#hash-collision-dos" id="id3">[1]</a>，其实这是一个老笑话了<a class="footnote-reference" href="#an-old-joke" id="id4">[2]</a>：</p>
 <blockquote>
 <p>老妈平时买菜总爱拎着个弹簧秤。然而昨天我在菜市场里看到的一幕，可比老妈的弹簧秤高明多了。</p>
 <p>一老大爷走到卖西红柿的摊前问：“多少钱一斤？”摊主回答：“两块五。”大爷挑了三个西红柿放到秤盘里。摊主说：“一斤半，三块七。”大爷说：“我就做个汤，不用那么多。”说着就去掉了个儿最大的那个西红柿。摊主迅速地又瞧一眼说：“一斤二两，三块钱。”</p>
@@ -46,13 +48,13 @@ remove_node(document.querySelector("link[title='math']"));
 <table class="docutils footnote" frame="void" id="hash-collision-dos" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td><a class="reference external" href="http://www.ocert.org/advisories/ocert-2011-003.html">multiple implementations denial-of-service via hash algorithm collision</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td><a class="reference external" href="http://www.ocert.org/advisories/ocert-2011-003.html">multiple implementations denial-of-service via hash algorithm collision</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="an-old-joke" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>这是我能找到的最早的有明确时间的转载了，<a class="reference external" href="https://blog.delphij.net/2006/04/zz-56.html">https://blog.delphij.net/2006/04/zz-56.html</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id4">[2]</a></td><td>这是我能找到的最早的有明确时间的转载了，<a class="reference external" href="https://blog.delphij.net/2006/04/zz-56.html">https://blog.delphij.net/2006/04/zz-56.html</a></td></tr>
 </tbody>
 </table>
 

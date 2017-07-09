@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>用CSS Counter Style画行号</title>
+<link rel="canonical" href="https://bhuztez.github.io/2016/line-number.html" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" title="math" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+function remove_node(node){node.parentNode.removeChild(node);}
+window.onload=function(){
+Array.prototype.slice.call(document.querySelectorAll(".formula")).forEach(function(e){katex.render(e.getAttribute("alt"),e,{displayMode:e.tagName==="DIV"})});
+remove_node(document.querySelector("link[title='math']"));
+};
+</script>
+</head>
+<body>
+<header>
+<nav>
+<li><a href="https://bhuztez.github.io/">Home</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
+<li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+</nav>
+</header>
+<div class="content">
+<div>2016-12-14</div>
+<article>
+<h1>用CSS Counter Style画行号</h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/css.html">CSS</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>现在可以找到很多网页版代码编辑器以及在网页上显示高亮代码的工具，他们显示行号的功能都非常复杂。</p>
+<!-- more -->
+<p>行号这么简单，用<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/CSS/&#64;counter-style">CSS Counter Style</a>就可以了。</p>
+<pre class="code css literal-block">
+<span class="k">&#64;counter-style</span> <span class="nt">lno</span> <span class="p">{</span>
+    <span class="nt">system</span><span class="o">:</span> <span class="nt">extends</span> <span class="nt">decimal</span><span class="o">;</span>
+    <span class="nt">pad</span><span class="o">:</span> <span class="nt">4</span> <span class="s2">&quot; &quot;</span><span class="o">;</span>
+<span class="p">}</span>
+
+<span class="nt">pre</span> <span class="p">{</span>
+    <span class="nb">margin</span><span class="o">:</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">5</span><span class="n">ch</span><span class="p">;</span>
+    <span class="nb">counter-reset</span><span class="o">:</span> <span class="n">line</span><span class="p">;</span>
+    <span class="nb">width</span><span class="o">:</span> <span class="m">4</span><span class="n">ch</span><span class="p">;</span>
+    <span class="nb">white-space</span><span class="o">:</span> <span class="n">pre</span><span class="o">-</span><span class="n">wrap</span><span class="p">;</span>
+    <span class="n">word</span><span class="o">-</span><span class="n">break</span><span class="o">:</span> <span class="n">break</span><span class="o">-</span><span class="n">all</span><span class="p">;</span>
+    <span class="nb">outline</span><span class="o">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="nb">red</span><span class="p">;</span>
+    <span class="nb">border-left</span><span class="o">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="nb">blue</span><span class="p">;</span>
+    <span class="nb">background-color</span><span class="o">:</span> <span class="m">#EEE</span><span class="p">;</span>
+    <span class="nb">padding</span><span class="o">:</span> <span class="m">0</span> <span class="m">1</span><span class="n">ch</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">pre</span> <span class="nt">span</span><span class="nc">.line</span> <span class="p">{</span>
+    <span class="nb">counter-increment</span><span class="o">:</span> <span class="n">line</span><span class="p">;</span>
+    <span class="n">box</span><span class="o">-</span><span class="n">decoration</span><span class="o">-</span><span class="n">break</span><span class="o">:</span> <span class="n">clone</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">pre</span> <span class="nt">span</span><span class="nc">.line</span><span class="o">:</span><span class="nd">:before</span> <span class="p">{</span>
+    <span class="nb">content</span><span class="o">:</span> <span class="n">counter</span><span class="p">(</span><span class="n">line</span><span class="o">,</span> <span class="n">lno</span><span class="p">);</span>
+    <span class="nb">margin</span><span class="o">:</span> <span class="m">0</span> <span class="m">2</span><span class="n">ch</span> <span class="m">0</span> <span class="m">-6</span><span class="n">ch</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+<pre class="code html literal-block">
+<span class="p">&lt;</span><span class="nt">pre</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;line&quot;</span><span class="p">&gt;</span>aa aaa aaa<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;line&quot;</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;line&quot;</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;line&quot;</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;line&quot;</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;line&quot;</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;line&quot;</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;line&quot;</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;line&quot;</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;line&quot;</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;line&quot;</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;line&quot;</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;line&quot;</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
+</pre>
+
+</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'bhuztez-github-io';
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+</body>
+</html>

@@ -27,6 +27,60 @@ remove_node(document.querySelector("link[title='math']"));
 </nav>
 </header>
 <div class="index content">
+<div>2014-12-26</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2014/scope.html">变量的作用域</a></h1>
+<p>假如一门语言允许你自己定义函数，那么就会出现作用域的问题。作用域的问题就是怎么找变量定义的问题。</p>
+
+<a href="https://bhuztez.github.io/2014/scope.html">阅读全文</a>
+</article>
+<hr/>
+<div>2014-12-09</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2014/scalable-source-routing.html">Scalable Source Routing</a></h1>
+<p>有很多关于adhoc network如何避免flooding的研究。其中一个是Scalable Source Routing，其主要思路借鉴自DHT。</p>
+
+<a href="https://bhuztez.github.io/2014/scalable-source-routing.html">阅读全文</a>
+</article>
+<hr/>
+<div>2014-12-08</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2014/access-control-with-datalog.html">用Datalog管理权限</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/datalog.html">Datalog</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>用普通SQL数据库管理权限是一件很别扭的事。一方面是有大量不必要的数据冗余，取消起来也特别麻烦。另外一方面，只要出现几条例外的规则，就不得不在代码里硬编码部分权限。</p>
+
+<a href="https://bhuztez.github.io/2014/access-control-with-datalog.html">阅读全文</a>
+</article>
+<hr/>
+<div>2014-11-23</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2014/pouring-water.html">Pouring Water</a></h1>
+<p>Pouring Water看上去是个很简单的问题，有容量分别为a升，b升的两个没有刻度的容器，问量出c升水要多少步。简单是简单，只是分情况讨论的数量实在是有点多，很多人一看就直接放弃了。</p>
+
+<a href="https://bhuztez.github.io/2014/pouring-water.html">阅读全文</a>
+</article>
+<hr/>
+<div>2014-11-17</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2014/metamath.html">Metamath</a></h1>
+<p><a class="reference external" href="http://metamath.org/">Metamath</a>是一个很独特的证明检查程序。Metamath语义非常简单，完全可以自己实现一遍。而且更加专注于证明本身，并不需要打补丁以便更好的支持新的理论。比如Unimath为了更好的支持Homotopy Type Theory就对Coq打了补丁。这一点很重要，要是我们不能检查证明检查程序本身正确与否，我们写的证明即使通过了检查，也不能说明证明没问题。而一个证明检查程序本身太复杂，超过了人力能检查的极限，那么出现重大缺陷就几乎不可避免了，比如Coq的<a class="reference external" href="http://inutile.club/estatis/falso/">Falso</a>。很不幸的是，Metamath风格的证明检查工具一直没有流行起来。</p>
+
+<a href="https://bhuztez.github.io/2014/metamath.html">阅读全文</a>
+</article>
+<hr/>
+<div>2014-11-04</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2014/distinct-game24-solution.html">二十四点去重</a></h1>
+<p>二十四点解法去重的思路很简单，就是根据把语法树根据等价公式找出相邻的语法树，得到以语法树为节点的边的集合，根据这个集合，进行unification，这样就把结果分组了，有几个组就是有几个不同的结果。</p>
+
+<a href="https://bhuztez.github.io/2014/distinct-game24-solution.html">阅读全文</a>
+</article>
+<hr/>
 <div>2014-10-19</div>
 <article>
 <h1><a href="https://bhuztez.github.io/2014/keep-grub-on-fedora.html">在Fedora上继续使用GRUB</a></h1>
@@ -80,102 +134,9 @@ remove_node(document.querySelector("link[title='math']"));
 <a href="https://bhuztez.github.io/2014/divination.html">阅读全文</a>
 </article>
 <hr/>
-<div>2014-04-13</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2014/heartbleed.html">Heartbleed漏洞</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/openssl.html">OpenSSL</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>最近爆出的<a class="reference external" href="http://heartbleed.com/">Heartbleed</a>漏洞实际上宣告了互联网安全已经破产了很久了。不管怎么样，还是首先提醒一下，这次的漏洞后果非常非常严重，至少应该尽快更新所有用到受影响版本的OpenSSL软件。不仅仅是服务端程序受影响，客户端程序也同样受影响，而且很多软件都选择自行编译一份OpenSSL库，所以即便使用的操作系统不受影响，自行安装的程序只要需要联网就很可能受影响。你可以检查一下软件安装目录下的文件。Windows下有libeay32.dll、ssleay32.dll或者类似名字的文件，Mac OS X下有libssl.dynlib或者类似名字的文件，Linux下有libssl.so或者类似名字的文件，非常有可能是受影响的。假如发现了这些文件，而在4月8日以后软件开发商没有发布过修补这个漏洞的新版本，请务必要第一时间联系软件开发商及时更新软件。</p>
-
-<a href="https://bhuztez.github.io/2014/heartbleed.html">阅读全文</a>
-</article>
-<hr/>
-<div>2014-03-29</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2014/y-combinator.html">不动点组合子</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/erlang.html">Erlang</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>最近有一个很奇怪的现象。也许仅仅是因为刚好有一家公司叫Y Combinator，有不少人在写博客鼓吹不动点组合子，以学会不动点组合子为荣。</p>
-
-<a href="https://bhuztez.github.io/2014/y-combinator.html">阅读全文</a>
-</article>
-<hr/>
-<div>2014-03-23</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2014/how-to-write-a-prolog-interpreter.html">如何实现Prolog解释器</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/prolog.html">Prolog</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>Prolog语言本身就不太容易理解。要写个Prolog解释器就更不容易了。还好有<a class="reference external" href="http://wambook.sourceforge.net/">Warren's Abstract Machine: A Tutorial Reconstruction</a>。</p>
-
-<a href="https://bhuztez.github.io/2014/how-to-write-a-prolog-interpreter.html">阅读全文</a>
-</article>
-<hr/>
-<div>2013-11-23</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2013/benchmarking-accept.html">比谁accept()快</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/joke.html">Joke</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>不知道为什么<a class="reference external" href="http://avplayer.org/">国内技术第一的开源社区</a>会去<a class="reference external" href="http://avboost.com/t/asio/347">反驳</a>一个<a class="reference external" href="http://my.oschina.net/u/200693/blog/34462">很不合理的benchmark</a>。那个benchmark竟然用了Erlang臭名昭著的<code>io:format</code>，莫名其妙的把<code>socket</code>设置成<code>active</code>，还不自量力的和C++去比速度，C++代码还是Boost库文档里的<a class="reference external" href="http://www.boost.org/doc/libs/1_55_0/doc/html/boost_asio/example/cpp03/echo/async_tcp_echo_server.cpp">例子</a>。</p>
-
-<a href="https://bhuztez.github.io/2013/benchmarking-accept.html">阅读全文</a>
-</article>
-<hr/>
-<div>2013-01-02</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2013/compiling-swt-application-with-gcj.html">用gcj编译SWT程序</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/swt.html">SWT</a></li>
-<li><a href="https://bhuztez.github.io/tag/java.html">Java</a></li>
-<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>很久之前编译成功过一次，忘了记下编译用的参数，之后就再也想不起来了。现在重新编译一次，把用到的参数记录一下。</p>
-
-<a href="https://bhuztez.github.io/2013/compiling-swt-application-with-gcj.html">阅读全文</a>
-</article>
-<hr/>
-<div>2012-08-06</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2012/dns.html">DNS基本配置</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/dns.html">DNS</a></li>
-<li><a href="https://bhuztez.github.io/tag/dnssec.html">DNSSEC</a></li>
-<li><a href="https://bhuztez.github.io/tag/ssh.html">SSH</a></li>
-<li><a href="https://bhuztez.github.io/tag/bind.html">BIND</a></li>
-<li><a href="https://bhuztez.github.io/tag/unbound.html">Unbound</a></li>
-<li><a href="https://bhuztez.github.io/tag/python.html">Python</a></li>
-<li><a href="https://bhuztez.github.io/tag/java.html">Java</a></li>
-<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>因为DNSSEC和SSHFP配置步骤还是有点多的，在这里记录一下</p>
-
-<a href="https://bhuztez.github.io/2012/dns.html">阅读全文</a>
-</article>
-<hr/>
 <div class="paginator">
 <a href="index2.html" class="prev">上一页</a>
-<span>3 / 4</span>
+<span>3 / 5</span>
 <a href="https://bhuztez.github.io/index4.html" class="next">下一页</a>
 </div>
 </div>
