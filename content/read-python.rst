@@ -6,13 +6,13 @@ Python代码阅读
 :slug: python-code-reading-101
 :tags: Python, OpenStack
 
-在阅读Python代码的时候，别忘了Python标准库里几个比较有用的库， :code:`pdb` 、 :code:`ast` 和 :code:`code` 。 :code:`pdb` 用来调试， :code:`ast` 用来解析Python代码， :code:`code` 直接能给你一个 `REPL`_ 。
+在阅读Python代码的时候，别忘了Python标准库里几个比较有用的库，\ :code:`pdb`\ 、\ :code:`ast`\ 和\ :code:`code`\ 。\ :code:`pdb`\ 用来调试，\ :code:`ast`\ 用来解析Python代码，\ :code:`code`\ 直接能给你一个\ `REPL`_\ 。
 
 .. _REPL: http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop
 
 .. more
 
-比如，阅读 :code:`nova-api` 的代码，并不关心URL Routing是怎么实现的，想知道的只是URL和相应处理代码的对应关系。把 :code:`nova-api` 最后两行代码换成下面这两行。
+比如，阅读\ :code:`nova-api`\ 的代码，并不关心URL Routing是怎么实现的，想知道的只是URL和相应处理代码的对应关系。把\ :code:`nova-api`\ 最后两行代码换成下面这两行。
 
 .. code:: python
 
