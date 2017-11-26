@@ -27,73 +27,6 @@ remove_node(document.querySelector("link[title='math']"));
 </nav>
 </header>
 <div class="index content">
-<div>2015-05-14</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2015/osv-erlang.html">在OSv上运行Erlang</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/osv.html">OSv</a></li>
-<li><a href="https://bhuztez.github.io/tag/erlang.html">Erlang</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p><a class="reference external" href="http://osv.io/">OSv</a>是为直接在虚拟机里运行应用程序设计的Unikernel。他们的目标是，除了一些固有的限制，比如因为只有一个地址空间，不支持多进程，以外，普通的Linux程序能直接在OSv上运行。</p>
-
-<a href="https://bhuztez.github.io/2015/osv-erlang.html">阅读全文</a>
-</article>
-<hr/>
-<div>2015-05-08</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2015/erlang-binary.html">Erlang字符串输出</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/erlang.html">Erlang</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>经常有人莫名其妙的抱怨Erlang字符串处理效率低下。在过去，Erlang确实是用简单的list来表示字符串的，不停拼接list效率确实不行。可现在这已经是老黄历了。</p>
-
-<a href="https://bhuztez.github.io/2015/erlang-binary.html">阅读全文</a>
-</article>
-<hr/>
-<div>2015-03-06</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2015/eight-queens-problem.html">八皇后问题</a></h1>
-<p>八皇后问题不算太难，可写起来也是挺麻烦的。有家奇怪的公司为了炒作，提出了C++在十行之内解八皇后的挑战，尽管他们自己办不到。</p>
-
-<a href="https://bhuztez.github.io/2015/eight-queens-problem.html">阅读全文</a>
-</article>
-<hr/>
-<div>2015-02-26</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2015/penney-game.html">Penney's game</a></h1>
-<p>Penney's game是个很简单的问题。可是网络上能找到的答案，要么到状态转移图就完了，要么就跳过中间步骤直接出答案了。</p>
-
-<a href="https://bhuztez.github.io/2015/penney-game.html">阅读全文</a>
-</article>
-<hr/>
-<div>2015-02-26</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2015/workflow-and-pi-calculus.html">工作流原理</a></h1>
-<p>工作流是一个很简单的概念。自己实现工作流引擎的也不在少数，甚至有一些很奇怪的号称支持中国特色流程的。可是很多就算看了文档和代码，也很难理解为啥这可以工作，特别是他是怎么保证某个任务确实会执行。这方面就缺一个简单易懂的文章列表。</p>
-
-<a href="https://bhuztez.github.io/2015/workflow-and-pi-calculus.html">阅读全文</a>
-</article>
-<hr/>
-<div>2015-02-02</div>
-<article>
-<h1><a href="https://bhuztez.github.io/2015/dialyzer.html">Dialyzer</a></h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/erlang.html">Erlang</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>动态类型语言的静态类型分析突然变成了一件时髦的事。Facebook推出的Hack语言吸引了大量关注。王垠靠PySonar也收获了很多粉丝。可是Erlang依旧被认为是老土。</p>
-
-<a href="https://bhuztez.github.io/2015/dialyzer.html">阅读全文</a>
-</article>
-<hr/>
 <div>2015-01-21</div>
 <article>
 <h1><a href="https://bhuztez.github.io/2015/yinyang-puzzle.html">阴阳谜题</a></h1>
@@ -102,39 +35,128 @@ remove_node(document.querySelector("link[title='math']"));
 <a href="https://bhuztez.github.io/2015/yinyang-puzzle.html">阅读全文</a>
 </article>
 <hr/>
-<div>2015-01-20</div>
+<div>2015-01-12</div>
 <article>
-<h1><a href="https://bhuztez.github.io/2015/macro-in-lisp.html">LISP中的Macro</a></h1>
+<h1><a href="https://bhuztez.github.io/2015/majority.html">Boyer-Moore Majority Vote</a></h1>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm">Boyer-Moore Majority Vote</a>算法的题leetcode里有，面试也经常会问到。不知道这个算法要想自己想出来还是挺困难的。已经知道这个算法，想证明这个是对的，还是挺容易的。</p>
+
+<a href="https://bhuztez.github.io/2015/majority.html">阅读全文</a>
+</article>
+<hr/>
+<div>2014-11-04</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2014/distinct-game24-solution.html">二十四点去重</a></h1>
+<p>二十四点解法去重的思路很简单，就是根据把语法树根据等价公式找出相邻的语法树，得到以语法树为节点的边的集合，根据这个集合，进行unification，这样就把结果分组了，有几个组就是有几个不同的结果。</p>
+
+<a href="https://bhuztez.github.io/2014/distinct-game24-solution.html">阅读全文</a>
+</article>
+<hr/>
+<div>2014-08-03</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2014/chinese-remainder-theorem.html">中国剩余定理</a></h1>
 <div class="info">
 <ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/lisp.html">LISP</a></li>
+<li><a href="https://bhuztez.github.io/tag/number-theory.html">Number Theory</a></li>
 </ul>
 <div class="clear"></div>
 </div>
-<p>Paul Graham在The Roots of Lisp一文中把John McCarthy的论文复述了一遍，还画蛇添足引入了<code>defun</code>，结果文中的解释器其实并不能自举。需要引入Macro之后才可以，讽刺的是，Paul Graham整天吹嘘Macro多么强大，在这里却忘记了。</p>
+<p>本文只为测试数学公式显示，切勿当真。</p>
+<p>中国剩余定理这个叫法是对这种方法的极大误解。根据中国人只追求实用的天赋，肯定不会没事去证明某种数学性质的。要是给不出解法，就算证明了一个很重要的性质，一句这有啥用就噎死了。中国剩余定理实际上是为了解一种同余方程组。中国剩余定理很可能不是中国人最早证明的，完整的解法也很可能不是中国人最早给出的，只是因为孙子算经中对这种同余方程组给出了不完整的解法，这就叫中国剩余定理了，和费马大定理有异曲同工之妙。</p>
 
-<a href="https://bhuztez.github.io/2015/macro-in-lisp.html">阅读全文</a>
+<a href="https://bhuztez.github.io/2014/chinese-remainder-theorem.html">阅读全文</a>
 </article>
 <hr/>
-<div>2015-01-15</div>
+<div>2014-06-11</div>
 <article>
-<h1><a href="https://bhuztez.github.io/2015/how-to-learn-operating-system.html">操作系统入门</a></h1>
-<p>好的操作系统教程很少。很多教程都是从bootloader该怎么写开始的，而bootloader一点都不好写。比如我就照着各种教程在bootloader上死了无数次了。</p>
+<h1><a href="https://bhuztez.github.io/2014/divination.html">占卜的意义</a></h1>
+<p>很多人都认为占卜不能预测未来，所以没什么用。还顺便把传说中周易的四大原则——不诚不测，不动不测，无事不测，重卦不测，拿出来批判一番。可是他们根本不理解占卜。占卜不是为了预测未来，毕竟没有人可以预测未来。</p>
 
-<a href="https://bhuztez.github.io/2015/how-to-learn-operating-system.html">阅读全文</a>
+<a href="https://bhuztez.github.io/2014/divination.html">阅读全文</a>
 </article>
 <hr/>
-<div>2014-12-28</div>
+<div>2014-03-29</div>
 <article>
-<h1><a href="https://bhuztez.github.io/2014/math-the-new-porn.html">Math is the new porn</a></h1>
-<p>按现在流行的说法，smart is the new sexy, math is the new porn。在某种程度上，事实也的确如此。</p>
+<h1><a href="https://bhuztez.github.io/2014/y-combinator.html">不动点组合子</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/erlang.html">Erlang</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>最近有一个很奇怪的现象。也许仅仅是因为刚好有一家公司叫Y Combinator，有不少人在写博客鼓吹不动点组合子，以学会不动点组合子为荣。</p>
 
-<a href="https://bhuztez.github.io/2014/math-the-new-porn.html">阅读全文</a>
+<a href="https://bhuztez.github.io/2014/y-combinator.html">阅读全文</a>
+</article>
+<hr/>
+<div>2014-03-23</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2014/how-to-write-a-prolog-interpreter.html">如何实现Prolog解释器</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/prolog.html">Prolog</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>Prolog语言本身就不太容易理解。要理解Prolog，不如先写个简单的Prolog解释器。然而这也不那么容易，还好有<a class="reference external" href="http://wambook.sourceforge.net/">Warren's Abstract Machine: A Tutorial Reconstruction</a>。</p>
+
+<a href="https://bhuztez.github.io/2014/how-to-write-a-prolog-interpreter.html">阅读全文</a>
+</article>
+<hr/>
+<div>2013-01-02</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2013/compiling-swt-application-with-gcj.html">用gcj编译SWT程序</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/swt.html">SWT</a></li>
+<li><a href="https://bhuztez.github.io/tag/java.html">Java</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>很久之前编译成功过一次，忘了记下编译用的参数，之后就再也想不起来了。现在重新编译一次，把用到的参数记录一下。</p>
+
+<a href="https://bhuztez.github.io/2013/compiling-swt-application-with-gcj.html">阅读全文</a>
+</article>
+<hr/>
+<div>2012-08-06</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2012/dns.html">DNS基本配置</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/dns.html">DNS</a></li>
+<li><a href="https://bhuztez.github.io/tag/dnssec.html">DNSSEC</a></li>
+<li><a href="https://bhuztez.github.io/tag/ssh.html">SSH</a></li>
+<li><a href="https://bhuztez.github.io/tag/bind.html">BIND</a></li>
+<li><a href="https://bhuztez.github.io/tag/unbound.html">Unbound</a></li>
+<li><a href="https://bhuztez.github.io/tag/python.html">Python</a></li>
+<li><a href="https://bhuztez.github.io/tag/java.html">Java</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-to</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>因为DNSSEC和SSHFP配置步骤还是有点多的，在这里记录一下</p>
+
+<a href="https://bhuztez.github.io/2012/dns.html">阅读全文</a>
+</article>
+<hr/>
+<div>2012-06-06</div>
+<article>
+<h1><a href="https://bhuztez.github.io/2012/python-code-reading-101.html">Python代码阅读</a></h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/python.html">Python</a></li>
+<li><a href="https://bhuztez.github.io/tag/openstack.html">OpenStack</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>在阅读Python代码的时候，别忘了Python标准库里几个比较有用的库，<code>pdb</code>、<code>ast</code>和<code>code</code>。<code>pdb</code>用来调试，<code>ast</code>用来解析Python代码，<code>code</code>直接能给你一个<a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a>。</p>
+
+<a href="https://bhuztez.github.io/2012/python-code-reading-101.html">阅读全文</a>
 </article>
 <hr/>
 <div class="paginator">
 <a href="index.html" class="prev">上一页</a>
-<span>2 / 5</span>
+<span>2 / 3</span>
 <a href="https://bhuztez.github.io/index3.html" class="next">下一页</a>
 </div>
 </div>

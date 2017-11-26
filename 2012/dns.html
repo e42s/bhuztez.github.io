@@ -152,8 +152,8 @@ zone &quot;example.com.&quot; {
 <p>用<code>nsupdate</code>添加一条记录</p>
 <pre class="code console literal-block">
 <span class="gp">$</span> nsupdate -k session.key
-<span class="gp">&gt;</span> server localhost 8053
-<span class="gp">&gt;</span> update add www.example.com. <span class="m">300</span> A 127.0.0.1
+<span class="gp">&gt;</span> server localhost <span class="m">8053</span>
+<span class="gp">&gt;</span> update add www.example.com. <span class="m">300</span> A <span class="m">127</span>.0.0.1
 <span class="gp">&gt;</span> send
 <span class="gp">&gt;</span> quit
 <span class="gp">$</span>

@@ -131,7 +131,7 @@ remove_node(document.querySelector("link[title='math']"));
 </div>
 <p>不妨设</p>
 <div alt="x = \sum_{i=1}^{n} \frac{a_i}{gcd(b_i, m_i)} k_i b_i" class="formula">
-<i>x</i> = <span class="limits"><sup class="limit"><i>n</i></sup><span class="limit"><span class="symbol">∑</span></span><sub class="limit"><i>i</i> = 1</sub></span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>a</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span><i>k</i><sub><i>i</i></sub><i>b</i><sub><i>i</i></sub>
+<i>x</i> = <span class="limits"><sup class="limit"><i>n</i></sup><span class="limit">⎲</span><span class="limit">⎳</span><sub class="limit"><i>i</i> = 1</sub></span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>a</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span><i>k</i><sub><i>i</i></sub><i>b</i><sub><i>i</i></sub>
 </div>
 <p>对于任意<span alt="j" class="formula">
 <i>j</i></span>
@@ -143,13 +143,13 @@ remove_node(document.querySelector("link[title='math']"));
 </div>
 <p>可得</p>
 <div alt="m_j \mid \sum_{i \ne j} \frac{a_i}{gcd(b_i, m_i)} k_i b_i" class="formula">
-<i>m</i><sub><i>j</i></sub>∣<span class="limits"><sup class="limit"> </sup><span class="limit"><span class="symbol">∑</span></span><sub class="limit"><i>i</i> ≠ <i>j</i></sub></span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>a</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span><i>k</i><sub><i>i</i></sub><i>b</i><sub><i>i</i></sub>
+<i>m</i><sub><i>j</i></sub>∣<span class="limits"><sup class="limit"> </sup><span class="limit">⎲</span><span class="limit">⎳</span><sub class="limit"><i>i</i> ≠ <i>j</i></sub></span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>a</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span><i>k</i><sub><i>i</i></sub><i>b</i><sub><i>i</i></sub>
 </div>
 <p>所以</p>
 <div alt="\begin{array}{lll} \sum_{i=1}^{n} \frac{a_i}{gcd(b_i, m_i)} k_i b_i &amp; \equiv \frac{a_j}{gcd(b_j, m_j)} k_j b_j  &amp; (mod\ m_j) \\ &amp; \equiv \frac{a_j}{gcd(b_j, m_j)} gcd(b_j, m_j) &amp; (mod\ m_j) \\ &amp; \equiv a_j &amp; (mod\ m_j) \end{array}" class="formula">
 <span class="array"><span class="arrayrow">
 <span class="arraycell align-l">
-<span class="limits"><sup class="limit"><i>n</i></sup><span class="limit"><span class="symbol">∑</span></span><sub class="limit"><i>i</i> = 1</sub></span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>a</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span><i>k</i><sub><i>i</i></sub><i>b</i><sub><i>i</i></sub>
+<span class="limits"><sup class="limit"><i>n</i></sup><span class="limit">⎲</span><span class="limit">⎳</span><sub class="limit"><i>i</i> = 1</sub></span><span class="fraction"><span class="ignored">(</span><span class="numerator"><i>a</i><sub><i>i</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>i</i></sub>, <i>m</i><sub><i>i</i></sub>)</span><span class="ignored">)</span></span><i>k</i><sub><i>i</i></sub><i>b</i><sub><i>i</i></sub>
 </span>
 <span class="arraycell align-l">
  ≡ <span class="fraction"><span class="ignored">(</span><span class="numerator"><i>a</i><sub><i>j</i></sub></span><span class="ignored">)/(</span><span class="denominator"><i>gcd</i>(<i>b</i><sub><i>j</i></sub>, <i>m</i><sub><i>j</i></sub>)</span><span class="ignored">)</span></span><i>k</i><sub><i>j</i></sub><i>b</i><sub><i>j</i></sub>
@@ -212,7 +212,7 @@ remove_node(document.querySelector("link[title='math']"));
 <p><span alt="bi" class="formula">
 <i>bi</i></span>
 可以直接取<span alt="\prod_{j \ne i} m_j" class="formula">
-<span class="limits"><span class="limit"><span class="symbol">∏</span></span></span><sub><i>j</i> ≠ <i>i</i></sub><i>m</i><sub><i>j</i></sub></span>
+<span class="limits"><span class="limit">∏</span></span><sub><i>j</i> ≠ <i>i</i></sub><i>m</i><sub><i>j</i></sub></span>
 ，求<span alt="k_i" class="formula">
 <i>k</i><sub><i>i</i></sub></span>
 却比较困难。</p>

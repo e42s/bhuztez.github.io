@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Dialyzer</title>
-<link rel="canonical" href="https://bhuztez.github.io/2015/dialyzer.html" />
+<title>在Fedora上继续使用GRUB</title>
+<link rel="canonical" href="https://bhuztez.github.io/drafts/keep-grub-on-fedora.html" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" title="math" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
@@ -27,19 +27,21 @@ remove_node(document.querySelector("link[title='math']"));
 </nav>
 </header>
 <div class="content">
-<div>2015-02-02</div>
+<div>2014-10-19</div>
 <article>
-<h1>Dialyzer</h1>
+<h1>在Fedora上继续使用GRUB</h1>
 <div class="info">
 <ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/erlang.html">Erlang</a></li>
+<li><a href="https://bhuztez.github.io/tag/fedora.html">Fedora</a></li>
+<li><a href="https://bhuztez.github.io/tag/grub.html">GRUB</a></li>
 </ul>
 <div class="clear"></div>
 </div>
-<p>动态类型语言的静态类型分析突然变成了一件时髦的事。Facebook推出的Hack语言吸引了大量关注。王垠靠PySonar也收获了很多粉丝。可是Erlang依旧被认为是老土。</p>
+<p>Fedora从某个版本开始默认使用GRUB2了。实在搞不明白无比复杂的GRUB2，还是继续用GRUB吧。可是没过多久fedora-logos里都不带GRUB的背景图了，只好果断抛弃，用generic-logos。另外还在<code>/etc/yum.conf</code>里把GRUB2什么的统统禁掉，免得distro-sync完了以后GRUB没了。</p>
 <!-- more -->
-<p>在Hack和PySonar的开发开始之前，Erlang里就已经有了Dialyzer和Typer。前者可以检查类型是否符合spec，后者可以分析出程序的类型。不仅仅是这样，HiPE会根据Type Inference得到的类型信息把Erlang代码编译成Native code。实际上是先有HiPE的。Dialyzer和Typer里的类型分析算法最早就是从HiPE里拿来的。而且假如你不开HiPE，Dialyzer在给标准库建plt文件时，会花费特别长的时间。也就是说没有HiPE，这检查的速度根本就不实用。更可恶的是，运行的时候能用掉你所有核心100%的CPU时间，忘了在启动前加上比如<code>+S 1:1</code>这样的参数可就惨了。</p>
-<p>假如你是非要看论文，那么可以看看<a class="reference external" href="http://www.it.uu.se/research/group/hipe/dialyzer/">DIALYZER: a DIscrepancy AnaLYZer for ERlang programs</a>, <a class="reference external" href="http://user.it.uu.se/~tobiasl/publications/typer.pdf">TYPER: A Type Annotator of Erlang Code</a>,<a class="reference external" href="http://www.it.uu.se/research/group/hipe/dialyzer/publications/succ_types.pdf">Pratical type inference based on success typings</a>,<a class="reference external" href="http://www.it.uu.se/research/group/hipe/dialyzer/publications/wrangler.pdf">Gradual Typing of Erlang programs: A Wrangler Experience</a></p>
+<pre class="code literal-block">
+exclude=grub2 grub-efi grub2-efi
+</pre>
 
 </article>
 <div id="disqus_thread"></div>

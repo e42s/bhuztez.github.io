@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <title>Pouring Water</title>
-<link rel="canonical" href="https://bhuztez.github.io/2014/pouring-water.html" />
+<link rel="canonical" href="https://bhuztez.github.io/drafts/pouring-water.html" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" title="math" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
@@ -49,18 +49,14 @@ remove_node(document.querySelector("link[title='math']"));
 </ol>
 <p>不妨设 a,b 内实际水量分别为 A, B。一开始 A = 0, B = 0，所以, a * x1 + b * y1 = A 和 a * x2 + b * y2 = B 都有整数解。即 x1 = 0, y1 = 0, x2 = 0, y2 = 0</p>
 <p>若操作前,a * x1 + b * y1 = A 和 a * x2 + b * y2 = B 都有整数解。</p>
-<ul>
-<li><p class="first">若进行的是操作 1,完成后,B 不变,A 变成 0,所以两者仍然都有整数解。</p>
-</li>
-<li><p class="first">若进行的是操作 2,完成后,A 不变,B 变成 0,所以两者仍然都有整数解。</p>
-</li>
-<li><p class="first">若进行的是操作 3,完成后,B 不变,A 变成 a,所以两者仍然都有整数解。</p>
-</li>
-<li><p class="first">若进行的是操作 4,完成后,A 不变,B 变成 b,所以两者仍然都有整数解。</p>
-</li>
+<ul class="simple">
+<li>若进行的是操作 1,完成后,B 不变,A 变成 0,所以两者仍然都有整数解。</li>
+<li>若进行的是操作 2,完成后,A 不变,B 变成 0,所以两者仍然都有整数解。</li>
+<li>若进行的是操作 3,完成后,B 不变,A 变成 a,所以两者仍然都有整数解。</li>
+<li>若进行的是操作 4,完成后,A 不变,B 变成 b,所以两者仍然都有整数解。</li>
 <li><dl class="first docutils">
 <dt>若进行的是操作 5,完成后,总水量不变,仍然是 a(x1 + x2) + b(y1 + y2)，分情况讨论</dt>
-<dd><ol class="first last arabic simple">
+<dd><ol class="first last arabic">
 <li>若把 B 倒满了,那么此时 A = a(x1 + x2) + b(y1 + y2 − 1),所以两者仍然都有整数解。</li>
 <li>若没把 B 倒满,则 A 必然被倒空了,所以两者仍然都有整数解。</li>
 </ol>
@@ -69,7 +65,7 @@ remove_node(document.querySelector("link[title='math']"));
 </li>
 <li><dl class="first docutils">
 <dt>若进行的是操作 6,完成后,类似操作 5,分情况讨论</dt>
-<dd><ol class="first last arabic simple">
+<dd><ol class="first last arabic">
 <li>若把 A 倒满了,那么此时 B = a(x1 + x2 − 1) + b(y1 + y2),所以两者仍然都有整数解。</li>
 <li>若没把 A 倒满,则 B 必然被倒空了,所以两者仍然都有整数解。</li>
 </ol>
@@ -94,14 +90,12 @@ remove_node(document.querySelector("link[title='math']"));
 <p>假设最开始两步是 fill(a) ，fill(b) ，若c=a或c=b，一步就已经完成了，与最少操作数矛盾。否则，下一步只能是empty(a)或empty(b)，结果分别和只在第一步fill(b)，fill(a)相同，故与最少操作数矛盾。</p>
 <p>所以 fill(a) 的下一步只能是 pour(a,b)</p>
 <p>假设最少的操作序列的第 n 步为 pour(a,b) 。分情况讨论</p>
-<ul>
-<li><p class="first">若第n+1步为 pour(b,a) ，因为pour操作不影响总水量，所以和在第n步直接 pour(b,a) 结果相同，故与最少操作数矛盾。</p>
-</li>
-<li><p class="first">若第n+1步为 pour(a,b) ，不会有任何变化，故与最少操作数矛盾。</p>
-</li>
+<ul class="simple">
+<li>若第n+1步为 pour(b,a) ，因为pour操作不影响总水量，所以和在第n步直接 pour(b,a) 结果相同，故与最少操作数矛盾。</li>
+<li>若第n+1步为 pour(a,b) ，不会有任何变化，故与最少操作数矛盾。</li>
 <li><dl class="first docutils">
 <dt>若第n步把a倒空了</dt>
-<dd><ol class="first last arabic simple">
+<dd><ol class="first last arabic">
 <li>若第n+1步为 empty(a) ，这一步没有任何作用</li>
 <li>若第n+1步为 empty(b) ，等于把两个容器都倒空了，回到初始状态，故与最少操作数矛盾</li>
 <li>若第n+1步为 fill(b) ，和在第一步 fill(b) 结果相同，故与最少操作数矛盾</li>
@@ -111,7 +105,7 @@ remove_node(document.querySelector("link[title='math']"));
 </li>
 <li><dl class="first docutils">
 <dt>若第n步把b倒满了</dt>
-<dd><ol class="first last arabic simple">
+<dd><ol class="first last arabic">
 <li>若第n+1步为 fill(b) ，这一步没有任何作用</li>
 <li>若第n+1步为 fill(a) ，等于把两个容器都倒满了，这种情况之前已经讨论过了，与最少操作数矛盾</li>
 <li>若第n+1步为 empty(a) ，和在第一步 fill(a) 结果相同，故与最少操作数矛盾</li>

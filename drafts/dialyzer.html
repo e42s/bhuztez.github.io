@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Dialyzer</title>
+<link rel="canonical" href="https://bhuztez.github.io/drafts/dialyzer.html" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" title="math" />
+<link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+function remove_node(node){node.parentNode.removeChild(node);}
+window.onload=function(){
+Array.prototype.slice.call(document.querySelectorAll(".formula")).forEach(function(e){katex.render(e.getAttribute("alt"),e,{displayMode:e.tagName==="DIV"})});
+remove_node(document.querySelector("link[title='math']"));
+};
+</script>
+</head>
+<body>
+<header>
+<nav>
+<li><a href="https://bhuztez.github.io/">Home</a></li>
+<li><a href="https://bhuztez.github.io/tag/how-to.html">How-tos</a></li>
+<li><a href="https://bhuztez.github.io/quotes.html">Quotes</a></li>
+<li><a href="https://bhuztez.github.io/archives.html">Archives</a></li>
+</nav>
+</header>
+<div class="content">
+<div>2015-02-02</div>
+<article>
+<h1>Dialyzer</h1>
+<div class="info">
+<ul class="tags">
+<li><a href="https://bhuztez.github.io/tag/erlang.html">Erlang</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<p>动态类型语言的静态类型分析突然变成了一件时髦的事。Facebook推出的Hack语言吸引了大量关注。王垠靠PySonar也收获了很多粉丝。可是Erlang依旧被认为是老土。</p>
+<!-- more -->
+<p>在Hack和PySonar的开发开始之前，Erlang里就已经有了Dialyzer和Typer。前者可以检查类型是否符合spec，后者可以分析出程序的类型。不仅仅是这样，HiPE会根据Type Inference得到的类型信息把Erlang代码编译成Native code。实际上是先有HiPE的。Dialyzer和Typer里的类型分析算法最早就是从HiPE里拿来的。而且假如你不开HiPE，Dialyzer在给标准库建plt文件时，会花费特别长的时间。也就是说没有HiPE，这检查的速度根本就不实用。更可恶的是，运行的时候能用掉你所有核心100%的CPU时间，忘了在启动前加上比如<code>+S 1:1</code>这样的参数可就惨了。</p>
+<p>假如你是非要看论文，那么可以看看<a class="reference external" href="http://www.it.uu.se/research/group/hipe/dialyzer/">DIALYZER: a DIscrepancy AnaLYZer for ERlang programs</a>, <a class="reference external" href="http://user.it.uu.se/~tobiasl/publications/typer.pdf">TYPER: A Type Annotator of Erlang Code</a>,<a class="reference external" href="http://www.it.uu.se/research/group/hipe/dialyzer/publications/succ_types.pdf">Pratical type inference based on success typings</a>,<a class="reference external" href="http://www.it.uu.se/research/group/hipe/dialyzer/publications/wrangler.pdf">Gradual Typing of Erlang programs: A Wrangler Experience</a></p>
+
+</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'bhuztez-github-io';
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+</body>
+</html>

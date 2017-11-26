@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>在Fedora上继续使用GRUB</title>
-<link rel="canonical" href="https://bhuztez.github.io/2014/keep-grub-on-fedora.html" />
+<title>Boyer-Moore Majority Vote</title>
+<link rel="canonical" href="https://bhuztez.github.io/2015/majority.html" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/base.css" type="text/css" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/math.css" type="text/css" title="math" />
 <link rel="stylesheet" href="https://bhuztez.github.io/theme/css/pygments.css" type="text/css" />
@@ -27,21 +27,26 @@ remove_node(document.querySelector("link[title='math']"));
 </nav>
 </header>
 <div class="content">
-<div>2014-10-19</div>
+<div>2015-01-12</div>
 <article>
-<h1>在Fedora上继续使用GRUB</h1>
-<div class="info">
-<ul class="tags">
-<li><a href="https://bhuztez.github.io/tag/fedora.html">Fedora</a></li>
-<li><a href="https://bhuztez.github.io/tag/grub.html">GRUB</a></li>
-</ul>
-<div class="clear"></div>
-</div>
-<p>Fedora从某个版本开始默认使用GRUB2了。实在搞不明白无比复杂的GRUB2，还是继续用GRUB吧。可是没过多久fedora-logos里都不带GRUB的背景图了，只好果断抛弃，用generic-logos。另外还在<code>/etc/yum.conf</code>里把GRUB2什么的统统禁掉，免得distro-sync完了以后GRUB没了。</p>
+<h1>Boyer-Moore Majority Vote</h1>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm">Boyer-Moore Majority Vote</a>算法的题leetcode里有，面试也经常会问到。不知道这个算法要想自己想出来还是挺困难的。已经知道这个算法，想证明这个是对的，还是挺容易的。</p>
 <!-- more -->
+<p>最简单的，找出过半的元素。每次计数为0时把数组切开，除了最后一段，在每一段里一个元素最多只能占一半。所以，只有在最后一段里过半的元素才有可能在总数上过半。</p>
 <pre class="code literal-block">
-exclude=grub2 grub-efi grub2-efi
+1   1   2   2 | 2   3 | 4
+  1   1   1       2       4
+  1   2   1   0   1   0   1
 </pre>
+<p>要找出出现次数超过1/3的元素，需要计两个数，只要一个计数到0了，就切开，不过要注意的是，另一个计数多出来的得算到下一段里。这样，除了最后一段，在每一段里一个元素最多只能占1/3。所以，只有在最后一段里过1/3的元素才有可能在总数上过1/3。</p>
+<pre class="code literal-block">
+1   1   2   3 | 3   2 | 1
+  1   1   1   1   1       1
+  1   2   2   1   1   0   1
+          2       3
+  0   0   1   0   1   0   0
+</pre>
+<p>依此类推，可以找出出现次数超过1/N的元素</p>
 
 </article>
 <div id="disqus_thread"></div>

@@ -40,31 +40,31 @@ remove_node(document.querySelector("link[title='math']"));
 <!-- more -->
 <p>行号这么简单，用<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/CSS/&#64;counter-style">CSS Counter Style</a>就可以了。</p>
 <pre class="code css literal-block">
-<span class="k">&#64;counter-style</span> <span class="nt">lno</span> <span class="p">{</span>
+<span class="p">&#64;</span><span class="k">counter-style</span> <span class="nt">lno</span> <span class="p">{</span>
     <span class="nt">system</span><span class="o">:</span> <span class="nt">extends</span> <span class="nt">decimal</span><span class="o">;</span>
     <span class="nt">pad</span><span class="o">:</span> <span class="nt">4</span> <span class="s2">&quot; &quot;</span><span class="o">;</span>
 <span class="p">}</span>
 
 <span class="nt">pre</span> <span class="p">{</span>
-    <span class="nb">margin</span><span class="o">:</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">5</span><span class="n">ch</span><span class="p">;</span>
-    <span class="nb">counter-reset</span><span class="o">:</span> <span class="n">line</span><span class="p">;</span>
-    <span class="nb">width</span><span class="o">:</span> <span class="m">4</span><span class="n">ch</span><span class="p">;</span>
-    <span class="nb">white-space</span><span class="o">:</span> <span class="n">pre</span><span class="o">-</span><span class="n">wrap</span><span class="p">;</span>
-    <span class="n">word</span><span class="o">-</span><span class="n">break</span><span class="o">:</span> <span class="n">break</span><span class="o">-</span><span class="n">all</span><span class="p">;</span>
-    <span class="nb">outline</span><span class="o">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="nb">red</span><span class="p">;</span>
-    <span class="nb">border-left</span><span class="o">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="nb">blue</span><span class="p">;</span>
-    <span class="nb">background-color</span><span class="o">:</span> <span class="m">#EEE</span><span class="p">;</span>
-    <span class="nb">padding</span><span class="o">:</span> <span class="m">0</span> <span class="m">1</span><span class="n">ch</span><span class="p">;</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">5</span><span class="kt">ch</span><span class="p">;</span>
+    <span class="k">counter-reset</span><span class="p">:</span> <span class="n">line</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">4</span><span class="kt">ch</span><span class="p">;</span>
+    <span class="k">white-space</span><span class="p">:</span> <span class="kc">pre-wrap</span><span class="p">;</span>
+    <span class="k">word-break</span><span class="p">:</span> <span class="n">break-all</span><span class="p">;</span>
+    <span class="k">outline</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+    <span class="k">border-left</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">blue</span><span class="p">;</span>
+    <span class="k">background-color</span><span class="p">:</span> <span class="mh">#EEE</span><span class="p">;</span>
+    <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">1</span><span class="kt">ch</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="nt">pre</span> <span class="nt">span</span><span class="nc">.line</span> <span class="p">{</span>
-    <span class="nb">counter-increment</span><span class="o">:</span> <span class="n">line</span><span class="p">;</span>
-    <span class="n">box</span><span class="o">-</span><span class="n">decoration</span><span class="o">-</span><span class="n">break</span><span class="o">:</span> <span class="n">clone</span><span class="p">;</span>
+<span class="nt">pre</span> <span class="nt">span</span><span class="p">.</span><span class="nc">line</span> <span class="p">{</span>
+    <span class="k">counter-increment</span><span class="p">:</span> <span class="n">line</span><span class="p">;</span>
+    <span class="k">box-decoration-break</span><span class="p">:</span> <span class="kc">clone</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="nt">pre</span> <span class="nt">span</span><span class="nc">.line</span><span class="o">:</span><span class="nd">:before</span> <span class="p">{</span>
-    <span class="nb">content</span><span class="o">:</span> <span class="n">counter</span><span class="p">(</span><span class="n">line</span><span class="o">,</span> <span class="n">lno</span><span class="p">);</span>
-    <span class="nb">margin</span><span class="o">:</span> <span class="m">0</span> <span class="m">2</span><span class="n">ch</span> <span class="m">0</span> <span class="m">-6</span><span class="n">ch</span><span class="p">;</span>
+<span class="nt">pre</span> <span class="nt">span</span><span class="p">.</span><span class="nc">line</span><span class="p">::</span><span class="nd">before</span> <span class="p">{</span>
+    <span class="k">content</span><span class="p">:</span> <span class="nb">counter</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">lno</span><span class="p">);</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">2</span><span class="kt">ch</span> <span class="mi">0</span> <span class="mi">-6</span><span class="kt">ch</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
 <pre class="code html literal-block">

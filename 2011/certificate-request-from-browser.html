@@ -58,7 +58,7 @@ remove_node(document.querySelector("link[title='math']"));
     <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="n">value</span> <span class="o">=</span> <span class="s1">''</span>
         <span class="n">final_attrs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_attrs</span><span class="p">(</span><span class="n">attrs</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">mark_safe</span><span class="p">(</span><span class="s1">u'&lt;keygen</span><span class="si">%s</span><span class="s1"> /&gt;'</span> <span class="o">%</span> <span class="n">flatatt</span><span class="p">(</span><span class="n">final_attrs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">mark_safe</span><span class="p">(</span><span class="sa">u</span><span class="s1">'&lt;keygen</span><span class="si">%s</span><span class="s1"> /&gt;'</span> <span class="o">%</span> <span class="n">flatatt</span><span class="p">(</span><span class="n">final_attrs</span><span class="p">))</span>
 
 
 <span class="k">class</span> <span class="nc">KeygenField</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">):</span>
@@ -66,7 +66,7 @@ remove_node(document.querySelector("link[title='math']"));
 
     <span class="k">def</span> <span class="nf">to_python</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">spki</span> <span class="o">=</span> <span class="n">crypto</span><span class="o">.</span><span class="n">NetscapeSPKI</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">r'\s'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+            <span class="n">spki</span> <span class="o">=</span> <span class="n">crypto</span><span class="o">.</span><span class="n">NetscapeSPKI</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'\s'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
             <span class="k">if</span> <span class="n">spki</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">spki</span><span class="o">.</span><span class="n">get_pubkey</span><span class="p">()):</span>
                 <span class="k">return</span> <span class="n">spki</span>
         <span class="k">except</span> <span class="n">crypto</span><span class="o">.</span><span class="n">Error</span><span class="p">:</span>
