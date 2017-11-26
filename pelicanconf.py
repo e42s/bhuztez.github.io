@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 AUTHOR = 'bhuztez'
-SITENAME = 'I am the loser. I am serious.'
+SITENAME = 'Kaitos日志'
 SITESUBTITLE = ''
 SITEURL = ''
 
