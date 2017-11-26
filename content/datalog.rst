@@ -5,7 +5,7 @@
 :date: 2014-12-08
 :slug: access-control-with-datalog
 :tags: Datalog
-
+:status: draft
 
 用普通SQL数据库管理权限是一件很别扭的事。一方面是有大量不必要的数据冗余，取消起来也特别麻烦。另外一方面，只要出现几条例外的规则，就不得不在代码里硬编码部分权限。
 

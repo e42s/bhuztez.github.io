@@ -5,6 +5,7 @@ Erlang字符串输出
 :date: 2015-05-08
 :slug: erlang-binary
 :tags: Erlang
+:status: draft
 
 经常有人莫名其妙的抱怨Erlang字符串处理效率低下。在过去，Erlang确实是用简单的list来表示字符串的，不停拼接list效率确实不行。可现在这已经是老黄历了。
 

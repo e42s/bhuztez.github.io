@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 import os
 import os.path
@@ -27,9 +27,9 @@ def add_folder(store, folder):
         if os.path.islink(filename):
             continue
         elif os.path.isdir(filename):
-            tree.add(name, 040000, add_folder(store, filename))
+            tree.add(name.encode('utf-8'), 0o040000, add_folder(store, filename))
         elif os.path.isfile(filename):
-            tree.add(name, 0100644, add_blob(store, filename))
+            tree.add(name.encode('utf-8'), 0o100644, add_blob(store, filename))
 
     store.add_object(tree)
     return tree.id
@@ -38,7 +38,7 @@ def add_folder(store, folder):
 store = repo.object_store
 tree = add_folder(store, 'output')
 
-old_commit = repo.get_refs().get("refs/heads/master", None)
+old_commit = repo.get_refs().get(b"refs/heads/master", None)
 
 new_commit = Commit()
 
@@ -57,4 +57,4 @@ new_commit.tree = tree
 
 store.add_object(new_commit)
 
-repo['refs/heads/master'] = new_commit.id
+repo[b'refs/heads/master'] = new_commit.id

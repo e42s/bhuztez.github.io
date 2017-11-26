@@ -46,22 +46,10 @@ div.info ul.tags li {
     float: left;
     position: relative;
     margin: 0 1em;
-    padding: 0.4em 0.5em 0.4em 0;
+    padding: 0.4em;
     background: #889977;
     color: #FFFFFF;
-    border-radius: 0 0.2em 0.2em 0;
-}
-
-div.info ul.tags li:before {
-    content:"";
-    border-style: solid;
-    border-color: transparent #889977 transparent transparent;
-    border-width: 1em 1em 1em 0;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    left: -1em;
-    top: 0;
+    border-radius: 0.2em;
 }
 
 div.info ul.tags li a {

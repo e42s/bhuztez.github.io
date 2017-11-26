@@ -4,7 +4,7 @@ Math is the new porn
 
 :date: 2014-12-28
 :slug: math-the-new-porn
-
+:status: draft
 
 按现在流行的说法，smart is the new sexy, math is the new porn。在某种程度上，事实也的确如此。
 

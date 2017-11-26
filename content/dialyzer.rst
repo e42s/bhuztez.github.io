@@ -5,6 +5,7 @@ Dialyzer
 :date: 2015-02-02
 :slug: dialyzer
 :tags: Erlang
+:status: draft
 
 动态类型语言的静态类型分析突然变成了一件时髦的事。Facebook推出的Hack语言吸引了大量关注。王垠靠PySonar也收获了很多粉丝。可是Erlang依旧被认为是老土。
 

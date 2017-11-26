@@ -4,7 +4,7 @@ Scalable Source Routing
 
 :date: 2014-12-09
 :slug: scalable-source-routing
-
+:status: draft
 
 有很多关于adhoc network如何避免flooding的研究。其中一个是Scalable Source Routing，其主要思路借鉴自DHT。
 

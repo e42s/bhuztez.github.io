@@ -4,6 +4,7 @@
 
 :date: 2017-07-06
 :slug: chicken-soup
+:status: draft
 
 前段时间，不知道聊什么扯到了豌豆荚。豌豆荚可能就是比较典型的信了自己的鸡汤。
 

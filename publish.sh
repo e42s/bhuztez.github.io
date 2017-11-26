@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-pelican -s publishconf.py
+pelican-3 -s publishconf.py
 ./commit.py

@@ -5,6 +5,7 @@
 :date: 2016-07-08
 :slug: untrusted
 :tags: Game
+:status: draft
 
 https://alexnisnevich.github.io/untrusted/
 

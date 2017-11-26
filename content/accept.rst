@@ -5,6 +5,7 @@
 :date: 2013-11-23
 :slug: benchmarking-accept
 :tags: Joke
+:status: draft
 
 不知道为什么\ `国内技术第一的开源社区`__\ 会去\ `反驳`__\ 一个\ `很不合理的benchmark`__\ 。那个benchmark竟然用了Erlang臭名昭著的\ :code:`io:format`\ ，莫名其妙的把\ :code:`socket`\ 设置成\ :code:`active`\ ，还不自量力的和C++去比速度，C++代码还是Boost库文档里的\ `例子`__\ 。
 

@@ -5,6 +5,7 @@
 :date: 2015-05-14
 :slug: osv-erlang
 :tags: OSv, Erlang
+:status: draft
 
 OSv__\ 是为直接在虚拟机里运行应用程序设计的Unikernel。他们的目标是，除了一些固有的限制，比如因为只有一个地址空间，不支持多进程，以外，普通的Linux程序能直接在OSv上运行。
 

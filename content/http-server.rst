@@ -5,6 +5,7 @@
 :date: 2014-10-10
 :slug: http-server-in-erlang
 :tags: Erlang, HTTP
+:status: draft
 
 很多人都在吹嘘REST架构。然而他们所谓的REST架构往往指的就是正确使用HTTP语义。REST架构的确是建立在正确使用HTTP语义之上的，然而在正确使用HTTP语义只是实现REST架构的基础。而那些吹嘘REST架构的人，往往号称自己是Web程序员。他们能对SSH框架，Rails框架侃侃而谈，却对HTTP协议一无所知，所以才会觉得REST很新鲜。
 

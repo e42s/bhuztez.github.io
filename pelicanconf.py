@@ -1,6 +1,4 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*- #
-from __future__ import unicode_literals
+#!/usr/bin/env python3
 
 AUTHOR = 'bhuztez'
 SITENAME = 'I am the loser. I am serious.'
@@ -20,7 +18,7 @@ PLUGINS = ['more', 'katex']
 
 TIMEZONE = 'Asia/Shanghai'
 
-DEFAULT_LANG = u'zh'
+DEFAULT_LANG = 'zh'
 LOCALE = "C"
 DEFAULT_DATE_FORMAT = '%Y-%m-%d'
 

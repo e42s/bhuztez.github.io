@@ -4,7 +4,7 @@ Pouring Water
 
 :date: 2014-11-23
 :slug: pouring-water
-
+:status: draft
 
 Pouring Water看上去是个很简单的问题，有容量分别为a升，b升的两个没有刻度的容器，问量出c升水要多少步。简单是简单，只是分情况讨论的数量实在是有点多，很多人一看就直接放弃了。
 

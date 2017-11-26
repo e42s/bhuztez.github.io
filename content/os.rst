@@ -4,7 +4,7 @@
 
 :date: 2015-01-15
 :slug: how-to-learn-operating-system
-
+:status: draft
 
 好的操作系统教程很少。很多教程都是从bootloader该怎么写开始的，而bootloader一点都不好写。比如我就照着各种教程在bootloader上死了无数次了。
 
